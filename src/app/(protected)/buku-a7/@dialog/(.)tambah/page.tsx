@@ -4,7 +4,7 @@ import dynamicFn from "next/dynamic"
 import DialogWrapper from "@/components/layout/dialog-wrapper"
 
 const AgendaForm = dynamicFn(async () => {
-  const AgendaForm = await import("./form")
+  const AgendaForm = await import("../../tambah/form")
   return AgendaForm
 })
 export const metadata = {

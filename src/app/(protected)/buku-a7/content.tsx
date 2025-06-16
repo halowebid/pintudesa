@@ -2,53 +2,84 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useSuspenseQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import type { PaginationState } from "@tanstack/react-table"
 
+import ShowOptions from "@/components/show-options"
+import { useToast } from "@/components/toast-provider"
 import { Button } from "@/components/ui/button"
 import { ControlledTable } from "@/components/ui/controlled-table"
-import { Skeleton } from "@/components/ui/skeleton"
 import { tableColumnRegistry } from "@/lib/data/table-column-registry"
 import { tableDataMapperRegistry } from "@/lib/data/table-data-mapper"
-import type { InsertAgenda } from "@/lib/db/schema/agenda"
+import type { SelectAgenda } from "@/lib/db/schema/agenda"
 import { useTRPC } from "@/lib/trpc/client"
+import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function AgendaContent() {
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   })
+  const columns = React.useMemo(() => tableColumnRegistry.agenda, [])
 
   const trpc = useTRPC()
 
-  const { data: agendasCount } = useSuspenseQuery(
+  const { toast } = useToast()
+  const handleError = useHandleTRPCError()
+
+  const { data: agendasCount, refetch: refetchAgendasCount } = useQuery(
     trpc.agenda.count.queryOptions(),
   )
 
-  const { data: rawData } = useSuspenseQuery(
+  const {
+    data: rawData,
+    isLoading,
+    refetch: refetchAgendas,
+  } = useQuery(
     trpc.agenda.all.queryOptions({
       page: pagination.pageIndex + 1,
       perPage: pagination.pageSize,
     }),
   )
-  const lastPage = agendasCount && Math.ceil(agendasCount / pagination.pageSize)
+  const { mutate: deleteItem } = useMutation(
+    trpc.agenda.delete.mutationOptions({
+      onSuccess: async () => {
+        await refetchAgendas()
+        await refetchAgendasCount()
+        toast({
+          description: "Berhasil menghapus agenda",
+        })
+      },
+      onError: (error) => {
+        handleError(error, "Gagal menghapus agenda")
+      },
+    }),
+  )
+  const lastPage = React.useMemo(() => {
+    if (!agendasCount) return 0
+    return Math.ceil(agendasCount / pagination.pageSize)
+  }, [agendasCount, pagination.pageSize])
 
   const mapFn = tableDataMapperRegistry.agenda
-  const data = (
-    typeof mapFn === "function" ? mapFn(rawData) : rawData
-  ) as InsertAgenda[]
-
-  if (rawData.length === 0 || !agendasCount) {
+  const data = React.useMemo(() => {
     return (
-      <div className="my-64 flex items-center justify-center">
-        <Skeleton />
-        <h3 className="text-center text-4xl font-bold">
-          Agenda tidak ditemukan!
-        </h3>
-      </div>
-    )
-  }
+      typeof mapFn === "function" ? mapFn(rawData ?? []) : (rawData ?? [])
+    ) as SelectAgenda[]
+  }, [mapFn, rawData])
 
+  React.useEffect(() => {
+    if (
+      lastPage &&
+      pagination.pageIndex &&
+      pagination.pageIndex !== 0 &&
+      pagination.pageIndex > lastPage - 1
+    ) {
+      setPagination((prev) => ({
+        ...prev,
+        pageIndex: lastPage - 1,
+      }))
+    }
+  }, [lastPage, pagination.pageIndex])
   return (
     <div className="flex w-full flex-col gap-4">
       <div className="mb-8 flex justify-between">
@@ -58,12 +89,20 @@ export default function AgendaContent() {
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
-        <ControlledTable<InsertAgenda>
+        <ControlledTable<SelectAgenda>
           data={data}
           setPagination={setPagination}
           pagination={pagination}
           totalPages={lastPage}
-          columns={[...tableColumnRegistry.agenda]}
+          columns={[...columns]}
+          isLoading={isLoading}
+          showActions
+          renderAction={(item) => (
+            <ShowOptions
+              onDelete={() => deleteItem(item.id)}
+              description={item.uraian}
+            />
+          )}
         />
       </div>
     </div>

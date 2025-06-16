@@ -44,7 +44,6 @@ const config = {
   productionBrowserSourceMaps: false,
   experimental: {
     cssChunking: true,
-    reactCompiler: true,
     serverSourceMaps: true,
     viewTransition: true,
     staleTimes: {

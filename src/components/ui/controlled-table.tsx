@@ -13,6 +13,7 @@ import {
   type Column,
   type ColumnDef,
   type ColumnFiltersState,
+  type Header,
   type PaginationState,
   type RowData,
   type SortingState,
@@ -59,53 +60,52 @@ interface ControlledTableProps<TData extends RowData> {
   pagination?: PaginationState
   sorting?: SortingState
   columnFilters?: ColumnFiltersState
-  setPagination?: (
-    updater: PaginationState | ((old: PaginationState) => PaginationState),
-  ) => void
-  setSorting?: (
-    updater: SortingState | ((old: SortingState) => SortingState),
-  ) => void
-  setColumnFilters?: (
-    updater:
-      | ColumnFiltersState
-      | ((old: ColumnFiltersState) => ColumnFiltersState),
-  ) => void
+  setPagination?: React.Dispatch<React.SetStateAction<PaginationState>>
+  setSorting?: React.Dispatch<React.SetStateAction<SortingState>>
+  setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>
   pageSizeOptions?: number[]
+  showActions?: boolean
+  renderAction?: (item: TData) => React.ReactNode
 }
 
 export function ControlledTable<TData extends RowData>({
   columns,
   data,
   totalPages,
-
   pagination,
   sorting,
   columnFilters,
+  isLoading,
   setPagination,
   setSorting,
   setColumnFilters,
   pageSizeOptions = [10, 20, 30],
+  showActions,
+  renderAction,
 }: ControlledTableProps<TData>) {
   const [internalPagination, setInternalPagination] =
     React.useState<PaginationState>({
       pageIndex: 0,
-      pageSize: pageSizeOptions[0] || 10,
+      pageSize: pageSizeOptions[0],
     })
   const [internalSorting, setInternalSorting] = React.useState<SortingState>([])
   const [internalColumnFilters, setInternalColumnFilters] =
     React.useState<ColumnFiltersState>([])
 
+  const memoizedColumns = React.useMemo(() => columns, [columns])
+  const memoizedData = React.useMemo(() => data, [data])
+
   const table = useReactTable<TData>({
-    data,
-    columns,
+    data: memoizedData,
+    columns: memoizedColumns,
     state: {
       pagination: pagination ?? internalPagination,
       sorting: sorting ?? internalSorting,
       columnFilters: columnFilters ?? internalColumnFilters,
     },
-    manualFiltering: columnFilters ? true : false,
-    manualSorting: sorting ? true : false,
-    manualPagination: pagination ? true : false,
+    manualPagination: !!pagination,
+    manualSorting: !!sorting,
+    manualFiltering: !!columnFilters,
     pageCount: totalPages,
     onPaginationChange: setPagination ?? setInternalPagination,
     onSortingChange: setSorting ?? setInternalSorting,
@@ -114,13 +114,12 @@ export function ControlledTable<TData extends RowData>({
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    autoResetPageIndex: true,
+    autoResetPageIndex: false,
   })
 
   const pageSizeCollection: ListCollection = createListCollection({
     items: pageSizeOptions.map((size) => String(size)),
   })
-
   return (
     <div>
       <Table className="min-w-full border">
@@ -132,54 +131,53 @@ export function ControlledTable<TData extends RowData>({
                   key={header.id}
                   colSpan={header.colSpan}
                   className={cn(
-                    "space-y-1 py-2",
+                    "space-y-1 px-2 py-4 align-top",
                     header.column.getCanSort() && "cursor-pointer select-none",
                   )}
                 >
-                  {header.isPlaceholder ? null : (
-                    <div
-                      onClick={header.column.getToggleSortingHandler()}
-                      className="flex items-center gap-1"
-                    >
-                      <span>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                      </span>
-                      {{
-                        asc: (
-                          <Icon
-                            className="text-muted-foreground size-4"
-                            name="ArrowUp"
-                          />
-                        ),
-                        desc: (
-                          <Icon
-                            className="text-muted-foreground size-4"
-                            name="ArrowDown"
-                          />
-                        ),
-                      }[header.column.getIsSorted() as string] ?? null}
-                    </div>
-                  )}
-
-                  {header.column.getCanFilter() && (
-                    <div>
-                      <Filter<TData> column={header.column} />
-                    </div>
-                  )}
+                  <div className="flex flex-col justify-center gap-1">
+                    {!header.isPlaceholder && <HeaderCell header={header} />}
+                    {header.column.getCanFilter() && (
+                      <div>
+                        <Filter column={header.column} />
+                      </div>
+                    )}
+                  </div>
                 </TableHead>
               ))}
+              {showActions && renderAction && (
+                <TableHead className={cn("px-2 py-4 align-top")}>
+                  Aksi
+                </TableHead>
+              )}
             </TableRow>
           ))}
         </TableHeader>
-
         <TableBody>
-          {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id} className="hover:bg-muted/90">
-              {row.getVisibleCells().map((cell) => {
-                return (
+          {isLoading ? (
+            <TableRow>
+              <TableCell
+                colSpan={memoizedColumns.length}
+                className="py-4 text-center"
+              >
+                <span className="text-muted-foreground animate-pulse">
+                  Loading...
+                </span>
+              </TableCell>
+            </TableRow>
+          ) : table.getRowModel().rows.length === 0 ? (
+            <TableRow>
+              <TableCell
+                colSpan={memoizedColumns.length}
+                className="py-4 text-center"
+              >
+                Tidak ada data ditemukan.
+              </TableCell>
+            </TableRow>
+          ) : (
+            table.getRowModel().rows.map((row) => (
+              <TableRow key={row.id} className="hover:bg-muted/90">
+                {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
                     className="truncate border px-3 py-2"
@@ -187,13 +185,17 @@ export function ControlledTable<TData extends RowData>({
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
-                )
-              })}
-            </TableRow>
-          ))}
+                ))}
+                {showActions && renderAction && (
+                  <TableCell className="truncate border px-3 py-2">
+                    {renderAction(row.original)}
+                  </TableCell>
+                )}
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
-
       <Pagination>
         <PaginationContent>
           <PaginationItem>
@@ -301,15 +303,111 @@ export function ControlledTable<TData extends RowData>({
   )
 }
 
-interface SelectFilterProps<TData extends RowData> {
+function HeaderCell<TData>({ header }: { header: Header<TData, unknown> }) {
+  return (
+    <div
+      className="group flex cursor-pointer items-center gap-1 select-none"
+      onClick={header.column.getToggleSortingHandler()}
+    >
+      {flexRender(header.column.columnDef.header, header.getContext())}
+      <span className="ml-1">
+        {header.column.getIsSorted() === "asc" ? (
+          <Icon name="ChevronUp" className="text-primary h-4 w-4" />
+        ) : header.column.getIsSorted() === "desc" ? (
+          <Icon name="ChevronDown" className="text-primary h-4 w-4" />
+        ) : (
+          <Icon
+            name="ChevronsUpDown"
+            className="text-muted-foreground group-hover:text-foreground h-4 w-4"
+          />
+        )}
+      </span>
+    </div>
+  )
+}
+
+function Filter<TData extends RowData>({
+  column,
+}: {
   column: Column<TData, unknown>
-  options?: string[]
+}) {
+  const columnFilterValue = column.getFilterValue()
+  // @ts-ignore fix dynamic meta type
+  const filterVariant = column.columnDef.meta?.filterVariant as
+    | "range"
+    | "select"
+    | undefined
+
+  if (filterVariant === "range") {
+    return (
+      <div className="flex space-x-2">
+        <DebouncedInput
+          type="number"
+          value={Array.isArray(columnFilterValue) ? columnFilterValue[0] : ""}
+          onChange={(value) =>
+            column.setFilterValue((old?: [number, number]) => [
+              value,
+              Number(old?.[1]) ? old?.[1] : undefined,
+            ])
+          }
+          placeholder="Min"
+        />
+        <DebouncedInput
+          type="number"
+          value={Array.isArray(columnFilterValue) ? columnFilterValue[1] : ""}
+          onChange={(value) =>
+            column.setFilterValue((old?: [number, number]) => [
+              Number(old?.[0]) ? old?.[0] : undefined,
+              value,
+            ])
+          }
+          placeholder="Max"
+        />
+      </div>
+    )
+  } else if (filterVariant === "select") {
+    return <SelectFilter column={column} />
+  }
+  return null
+}
+
+function DebouncedInput({
+  value: initialValue,
+  onChange,
+  debounce = 500,
+  ...props
+}: {
+  value?: string | number
+  onChange: (value: string | number) => void
+  debounce?: number
+} & React.InputHTMLAttributes<HTMLInputElement>) {
+  const [value, setValue] = React.useState(initialValue ?? "")
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value
+    setValue(newValue)
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+
+    timeoutRef.current = setTimeout(() => onChange(newValue), debounce)
+  }
+
+  return (
+    <Input
+      {...props}
+      value={value}
+      onChange={handleChange}
+      className="h-8 min-w-16 p-2"
+    />
+  )
 }
 
 function SelectFilter<TData extends RowData>({
   column,
-  options,
-}: SelectFilterProps<TData>) {
+}: {
+  column: Column<TData, unknown>
+}) {
   const rawValue = column.getFilterValue()
   const columnFilterValue =
     typeof rawValue === "string" || typeof rawValue === "number"
@@ -317,8 +415,6 @@ function SelectFilter<TData extends RowData>({
       : ""
 
   const values = React.useMemo<string[]>(() => {
-    if (options) return options
-
     const unique = new Set<string>()
     column.getFacetedRowModel().rows.forEach((row) => {
       const value = row.getValue(column.id)
@@ -329,21 +425,18 @@ function SelectFilter<TData extends RowData>({
         unique.add(String(value))
       }
     })
-
-    return Array.from(unique)
-  }, [column, options])
+    return ["", ...Array.from(unique)]
+  }, [column])
 
   const rangeCollection: ListCollection = createListCollection({
-    items: ["", ...values],
+    items: values,
   })
 
   return (
     <Select
       value={[columnFilterValue]}
       collection={rangeCollection}
-      onValueChange={(e) => {
-        column.setFilterValue(e.value[0])
-      }}
+      onValueChange={(e) => column.setFilterValue(e.value[0])}
     >
       <SelectTrigger className="!h-8 w-32 p-2">
         <SelectValueText placeholder="All" />
@@ -356,91 +449,5 @@ function SelectFilter<TData extends RowData>({
         ))}
       </SelectContent>
     </Select>
-  )
-}
-
-interface FilterProps<TData extends RowData> {
-  column: Column<TData, unknown>
-}
-
-function Filter<TData extends RowData>({ column }: FilterProps<TData>) {
-  const columnFilterValue = column.getFilterValue()
-  // @ts-ignore fix dynamic meta type
-  const filterVariant = column.columnDef.meta?.filterVariant as
-    | "range"
-    | "select"
-    | undefined
-
-  if (filterVariant === "range") {
-    return (
-      <div>
-        <div className="flex space-x-2">
-          <DebouncedInput
-            type="number"
-            value={Array.isArray(columnFilterValue) ? columnFilterValue[0] : ""}
-            onChange={(value) =>
-              column.setFilterValue((old?: [number, number]) => [
-                value,
-                Number(old?.[1]) ? old?.[1] : undefined,
-              ])
-            }
-            placeholder="Min"
-            className="w-24 rounded border shadow"
-          />
-          <DebouncedInput
-            type="number"
-            value={Array.isArray(columnFilterValue) ? columnFilterValue[1] : ""}
-            onChange={(value) =>
-              column.setFilterValue((old?: [number, number]) => [
-                Number(old?.[0]) ? old?.[0] : undefined,
-                value,
-              ])
-            }
-            placeholder="Max"
-            className="w-24 rounded border shadow"
-          />
-        </div>
-      </div>
-    )
-  } else if (filterVariant === "select") {
-    return <SelectFilter<TData> column={column} />
-  }
-}
-
-interface DebouncedInputProps
-  extends Omit<React.ComponentProps<"input">, "onChange" | "value"> {
-  value?: string | number
-  onChange: (value: string | number) => void
-  debounce?: number
-}
-function DebouncedInput({
-  value: initialValue,
-  onChange,
-  debounce = 500,
-  ...props
-}: DebouncedInputProps) {
-  const [value, setValue] = React.useState(initialValue ?? "")
-  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value
-    setValue(newValue)
-
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-    }
-
-    timeoutRef.current = setTimeout(() => {
-      onChange(newValue)
-    }, debounce)
-  }
-
-  return (
-    <Input
-      {...props}
-      value={value}
-      onChange={handleChange}
-      className="h-8 min-w-16 p-2"
-    />
   )
 }
