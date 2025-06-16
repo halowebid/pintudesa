@@ -15,6 +15,7 @@ import {
 import {
   countInventarises,
   deleteInventaris,
+  getInventarisById,
   getInventarises,
   insertInventaris,
   searchInventarises,
@@ -77,6 +78,17 @@ export const inventarisRouter = createTRPCRouter({
       }
       return data
     }),
+
+  byId: publicProcedure.input(z.string()).query(async ({ input }) => {
+    const { data, error } = await tryCatch(getInventarisById(input))
+    if (error) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Error fetching inventaris by ID",
+      })
+    }
+    return data
+  }),
 
   search: publicProcedure
     .input(z.object({ searchQuery: z.string(), limit: z.number() }))

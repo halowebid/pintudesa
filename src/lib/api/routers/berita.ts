@@ -15,6 +15,7 @@ import {
 import {
   countBeritas,
   deleteBerita,
+  getBeritaById,
   getBeritas,
   insertBerita,
   searchBeritas,
@@ -77,6 +78,17 @@ export const beritaRouter = createTRPCRouter({
       }
       return data
     }),
+
+  byId: publicProcedure.input(z.string()).query(async ({ input }) => {
+    const { data, error } = await tryCatch(getBeritaById(input))
+    if (error) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Error fetching berita by ID",
+      })
+    }
+    return data
+  }),
 
   search: publicProcedure
     .input(z.object({ searchQuery: z.string(), limit: z.number() }))
