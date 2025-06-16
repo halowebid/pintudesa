@@ -1,0 +1,1 @@
+CREATE TYPE "public"."kategori_penduduk" AS ENUM('penduduk_dalam_desa', 'penduduk_luar_desa', 'penduduk_luar_berdomisili_di_desa');

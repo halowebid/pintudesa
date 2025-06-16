@@ -279,3 +279,5 @@ export const listJenisPekerjaan = [
 export const jenisPekerjaan = z.enum(JENIS_PEKERJAAN)
 
 export const jenisPekerjaanEnum = pgEnum("jenis_pekerjaan", JENIS_PEKERJAAN)
+
+export type JenisPekerjaan = z.infer<typeof jenisPekerjaan>

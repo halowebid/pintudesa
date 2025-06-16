@@ -45,3 +45,5 @@ export const updateInventarisSchema = createUpdateSchema(inventarisTable)
 
 export type SelectInventaris = typeof inventarisTable.$inferSelect
 export type InsertInventaris = typeof inventarisTable.$inferInsert
+
+export type JenisInventaris = z.infer<typeof jenisInventaris>
