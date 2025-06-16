@@ -35,6 +35,12 @@ export const getAgendas = async (page: number, perPage: number) => {
   })
 }
 
+export const getAgendaById = async (id: string) => {
+  return await db.query.agendaTable.findFirst({
+    where: eq(agendaTable.id, id),
+  })
+}
+
 export const searchAgendas = async ({
   searchQuery,
   limit,
