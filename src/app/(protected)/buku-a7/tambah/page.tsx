@@ -20,7 +20,7 @@ export default function AgendaPage() {
         </div>
       }
     >
-      <AgendaForm />
+      <AgendaForm isDialog={false} />
     </React.Suspense>
   )
 }
