@@ -39,7 +39,6 @@
     "@yopem-ui/utils": "^0.0.2",
     "@yopem/try-catch": "^0.0.2",
     "arctic": "^3.7.0",
-    "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "dayjs": "^1.11.13",
     "dotenv-cli": "^8.0.0",
     "drizzle-orm": "^0.44.2",
