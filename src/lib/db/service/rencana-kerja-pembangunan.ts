@@ -48,6 +48,12 @@ export const getRencanaKerjaPembangunans = async (
   })
 }
 
+export const getRencanaKerjaPembangunanById = async (id: string) => {
+  return await db.query.rencanaKerjaPembangunanTable.findFirst({
+    where: eq(rencanaKerjaPembangunanTable.id, id),
+  })
+}
+
 export const searchRencanaKerjaPembangunans = async ({
   searchQuery,
   limit,

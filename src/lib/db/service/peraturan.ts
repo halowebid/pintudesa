@@ -37,6 +37,12 @@ export const getPeraturans = async (page: number, perPage: number) => {
   })
 }
 
+export const getPeraturanById = async (id: string) => {
+  return await db.query.peraturanTable.findFirst({
+    where: eq(peraturanTable.id, id),
+  })
+}
+
 export const searchPeraturans = async ({
   searchQuery,
   limit,

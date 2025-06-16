@@ -40,6 +40,12 @@ export const getInventarises = async (page: number, perPage: number) => {
   })
 }
 
+export const getInventarisById = async (id: string) => {
+  return await db.query.inventarisTable.findFirst({
+    where: eq(inventarisTable.id, id),
+  })
+}
+
 export const searchInventarises = async ({
   searchQuery,
   limit,

@@ -29,7 +29,7 @@ export const deleteEkspedisi = async (id: string) => {
   return ekspedisi[0]
 }
 
-export const getEkspedisis = async (page: number, perPage: number) => {
+export const getEkspedises = async (page: number, perPage: number) => {
   return await db.query.ekspedisiTable.findMany({
     limit: perPage,
     offset: (page - 1) * perPage,
@@ -37,7 +37,13 @@ export const getEkspedisis = async (page: number, perPage: number) => {
   })
 }
 
-export const searchEkspedisis = async ({
+export const getEkspedisiById = async (id: string) => {
+  return await db.query.agendaTable.findFirst({
+    where: eq(ekspedisiTable.id, id),
+  })
+}
+
+export const searchEkspedises = async ({
   searchQuery,
   limit,
 }: {
@@ -45,13 +51,13 @@ export const searchEkspedisis = async ({
   limit: number
 }) => {
   return await db.query.ekspedisiTable.findMany({
-    where: (ekspedisis, { ilike }) =>
-      ilike(ekspedisis.nomorSurat, `%${searchQuery}%`),
+    where: (ekspedises, { ilike }) =>
+      ilike(ekspedises.nomorSurat, `%${searchQuery}%`),
     limit: limit,
   })
 }
 
-export const countEkspedisis = async () => {
+export const countEkspedises = async () => {
   const ekspedisi = await db.select({ value: count() }).from(ekspedisiTable)
   return ekspedisi[0]?.value ?? 0
 }
