@@ -13,11 +13,11 @@ import {
   type SelectEkspedisi,
 } from "@/lib/db/schema/ekspedisi"
 import {
-  countEkspedisis,
+  countEkspedises,
   deleteEkspedisi,
-  getEkspedisis,
+  getEkspedises,
   insertEkspedisi,
-  searchEkspedisis,
+  searchEkspedises,
   updateEkspedisi,
 } from "@/lib/db/service/ekspedisi"
 
@@ -67,12 +67,12 @@ export const ekspedisiRouter = createTRPCRouter({
     .input(z.object({ page: z.number(), perPage: z.number() }))
     .query(async ({ input }) => {
       const { data, error } = await tryCatch(
-        getEkspedisis(input.page, input.perPage),
+        getEkspedises(input.page, input.perPage),
       )
       if (error) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "Error fetching ekspedisis",
+          message: "Error fetching ekspedises",
         })
       }
       return data
@@ -81,22 +81,22 @@ export const ekspedisiRouter = createTRPCRouter({
   search: publicProcedure
     .input(z.object({ searchQuery: z.string(), limit: z.number() }))
     .query(async ({ input }) => {
-      const { data, error } = await tryCatch(searchEkspedisis(input))
+      const { data, error } = await tryCatch(searchEkspedises(input))
       if (error) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "Error fetching ekspedisis",
+          message: "Error fetching ekspedises",
         })
       }
       return data
     }),
 
   count: publicProcedure.query(async () => {
-    const { data, error } = await tryCatch(countEkspedisis())
+    const { data, error } = await tryCatch(countEkspedises())
     if (error) {
       throw new TRPCError({
         code: "INTERNAL_SERVER_ERROR",
-        message: "Error counting ekspedisis",
+        message: "Error counting ekspedises",
       })
     }
     return data
