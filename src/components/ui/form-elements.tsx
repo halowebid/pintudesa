@@ -262,7 +262,7 @@ export const FileUploadDropzoneField = ({
     const validFiles = Array.from(files).filter(
       (file) => file.size <= maxSizeMb * 1024 * 1024,
     )
-    // Fix Later: handle upload
+    // TODO: Handle upload (Issue #123)
     const newFiles = multiple
       ? [...field.state.value, ...validFiles]
       : validFiles.slice(0, 1)
