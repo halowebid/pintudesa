@@ -15,6 +15,7 @@ import {
 import {
   countRABs,
   deleteRAB,
+  getRABById,
   getRABs,
   insertRAB,
   searchRABs,
@@ -73,6 +74,17 @@ export const rabRouter = createTRPCRouter({
       }
       return data
     }),
+
+  byId: publicProcedure.input(z.string()).query(async ({ input }) => {
+    const { data, error } = await tryCatch(getRABById(input))
+    if (error) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Error fetching rab by ID",
+      })
+    }
+    return data
+  }),
 
   search: publicProcedure
     .input(z.object({ searchQuery: z.string(), limit: z.number() }))

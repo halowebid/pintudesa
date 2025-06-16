@@ -15,6 +15,7 @@ import {
 import {
   countTanahKases,
   deleteTanahKas,
+  getTanahKasById,
   getTanahKases,
   insertTanahKas,
   searchTanahKases,
@@ -77,6 +78,17 @@ export const tanahKasRouter = createTRPCRouter({
       }
       return data
     }),
+
+  byId: publicProcedure.input(z.string()).query(async ({ input }) => {
+    const { data, error } = await tryCatch(getTanahKasById(input))
+    if (error) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Error fetching tanahKas by ID",
+      })
+    }
+    return data
+  }),
 
   search: publicProcedure
     .input(z.object({ searchQuery: z.string(), limit: z.number() }))

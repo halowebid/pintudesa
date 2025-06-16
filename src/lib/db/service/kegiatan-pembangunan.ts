@@ -48,6 +48,12 @@ export const getKegiatanPembangunans = async (
   })
 }
 
+export const getKegiatanPembangunanById = async (id: string) => {
+  return await db.query.kegiatanPembangunanTable.findFirst({
+    where: eq(kegiatanPembangunanTable.id, id),
+  })
+}
+
 export const searchKegiatanPembangunans = async ({
   searchQuery,
   limit,

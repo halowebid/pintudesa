@@ -44,6 +44,12 @@ export const getBeritas = async (page: number, perPage: number) => {
   })
 }
 
+export const getBeritaById = async (id: string) => {
+  return await db.query.agendaTable.findFirst({
+    where: eq(beritaTable.id, id),
+  })
+}
+
 export const getBeritaBySlug = async (slug: string) => {
   return await db.query.beritaTable.findFirst({
     where: (berita, { eq }) => eq(berita.slug, slug),

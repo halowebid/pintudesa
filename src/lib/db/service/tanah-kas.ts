@@ -35,6 +35,12 @@ export const getTanahKases = async (page: number, perPage: number) => {
   })
 }
 
+export const getTanahKasById = async (id: string) => {
+  return await db.query.tanahKasTable.findFirst({
+    where: eq(tanahKasTable.id, id),
+  })
+}
+
 export const searchTanahKases = async ({
   searchQuery,
   limit,
