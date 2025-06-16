@@ -34,7 +34,7 @@ export default function AgendaForm() {
         toast({
           description: "Berhasil membuat agenda",
         })
-        router.push("/buku-a7")
+        router.back()
       },
       onError: (error) => {
         handleError(error, "Gagal membuat agenda")
