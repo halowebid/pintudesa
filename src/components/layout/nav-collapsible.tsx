@@ -28,7 +28,7 @@ const NavCollapsible = (props: NavCollapsibleProps) => {
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Items</SidebarGroupLabel>
+      <SidebarGroupLabel>{props.label}</SidebarGroupLabel>
       <SidebarMenu>
         <SidebarMenuItemCollapsible label={props.label} defaultOpen>
           {props.items.map((item) => (

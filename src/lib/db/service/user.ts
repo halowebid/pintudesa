@@ -66,6 +66,12 @@ export const getExistingUser = async (providerAccountId: string) => {
   })
 }
 
+export const getUserById = async (id: string) => {
+  return await db.query.userTable.findFirst({
+    where: (user, { eq }) => eq(user.id, id),
+  })
+}
+
 export const getUserByUsername = async (username: string) => {
   return await db.query.userTable.findFirst({
     where: (user, { eq }) => eq(user.username, username),

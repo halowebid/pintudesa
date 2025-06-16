@@ -48,6 +48,12 @@ export const getInventarisHasilPembangunans = async (
   })
 }
 
+export const getInventarisHasilPembangunanById = async (id: string) => {
+  return await db.query.inventarisHasilPembangunanTable.findFirst({
+    where: eq(inventarisHasilPembangunanTable.id, id),
+  })
+}
+
 export const searchInventarisHasilPembangunans = async ({
   searchQuery,
   limit,

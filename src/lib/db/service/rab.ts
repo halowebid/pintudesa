@@ -32,6 +32,12 @@ export const getRABs = async (page: number, perPage: number) => {
   })
 }
 
+export const getRABById = async (id: string) => {
+  return await db.query.rabTable.findFirst({
+    where: eq(rabTable.id, id),
+  })
+}
+
 export const searchRABs = async ({
   searchQuery,
   limit,

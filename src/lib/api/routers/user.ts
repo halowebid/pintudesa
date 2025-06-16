@@ -11,6 +11,7 @@ import { updateUserSchema, type SelectUser } from "@/lib/db/schema/user"
 import {
   countUsers,
   deleteUser,
+  getUserById,
   getUserByUsername,
   getUsers,
   searchUsers,
@@ -57,6 +58,17 @@ export const userRouter = createTRPCRouter({
       }
       return data
     }),
+
+  byId: publicProcedure.input(z.string()).query(async ({ input }) => {
+    const { data, error } = await tryCatch(getUserById(input))
+    if (error) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Error fetching user",
+      })
+    }
+    return data
+  }),
 
   byUsername: publicProcedure.input(z.string()).query(async ({ input }) => {
     const { data, error } = await tryCatch(getUserByUsername(input))

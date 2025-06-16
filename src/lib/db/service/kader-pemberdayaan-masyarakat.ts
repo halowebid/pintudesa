@@ -48,6 +48,12 @@ export const getKaderPemberdayaanMasyarakats = async (
   })
 }
 
+export const getKaderPemberdayaanMasyarakatById = async (id: string) => {
+  return await db.query.kaderPemberdayaanMasyarakatTable.findFirst({
+    where: eq(kaderPemberdayaanMasyarakatTable.id, id),
+  })
+}
+
 export const searchKaderPemberdayaanMasyarakats = async ({
   searchQuery,
   limit,

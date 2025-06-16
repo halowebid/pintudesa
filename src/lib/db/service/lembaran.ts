@@ -35,6 +35,12 @@ export const getLembarans = async (page: number, perPage: number) => {
   })
 }
 
+export const getLembaranById = async (id: string) => {
+  return await db.query.lembaranTable.findFirst({
+    where: eq(lembaranTable.id, id),
+  })
+}
+
 export const searchLembarans = async ({
   searchQuery,
   limit,
