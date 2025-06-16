@@ -103,6 +103,7 @@ export default function AgendaContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
+              editUrl={`/buku-a7/edit/${item.id}`}
               description={item.uraian}
             />
           )}

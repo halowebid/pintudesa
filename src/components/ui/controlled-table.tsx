@@ -161,11 +161,6 @@ export function ControlledTable<TData extends RowData>({
                   </TableHead>
                 )
               })}
-              {showActions && renderAction && (
-                <TableHead className={cn("px-2 py-4 align-top")}>
-                  Aksi
-                </TableHead>
-              )}
             </TableRow>
           ))}
         </TableHeader>
