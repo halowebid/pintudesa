@@ -15,6 +15,7 @@ import {
 import {
   countAgendas,
   deleteAgenda,
+  getAgendaById,
   getAgendas,
   insertAgenda,
   searchAgendas,
@@ -77,6 +78,17 @@ export const agendaRouter = createTRPCRouter({
       }
       return data
     }),
+
+  byId: adminProtectedProcedure.input(z.string()).query(async ({ input }) => {
+    const { data, error } = await tryCatch(getAgendaById(input))
+    if (error) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Error fetching agenda by ID",
+      })
+    }
+    return data
+  }),
 
   search: publicProcedure
     .input(z.object({ searchQuery: z.string(), limit: z.number() }))
