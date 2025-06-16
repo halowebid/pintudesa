@@ -31,7 +31,6 @@ export default function AgendaForm() {
   const { mutate: createAgenda } = useMutation(
     trpc.agenda.create.mutationOptions({
       onSuccess: () => {
-        // Fix not working toast
         toast({
           description: "Berhasil membuat agenda",
         })
