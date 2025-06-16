@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { useMutation, useQuery } from "@tanstack/react-query"
-import type { PaginationState } from "@tanstack/react-table"
+import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
 import ShowOptions from "@/components/show-options"
 import { useToast } from "@/components/toast-provider"
@@ -20,7 +20,10 @@ export default function AgendaContent() {
     pageIndex: 0,
     pageSize: 10,
   })
-  const columns = React.useMemo(() => tableColumnRegistry.agenda, [])
+  const columns = React.useMemo(
+    () => tableColumnRegistry.agenda as ColumnDef<SelectAgenda>[],
+    [],
+  )
 
   const trpc = useTRPC()
 
@@ -94,7 +97,7 @@ export default function AgendaContent() {
           setPagination={setPagination}
           pagination={pagination}
           totalPages={lastPage}
-          columns={[...columns]}
+          columns={columns}
           isLoading={isLoading}
           showActions
           renderAction={(item) => (

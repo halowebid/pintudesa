@@ -47,6 +47,14 @@ import {
   TableRow,
 } from "./table"
 
+declare module "@tanstack/react-table" {
+  // @ts-ignore extending ColumnMeta with custom props
+  interface ColumnMeta<_TData, _TValue> {
+    isHiddenOnMobile?: boolean
+    filterVariant?: "range" | "select" | undefined
+  }
+}
+
 export type { ColumnDef, FilterFn, RowData } from "@tanstack/react-table"
 
 export const createColumnHelperInstance = <TData extends RowData>() =>
@@ -120,31 +128,39 @@ export function ControlledTable<TData extends RowData>({
   const pageSizeCollection: ListCollection = createListCollection({
     items: pageSizeOptions.map((size) => String(size)),
   })
+
   return (
-    <div>
-      <Table className="min-w-full border">
+    <div className="relative min-h-[100vh] w-full overflow-auto">
+      <Table className="table-auto border-collapse border-spacing-0">
         <TableHeader>
           {table.getHeaderGroups().map((hg) => (
-            <TableRow key={hg.id} className="bg-muted">
-              {hg.headers.map((header) => (
-                <TableHead
-                  key={header.id}
-                  colSpan={header.colSpan}
-                  className={cn(
-                    "space-y-1 px-2 py-4 align-top",
-                    header.column.getCanSort() && "cursor-pointer select-none",
-                  )}
-                >
-                  <div className="flex flex-col justify-center gap-1">
-                    {!header.isPlaceholder && <HeaderCell header={header} />}
-                    {header.column.getCanFilter() && (
-                      <div>
-                        <Filter column={header.column} />
-                      </div>
+            <TableRow key={hg.id}>
+              {hg.headers.map((header) => {
+                const isHiddenOnMobile =
+                  header.column.columnDef.meta?.isHiddenOnMobile
+
+                return (
+                  <TableHead
+                    key={header.id}
+                    colSpan={header.colSpan}
+                    className={cn(
+                      "space-y-1 px-2 py-4 align-top whitespace-nowrap",
+                      header.column.getCanSort() &&
+                        "cursor-pointer select-none",
+                      isHiddenOnMobile && "hidden lg:table-cell",
                     )}
-                  </div>
-                </TableHead>
-              ))}
+                  >
+                    <div className="flex flex-col justify-center gap-1">
+                      {!header.isPlaceholder && <HeaderCell header={header} />}
+                      {header.column.getCanFilter() && (
+                        <div>
+                          <Filter column={header.column} />
+                        </div>
+                      )}
+                    </div>
+                  </TableHead>
+                )
+              })}
               {showActions && renderAction && (
                 <TableHead className={cn("px-2 py-4 align-top")}>
                   Aksi
@@ -176,18 +192,22 @@ export function ControlledTable<TData extends RowData>({
             </TableRow>
           ) : (
             table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} className="hover:bg-muted/90">
+              <TableRow key={row.id}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
-                    className="truncate border px-3 py-2"
+                    className={cn(
+                      "max-w-[150px] truncate px-1.5 py-2 whitespace-nowrap md:px-3",
+                      cell.column.columnDef.meta?.isHiddenOnMobile &&
+                        "hidden lg:table-cell",
+                    )}
                     title={String(cell.getValue())}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
                 {showActions && renderAction && (
-                  <TableCell className="truncate border px-3 py-2">
+                  <TableCell className="px-1.5 py-2 md:px-3">
                     {renderAction(row.original)}
                   </TableCell>
                 )}
@@ -197,7 +217,7 @@ export function ControlledTable<TData extends RowData>({
         </TableBody>
       </Table>
       <Pagination>
-        <PaginationContent>
+        <PaginationContent className="flex flex-wrap items-center justify-center gap-2 px-2 py-1">
           <PaginationItem>
             <PaginationLink
               onClick={() => table.setPageIndex(0)}
@@ -220,7 +240,7 @@ export function ControlledTable<TData extends RowData>({
           </PaginationItem>
 
           <PaginationItem>
-            <span className="px-2 text-sm">
+            <span className="px-2 text-sm whitespace-nowrap">
               Page{" "}
               <strong>
                 {table.getState().pagination.pageIndex + 1} of{" "}
@@ -249,23 +269,23 @@ export function ControlledTable<TData extends RowData>({
               <Icon name="ChevronsRight" />
             </PaginationLink>
           </PaginationItem>
-          <PaginationItem>
-            <span className="ml-2 flex items-center gap-1 text-sm">
-              | Go to page:
-              <Input
-                aria-label="Page number"
-                type="number"
-                min={1}
-                max={table.getPageCount()}
-                defaultValue={table.getState().pagination.pageIndex + 1}
-                onChange={(e) => {
-                  const page = e.target.value ? Number(e.target.value) - 1 : 0
-                  table.setPageIndex(page)
-                }}
-                className="h-8 w-16 rounded border px-1 py-0.5 text-sm"
-              />
-            </span>
+
+          <PaginationItem className="flex flex-wrap items-center gap-1 text-sm">
+            <span className="whitespace-nowrap">Go to page:</span>
+            <Input
+              aria-label="Page number"
+              type="number"
+              min={1}
+              max={table.getPageCount()}
+              defaultValue={table.getState().pagination.pageIndex + 1}
+              onChange={(e) => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                table.setPageIndex(page)
+              }}
+              className="h-8 w-16 rounded border px-1 py-0.5 text-sm"
+            />
           </PaginationItem>
+
           <PaginationItem>
             <Select
               value={[String(table.getState().pagination.pageSize)]}
@@ -332,7 +352,6 @@ function Filter<TData extends RowData>({
   column: Column<TData, unknown>
 }) {
   const columnFilterValue = column.getFilterValue()
-  // @ts-ignore fix dynamic meta type
   const filterVariant = column.columnDef.meta?.filterVariant as
     | "range"
     | "select"

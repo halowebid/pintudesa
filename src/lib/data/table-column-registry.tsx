@@ -1,21 +1,84 @@
+import type { ColumnDef } from "@tanstack/react-table"
+
+import type { InsertAgenda } from "@/lib/db/schema/agenda"
+import { formatDate } from "@/lib/utils/date"
+
+export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
+  {
+    accessorKey: "jenisSurat",
+    header: "Jenis Surat",
+    cell: ({ getValue }) => (
+      <span className="max-w-[180px] truncate font-medium">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "uraian",
+    header: "Uraian",
+    cell: ({ getValue, row }) => {
+      const uraian = getValue<string>()
+      const surat = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">{uraian}</span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            {surat.keteranganTambahan}
+          </span>
+          <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+            {surat.createdAt && (
+              <span>Dibuat: {formatDate(new Date(surat.createdAt), "LL")}</span>
+            )}
+            {surat.updatedAt && (
+              <span>
+                Diperbarui: {formatDate(new Date(surat.updatedAt), "LL")}
+              </span>
+            )}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "keteranganTambahan",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline-block">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true }, // tambahkan supaya otomatis hidden di mobile
+    header: () => <span className="hidden lg:inline">Created At</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Updated At</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
 export const tableColumnRegistry = {
-  agenda: [
-    {
-      header: "Jenis Surat",
-      accessorKey: "jenisSurat",
-      meta: { filterVariant: "select" },
-    },
-    { header: "Uraian", accessorKey: "uraian" },
-    { header: "Keterangan Tambahan", accessorKey: "keteranganTambahan" },
-    {
-      header: "Created At",
-      accessorKey: "createdAt",
-    },
-    {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-    },
-  ],
+  agenda: agendaColumns,
   berita: [
     { header: "Judul", accessorKey: "judul" },
     { header: "Slug", accessorKey: "slug" },
