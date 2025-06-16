@@ -86,7 +86,7 @@ export default function AgendaContent() {
   return (
     <div className="flex w-full flex-col gap-4">
       <div className="mb-8 flex justify-between">
-        <h1>A7. Buku Agenda</h1>
+        <h1 className="text-lg font-bold">A7. Buku Agenda</h1>
         <Button asChild>
           <Link href="/buku-a7/tambah">Tambah</Link>
         </Button>
