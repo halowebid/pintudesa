@@ -20,6 +20,7 @@ const handler = (req: NextRequest) =>
     onError:
       appEnv === "development"
         ? ({ path, error }) => {
+            // eslint-disable-next-line no-console
             console.error(
               `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`,
             )
