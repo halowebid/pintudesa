@@ -58,6 +58,7 @@
     "zod": "^3.25.53"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@next/bundle-analyzer": "^15.4.0-canary.68",
     "@tailwindcss/postcss": "^4.1.8",
     "@tanstack/react-query-devtools": "^5.80.6",
