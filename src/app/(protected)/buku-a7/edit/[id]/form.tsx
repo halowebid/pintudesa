@@ -36,9 +36,9 @@ export default function AgendaForm({
   const queryClient = useQueryClient()
   const router = useRouter()
 
-  const agendaPage = trpc.agenda.all.queryKey()
-  const invalidateMyQueryKey = async () => {
-    await queryClient.invalidateQueries({ queryKey: agendaPage })
+  const agendasKey = trpc.agenda.all.queryKey()
+  const invalidateAgendasKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: agendasKey })
   }
   const { data } = useQuery(trpc.agenda.byId.queryOptions(id))
   const { mutate: updateAgenda } = useMutation(
@@ -49,7 +49,7 @@ export default function AgendaForm({
         })
         if (isDialog) {
           router.back()
-          await invalidateMyQueryKey()
+          await invalidateAgendasKey()
         } else {
           router.push("/buku-a7")
         }
