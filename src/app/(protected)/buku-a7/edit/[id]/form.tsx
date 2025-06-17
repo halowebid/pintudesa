@@ -22,7 +22,13 @@ const formSchema = z.object({
     .or(z.literal("").transform(() => undefined)),
 })
 
-export default function AgendaForm({ id }: { id: string }) {
+export default function AgendaForm({
+  id,
+  isDialog,
+}: {
+  id: string
+  isDialog: boolean
+}) {
   const { toast } = useToast()
   const handleError = useHandleTRPCError()
 
@@ -35,7 +41,11 @@ export default function AgendaForm({ id }: { id: string }) {
         toast({
           description: "Berhasil memperbaharui agenda",
         })
-        router.back()
+        if (isDialog) {
+          router.back()
+        } else {
+          router.push("/buku-a7")
+        }
       },
       onError: (error) => {
         handleError(error, "Gagal memperbaharui agenda")
