@@ -1,7 +1,6 @@
 import * as React from "react"
 import dynamicFn from "next/dynamic"
 
-import { Skeleton } from "@/components/ui/skeleton"
 import { HydrateClient, prefetch, trpc } from "@/lib/trpc/server"
 
 const AgendaContent = dynamicFn(async () => {
@@ -25,15 +24,7 @@ export default function AgendaPage() {
 
   return (
     <HydrateClient>
-      <React.Suspense
-        fallback={
-          <div className="flex w-full flex-col gap-4">
-            <Skeleton />
-          </div>
-        }
-      >
-        <AgendaContent />
-      </React.Suspense>
+      <AgendaContent />
     </HydrateClient>
   )
 }
