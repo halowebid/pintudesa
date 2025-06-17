@@ -85,7 +85,7 @@ export default function AgendaContent() {
   }, [lastPage, pagination.pageIndex])
   return (
     <div className="flex w-full flex-col gap-4">
-      <div className="mb-8 flex justify-between">
+      <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">A7. Buku Agenda</h1>
         <Button asChild>
           <Link href="/buku-a7/tambah">Tambah</Link>
