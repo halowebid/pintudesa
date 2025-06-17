@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "build": "next build --turbopack",
+    "build": "next build",
     "check": "lint && tsc --noEmit",
     "db:check": "drizzle-kit check",
     "db:drop": "drizzle-kit drop",
