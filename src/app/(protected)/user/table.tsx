@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query"
 
 import ShowOptions from "@/components/show-options"
 import TablePagination from "@/components/table-pagination"
+import { useToast } from "@/components/toast-provider"
 import {
   Table,
   TableBody,
@@ -13,7 +14,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { useToast } from "@/components/ui/toast"
 import UserRoleBadge from "@/components/user-role-badge"
 import type { SelectUser } from "@/lib/db/schema/user"
 import { useTRPC } from "@/lib/trpc/client"

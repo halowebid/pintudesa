@@ -4,6 +4,7 @@ import { type Metadata } from "next"
 import localFont from "next/font/local"
 
 import Providers from "@/components/providers"
+import { ToastProvider } from "@/components/toast-provider"
 import { siteDescription, siteTagline, siteTitle } from "@/lib/env/client"
 
 export const metadata: Metadata = {
@@ -32,7 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${adwaita.variable}`} suppressHydrationWarning>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <ToastProvider>{children}</ToastProvider>
+        </Providers>
       </body>
     </html>
   )

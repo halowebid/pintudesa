@@ -31,7 +31,7 @@ const AlertDelete = (props: AlertDeleteProps) => {
 
   return (
     <div className={className}>
-      <Dialog open={isOpen}>
+      <Dialog open={isOpen} onOpenChange={onClose}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Delete {description}</DialogTitle>
@@ -40,11 +40,13 @@ const AlertDelete = (props: AlertDeleteProps) => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <DialogCloseTrigger>
-              <Button onClick={handleDeleteAndClose}>Ya</Button>
-              <Button variant="outline" onClick={onClose}>
-                Tidak
-              </Button>
+            <DialogCloseTrigger asChild>
+              <div className="justify-betweem flex flex-row gap-4">
+                <Button onClick={handleDeleteAndClose}>Ya</Button>
+                <Button variant="outline" onClick={onClose}>
+                  Tidak
+                </Button>
+              </div>
             </DialogCloseTrigger>
           </DialogFooter>
         </DialogContent>

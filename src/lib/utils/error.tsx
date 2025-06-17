@@ -2,7 +2,7 @@
 
 import type { TRPCClientErrorLike } from "@trpc/client"
 
-import { useToast } from "@/components/ui/toast"
+import { useToast } from "@/components/toast-provider"
 
 export const useHandleTRPCError = () => {
   const { toast } = useToast()
