@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { z } from "zod"
 
 import { useToast } from "@/components/toast-provider"
@@ -33,16 +33,23 @@ export default function AgendaForm({
   const handleError = useHandleTRPCError()
 
   const trpc = useTRPC()
+  const queryClient = useQueryClient()
   const router = useRouter()
+
+  const agendaPage = trpc.agenda.all.queryKey()
+  const invalidateMyQueryKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: agendaPage })
+  }
   const { data } = useQuery(trpc.agenda.byId.queryOptions(id))
   const { mutate: updateAgenda } = useMutation(
     trpc.agenda.update.mutationOptions({
-      onSuccess: () => {
+      onSuccess: async () => {
         toast({
           description: "Berhasil memperbaharui agenda",
         })
         if (isDialog) {
           router.back()
+          await invalidateMyQueryKey()
         } else {
           router.push("/buku-a7")
         }
