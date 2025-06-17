@@ -11,9 +11,12 @@ export const metadata = {
   title: "Edit Agenda",
 }
 
-export default function AgendaPage({ params }: { params: { id: string } }) {
-  const { id } = params
-
+export default async function AgendaPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
   return (
     <React.Suspense
       fallback={
