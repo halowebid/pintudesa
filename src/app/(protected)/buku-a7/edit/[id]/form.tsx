@@ -93,6 +93,7 @@ export default function AgendaForm({
           <form.FormItem>
             <form.FormLabel>Jenis Surat</form.FormLabel>
             <field.SelectField
+              mode={isDialog ? "inline" : "portal"}
               options={[
                 { label: "Surat Masuk", value: "surat_masuk" },
                 { label: "Surat Keluar", value: "surat_keluar" },
