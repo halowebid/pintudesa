@@ -1,7 +1,7 @@
 import "@/styles/globals.css"
 
 import { type Metadata } from "next"
-import localFont from "next/font/local"
+import { Manrope } from "next/font/google"
 
 import Providers from "@/components/providers"
 import { ToastProvider } from "@/components/toast-provider"
@@ -13,25 +13,16 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.png" }],
 }
 
-const adwaita = localFont({
-  src: [
-    {
-      path: "./fonts/adwaita-sans-regular.woff2",
-      style: "normal",
-    },
-    {
-      path: "./fonts/adwaita-sans-italic.woff2",
-      style: "italic",
-    },
-  ],
-  variable: "--font-adwaita-sans",
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
 })
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${adwaita.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${manrope.className}`} suppressHydrationWarning>
       <body>
         <Providers>
           <ToastProvider>{children}</ToastProvider>

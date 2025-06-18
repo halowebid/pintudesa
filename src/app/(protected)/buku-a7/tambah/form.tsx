@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { z } from "zod"
 
 import { useToast } from "@/components/toast-provider"
@@ -26,16 +26,22 @@ export default function AgendaForm({ isDialog }: { isDialog: boolean }) {
   const handleError = useHandleTRPCError()
 
   const trpc = useTRPC()
+  const queryClient = useQueryClient()
   const router = useRouter()
 
+  const agendasKey = trpc.agenda.all.queryKey()
+  const invalidateAgendasKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: agendasKey })
+  }
   const { mutate: createAgenda } = useMutation(
     trpc.agenda.create.mutationOptions({
-      onSuccess: () => {
+      onSuccess: async () => {
         toast({
           description: "Berhasil membuat agenda",
         })
         if (isDialog) {
           router.back()
+          await invalidateAgendasKey()
         } else {
           router.push("/buku-a7")
         }
@@ -75,6 +81,7 @@ export default function AgendaForm({ isDialog }: { isDialog: boolean }) {
           <form.FormItem>
             <form.FormLabel>Jenis Surat</form.FormLabel>
             <field.SelectField
+              mode={isDialog ? "inline" : "portal"}
               options={[
                 { label: "Surat Masuk", value: "surat_masuk" },
                 { label: "Surat Keluar", value: "surat_keluar" },
