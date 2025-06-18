@@ -3,15 +3,15 @@ import dynamicFn from "next/dynamic"
 
 import { Skeleton } from "@/components/ui/skeleton"
 
-const AgendaForm = dynamicFn(async () => {
-  const AgendaForm = await import("./form")
-  return AgendaForm
+const EkspedisiForm = dynamicFn(async () => {
+  const EkspedisiForm = await import("./form")
+  return EkspedisiForm
 })
 export const metadata = {
-  title: "Buat Agenda",
+  title: "Buat Ekspedisi",
 }
 
-export default function AgendaPage() {
+export default function EkspedisiPage() {
   return (
     <React.Suspense
       fallback={
@@ -20,7 +20,7 @@ export default function AgendaPage() {
         </div>
       }
     >
-      <AgendaForm isDialog={false} />
+      <EkspedisiForm isDialog={false} />
     </React.Suspense>
   )
 }

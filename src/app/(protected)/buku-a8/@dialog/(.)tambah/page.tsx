@@ -3,18 +3,18 @@ import dynamicFn from "next/dynamic"
 
 import DialogWrapper from "@/components/layout/dialog-wrapper"
 
-const AgendaForm = dynamicFn(async () => {
-  const AgendaForm = await import("../../tambah/form")
-  return AgendaForm
+const EkspedisiForm = dynamicFn(async () => {
+  const EkspedisiForm = await import("../../tambah/form")
+  return EkspedisiForm
 })
 export const metadata = {
-  title: "Buat Agenda",
+  title: "Buat Ekspedisi",
 }
 
-export default function AgendaPage() {
+export default function EkspedisiPage() {
   return (
     <DialogWrapper>
-      <AgendaForm isDialog />
+      <EkspedisiForm isDialog />
     </DialogWrapper>
   )
 }
