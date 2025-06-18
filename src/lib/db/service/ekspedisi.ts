@@ -38,7 +38,7 @@ export const getEkspedises = async (page: number, perPage: number) => {
 }
 
 export const getEkspedisiById = async (id: string) => {
-  return await db.query.agendaTable.findFirst({
+  return await db.query.ekspedisiTable.findFirst({
     where: eq(ekspedisiTable.id, id),
   })
 }
