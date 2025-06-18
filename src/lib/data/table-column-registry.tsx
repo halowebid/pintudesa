@@ -2,6 +2,15 @@ import type { ColumnDef } from "@tanstack/react-table"
 
 import type { InsertAgenda } from "@/lib/db/schema/agenda"
 import { formatDate } from "@/lib/utils/date"
+import type { InsertBerita } from "../db/schema/berita"
+import type { InsertEkspedisi } from "../db/schema/ekspedisi"
+import type { InsertInventaris } from "../db/schema/inventaris"
+import type { InsertLembaran } from "../db/schema/lembaran"
+import type { InsertPendudukSementara } from "../db/schema/penduduk-sementara"
+import type { InsertPeraturan } from "../db/schema/peraturan"
+import type { InsertRAB } from "../db/schema/rab"
+import type { SelectTanah } from "../db/schema/tanah"
+import type { SelectTanahKas } from "../db/schema/tanah-kas"
 
 export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
   {
@@ -76,459 +85,1263 @@ export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
     },
   },
 ]
+export const beritaColumns: ColumnDef<InsertBerita, unknown>[] = [
+  {
+    accessorKey: "judul",
+    header: "Judul",
+    cell: ({ getValue, row }) => {
+      const judul = getValue<string>()
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">{judul}</span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            {data.uraian}
+          </span>
+          <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+            {data.createdAt && (
+              <span>Dibuat: {formatDate(new Date(data.createdAt), "LL")}</span>
+            )}
+            {data.updatedAt && (
+              <span>
+                Diperbarui: {formatDate(new Date(data.updatedAt), "LL")}
+              </span>
+            )}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "slug",
+    header: "Slug",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "uraian",
+    header: () => <span className="hidden lg:inline">Uraian</span>,
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline-block">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: () => <span className="hidden lg:inline">Created At</span>,
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    header: () => <span className="hidden lg:inline">Updated At</span>,
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+export const rabColumns: ColumnDef<InsertRAB, unknown>[] = [
+  {
+    accessorKey: "bidang",
+    header: "Bidang",
+    cell: ({ getValue, row }) => {
+      const bidang = getValue<string>()
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">{bidang}</span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            {data.kegiatan}
+          </span>
+          <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+            {data.createdAt && (
+              <span>Dibuat: {formatDate(new Date(data.createdAt), "LL")}</span>
+            )}
+            {data.updatedAt && (
+              <span>
+                Diperbarui: {formatDate(new Date(data.updatedAt), "LL")}
+              </span>
+            )}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "waktuPelaksanaan",
+    header: "Waktu Pelaksanaan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "kegiatan",
+    header: () => <span className="hidden lg:inline">Kegiatan</span>,
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline-block">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: () => <span className="hidden lg:inline">Created At</span>,
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    header: () => <span className="hidden lg:inline">Updated At</span>,
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
+export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
+  {
+    accessorKey: "judul",
+    header: "Judul",
+    cell: ({ getValue, row }) => {
+      const judul = getValue<string>()
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">{judul}</span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            {data.uraian}
+          </span>
+          <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+            <span>
+              Ditetapkan:{" "}
+              {formatDate(new Date(data.tanggal_surat_ditetapkan), "LL")}
+            </span>
+            {data.tanggalSuratDiundangkan && (
+              <span>
+                Diundangkan:{" "}
+                {formatDate(new Date(data.tanggalSuratDiundangkan), "LL")}
+              </span>
+            )}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "jenisPeraturan",
+    header: "Jenis Peraturan",
+    meta: { filterVariant: "select", isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "nomorSuratDitetapkan",
+    header: "No. Ditetapkan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanggal_surat_ditetapkan",
+    header: "Tgl. Ditetapkan",
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "nomorSuratDilaporkan",
+    header: "No. Dilaporkan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanggalSuratDilaporkan",
+    header: "Tgl. Dilaporkan",
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "nomorSuratDiundangkan",
+    header: "No. Diundangkan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanggalSuratDiundangkan",
+    header: "Tgl. Diundangkan",
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "keteranganTambahan",
+    header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline-block">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: () => <span className="hidden lg:inline">Created At</span>,
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    header: () => <span className="hidden lg:inline">Updated At</span>,
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+export const pendudukSementaraColumns: ColumnDef<
+  InsertPendudukSementara,
+  unknown
+>[] = [
+  {
+    accessorKey: "nama",
+    header: "Nama",
+    cell: ({ getValue, row }) => {
+      const nama = getValue<string>()
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">{nama}</span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            {data.nomorIndentitas}
+          </span>
+          <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+            <span>
+              Datang: {formatDate(new Date(data.tanggalDatang), "LL")}
+            </span>
+            {data.tanggalPergi && (
+              <span>
+                Pergi: {formatDate(new Date(data.tanggalPergi), "LL")}
+              </span>
+            )}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "nomorIndentitas",
+    header: "No. Identitas",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "jenisKelamin",
+    header: "Jenis Kelamin",
+    meta: { filterVariant: "select", isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tempatLahir",
+    header: "Tempat Lahir",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanggalLahir",
+    header: "Tanggal Lahir",
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "pekerjaan",
+    header: "Pekerjaan",
+    meta: { filterVariant: "select", isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "kebangsaan",
+    header: "Kebangsaan",
+    meta: { filterVariant: "select", isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "keturunan",
+    header: "Keturunan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "datangDari",
+    header: "Datang Dari",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tujuanKedatangan",
+    header: "Tujuan Kedatangan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "namaYangDidatangi",
+    header: "Nama Yang Didatangi",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "alamatYangDidatangi",
+    header: "Alamat Yang Didatangi",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanggalDatang",
+    header: "Tanggal Datang",
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "tanggalPergi",
+    header: "Tanggal Pergi",
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "keteranganTambahan",
+    header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline-block">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: () => <span className="hidden lg:inline">Created At</span>,
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    header: () => <span className="hidden lg:inline">Updated At</span>,
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
+export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
+  {
+    accessorKey: "jenisPeraturan",
+    header: "Jenis Peraturan",
+    cell: ({ getValue, row }) => {
+      const jenisPeraturan = getValue<string>()
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">
+            {jenisPeraturan}
+          </span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            {data.keterangan}
+          </span>
+          <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+            <span>
+              Ditetapkan: {formatDate(new Date(data.tanggalDitetapkan), "LL")}
+            </span>
+            <span>
+              Diundangkan: {formatDate(new Date(data.tanggalDiundangkan), "LL")}
+            </span>
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "nomorDitetapkan",
+    header: "No. Ditetapkan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanggalDitetapkan",
+    header: "Tgl. Ditetapkan",
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "nomorDiundangkan",
+    header: "No. Diundangkan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanggalDiundangkan",
+    header: "Tgl. Diundangkan",
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "tentang",
+    header: "Tentang",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline-block">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "keterangan",
+    header: () => <span className="hidden lg:inline">Keterangan</span>,
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline-block">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: () => <span className="hidden lg:inline">Created At</span>,
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    header: () => <span className="hidden lg:inline">Updated At</span>,
+    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
+export const inventarisColumns: ColumnDef<InsertInventaris, unknown>[] = [
+  {
+    accessorKey: "jenisInventaris",
+    header: "Jenis Inventaris",
+    cell: ({ getValue, row }) => {
+      const jenis = getValue<string>()
+      const data = row.original
+      return (
+        <div className="flex max-w-[220px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">{jenis}</span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            {data.keteranganTambahan}
+          </span>
+          <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+            {data.createdAt && (
+              <span>
+                Dibuat: {new Date(data.createdAt).toLocaleDateString()}
+              </span>
+            )}
+            {data.updatedAt && (
+              <span>
+                Diperbarui: {new Date(data.updatedAt).toLocaleDateString()}
+              </span>
+            )}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "tahun",
+    header: "Tahun",
+    cell: ({ getValue }) => <span>{getValue<number>()}</span>,
+  },
+  {
+    accessorKey: "dariPemerintah",
+    header: "Dari Pemerintah",
+    cell: ({ getValue }) => <span>{getValue<number>()}</span>,
+  },
+  {
+    accessorKey: "dariProvinsi",
+    header: "Dari Provinsi",
+    cell: ({ getValue }) => <span>{getValue<number>()}</span>,
+  },
+  {
+    accessorKey: "dariKabupatenAtauKota",
+    header: "Dari Kabupaten/Kota",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "diBeliSendiri",
+    header: "Dibeli Sendiri",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "sumbangan",
+    header: "Sumbangan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "keadaanBaik",
+    header: "Keadaan Baik",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "keadaanRusak",
+    header: "Keadaan Rusak",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "penghapusanRusak",
+    header: "Penghapusan Rusak",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "penghapusanDijual",
+    header: "Penghapusan Dijual",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "penghapusanHilang",
+    header: "Penghapusan Hilang",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "penghapusanDisumbangkan",
+    header: "Penghapusan Disumbangkan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanggalPenghapusan",
+    header: "Tanggal Penghapusan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "keadaanBaikAkhirTahun",
+    header: "Keadaan Baik Akhir Tahun",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "keadaanRusakAkhirTahun",
+    header: "Keadaan Rusak Akhir Tahun",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "keteranganTambahan",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Created At</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Updated At</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+]
+
+export const ekspedisiColumns: ColumnDef<InsertEkspedisi, unknown>[] = [
+  {
+    accessorKey: "nomorSurat",
+    header: "Nomor Surat",
+    cell: ({ getValue, row }) => {
+      const nomor = getValue<string>()
+      const data = row.original
+      return (
+        <div className="flex max-w-[220px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">{nomor}</span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            {data.keteranganTambahan}
+          </span>
+          <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+            {data.createdAt && (
+              <span>
+                Dibuat: {new Date(data.createdAt).toLocaleDateString()}
+              </span>
+            )}
+            {data.updatedAt && (
+              <span>
+                Diperbarui: {new Date(data.updatedAt).toLocaleDateString()}
+              </span>
+            )}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "tanggalSurat",
+    header: "Tanggal Surat",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "ditujukan",
+    header: "Ditujukan",
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
+  {
+    accessorKey: "tanggalPengiriman",
+    header: "Tanggal Pengiriman",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "uraianSurat",
+    header: "Uraian Surat",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[240px] truncate lg:inline">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "keteranganTambahan",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Created At</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Updated At</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+]
+
+export const tanahKasColumns: ColumnDef<SelectTanahKas, unknown>[] = [
+  {
+    accessorKey: "asal",
+    header: "Asal",
+    cell: ({ getValue }) => (
+      <span className="font-medium">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "nomorSertifikat",
+    header: "Nomor Sertifikat",
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
+  {
+    accessorKey: "luasTanah",
+    header: "Luas Tanah",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "kelasTanah",
+    header: "Kelas Tanah",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "milikDesa",
+    header: "Milik Desa",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "milikPemerintah",
+    header: "Milik Pemerintah",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "milikProvinsi",
+    header: "Milik Provinsi",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "milikKabupatenAtauKota",
+    header: "Milik Kabupaten/Kota",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "milikLainnya",
+    header: "Milik Lainnya",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanahSawa",
+    header: "Sawah",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanahTegal",
+    header: "Tegal",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanahKebun",
+    header: "Kebun",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanahTambak",
+    header: "Tambak",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanahKering",
+    header: "Kering",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanahPatok",
+    header: "Patok",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "tanahTidakPatok",
+    header: "Tidak Patok",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "lokasi",
+    header: "Lokasi",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[240px] truncate lg:inline">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "mutasi",
+    header: "Mutasi",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "keteranganTambahan",
+    header: "Keterangan Tambahan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: "Created At",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    header: "Updated At",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+]
+
+export const tanahColumns: ColumnDef<SelectTanah, unknown>[] = [
+  {
+    accessorKey: "namaPemilik",
+    header: "Nama Pemilik",
+    cell: ({ getValue, row }) => {
+      const nama = getValue<string>()
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">{nama}</span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            {data.keteranganTambahan}
+          </span>
+          <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+            {data.createdAt && (
+              <span>Dibuat: {formatDate(new Date(data.createdAt), "LL")}</span>
+            )}
+            {data.updatedAt && (
+              <span>
+                Diperbarui: {formatDate(new Date(data.updatedAt), "LL")}
+              </span>
+            )}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "totalLuas",
+    header: "Total Luas",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
+  },
+  {
+    accessorKey: "hakMilik",
+    header: "Hak Milik",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "hakGunaBangunan",
+    header: "Hak Guna Bangunan",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "hakPakai",
+    header: "Hak Pakai",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "hakGunaUsaha",
+    header: "Hak Guna Usaha",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "hakPengelolaan",
+    header: "Hak Pengelolaan",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "hakMilikAdat",
+    header: "Hak Milik Adat",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "hakVIMilikPribumi",
+    header: "Hak VI Milik Pribumi",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "tanahNegara",
+    header: "Tanah Negara",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "perumahan",
+    header: "Perumahan",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "perdaganganDanJasa",
+    header: "Perdagangan & Jasa",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "perkantoran",
+    header: "Perkantoran",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "industri",
+    header: "Industri",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "fasilitasUmum",
+    header: "Fasilitas Umum",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "sawah",
+    header: "Sawah",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "tegalan",
+    header: "Tegalan",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "perkebunan",
+    header: "Perkebunan",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "peternakanPerikanan",
+    header: "Peternakan/Perikanan",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "hutanBelukar",
+    header: "Hutan Belukar",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "hutanLebat",
+    header: "Hutan Lebat",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "tanahKosong",
+    header: "Tanah Kosong",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "lainLain",
+    header: "Lain-lain",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "mutasi",
+    header: "Mutasi",
+    meta: { isHiddenOnMobile: true },
+  },
+  {
+    accessorKey: "keteranganTambahan",
+    header: "Keterangan Tambahan",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden max-w-[200px] truncate lg:inline">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: "Created At",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    header: "Updated At",
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? new Date(val).toLocaleDateString() : ""}
+        </span>
+      )
+    },
+  },
+]
 
 export const tableColumnRegistry = {
   agenda: agendaColumns,
-  berita: [
-    { header: "Judul", accessorKey: "judul" },
-    { header: "Slug", accessorKey: "slug" },
-    { header: "Uraian", accessorKey: "uraian" },
-    {
-      header: "Created At",
-      accessorKey: "createdAt",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-      meta: { filterVariant: "range" },
-    },
-  ],
-  rab: [
-    { header: "Bidang", accessorKey: "bidang" },
-    { header: "Waktu Pelaksanaan", accessorKey: "waktuPelaksanaan" },
-    { header: "Kegiatan", accessorKey: "kegiatan" },
-    {
-      header: "Created At",
-      accessorKey: "createdAt",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-      meta: { filterVariant: "range" },
-    },
-  ],
-  peraturan: [
-    { header: "Judul", accessorKey: "judul" },
-    { header: "Uraian", accessorKey: "uraian" },
-    {
-      header: "Jenis Peraturan",
-      accessorKey: "jenisPeraturan",
-      meta: { filterVariant: "select" },
-    },
-    { header: "No. Ditetapkan", accessorKey: "nomorSuratDitetapkan" },
-    {
-      header: "Tgl. Ditetapkan",
-      accessorKey: "tanggal_surat_ditetapkan",
-      meta: { filterVariant: "range" },
-    },
-    { header: "No. Dilaporkan", accessorKey: "nomorSuratDilaporkan" },
-    {
-      header: "Tgl. Dilaporkan",
-      accessorKey: "tanggalSuratDilaporkan",
-      meta: { filterVariant: "range" },
-    },
-    { header: "No. Diundangkan", accessorKey: "nomorSuratDiundangkan" },
-    {
-      header: "Tgl. Diundangkan",
-      accessorKey: "tanggalSuratDiundangkan",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Keterangan Tambahan", accessorKey: "keteranganTambahan" },
-    {
-      header: "Created At",
-      accessorKey: "createdAt",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-      meta: { filterVariant: "range" },
-    },
-  ],
+  berita: beritaColumns,
+  rab: rabColumns,
+  peraturan: peraturanColumns,
 
-  pendudukSementara: [
-    { header: "Nama", accessorKey: "nama" },
-    { header: "No. Identitas", accessorKey: "nomorIndentitas" },
-    {
-      header: "Jenis Kelamin",
-      accessorKey: "jenisKelamin",
-      meta: { filterVariant: "select" },
-    },
-    { header: "Tempat Lahir", accessorKey: "tempatLahir" },
-    {
-      header: "Tanggal Lahir",
-      accessorKey: "tanggalLahir",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Pekerjaan",
-      accessorKey: "pekerjaan",
-      meta: { filterVariant: "select" },
-    },
-    {
-      header: "Kebangsaan",
-      accessorKey: "kebangsaan",
-      meta: { filterVariant: "select" },
-    },
-    { header: "Keturunan", accessorKey: "keturunan" },
-    { header: "Datang Dari", accessorKey: "datangDari" },
-    { header: "Tujuan Kedatangan", accessorKey: "tujuanKedatangan" },
-    { header: "Nama Yang Didatangi", accessorKey: "namaYangDidatangi" },
-    { header: "Alamat Yang Didatangi", accessorKey: "alamatYangDidatangi" },
-    {
-      header: "Tanggal Datang",
-      accessorKey: "tanggalDatang",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Tanggal Pergi",
-      accessorKey: "tanggalPergi",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Keterangan Tambahan", accessorKey: "keteranganTambahan" },
-    {
-      header: "Created At",
-      accessorKey: "createdAt",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-      meta: { filterVariant: "range" },
-    },
-  ],
+  pendudukSementara: pendudukSementaraColumns,
 
-  lembaran: [
-    {
-      header: "Jenis Peraturan",
-      accessorKey: "jenisPeraturan",
-      meta: { filterVariant: "select" },
-    },
-    { header: "No. Ditetapkan", accessorKey: "nomorDitetapkan" },
-    {
-      header: "Tgl. Ditetapkan",
-      accessorKey: "tanggalDitetapkan",
-      meta: { filterVariant: "range" },
-    },
-    { header: "No. Diundangkan", accessorKey: "nomorDiundangkan" },
-    {
-      header: "Tgl. Diundangkan",
-      accessorKey: "tanggalDiundangkan",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Tentang", accessorKey: "tentang" },
-    { header: "Keterangan", accessorKey: "keterangan" },
-    {
-      header: "Created At",
-      accessorKey: "createdAt",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-      meta: { filterVariant: "range" },
-    },
-  ],
+  lembaran: lembaranColumns,
 
-  inventaris: [
-    {
-      header: "Jenis Inventaris",
-      accessorKey: "jenisInventaris",
-      meta: { filterVariant: "select" },
-    },
-    { header: "Tahun", accessorKey: "tahun", meta: { filterVariant: "range" } },
-    {
-      header: "Dari Pemerintah",
-      accessorKey: "dariPemerintah",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Dari Provinsi",
-      accessorKey: "dariProvinsi",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Dari Kabupaten/Kota",
-      accessorKey: "dariKabupatenAtauKota",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Dibeli Sendiri",
-      accessorKey: "diBeliSendiri",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Sumbangan",
-      accessorKey: "sumbangan",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Keadaan Baik",
-      accessorKey: "keadaanBaik",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Keadaan Rusak",
-      accessorKey: "keadaanRusak",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Penghapusan Rusak",
-      accessorKey: "penghapusanRusak",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Penghapusan Dijual",
-      accessorKey: "penghapusanDijual",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Penghapusan Hilang",
-      accessorKey: "penghapusanHilang",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Penghapusan Disumbangkan",
-      accessorKey: "penghapusanDisumbangkan",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Tanggal Penghapusan",
-      accessorKey: "tanggalPenghapusan",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Keadaan Baik Akhir Tahun",
-      accessorKey: "keadaanBaikAkhirTahun",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Keadaan Rusak Akhir Tahun",
-      accessorKey: "keadaanRusakAkhirTahun",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Keterangan Tambahan", accessorKey: "keteranganTambahan" },
-    {
-      header: "Created At",
-      accessorKey: "createdAt",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-      meta: { filterVariant: "range" },
-    },
-  ],
-  ekspedisi: [
-    { header: "Nomor Surat", accessorKey: "nomorSurat" },
-    {
-      header: "Tanggal Surat",
-      accessorKey: "tanggalSurat",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Ditujukan", accessorKey: "ditujukan" },
-    {
-      header: "Tanggal Pengiriman",
-      accessorKey: "tanggalPengiriman",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Uraian Surat", accessorKey: "uraianSurat" },
-    { header: "Keterangan Tambahan", accessorKey: "keteranganTambahan" },
-    {
-      header: "Created At",
-      accessorKey: "createdAt",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-      meta: { filterVariant: "range" },
-    },
-  ],
+  inventaris: inventarisColumns,
+  ekspedisi: ekspedisiColumns,
 
-  tanahKas: [
-    { header: "Asal", accessorKey: "asal" },
-    { header: "Nomor Sertifikat", accessorKey: "nomorSertifikat" },
-    {
-      header: "Luas Tanah",
-      accessorKey: "luasTanah",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Kelas Tanah", accessorKey: "kelasTanah" },
-    {
-      header: "Milik Desa",
-      accessorKey: "milikDesa",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Milik Pemerintah",
-      accessorKey: "milikPemerintah",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Milik Provinsi",
-      accessorKey: "milikProvinsi",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Milik Kabupaten/Kota",
-      accessorKey: "milikKabupatenAtauKota",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Milik Lainnya",
-      accessorKey: "milikLainnya",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Sawah",
-      accessorKey: "tanahSawa",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Tegal",
-      accessorKey: "tanahTegal",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Kebun",
-      accessorKey: "tanahKebun",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Tambak",
-      accessorKey: "tanahTambak",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Kering",
-      accessorKey: "tanahKering",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Patok",
-      accessorKey: "tanahPatok",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Tidak Patok",
-      accessorKey: "tanahTidakPatok",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Lokasi", accessorKey: "lokasi" },
-    { header: "Mutasi", accessorKey: "mutasi" },
-    { header: "Keterangan Tambahan", accessorKey: "keteranganTambahan" },
-    {
-      header: "Created At",
-      accessorKey: "createdAt",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-      meta: { filterVariant: "range" },
-    },
-  ],
+  tanahKas: tanahKasColumns,
 
-  tanah: [
-    { header: "Nama Pemilik", accessorKey: "namaPemilik" },
-    {
-      header: "Total Luas",
-      accessorKey: "totalLuas",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Hak Milik", accessorKey: "hakMilik" },
-    { header: "Hak Guna Bangunan", accessorKey: "hakGunaBangunan" },
-    { header: "Hak Pakai", accessorKey: "hakPakai" },
-    { header: "Hak Guna Usaha", accessorKey: "hakGunaUsaha" },
-    { header: "Hak Pengelolaan", accessorKey: "hakPengelolaan" },
-    { header: "Hak Milik Adat", accessorKey: "hakMilikAdat" },
-    { header: "Hak VI Milik Pribumi", accessorKey: "hakVIMilikPribumi" },
-    {
-      header: "Tanah Negara",
-      accessorKey: "tanahNegara",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Perumahan",
-      accessorKey: "perumahan",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Perdagangan & Jasa",
-      accessorKey: "perdaganganDanJasa",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Perkantoran",
-      accessorKey: "perkantoran",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Industri",
-      accessorKey: "industri",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Fasilitas Umum",
-      accessorKey: "fasilitasUmum",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Sawah", accessorKey: "sawah", meta: { filterVariant: "range" } },
-    {
-      header: "Tegalan",
-      accessorKey: "tegalan",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Perkebunan",
-      accessorKey: "perkebunan",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Peternakan/Perikanan",
-      accessorKey: "peternakanPerikanan",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Hutan Belukar",
-      accessorKey: "hutanBelukar",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Hutan Lebat",
-      accessorKey: "hutanLebat",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Tanah Kosong",
-      accessorKey: "tanahKosong",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Lain-lain",
-      accessorKey: "lainLain",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Mutasi",
-      accessorKey: "mutasi",
-      meta: { filterVariant: "range" },
-    },
-    { header: "Keterangan Tambahan", accessorKey: "keteranganTambahan" },
-    {
-      header: "Created At",
-      accessorKey: "createdAt",
-      meta: { filterVariant: "range" },
-    },
-    {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-      meta: { filterVariant: "range" },
-    },
-  ],
+  tanah: tanahColumns,
   users: [
     { header: "Email", accessorKey: "email" },
     { header: "Name", accessorKey: "name" },

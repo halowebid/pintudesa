@@ -3,12 +3,14 @@
 import * as React from "react"
 import {
   createListCollection,
+  parseDate,
   type DatePickerValueChangeDetails,
   type ListCollection,
 } from "@ark-ui/react"
 import { Icon } from "@yopem-ui/react-icons"
 import { cn } from "@yopem-ui/utils"
 
+import { formatStringToDate } from "@/lib/utils/date"
 import { Checkbox } from "./checkbox"
 import { DatePicker } from "./date-picker"
 import { useFieldContext } from "./form"
@@ -335,11 +337,24 @@ export const FileUploadDropzoneField = ({
   )
 }
 
-export const DatePickerField = ({ label }: { label?: string }) => {
+export const DatePickerField = ({
+  label,
+  mode,
+}: {
+  label?: string
+  mode?: "inline" | "portal"
+}) => {
   const field = useFieldContext<string | null>()
   const handleOnValueChange = (e: DatePickerValueChangeDetails) => {
     field.handleChange(e.valueAsString[0])
   }
-
-  return <DatePicker label={label} handleOnValueChange={handleOnValueChange} />
+  const defaultValue = formatStringToDate(field.state.value ?? "")
+  return (
+    <DatePicker
+      value={[parseDate(defaultValue)]}
+      label={label}
+      mode={mode}
+      handleOnValueChange={handleOnValueChange}
+    />
+  )
 }
