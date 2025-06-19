@@ -9,7 +9,7 @@ const TanahKasContent = dynamicFn(async () => {
 })
 
 export const metadata = {
-  title: "Buku TanahKas",
+  title: "Buku Tanah Kas",
 }
 
 export default function TanahKasPage() {

@@ -8,7 +8,7 @@ const TanahKasForm = dynamicFn(async () => {
   return TanahKasForm
 })
 export const metadata = {
-  title: "Edit TanahKas",
+  title: "Edit Tanah Kas",
 }
 
 export default async function TanahKasPage({
