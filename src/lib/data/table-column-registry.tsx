@@ -17,7 +17,7 @@ import { formatDate } from "@/lib/utils/date"
 import {
   jenisPeraturanLabelMap,
   jenisSuratAgendaLabelMap,
-} from "../utils/mapper"
+} from "@/lib/utils/mapper"
 
 export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
   {
@@ -50,11 +50,6 @@ export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
           <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
             {surat.createdAt && (
               <span>Dibuat: {formatDate(new Date(surat.createdAt), "LL")}</span>
-            )}
-            {surat.updatedAt && (
-              <span>
-                Diperbarui: {formatDate(new Date(surat.updatedAt), "LL")}
-              </span>
             )}
           </span>
         </div>
@@ -578,7 +573,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
     header: "Tentang",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline-block">
+      <span className="line-clamp-3 hidden max-w-[inherit] truncate lg:inline-block">
         {getValue<string>()}
       </span>
     ),
@@ -588,7 +583,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
     header: () => <span className="hidden lg:inline">Keterangan</span>,
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline-block">
+      <span className="line-clamp-3 hidden max-w-[inherit] truncate lg:inline-block">
         {getValue<string>()}
       </span>
     ),

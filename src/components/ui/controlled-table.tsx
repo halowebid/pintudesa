@@ -193,7 +193,7 @@ export function ControlledTable<TData extends RowData>({
                   <TableCell
                     key={cell.id}
                     className={cn(
-                      "max-w-[150px] truncate px-1.5 py-2 whitespace-nowrap md:px-3",
+                      "max-w-[150px] px-1.5 py-2 md:px-3",
                       cell.column.columnDef.meta?.isHiddenOnMobile &&
                         "hidden lg:table-cell",
                     )}
