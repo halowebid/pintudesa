@@ -86,6 +86,7 @@ export default function LembaranForm({
 
   const defaultValues = React.useMemo<z.input<typeof formSchema>>(
     () => ({
+      ...data,
       jenisPeraturan: data?.jenisPeraturan ?? "peraturan_desa",
       nomorDitetapkan: data?.nomorDitetapkan ?? "",
       tanggalDitetapkan: data?.tanggalDitetapkan ?? "",

@@ -79,6 +79,7 @@ export default function TanahForm({
 
   const defaultValues = React.useMemo<z.input<typeof formSchema>>(
     () => ({
+      ...data,
       namaPemilik: data?.namaPemilik ?? "",
       totalLuas: data?.totalLuas ?? 0,
       hakMilik: data?.hakMilik ?? "",
