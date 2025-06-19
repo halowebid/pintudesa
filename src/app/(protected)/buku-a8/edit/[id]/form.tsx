@@ -23,7 +23,7 @@ const dateFlexible = z
       return val instanceof Date && !isNaN(val.getTime())
     },
     {
-      message: "Tanggal tidak valid, harus format DD/MM/YYYY",
+      message: "Tanggal tidak valid, harus format MM/DD/YYYY",
     },
   )
   .transform((val) => {

@@ -338,14 +338,25 @@ export const DatePickerField = ({
   label?: string
   mode?: "inline" | "portal"
 }) => {
-  const field = useFieldContext<string | null>()
+  const field = useFieldContext<string | Date | null | undefined>()
   const handleOnValueChange = (e: DatePickerValueChangeDetails) => {
     field.handleChange(e.valueAsString[0])
   }
-  const defaultValue =
-    field.state.value && field.state.value.length > 0
-      ? formatStringToDate(field.state.value)
-      : ""
+
+  const defaultValue = React.useMemo(() => {
+    const value = field.state.value
+
+    if (typeof value === "string") {
+      return value.trim().length > 0 ? formatStringToDate(value) : ""
+    }
+
+    if (value && value instanceof Date) {
+      return value
+    }
+
+    return ""
+  }, [field.state.value])
+
   return (
     <DatePicker
       value={
