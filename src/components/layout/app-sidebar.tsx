@@ -78,7 +78,7 @@ const AppSidebar = (props: AppSidebarProps) => {
         icon: "BookOpen" as const,
       },
       {
-        name: "A9. Buku Kewarganegaraan Desa",
+        name: "A9. Buku Lembaran Desa",
         url: "/buku-a9",
         icon: "Globe" as const,
       },
