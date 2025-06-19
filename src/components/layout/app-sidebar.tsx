@@ -63,7 +63,7 @@ const AppSidebar = (props: AppSidebarProps) => {
         icon: "Calendar" as const,
       },
       {
-        name: "A6. Buku Keluarga Desa",
+        name: "A6. Buku Tanah Desa",
         url: "/buku-a6",
         icon: "Users" as const,
       },
