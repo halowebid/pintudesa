@@ -30,4 +30,4 @@ export const updateAgendaSchema = createUpdateSchema(agendaTable)
 export type SelectAgenda = typeof agendaTable.$inferSelect
 export type InsertAgenda = typeof agendaTable.$inferInsert
 
-export type JenisSuratAgendaType = z.infer<typeof jenisSuratAgenda>
+export type JenisSuratAgenda = z.infer<typeof jenisSuratAgenda>

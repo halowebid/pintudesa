@@ -127,6 +127,34 @@
       "when": 1750041389216,
       "tag": "0017_quick_domino",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1750342987504,
+      "tag": "0018_crazy_liz_osborn",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1750343162614,
+      "tag": "0019_sad_hedge_knight",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1750343706912,
+      "tag": "0020_thankful_grandmaster",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1750343876987,
+      "tag": "0021_faulty_maginty",
+      "breakpoints": true
     }
   ]
 }
