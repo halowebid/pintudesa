@@ -1,5 +1,7 @@
 import dayjs from "dayjs"
 import LocalizedFormat from "dayjs/plugin/localizedFormat"
+import timezone from "dayjs/plugin/timezone"
+import utc from "dayjs/plugin/utc"
 
 export function formatDate(data: string | Date | null, format: string) {
   dayjs.extend(LocalizedFormat)
@@ -8,6 +10,9 @@ export function formatDate(data: string | Date | null, format: string) {
 }
 
 export function formatStringToDate(value: string | Date): Date {
+  dayjs.extend(utc)
+  dayjs.extend(timezone)
+
   if (value instanceof Date && !isNaN(value.getTime())) return value
 
   if (typeof value === "string") {
@@ -15,7 +20,7 @@ export function formatStringToDate(value: string | Date): Date {
     if (parsed.isValid()) return parsed.toDate()
   }
 
-  return new Date()
+  return dayjs().tz("Asia/Jakarta").toDate()
 }
 
 export function formatDateToString(date?: Date): string {
