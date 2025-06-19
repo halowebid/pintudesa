@@ -59,8 +59,8 @@
       desa_)
 - [ ] **A5 Buku Tanah Kas Desa** = tanahKas
 - [ ] **A6 Buku Tanah Desa** = tanah
-- [ ] **A7 Buku Agenda Desa** = agenda
-- [ ] **A8 Buku Ekspedisi** = ekspedisi
+- [x] **A7 Buku Agenda Desa** = agenda
+- [x] **A8 Buku Ekspedisi** = ekspedisi
 - [ ] **A9 Buku Lembaran dan Buku Berita Desa** = lembaran
 
 ### Administrasi > Buku Administrasi > Administrasi Penduduk Desa
