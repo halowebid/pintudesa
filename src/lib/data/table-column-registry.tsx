@@ -1,21 +1,34 @@
 import type { ColumnDef } from "@tanstack/react-table"
 
-import type { InsertAgenda } from "@/lib/db/schema/agenda"
+import { JENIS_SURAT_AGENDA, type InsertAgenda } from "@/lib/db/schema/agenda"
+import type { InsertBerita } from "@/lib/db/schema/berita"
+import type { InsertEkspedisi } from "@/lib/db/schema/ekspedisi"
+import type { InsertInventaris } from "@/lib/db/schema/inventaris"
+import type { InsertLembaran } from "@/lib/db/schema/lembaran"
+import type { InsertPendudukSementara } from "@/lib/db/schema/penduduk-sementara"
+import {
+  JENIS_PERATURAN,
+  type InsertPeraturan,
+} from "@/lib/db/schema/peraturan"
+import type { InsertRAB } from "@/lib/db/schema/rab"
+import type { SelectTanah } from "@/lib/db/schema/tanah"
+import type { SelectTanahKas } from "@/lib/db/schema/tanah-kas"
 import { formatDate } from "@/lib/utils/date"
-import type { InsertBerita } from "../db/schema/berita"
-import type { InsertEkspedisi } from "../db/schema/ekspedisi"
-import type { InsertInventaris } from "../db/schema/inventaris"
-import type { InsertLembaran } from "../db/schema/lembaran"
-import type { InsertPendudukSementara } from "../db/schema/penduduk-sementara"
-import type { InsertPeraturan } from "../db/schema/peraturan"
-import type { InsertRAB } from "../db/schema/rab"
-import type { SelectTanah } from "../db/schema/tanah"
-import type { SelectTanahKas } from "../db/schema/tanah-kas"
+import {
+  jenisPeraturanLabelMap,
+  jenisSuratAgendaLabelMap,
+} from "@/lib/utils/mapper"
 
 export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
   {
     accessorKey: "jenisSurat",
     header: "Jenis Surat",
+    meta: {
+      filterVariant: "select",
+      selectOptions: JENIS_SURAT_AGENDA.map(
+        (value) => jenisSuratAgendaLabelMap[value],
+      ),
+    },
     cell: ({ getValue }) => (
       <span className="max-w-[180px] truncate font-medium">
         {getValue<string>()}
@@ -38,11 +51,6 @@ export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
             {surat.createdAt && (
               <span>Dibuat: {formatDate(new Date(surat.createdAt), "LL")}</span>
             )}
-            {surat.updatedAt && (
-              <span>
-                Diperbarui: {formatDate(new Date(surat.updatedAt), "LL")}
-              </span>
-            )}
           </span>
         </div>
       )
@@ -60,21 +68,8 @@ export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
   },
   {
     accessorKey: "createdAt",
-    meta: { isHiddenOnMobile: true }, // tambahkan supaya otomatis hidden di mobile
-    header: () => <span className="hidden lg:inline">Created At</span>,
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
     meta: { isHiddenOnMobile: true },
-    header: () => <span className="hidden lg:inline">Updated At</span>,
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -132,20 +127,7 @@ export const beritaColumns: ColumnDef<InsertBerita, unknown>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: () => <span className="hidden lg:inline">Created At</span>,
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    header: () => <span className="hidden lg:inline">Updated At</span>,
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
     meta: { filterVariant: "range", isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
@@ -174,11 +156,6 @@ export const rabColumns: ColumnDef<InsertRAB, unknown>[] = [
             {data.createdAt && (
               <span>Dibuat: {formatDate(new Date(data.createdAt), "LL")}</span>
             )}
-            {data.updatedAt && (
-              <span>
-                Diperbarui: {formatDate(new Date(data.updatedAt), "LL")}
-              </span>
-            )}
           </span>
         </div>
       )
@@ -204,20 +181,7 @@ export const rabColumns: ColumnDef<InsertRAB, unknown>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: () => <span className="hidden lg:inline">Created At</span>,
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    header: () => <span className="hidden lg:inline">Updated At</span>,
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
     meta: { filterVariant: "range", isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
@@ -342,20 +306,7 @@ export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: () => <span className="hidden lg:inline">Created At</span>,
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    header: () => <span className="hidden lg:inline">Updated At</span>,
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
     meta: { filterVariant: "range", isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
@@ -528,20 +479,7 @@ export const pendudukSementaraColumns: ColumnDef<
   },
   {
     accessorKey: "createdAt",
-    header: () => <span className="hidden lg:inline">Created At</span>,
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    header: () => <span className="hidden lg:inline">Updated At</span>,
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
     meta: { filterVariant: "range", isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
@@ -558,6 +496,13 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
   {
     accessorKey: "jenisPeraturan",
     header: "Jenis Peraturan",
+    meta: {
+      filterVariant: "select",
+      selectOptions: JENIS_PERATURAN.map(
+        (value) => jenisPeraturanLabelMap[value],
+      ),
+    },
+
     cell: ({ getValue, row }) => {
       const jenisPeraturan = getValue<string>()
       const data = row.original
@@ -592,7 +537,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
   {
     accessorKey: "tanggalDitetapkan",
     header: "Tgl. Ditetapkan",
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -613,7 +558,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
   {
     accessorKey: "tanggalDiundangkan",
     header: "Tgl. Diundangkan",
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -628,7 +573,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
     header: "Tentang",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline-block">
+      <span className="line-clamp-3 hidden max-w-[inherit] truncate lg:inline-block">
         {getValue<string>()}
       </span>
     ),
@@ -638,28 +583,15 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
     header: () => <span className="hidden lg:inline">Keterangan</span>,
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline-block">
+      <span className="line-clamp-3 hidden max-w-[inherit] truncate lg:inline-block">
         {getValue<string>()}
       </span>
     ),
   },
   {
     accessorKey: "createdAt",
-    header: () => <span className="hidden lg:inline">Created At</span>,
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    header: () => <span className="hidden lg:inline">Updated At</span>,
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -688,11 +620,6 @@ export const inventarisColumns: ColumnDef<InsertInventaris, unknown>[] = [
             {data.createdAt && (
               <span>
                 Dibuat: {new Date(data.createdAt).toLocaleDateString()}
-              </span>
-            )}
-            {data.updatedAt && (
-              <span>
-                Diperbarui: {new Date(data.updatedAt).toLocaleDateString()}
               </span>
             )}
           </span>
@@ -829,20 +756,7 @@ export const inventarisColumns: ColumnDef<InsertInventaris, unknown>[] = [
   {
     accessorKey: "createdAt",
     meta: { isHiddenOnMobile: true },
-    header: () => <span className="hidden lg:inline">Created At</span>,
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {val ? new Date(val).toLocaleDateString() : ""}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    meta: { isHiddenOnMobile: true },
-    header: () => <span className="hidden lg:inline">Updated At</span>,
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -871,11 +785,6 @@ export const ekspedisiColumns: ColumnDef<InsertEkspedisi, unknown>[] = [
             {data.createdAt && (
               <span>
                 Dibuat: {new Date(data.createdAt).toLocaleDateString()}
-              </span>
-            )}
-            {data.updatedAt && (
-              <span>
-                Diperbarui: {new Date(data.updatedAt).toLocaleDateString()}
               </span>
             )}
           </span>
@@ -937,20 +846,7 @@ export const ekspedisiColumns: ColumnDef<InsertEkspedisi, unknown>[] = [
   {
     accessorKey: "createdAt",
     meta: { isHiddenOnMobile: true },
-    header: () => <span className="hidden lg:inline">Created At</span>,
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {val ? new Date(val).toLocaleDateString() : ""}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    meta: { isHiddenOnMobile: true },
-    header: () => <span className="hidden lg:inline">Updated At</span>,
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -1117,20 +1013,7 @@ export const tanahKasColumns: ColumnDef<SelectTanahKas, unknown>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Created At",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {val ? new Date(val).toLocaleDateString() : ""}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    header: "Updated At",
+    header: "Dibuat",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
@@ -1300,20 +1183,7 @@ export const tanahColumns: ColumnDef<SelectTanah, unknown>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Created At",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {val ? new Date(val).toLocaleDateString() : ""}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    header: "Updated At",
+    header: "Dibuat",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
@@ -1351,7 +1221,7 @@ export const tableColumnRegistry = {
     { header: "About", accessorKey: "about" },
     { header: "Role", accessorKey: "role", meta: { filterVariant: "select" } },
     {
-      header: "Created At",
+      header: "Dibuat",
       accessorKey: "createdAt",
       meta: { filterVariant: "range" },
     },

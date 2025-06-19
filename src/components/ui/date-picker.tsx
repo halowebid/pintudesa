@@ -120,12 +120,6 @@ export const DatePicker = ({
         >
           <Icon name="Calendar" className="size-4" />
         </DatePickerPrimitive.Trigger>
-        <DatePickerPrimitive.ClearTrigger
-          className="text-muted-foreground ml-1 text-xs hover:underline"
-          asChild
-        >
-          <Icon name="Trash" className="size-4" />
-        </DatePickerPrimitive.ClearTrigger>
       </DatePickerPrimitive.Control>
 
       {mode === "portal" ? <Portal>{Content}</Portal> : Content}
