@@ -37,7 +37,7 @@
       },
       "devDependencies": {
         "@eslint/eslintrc": "^3.3.1",
-        "@next/bundle-analyzer": "^15.4.0-canary.68",
+        "@next/bundle-analyzer": "15.3.3",
         "@tailwindcss/postcss": "^4.1.8",
         "@tanstack/react-query-devtools": "^5.80.6",
         "@types/bun": "^1.2.15",
@@ -233,7 +233,7 @@
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.25", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ=="],
 
-    "@next/bundle-analyzer": ["@next/bundle-analyzer@15.4.0-canary.68", "", { "dependencies": { "webpack-bundle-analyzer": "4.10.1" } }, "sha512-zo1MEF20MjURKVB/w1r/oWEYFPTKezVVDMgRFoUv1NDmE/9g8WQfXsnY2zvVqCCNLib6sn9ccafuer2czi+5ew=="],
+    "@next/bundle-analyzer": ["@next/bundle-analyzer@15.3.3", "", { "dependencies": { "webpack-bundle-analyzer": "4.10.1" } }, "sha512-9gddnjACK6yOa5IkmeFyzcwZh2rscsb6ZspTd7tymPYKQM96fJuKjn9HrRtPNKiMm7ExKNadAJqREmHdBgHZ9A=="],
 
     "@next/env": ["@next/env@15.3.3", "", {}, "sha512-OdiMrzCl2Xi0VTjiQQUK0Xh7bJHnOuET2s+3V+Y40WJBAXrJeGA3f+I8MZJ/YQ3mVGi5XGR1L66oFlgqXhQ4Vw=="],
 
