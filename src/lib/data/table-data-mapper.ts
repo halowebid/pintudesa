@@ -1,10 +1,16 @@
-import { mapAgendaRow, mapInventarisRow } from "@/lib/utils/mapper"
-import type { SelectAgenda } from "../db/schema/agenda"
-import type { SelectInventaris } from "../db/schema/inventaris"
+import type { SelectAgenda } from "@/lib/db/schema/agenda"
+import type { SelectInventaris } from "@/lib/db/schema/inventaris"
+import type { SelectLembaran } from "@/lib/db/schema/lembaran"
+import {
+  mapAgendaRow,
+  mapInventarisRow,
+  mapLembaranRow,
+} from "@/lib/utils/mapper"
 
 interface TableKeyMap {
   agenda: ReturnType<typeof mapAgendaRow>
   inventaris: ReturnType<typeof mapInventarisRow>
+  lembaran: ReturnType<typeof mapLembaranRow>
 }
 
 type TableDataMapperRegistry = {
@@ -14,4 +20,5 @@ type TableDataMapperRegistry = {
 export const tableDataMapperRegistry: TableDataMapperRegistry = {
   agenda: (data: unknown[]) => mapAgendaRow(data as SelectAgenda[]),
   inventaris: (data: unknown[]) => mapInventarisRow(data as SelectInventaris[]),
+  lembaran: (data: unknown[]) => mapLembaranRow(data as SelectLembaran[]),
 }

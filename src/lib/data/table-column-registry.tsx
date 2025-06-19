@@ -1,21 +1,34 @@
 import type { ColumnDef } from "@tanstack/react-table"
 
-import type { InsertAgenda } from "@/lib/db/schema/agenda"
+import { JENIS_SURAT_AGENDA, type InsertAgenda } from "@/lib/db/schema/agenda"
 import type { InsertBerita } from "@/lib/db/schema/berita"
 import type { InsertEkspedisi } from "@/lib/db/schema/ekspedisi"
 import type { InsertInventaris } from "@/lib/db/schema/inventaris"
 import type { InsertLembaran } from "@/lib/db/schema/lembaran"
 import type { InsertPendudukSementara } from "@/lib/db/schema/penduduk-sementara"
-import type { InsertPeraturan } from "@/lib/db/schema/peraturan"
+import {
+  JENIS_PERATURAN,
+  type InsertPeraturan,
+} from "@/lib/db/schema/peraturan"
 import type { InsertRAB } from "@/lib/db/schema/rab"
 import type { SelectTanah } from "@/lib/db/schema/tanah"
 import type { SelectTanahKas } from "@/lib/db/schema/tanah-kas"
 import { formatDate } from "@/lib/utils/date"
+import {
+  jenisPeraturanLabelMap,
+  jenisSuratAgendaLabelMap,
+} from "../utils/mapper"
 
 export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
   {
     accessorKey: "jenisSurat",
     header: "Jenis Surat",
+    meta: {
+      filterVariant: "select",
+      selectOptions: JENIS_SURAT_AGENDA.map(
+        (value) => jenisSuratAgendaLabelMap[value],
+      ),
+    },
     cell: ({ getValue }) => (
       <span className="max-w-[180px] truncate font-medium">
         {getValue<string>()}
@@ -488,6 +501,13 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
   {
     accessorKey: "jenisPeraturan",
     header: "Jenis Peraturan",
+    meta: {
+      filterVariant: "select",
+      selectOptions: JENIS_PERATURAN.map(
+        (value) => jenisPeraturanLabelMap[value],
+      ),
+    },
+
     cell: ({ getValue, row }) => {
       const jenisPeraturan = getValue<string>()
       const data = row.original
@@ -522,7 +542,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
   {
     accessorKey: "tanggalDitetapkan",
     header: "Tgl. Ditetapkan",
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -543,7 +563,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
   {
     accessorKey: "tanggalDiundangkan",
     header: "Tgl. Diundangkan",
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -576,7 +596,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
   {
     accessorKey: "createdAt",
     header: () => <span className="hidden lg:inline">Dibuat</span>,
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (

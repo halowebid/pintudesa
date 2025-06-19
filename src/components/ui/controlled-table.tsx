@@ -52,6 +52,7 @@ declare module "@tanstack/react-table" {
   interface ColumnMeta<_TData, _TValue> {
     isHiddenOnMobile?: boolean
     filterVariant?: "range" | "select" | undefined
+    options?: string[]
   }
 }
 
@@ -423,6 +424,7 @@ function SelectFilter<TData extends RowData>({
   column: Column<TData, unknown>
 }) {
   const rawValue = column.getFilterValue()
+  const options = column.columnDef.meta?.selectOptions
   const columnFilterValue =
     typeof rawValue === "string" || typeof rawValue === "number"
       ? String(rawValue)
@@ -443,7 +445,7 @@ function SelectFilter<TData extends RowData>({
   }, [column])
 
   const rangeCollection: ListCollection = createListCollection({
-    items: values,
+    items: options ? ["", ...options] : values,
   })
 
   return (

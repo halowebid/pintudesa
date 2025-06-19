@@ -164,12 +164,6 @@ export const TextareaField = ({
         placeholder={placeholder}
         rows={rows}
         data-slot="textarea"
-        aria-invalid={
-          Array.isArray(field.state.meta.errors) &&
-          field.state.meta.errors.length > 0
-            ? "true"
-            : "false"
-        }
         className={cn(
           "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
           className,
@@ -348,10 +342,15 @@ export const DatePickerField = ({
   const handleOnValueChange = (e: DatePickerValueChangeDetails) => {
     field.handleChange(e.valueAsString[0])
   }
-  const defaultValue = formatStringToDate(field.state.value ?? "")
+  const defaultValue =
+    field.state.value && field.state.value.length > 0
+      ? formatStringToDate(field.state.value)
+      : ""
   return (
     <DatePicker
-      value={[parseDate(defaultValue)]}
+      value={
+        defaultValue instanceof Date ? [parseDate(defaultValue)] : undefined
+      }
       label={label}
       mode={mode}
       handleOnValueChange={handleOnValueChange}
