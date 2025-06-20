@@ -2,6 +2,7 @@ import { drizzle } from "drizzle-orm/node-postgres"
 
 import { databaseUrl } from "@/lib/env/server"
 import { agendaTable } from "./schema/agenda"
+import { anggotaKeluargaTable } from "./schema/anggota-keluarga"
 import { beritaTable } from "./schema/berita"
 import { ekspedisiTable } from "./schema/ekspedisi"
 import { inventarisTable } from "./schema/inventaris"
@@ -9,10 +10,7 @@ import { inventarisHasilPembangunanTable } from "./schema/inventaris-hasil-pemba
 import { jenisKelaminEnum } from "./schema/jenis-kelamin"
 import { jenisPekerjaanEnum } from "./schema/jenis-pekerjaan"
 import { kaderPemberdayaanMasyarakatTable } from "./schema/kader-pemberdayaan-masyarakat"
-import {
-  anggotaKeluargaTable,
-  kartuKeluargaTable,
-} from "./schema/kartu-keluarga"
+import { kartuKeluargaTable } from "./schema/kartu-keluarga"
 import { kategoriPendudukEnum } from "./schema/kategori-penduduk"
 import { kebangsaanEnum } from "./schema/kebangsaan"
 import { kegiatanPembangunanTable } from "./schema/kegiatan-pembangunan"
