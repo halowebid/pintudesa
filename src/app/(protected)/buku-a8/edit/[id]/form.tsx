@@ -105,6 +105,7 @@ export default function EkspedisiForm({
 
   const defaultValues = React.useMemo<z.input<typeof formSchema>>(
     () => ({
+      ...data,
       nomorSurat: data?.nomorSurat ?? "",
       tanggalSurat: data?.tanggalSurat ?? new Date(),
       ditujukan: data?.ditujukan ?? "",
