@@ -1037,16 +1037,11 @@ export const tanahColumns: ColumnDef<SelectTanah, unknown>[] = [
         <div className="flex max-w-[240px] flex-col">
           <span className="line-clamp-2 truncate font-medium">{nama}</span>
           <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
-            {data.keteranganTambahan}
+            {data.totalLuas}
           </span>
           <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
             {data.createdAt && (
               <span>Dibuat: {formatDate(new Date(data.createdAt), "LL")}</span>
-            )}
-            {data.updatedAt && (
-              <span>
-                Diperbarui: {formatDate(new Date(data.updatedAt), "LL")}
-              </span>
             )}
           </span>
         </div>
@@ -1070,116 +1065,6 @@ export const tanahColumns: ColumnDef<SelectTanah, unknown>[] = [
     accessorKey: "hakGunaBangunan",
     header: "Hak Guna Bangunan",
     meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "hakPakai",
-    header: "Hak Pakai",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "hakGunaUsaha",
-    header: "Hak Guna Usaha",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "hakPengelolaan",
-    header: "Hak Pengelolaan",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "hakMilikAdat",
-    header: "Hak Milik Adat",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "hakVIMilikPribumi",
-    header: "Hak VI Milik Pribumi",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "tanahNegara",
-    header: "Tanah Negara",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "perumahan",
-    header: "Perumahan",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "perdaganganDanJasa",
-    header: "Perdagangan & Jasa",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "perkantoran",
-    header: "Perkantoran",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "industri",
-    header: "Industri",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "fasilitasUmum",
-    header: "Fasilitas Umum",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "sawah",
-    header: "Sawah",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "tegalan",
-    header: "Tegalan",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "perkebunan",
-    header: "Perkebunan",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "peternakanPerikanan",
-    header: "Peternakan/Perikanan",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "hutanBelukar",
-    header: "Hutan Belukar",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "hutanLebat",
-    header: "Hutan Lebat",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "tanahKosong",
-    header: "Tanah Kosong",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "lainLain",
-    header: "Lain-lain",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "mutasi",
-    header: "Mutasi",
-    meta: { isHiddenOnMobile: true },
-  },
-  {
-    accessorKey: "keteranganTambahan",
-    header: "Keterangan Tambahan",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline">
-        {getValue<string>()}
-      </span>
-    ),
   },
   {
     accessorKey: "createdAt",
