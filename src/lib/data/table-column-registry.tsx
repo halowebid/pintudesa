@@ -862,153 +862,41 @@ export const tanahKasColumns: ColumnDef<SelectTanahKas, unknown>[] = [
   {
     accessorKey: "asal",
     header: "Asal",
-    cell: ({ getValue }) => (
-      <span className="font-medium">{getValue<string>()}</span>
-    ),
+    cell: ({ getValue, row }) => {
+      const asal = getValue<string>()
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">{asal}</span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            Nomor Sertifikat: {data.nomorSertifikat}
+          </span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            Luas Tanah: {data.luasTanah} m²
+          </span>
+          {data.createdAt && (
+            <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+              <span>Dibuat: {formatDate(new Date(data.createdAt), "LL")}</span>
+            </span>
+          )}
+        </div>
+      )
+    },
   },
   {
     accessorKey: "nomorSertifikat",
     header: "Nomor Sertifikat",
-    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+    meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden lg:inline">{getValue<number>()}</span>
+    ),
   },
   {
     accessorKey: "luasTanah",
     header: "Luas Tanah",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "kelasTanah",
-    header: "Kelas Tanah",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
-    ),
-  },
-  {
-    accessorKey: "milikDesa",
-    header: "Milik Desa",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "milikPemerintah",
-    header: "Milik Pemerintah",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "milikProvinsi",
-    header: "Milik Provinsi",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "milikKabupatenAtauKota",
-    header: "Milik Kabupaten/Kota",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "milikLainnya",
-    header: "Milik Lainnya",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "tanahSawa",
-    header: "Sawah",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "tanahTegal",
-    header: "Tegal",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "tanahKebun",
-    header: "Kebun",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "tanahTambak",
-    header: "Tambak",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "tanahKering",
-    header: "Kering",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "tanahPatok",
-    header: "Patok",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "tanahTidakPatok",
-    header: "Tidak Patok",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
-    ),
-  },
-  {
-    accessorKey: "lokasi",
-    header: "Lokasi",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden max-w-[240px] truncate lg:inline">
-        {getValue<string>()}
-      </span>
-    ),
-  },
-  {
-    accessorKey: "mutasi",
-    header: "Mutasi",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
-    ),
-  },
-  {
-    accessorKey: "keteranganTambahan",
-    header: "Keterangan Tambahan",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline">
-        {getValue<string>()}
-      </span>
+      <span className="hidden lg:inline">{getValue<number>()} m²</span>
     ),
   },
   {
