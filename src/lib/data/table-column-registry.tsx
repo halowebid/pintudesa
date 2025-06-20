@@ -1037,7 +1037,7 @@ export const tanahColumns: ColumnDef<SelectTanah, unknown>[] = [
         <div className="flex max-w-[240px] flex-col">
           <span className="line-clamp-2 truncate font-medium">{nama}</span>
           <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
-            {data.totalLuas}
+            {data.totalLuas} m²
           </span>
           <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
             {data.createdAt && (
@@ -1053,7 +1053,7 @@ export const tanahColumns: ColumnDef<SelectTanah, unknown>[] = [
     header: "Total Luas",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
+      <span className="hidden lg:inline">{getValue<number>()} m²</span>
     ),
   },
   {
