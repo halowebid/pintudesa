@@ -76,6 +76,8 @@ export const insertKartuKeluargaSchema = createInsertSchema(kartuKeluargaTable)
 export const insertAnggotaKeluargaSchema =
   createInsertSchema(anggotaKeluargaTable)
 export const updateKartuKeluargaSchema = createUpdateSchema(kartuKeluargaTable)
+export const updateAnggotaKeluargaSchema =
+  createUpdateSchema(anggotaKeluargaTable)
 
 export type SelectKartuKeluarga = typeof kartuKeluargaTable.$inferSelect
 export type InsertKartuKeluarga = typeof kartuKeluargaTable.$inferInsert
