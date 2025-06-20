@@ -97,9 +97,11 @@
 
 - [ ] **Kartu Keluarga** = kartuKeluarga (_tiap jenis kategori penduduk punya
       form yang berbeda, kepala keluarga wajib memiliki shdk atribut kepala
-      keluarga, lihat demo panel_)
+      keluarga dan anggota keluarga bebas shdk yang lain kecuali kepala
+      keluarga, harus ada fitur untuk pecah kartu keluarga juga, lihat demo
+      panel_)
 - [ ] **Penduduk** = penduduk (_tandai penduduk yang tidak memiliki nomor kartu
-      keluarga_)
+      keluarga, berikan indikator di tabel_)
 
 ### Layanan
 
