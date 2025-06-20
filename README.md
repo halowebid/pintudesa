@@ -61,7 +61,7 @@
 - [ ] **A6 Buku Tanah Desa** = tanah
 - [x] **A7 Buku Agenda Desa** = agenda
 - [x] **A8 Buku Ekspedisi** = ekspedisi
-- [ ] **A9 Buku Lembaran dan Buku Berita Desa** = lembaran
+- [x] **A9 Buku Lembaran dan Buku Berita Desa** = lembaran
 
 ### Administrasi > Buku Administrasi > Administrasi Penduduk Desa
 
@@ -95,8 +95,13 @@
 
 ### Kependudukan
 
-- [ ] Kartu Keluarga = kartuKeluarga
-- [ ] Penduduk = penduduk (_memiliki relasi dengan kartu keluarga_)
+- [ ] **Kartu Keluarga** = kartuKeluarga (_tiap jenis kategori penduduk punya
+      form yang berbeda, kepala keluarga wajib memiliki shdk atribut kepala
+      keluarga dan anggota keluarga bebas shdk yang lain kecuali kepala
+      keluarga, harus ada fitur untuk pecah kartu keluarga juga, lihat demo
+      panel_)
+- [ ] **Penduduk** = penduduk (_tandai penduduk yang tidak memiliki nomor kartu
+      keluarga, berikan indikator di tabel_)
 
 ### Layanan
 
