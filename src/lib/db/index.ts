@@ -2,6 +2,7 @@ import { drizzle } from "drizzle-orm/node-postgres"
 
 import { databaseUrl } from "@/lib/env/server"
 import { agendaTable } from "./schema/agenda"
+import { anggotaKeluargaTable } from "./schema/anggota-keluarga"
 import { beritaTable } from "./schema/berita"
 import { ekspedisiTable } from "./schema/ekspedisi"
 import { inventarisTable } from "./schema/inventaris"
@@ -9,10 +10,12 @@ import { inventarisHasilPembangunanTable } from "./schema/inventaris-hasil-pemba
 import { jenisKelaminEnum } from "./schema/jenis-kelamin"
 import { jenisPekerjaanEnum } from "./schema/jenis-pekerjaan"
 import { kaderPemberdayaanMasyarakatTable } from "./schema/kader-pemberdayaan-masyarakat"
+import { kartuKeluargaTable } from "./schema/kartu-keluarga"
 import { kategoriPendudukEnum } from "./schema/kategori-penduduk"
 import { kebangsaanEnum } from "./schema/kebangsaan"
 import { kegiatanPembangunanTable } from "./schema/kegiatan-pembangunan"
 import { lembaranTable } from "./schema/lembaran"
+import { pendudukTable } from "./schema/penduduk"
 import { pendudukSementaraTable } from "./schema/penduduk-sementara"
 import { peraturanTable } from "./schema/peraturan"
 import { rabTable } from "./schema/rab"
@@ -29,6 +32,7 @@ export const db = drizzle(databaseUrl, {
     userTable,
     // data
     agendaTable,
+    anggotaKeluargaTable,
     beritaTable,
     ekspedisiTable,
     inventarisHasilPembangunanTable,
@@ -36,11 +40,13 @@ export const db = drizzle(databaseUrl, {
     jenisKelaminEnum,
     jenisPekerjaanEnum,
     kaderPemberdayaanMasyarakatTable,
+    kartuKeluargaTable,
     kategoriPendudukEnum,
     kebangsaanEnum,
     kegiatanPembangunanTable,
     lembaranTable,
     pendudukSementaraTable,
+    pendudukTable,
     peraturanTable,
     rabTable,
     rencanaKerjaPembangunanTable,

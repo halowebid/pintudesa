@@ -4,13 +4,16 @@ import {
   publicProcedure,
 } from "@/lib/api/trpc"
 import { agendaRouter } from "./routers/agenda"
+import { anggotaKeluargaRouter } from "./routers/anggota-keluarga"
 import { beritaRouter } from "./routers/berita"
 import { ekspedisiRouter } from "./routers/ekspedisi"
 import { inventarisRouter } from "./routers/inventaris"
 import { inventarisHasilPembangunanRouter } from "./routers/inventaris-hasil-pembangunan"
 import { kaderPemberdayaanMasyarakatRouter } from "./routers/kader-pemberdayaan-masyarakat"
+import { kartuKeluargaRouter } from "./routers/kartu-keluarga"
 import { kegiatanPembangunanRouter } from "./routers/kegiatan-pembangunan"
 import { lembaranRouter } from "./routers/lembaran"
+import { pendudukRouter } from "./routers/penduduk"
 import { rabRouter } from "./routers/rab"
 import { rencanaKerjaPembangunanRouter } from "./routers/rencana-kerja-pembangunan"
 import { tanahRouter } from "./routers/tanah"
@@ -22,13 +25,16 @@ export const appRouter = createTRPCRouter({
 
   // Routers
   agenda: agendaRouter,
+  anggotaKeluarga: anggotaKeluargaRouter,
   berita: beritaRouter,
   ekspedisi: ekspedisiRouter,
   inventaris: inventarisRouter,
   inventarisHasilPembangunan: inventarisHasilPembangunanRouter,
   kaderPemberdayaanMasyarakat: kaderPemberdayaanMasyarakatRouter,
+  kartuKeluarga: kartuKeluargaRouter,
   kegiatanPembangunan: kegiatanPembangunanRouter,
   lembaran: lembaranRouter,
+  penduduk: pendudukRouter,
   rab: rabRouter,
   rencanaKerjaPembangunan: rencanaKerjaPembangunanRouter,
   tanah: tanahRouter,
