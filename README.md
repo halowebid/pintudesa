@@ -54,11 +54,11 @@
 
 - [ ] **A1 Buku Peraturan Desa** = peraturan
 - [ ] **A2 Buku Keputusan Kepala Desa** = keputusan
-- [ ] **A3 Buku Inventaris Desa** = inventaris
+- [x] **A3 Buku Inventaris Desa** = inventaris
 - [ ] A4 Buku Aparat Pemerintah Desa = aparat (_butuh data aparat pemerintah
       desa_)
-- [ ] **A5 Buku Tanah Kas Desa** = tanahKas
-- [ ] **A6 Buku Tanah Desa** = tanah
+- [x] **A5 Buku Tanah Kas Desa** = tanahKas
+- [x] **A6 Buku Tanah Desa** = tanah
 - [x] **A7 Buku Agenda Desa** = agenda
 - [x] **A8 Buku Ekspedisi** = ekspedisi
 - [x] **A9 Buku Lembaran dan Buku Berita Desa** = lembaran
