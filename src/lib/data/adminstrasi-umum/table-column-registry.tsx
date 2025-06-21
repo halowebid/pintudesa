@@ -196,6 +196,17 @@ export const rabColumns: ColumnDef<InsertRAB, unknown>[] = [
 
 export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
   {
+    accessorKey: "jenisPeraturan",
+    header: "Jenis Peraturan",
+    meta: {
+      filterVariant: "select",
+      selectOptions: JENIS_PERATURAN.map(
+        (value) => jenisPeraturanLabelMap[value],
+      ),
+    },
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
+  {
     accessorKey: "judul",
     header: "Judul",
     cell: ({ getValue, row }) => {
@@ -223,14 +234,7 @@ export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
       )
     },
   },
-  {
-    accessorKey: "jenisPeraturan",
-    header: "Jenis Peraturan",
-    meta: { filterVariant: "select", isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
-    ),
-  },
+
   {
     accessorKey: "nomorSuratDitetapkan",
     header: "No. Ditetapkan",
@@ -272,37 +276,6 @@ export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
         </span>
       )
     },
-  },
-  {
-    accessorKey: "nomorSuratDiundangkan",
-    header: "No. Diundangkan",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
-    ),
-  },
-  {
-    accessorKey: "tanggalSuratDiundangkan",
-    header: "Tgl. Diundangkan",
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "keteranganTambahan",
-    header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline-block">
-        {getValue<string>()}
-      </span>
-    ),
   },
   {
     accessorKey: "createdAt",
