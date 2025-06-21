@@ -182,7 +182,7 @@ export const rabColumns: ColumnDef<InsertRAB, unknown>[] = [
   {
     accessorKey: "createdAt",
     header: () => <span className="hidden lg:inline">Dibuat</span>,
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
