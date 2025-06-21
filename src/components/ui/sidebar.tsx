@@ -513,8 +513,11 @@ export const SidebarMenuItemCollapsible = ({
 
   return (
     <SidebarMenuItem className={className} {...props}>
-      <SidebarMenuButton onClick={() => setOpen((o) => !o)}>
-        <span className="flex-1">{label}</span>
+      <SidebarMenuButton
+        className="!h-[unset] max-h-14 min-h-8"
+        onClick={() => setOpen((o) => !o)}
+      >
+        <span className="line-clamp-2 flex-1">{label}</span>
         <Icon
           name="ChevronRight"
           className={cn("ml-auto transition-transform", open && "rotate-90")}
