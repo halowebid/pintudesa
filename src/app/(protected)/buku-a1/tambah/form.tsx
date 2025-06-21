@@ -191,6 +191,7 @@ export default function PeraturanForm({ isDialog }: { isDialog: boolean }) {
           <form.FormItem>
             <form.FormLabel>Jenis Peraturan</form.FormLabel>
             <field.SelectField
+              mode={isDialog ? "inline" : "portal"}
               options={JENIS_PERATURAN.map((value) => ({
                 label: jenisPeraturanLabelMap[value],
                 value,
