@@ -16,6 +16,7 @@ interface NavCollapsibleProps extends React.ComponentProps<typeof SidebarMenu> {
     name: string
     url: string
     icon?: IconProps["name"]
+    disabled?: boolean
   }[]
   label: string
 }
@@ -32,6 +33,7 @@ const NavCollapsible = (props: NavCollapsibleProps) => {
               asChild
               isActive={pathname.includes(item.url)}
               tooltip={item.name}
+              disabled={item.disabled}
             >
               <Link href={item.url}>
                 <span className="line-clamp-2">{item.name}</span>
