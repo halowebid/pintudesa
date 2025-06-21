@@ -246,7 +246,7 @@ export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
   {
     accessorKey: "tanggal_surat_ditetapkan",
     header: "Tgl. Ditetapkan",
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -267,7 +267,7 @@ export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
   {
     accessorKey: "tanggalSuratDilaporkan",
     header: "Tgl. Dilaporkan",
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -280,7 +280,7 @@ export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
   {
     accessorKey: "createdAt",
     header: () => <span className="hidden lg:inline">Dibuat</span>,
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (

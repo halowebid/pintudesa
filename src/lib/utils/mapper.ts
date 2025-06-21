@@ -4,7 +4,10 @@ import {
   type SelectInventaris,
 } from "@/lib/db/schema/inventaris"
 import type { SelectLembaran } from "@/lib/db/schema/lembaran"
-import { JENIS_PERATURAN } from "@/lib/db/schema/peraturan"
+import {
+  JENIS_PERATURAN,
+  type SelectPeraturan,
+} from "@/lib/db/schema/peraturan"
 import { formatDate } from "./date"
 import { createLabelMap } from "./label"
 
@@ -41,4 +44,10 @@ export const mapLembaranRow = (data: SelectLembaran[]) =>
       : "-",
     createdAt: formatDate(item.createdAt, "LL"),
     updatedAt: formatDate(item.updatedAt, "LL"),
+  }))
+
+export const mapPeraturanRow = (data: SelectPeraturan[]) =>
+  data.map((item) => ({
+    ...item,
+    jenisPeraturan: jenisPeraturanLabelMap[item.jenisPeraturan],
   }))

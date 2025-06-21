@@ -115,54 +115,54 @@ const AppSidebar = (props: AppSidebarProps) => {
     navBukuAdministrasiKeuangan: [
       {
         name: "C1. Buku Anggaran Pendapatan dan Belanja Desa",
-        url: "/buku-b1",
+        url: "/buku-c1",
         icon: "Settings" as const,
       },
       {
         name: "C2. Buku Rencana Anggaran Biaya Desa",
-        url: "/buku-b2",
+        url: "/buku-c2",
         icon: "DollarSign" as const,
       },
       {
         name: "C3. Buku Kas Pembantu Kegiatan",
-        url: "/buku-b3",
+        url: "/buku-c3",
         icon: "Archive" as const,
       },
       {
         name: "C4. Buku Kas Umum",
-        url: "/buku-b4",
+        url: "/buku-c4",
         icon: "MapPin" as const,
       },
       {
         name: "C5. Buku Kas Pembantu",
-        url: "/buku-b5",
+        url: "/buku-c5",
         icon: "Calendar" as const,
       },
       {
         name: "C6. Buku Bank Desa",
-        url: "/buku-b5",
+        url: "/buku-c6",
         icon: "Calendar" as const,
       },
     ],
     navBukuAdministrasiPembangunan: [
       {
         name: "D1. Buku Rencana Kerja Pembangunan Desa",
-        url: "/buku-b1",
+        url: "/buku-d1",
         icon: "Settings" as const,
       },
       {
         name: "D2. Buku Kegiatan Pembangunan Desa",
-        url: "/buku-b2",
+        url: "/buku-d2",
         icon: "DollarSign" as const,
       },
       {
         name: "D3. Buku Inventaris Hasil-hasil Pembangunan Desa",
-        url: "/buku-b3",
+        url: "/buku-d3",
         icon: "Archive" as const,
       },
       {
         name: "D4. Buku Kader Pemberdayaan Masyarakat Desa",
-        url: "/buku-b4",
+        url: "/buku-d4",
         icon: "MapPin" as const,
       },
     ],
