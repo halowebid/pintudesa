@@ -4,7 +4,6 @@
 
 - [ ] Chart
 - [ ] Combo Box
-- [ ] Map Location Picker
 
 ## Fitur
 
@@ -112,8 +111,6 @@
 - [ ] Berita dan Pengumuman = berita (_perlu penambahan column ke table
       database_)
 - [ ] Catatan = catatanPenduduk (_ubah menjadi Catatan Penduduk_)
-- [ ] Wisata = wisata (_perlu komponen Map Location Picker untuk memilih lokasi
-      wisata, lihat demo panel_)
 - [ ] Informasi Anggaran = infoAnggaran
 - [ ] Informasi PPID = infoPpid
 
