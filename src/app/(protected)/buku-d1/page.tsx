@@ -9,7 +9,7 @@ const RencanaKerjaPembangunanContent = dynamicFn(async () => {
 })
 
 export const metadata = {
-  title: "Buku RencanaKerjaPembangunan",
+  title: "Buku Rencana Kerja Pembangunan",
 }
 
 export default function RencanaKerjaPembangunanPage() {
