@@ -1,21 +1,5 @@
 {
-  "extends": "@yopem/typescript-config/nextjs",
-  "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "strict": true,
-    "incremental": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "paths": {
-      "@/*": ["./*"]
-    },
-    "target": "esnext",
-    "baseUrl": "./src/"
-  },
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
+  "extends": "@yopem/typescript-config/base",
+  "files": [],
   "exclude": ["node_modules"]
 }

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalDependencies": ["**/.env"],
+  "globalEnv": ["NODE_ENV", "APP_ENV"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", ".next/**"],
+      "cache": false
+    },
+    "build:fast": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "db:check": {},
+    "db:drop": {},
+    "db:generate": {},
+    "db:migrate": {},
+    "db:pull": {},
+    "db:push": {},
+    "db:studio": {},
+    "db:up": {},
+    "format:check": {},
+    "format:write": {},
+    "test": {},
+    "lint": {},
+    "lint:fix": {},
+    "start": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "typecheck": {
+      "cache": false,
+      "dependsOn": ["^typecheck"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

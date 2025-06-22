@@ -21,8 +21,8 @@
   bisa digunakan untuk membuat Keputusan Kepala Desa.  
   Jika opsi Keputusan Kepala Desa dipilih di dalam Buku Peraturan Desa, maka
   kolom Surat Diundangkan dan Tanggal Surat Diundangkan tidak akan ditampilkan.
-- Data Jenis Pekerjaan ambil di @/lib/db/schema/pekerjaan tidak perlu menulis
-  manual untuk Select Form, Type atau use case lainnya.
+- Data Jenis Pekerjaan ambil di ../schema/pekerjaan tidak perlu menulis manual
+  untuk Select Form, Type atau use case lainnya.
 
 ## Status Dashboard
 
@@ -131,3 +131,5 @@
 ## Fix
 
 - [ ] Ubah RAB tanggal pelaksanaan menjadi timestamp
+- [ ] make global env
+- [ ] typecheck error
