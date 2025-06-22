@@ -33,11 +33,16 @@ const NavCollapsible = (props: NavCollapsibleProps) => {
               asChild
               isActive={pathname.includes(item.url)}
               tooltip={item.name}
-              disabled={item.disabled}
             >
-              <Link href={item.url}>
-                <span className="line-clamp-2">{item.name}</span>
-              </Link>
+              {item.disabled ? (
+                <span className="text-muted-foreground line-clamp-2 cursor-not-allowed">
+                  {item.name}
+                </span>
+              ) : (
+                <Link href={item.url}>
+                  <span className="line-clamp-2">{item.name}</span>
+                </Link>
+              )}
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
