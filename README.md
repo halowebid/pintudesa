@@ -52,7 +52,7 @@
 
 ### Administrasi > Buku Administrasi > Administrasi Umum
 
-- [ ] **A1 Buku Peraturan Desa** = peraturan
+- [x] **A1 Buku Peraturan Desa** = peraturan
 - [ ] A2 Buku Keputusan Kepala Desa = keputusan
 - [x] **A3 Buku Inventaris Desa** = inventaris
 - [ ] A4 Buku Aparat Pemerintah Desa = aparat (_butuh data aparat pemerintah
@@ -78,7 +78,7 @@
 
 - [ ] C1 Buku Anggaran Pendapatan dan Belanja Desa = anggaran (_lihat demo panel
       form_)
-- [ ] **C2 Buku Rencana Anggaran Biaya Desa** = rab
+- [x] **C2 Buku Rencana Anggaran Biaya Desa** = rab
 - [ ] C3 Buku Kas Pembantu Kegiatan = kasPembantuKegiatan
 - [ ] C4 Buku Kas Umum = kasUmum
 - [ ] C5 Buku Kas Pembantu = kasPembantu
@@ -86,11 +86,11 @@
 
 ### Administrasi > Buku Administrasi > Administrasi Pembangunan
 
-- [ ] **D1 Buku Rencana Kerja Pembangunan Desa** = rencanaKerjaPembangunan
-- [ ] **D2 Buku Kegiatan Pembangunan Desa** = kegiatanPembangunan
-- [ ] **D3 Buku Inventaris Hasil-hasil Pembangunan Desa** =
+- [x] **D1 Buku Rencana Kerja Pembangunan Desa** = rencanaKerjaPembangunan
+- [x] **D2 Buku Kegiatan Pembangunan Desa** = kegiatanPembangunan
+- [x] **D3 Buku Inventaris Hasil-hasil Pembangunan Desa** =
       inventarisHasilPembangunan
-- [ ] **D4 Buku Kader Pemberdayaan Masyarakat Desa** =
+- [x] **D4 Buku Kader Pemberdayaan Masyarakat Desa** =
       kaderPemberdayaanMasyarakat
 
 ### Kependudukan
