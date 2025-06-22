@@ -7,6 +7,8 @@
 
 ## Fitur
 
+- [ ] Pengaturan (untuk ubah nama desa, alamat desa, nomor telepon desa, email
+      desa, dan logo desa, banner desa).
 - [ ] Role based authentication for admin, penduduk, and aparatur desa
       (_different admin panel view_)
 - [ ] TRPC file upload
