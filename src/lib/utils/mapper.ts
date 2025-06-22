@@ -3,14 +3,20 @@ import {
   JENIS_INVENTARIS,
   type SelectInventaris,
 } from "@/lib/db/schema/inventaris"
+import { JENIS_KELAMIN } from "@/lib/db/schema/jenis-kelamin"
+import type { SelectKaderPemberdayaanMasyarakat } from "@/lib/db/schema/kader-pemberdayaan-masyarakat"
 import type { SelectLembaran } from "@/lib/db/schema/lembaran"
-import { JENIS_PERATURAN } from "@/lib/db/schema/peraturan"
+import {
+  JENIS_PERATURAN,
+  type SelectPeraturan,
+} from "@/lib/db/schema/peraturan"
 import { formatDate } from "./date"
 import { createLabelMap } from "./label"
 
 export const jenisSuratAgendaLabelMap = createLabelMap(JENIS_SURAT_AGENDA)
 export const jenisPeraturanLabelMap = createLabelMap(JENIS_PERATURAN)
 export const jenisInventarisLabelMap = createLabelMap(JENIS_INVENTARIS)
+export const jenisKelaminLabelMap = createLabelMap(JENIS_KELAMIN)
 
 export const mapAgendaRow = (data: SelectAgenda[]) =>
   data.map((item) => ({
@@ -41,4 +47,18 @@ export const mapLembaranRow = (data: SelectLembaran[]) =>
       : "-",
     createdAt: formatDate(item.createdAt, "LL"),
     updatedAt: formatDate(item.updatedAt, "LL"),
+  }))
+
+export const mapPeraturanRow = (data: SelectPeraturan[]) =>
+  data.map((item) => ({
+    ...item,
+    jenisPeraturan: jenisPeraturanLabelMap[item.jenisPeraturan],
+  }))
+
+export const mapKaderPemberdayaanMasyarakatRow = (
+  data: SelectKaderPemberdayaanMasyarakat[],
+) =>
+  data.map((item) => ({
+    ...item,
+    jenisKelamin: jenisKelaminLabelMap[item.jenisKelamin],
   }))

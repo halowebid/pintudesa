@@ -9,6 +9,8 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -36,16 +38,17 @@ const AppSidebar = (props: AppSidebarProps) => {
         icon: "Users" as const,
       },
     ],
-    navBuku: [
+    navBukuAdministrasiUmum: [
       {
         name: "A1. Buku Peraturan Desa",
         url: "/buku-a1",
         icon: "Settings" as const,
       },
       {
-        name: "A2. Buku Keuangan Desa",
+        name: "A2. Buku Keputusan Kepala Desa",
         url: "/buku-a2",
         icon: "DollarSign" as const,
+        disabled: true,
       },
       {
         name: "A3. Buku Inventaris Desa",
@@ -58,7 +61,7 @@ const AppSidebar = (props: AppSidebarProps) => {
         icon: "MapPin" as const,
       },
       {
-        name: "A5. Buku Peristiwa Desa",
+        name: "A5. Buku Tanah Kas Desa",
         url: "/buku-a5",
         icon: "Calendar" as const,
       },
@@ -83,6 +86,97 @@ const AppSidebar = (props: AppSidebarProps) => {
         icon: "Globe" as const,
       },
     ],
+    navBukuAdministrasiPenduduk: [
+      {
+        name: "B1. Buku Induk Penduduk Desa",
+        url: "/buku-b1",
+        icon: "Settings" as const,
+        disabled: true,
+      },
+      {
+        name: "B2. Buku Mutasi Penduduk Desa",
+        url: "/buku-b2",
+        icon: "DollarSign" as const,
+        disabled: true,
+      },
+      {
+        name: "B3. Buku Rekapitulasi Jumlah Penduduk Desa",
+        url: "/buku-b3",
+        icon: "Archive" as const,
+        disabled: true,
+      },
+      {
+        name: "B4. Buku Penduduk Sementara",
+        url: "/buku-b4",
+        icon: "MapPin" as const,
+        disabled: true,
+      },
+      {
+        name: "B5. Buku KTP dan Kartu Keluarga",
+        url: "/buku-b5",
+        icon: "Calendar" as const,
+        disabled: true,
+      },
+    ],
+    navBukuAdministrasiKeuangan: [
+      {
+        name: "C1. Buku Anggaran Pendapatan dan Belanja Desa",
+        url: "/buku-c1",
+        icon: "Settings" as const,
+        disabled: true,
+      },
+      {
+        name: "C2. Buku Rencana Anggaran Biaya Desa",
+        url: "/buku-c2",
+        icon: "DollarSign" as const,
+      },
+      {
+        name: "C3. Buku Kas Pembantu Kegiatan",
+        url: "/buku-c3",
+        icon: "Archive" as const,
+        disabled: true,
+      },
+      {
+        name: "C4. Buku Kas Umum",
+        url: "/buku-c4",
+        icon: "MapPin" as const,
+        disabled: true,
+      },
+      {
+        name: "C5. Buku Kas Pembantu",
+        url: "/buku-c5",
+        icon: "Calendar" as const,
+        disabled: true,
+      },
+      {
+        name: "C6. Buku Bank Desa",
+        url: "/buku-c6",
+        icon: "Calendar" as const,
+        disabled: true,
+      },
+    ],
+    navBukuAdministrasiPembangunan: [
+      {
+        name: "D1. Buku Rencana Kerja Pembangunan Desa",
+        url: "/buku-d1",
+        icon: "Settings" as const,
+      },
+      {
+        name: "D2. Buku Kegiatan Pembangunan Desa",
+        url: "/buku-d2",
+        icon: "DollarSign" as const,
+      },
+      {
+        name: "D3. Buku Inventaris Hasil-hasil Pembangunan Desa",
+        url: "/buku-d3",
+        icon: "Archive" as const,
+      },
+      {
+        name: "D4. Buku Kader Pemberdayaan Masyarakat Desa",
+        url: "/buku-d4",
+        icon: "MapPin" as const,
+      },
+    ],
   }
   return (
     <Sidebar variant="inset" {...props}>
@@ -101,7 +195,21 @@ const AppSidebar = (props: AppSidebarProps) => {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavCollapsible items={data.navBuku} label="Administrasi" />
+        <SidebarGroup>
+          <SidebarGroupLabel>Buku Administrasi</SidebarGroupLabel>
+          <NavCollapsible
+            items={data.navBukuAdministrasiUmum}
+            label="Buku Administrasi Umum"
+          />
+          <NavCollapsible
+            items={data.navBukuAdministrasiPenduduk}
+            label="Buku Administrasi Penduduk"
+          />
+          <NavCollapsible
+            items={data.navBukuAdministrasiKeuangan}
+            label="Buku Administrasi Keuangan"
+          />
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={props.user} />
