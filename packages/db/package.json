@@ -26,6 +26,9 @@
         "default": "./src/index.ts"
       }
     },
+    "./schema": {
+      "import": "./src/schema/index.ts"
+    },
     "./package.json": "./package.json"
   },
   "sideEffects": false,

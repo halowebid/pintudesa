@@ -1,6 +1,6 @@
 "use client"
 
-import type { SelectUser } from "@pintudesa/db"
+import type { SelectUser } from "@pintudesa/db/schema"
 import {
   Avatar,
   AvatarFallback,

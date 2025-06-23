@@ -1,4 +1,4 @@
-import type { SelectKaderPemberdayaanMasyarakat } from "@pintudesa/db"
+import type { SelectKaderPemberdayaanMasyarakat } from "@pintudesa/db/schema"
 
 import { mapKaderPemberdayaanMasyarakatRow } from "@/lib/utils/mapper"
 
