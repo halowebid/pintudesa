@@ -8,7 +8,7 @@ import {
   type SelectKaderPemberdayaanMasyarakat,
   type SelectLembaran,
   type SelectPeraturan,
-} from "@pintudesa/db"
+} from "@pintudesa/db/schema"
 import { formatDate } from "@pintudesa/utils"
 
 import { createLabelMap } from "./label"

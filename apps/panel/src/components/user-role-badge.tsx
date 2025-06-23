@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { UserRole } from "@pintudesa/db"
+import type { UserRole } from "@pintudesa/db/schema"
 import { Badge } from "@pintudesa/ui"
 import { cn } from "@yopem-ui/utils"
 

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { JENIS_PERATURAN } from "@pintudesa/db"
+import { JENIS_PERATURAN } from "@pintudesa/db/schema"
 import { Button } from "@pintudesa/ui"
 import { formatStringToDate } from "@pintudesa/utils"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"

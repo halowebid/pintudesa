@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { JENIS_PERATURAN, jenisPeraturan } from "@pintudesa/db"
+import { JENIS_PERATURAN, jenisPeraturan } from "@pintudesa/db/schema"
 import { Button } from "@pintudesa/ui"
 import { formatStringToDate } from "@pintudesa/utils"
 import { useMutation, useQueryClient } from "@tanstack/react-query"

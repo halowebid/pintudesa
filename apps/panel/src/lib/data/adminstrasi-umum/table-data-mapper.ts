@@ -3,7 +3,7 @@ import type {
   SelectInventaris,
   SelectLembaran,
   SelectPeraturan,
-} from "@pintudesa/db"
+} from "@pintudesa/db/schema"
 
 import {
   mapAgendaRow,

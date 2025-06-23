@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import type { SelectUser } from "@pintudesa/db"
+import type { SelectUser } from "@pintudesa/db/schema"
 import {
   Sidebar,
   SidebarContent,

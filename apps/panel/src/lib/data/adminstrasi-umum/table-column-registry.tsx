@@ -11,7 +11,7 @@ import {
   type InsertRAB,
   type SelectTanah,
   type SelectTanahKas,
-} from "@pintudesa/db"
+} from "@pintudesa/db/schema"
 import { formatDate } from "@pintudesa/utils"
 import type { ColumnDef } from "@tanstack/react-table"
 

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectInventaris } from "@pintudesa/db"
+import type { SelectInventaris } from "@pintudesa/db/schema"
 import { Button } from "@pintudesa/ui"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
