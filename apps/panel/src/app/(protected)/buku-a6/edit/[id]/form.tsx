@@ -52,7 +52,10 @@ export default function TanahForm({
   const trpc = useTRPC()
   const queryClient = useQueryClient()
   const router = useRouter()
-
+  const tanahByIdKey = trpc.tanah.byId.queryKey(id)
+  const invalidateTanahByIdKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: tanahByIdKey })
+  }
   const tanahsKey = trpc.tanah.all.queryKey()
   const invalidateTanahsKey = async () => {
     await queryClient.invalidateQueries({ queryKey: tanahsKey })
@@ -64,9 +67,10 @@ export default function TanahForm({
         toast({
           description: "Berhasil memperbaharui tanah",
         })
+        await invalidateTanahByIdKey()
+        await invalidateTanahsKey()
         if (isDialog) {
           router.back()
-          await invalidateTanahsKey()
         } else {
           router.push("/buku-a6")
         }

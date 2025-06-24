@@ -36,6 +36,12 @@ export default function InventarisHasilPembangunanForm({
   const queryClient = useQueryClient()
   const router = useRouter()
 
+  const hasilPembangunanByIdKey =
+    trpc.inventarisHasilPembangunan.byId.queryKey(id)
+  const invalidateHasilPembangunanByIdKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: hasilPembangunanByIdKey })
+  }
+
   const inventarisHasilPembangunansKey =
     trpc.inventarisHasilPembangunan.all.queryKey()
   const invalidateInventarisHasilPembangunansKey = async () => {
@@ -52,8 +58,10 @@ export default function InventarisHasilPembangunanForm({
         toast({
           description: "Berhasil memperbaharui inventaris hasil bangunan",
         })
+        await invalidateHasilPembangunanByIdKey()
+        await invalidateInventarisHasilPembangunansKey()
+
         if (isDialog) {
-          await invalidateInventarisHasilPembangunansKey()
           router.back()
         } else {
           router.push("/buku-d3")

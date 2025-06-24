@@ -103,6 +103,11 @@ export default function PeraturanForm({
   const queryClient = useQueryClient()
   const router = useRouter()
 
+  const peraturanByIdKey = trpc.peraturan.byId.queryKey(id)
+  const invalidatePeraturanByIdKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: peraturanByIdKey })
+  }
+
   const peraturansKey = trpc.peraturan.all.queryKey()
   const invalidatePeraturansKey = async () => {
     await queryClient.invalidateQueries({ queryKey: peraturansKey })
@@ -114,8 +119,9 @@ export default function PeraturanForm({
         toast({
           description: "Berhasil memperbaharui peraturan",
         })
+        await invalidatePeraturansKey()
+        await invalidatePeraturanByIdKey()
         if (isDialog) {
-          await invalidatePeraturansKey()
           router.back()
         } else {
           router.push("/buku-a1")

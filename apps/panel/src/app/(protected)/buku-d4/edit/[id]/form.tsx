@@ -40,6 +40,14 @@ export default function KaderPemberdayaanMasyarakatForm({
   const queryClient = useQueryClient()
   const router = useRouter()
 
+  const kaderPemberdayaanMasyarakatByIdKey =
+    trpc.kaderPemberdayaanMasyarakat.byId.queryKey(id)
+  const invalidateKaderPemberdayaanMasyarakatByIdKey = async () => {
+    await queryClient.invalidateQueries({
+      queryKey: kaderPemberdayaanMasyarakatByIdKey,
+    })
+  }
+
   const kaderPemberdayaanMasyarakatsKey =
     trpc.kaderPemberdayaanMasyarakat.all.queryKey()
   const invalidateKaderPemberdayaanMasyarakatsKey = async () => {
@@ -56,8 +64,10 @@ export default function KaderPemberdayaanMasyarakatForm({
         toast({
           description: "Berhasil memperbaharui kader pemberdayaan masyarakat",
         })
+        await invalidateKaderPemberdayaanMasyarakatByIdKey()
+        await invalidateKaderPemberdayaanMasyarakatsKey()
+
         if (isDialog) {
-          await invalidateKaderPemberdayaanMasyarakatsKey()
           router.back()
         } else {
           router.push("/buku-d4")

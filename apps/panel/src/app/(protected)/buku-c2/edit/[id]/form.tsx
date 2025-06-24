@@ -31,6 +31,11 @@ export default function RABForm({
   const queryClient = useQueryClient()
   const router = useRouter()
 
+  const rabByIdKey = trpc.rab.byId.queryKey(id)
+  const invalidateRABByIdKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: rabByIdKey })
+  }
+
   const RABsKey = trpc.rab.all.queryKey()
   const invalidateRABsKey = async () => {
     await queryClient.invalidateQueries({ queryKey: RABsKey })
@@ -42,9 +47,10 @@ export default function RABForm({
         toast({
           description: "Berhasil memperbaharui rencana anggaran biaya",
         })
+        await invalidateRABByIdKey()
+        await invalidateRABsKey()
         if (isDialog) {
           router.back()
-          await invalidateRABsKey()
         } else {
           router.push("/buku-c2")
         }

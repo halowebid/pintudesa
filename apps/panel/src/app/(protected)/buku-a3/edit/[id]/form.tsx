@@ -50,7 +50,10 @@ export default function InventarisForm({
   const trpc = useTRPC()
   const queryClient = useQueryClient()
   const router = useRouter()
-
+  const inventarisByIdKey = trpc.inventaris.byId.queryKey(id)
+  const invalidateInventarisByIdKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: inventarisByIdKey })
+  }
   const inventarissKey = trpc.inventaris.all.queryKey()
   const invalidateInventarissKey = async () => {
     await queryClient.invalidateQueries({ queryKey: inventarissKey })
@@ -62,9 +65,10 @@ export default function InventarisForm({
         toast({
           description: "Berhasil memperbaharui inventaris",
         })
+        await invalidateInventarisByIdKey()
+        await invalidateInventarissKey()
         if (isDialog) {
           router.back()
-          await invalidateInventarissKey()
         } else {
           router.push("/buku-a3")
         }
