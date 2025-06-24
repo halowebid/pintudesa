@@ -61,6 +61,10 @@ export default function LembaranForm({
   const router = useRouter()
 
   const lembaransKey = trpc.lembaran.all.queryKey()
+  const lembaranByIdKey = trpc.lembaran.byId.queryKey(id)
+  const invalidateLembaranByIdKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: lembaranByIdKey })
+  }
   const invalidateLembaransKey = async () => {
     await queryClient.invalidateQueries({ queryKey: lembaransKey })
   }
@@ -71,9 +75,10 @@ export default function LembaranForm({
         toast({
           description: "Berhasil memperbaharui lembaran",
         })
+        await invalidateLembaransKey()
+        await invalidateLembaranByIdKey()
         if (isDialog) {
           router.back()
-          await invalidateLembaransKey()
         } else {
           router.push("/buku-a9")
         }

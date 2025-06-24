@@ -62,7 +62,7 @@ export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
     meta: { isHiddenOnMobile: true },
     header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline-block">
+      <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
       </span>
     ),
@@ -113,7 +113,9 @@ export const beritaColumns: ColumnDef<InsertBerita, unknown>[] = [
     header: "Slug",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -121,7 +123,7 @@ export const beritaColumns: ColumnDef<InsertBerita, unknown>[] = [
     header: () => <span className="hidden lg:inline">Uraian</span>,
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline-block">
+      <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
       </span>
     ),
@@ -167,7 +169,9 @@ export const rabColumns: ColumnDef<InsertRAB, unknown>[] = [
     header: "Waktu Pelaksanaan",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -175,7 +179,7 @@ export const rabColumns: ColumnDef<InsertRAB, unknown>[] = [
     header: () => <span className="hidden lg:inline">Kegiatan</span>,
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline-block">
+      <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
       </span>
     ),
@@ -241,7 +245,9 @@ export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
     header: "No. Ditetapkan",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -262,7 +268,9 @@ export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
     header: "No. Dilaporkan",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -327,7 +335,9 @@ export const pendudukSementaraColumns: ColumnDef<
     header: "No. Identitas",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -335,7 +345,9 @@ export const pendudukSementaraColumns: ColumnDef<
     header: "Jenis Kelamin",
     meta: { filterVariant: "select", isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -343,13 +355,15 @@ export const pendudukSementaraColumns: ColumnDef<
     header: "Tempat Lahir",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
     accessorKey: "tanggalLahir",
     header: "Tanggal Lahir",
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -364,7 +378,9 @@ export const pendudukSementaraColumns: ColumnDef<
     header: "Pekerjaan",
     meta: { filterVariant: "select", isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -372,7 +388,9 @@ export const pendudukSementaraColumns: ColumnDef<
     header: "Kebangsaan",
     meta: { filterVariant: "select", isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -380,7 +398,9 @@ export const pendudukSementaraColumns: ColumnDef<
     header: "Keturunan",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -388,7 +408,9 @@ export const pendudukSementaraColumns: ColumnDef<
     header: "Datang Dari",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -396,7 +418,9 @@ export const pendudukSementaraColumns: ColumnDef<
     header: "Tujuan Kedatangan",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -404,7 +428,9 @@ export const pendudukSementaraColumns: ColumnDef<
     header: "Nama Yang Didatangi",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -412,7 +438,9 @@ export const pendudukSementaraColumns: ColumnDef<
     header: "Alamat Yang Didatangi",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -446,7 +474,7 @@ export const pendudukSementaraColumns: ColumnDef<
     header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline-block">
+      <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
       </span>
     ),
@@ -505,7 +533,9 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
     header: "No. Ditetapkan",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -526,7 +556,9 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
     header: "No. Diundangkan",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {
@@ -547,7 +579,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
     header: "Tentang",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="line-clamp-3 hidden max-w-[inherit] truncate lg:inline-block">
+      <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
       </span>
     ),
@@ -557,7 +589,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
     header: () => <span className="hidden lg:inline">Keterangan</span>,
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="line-clamp-3 hidden max-w-[inherit] truncate lg:inline-block">
+      <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
       </span>
     ),
@@ -611,7 +643,7 @@ export const inventarisColumns: ColumnDef<InsertInventaris, unknown>[] = [
     meta: { isHiddenOnMobile: true },
     header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline">
+      <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
       </span>
     ),
@@ -691,7 +723,7 @@ export const ekspedisiColumns: ColumnDef<InsertEkspedisi, unknown>[] = [
     header: "Uraian Surat",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[240px] truncate lg:inline">
+      <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
       </span>
     ),
@@ -701,7 +733,7 @@ export const ekspedisiColumns: ColumnDef<InsertEkspedisi, unknown>[] = [
     meta: { isHiddenOnMobile: true },
     header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
     cell: ({ getValue }) => (
-      <span className="hidden max-w-[200px] truncate lg:inline">
+      <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
       </span>
     ),
@@ -751,7 +783,9 @@ export const tanahKasColumns: ColumnDef<SelectTanahKas, unknown>[] = [
     header: "Nomor Sertifikat",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<number>()}
+      </span>
     ),
   },
   {
@@ -759,7 +793,9 @@ export const tanahKasColumns: ColumnDef<SelectTanahKas, unknown>[] = [
     header: "Luas Tanah",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()} m²</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<number>()} m²
+      </span>
     ),
   },
   {
@@ -804,18 +840,30 @@ export const tanahColumns: ColumnDef<SelectTanah, unknown>[] = [
     header: "Total Luas",
     meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<number>()} m²</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<number>()} m²
+      </span>
     ),
   },
   {
     accessorKey: "hakMilik",
     header: "Hak Milik",
     meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
   },
   {
     accessorKey: "hakGunaBangunan",
     header: "Hak Guna Bangunan",
     meta: { isHiddenOnMobile: true },
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
   },
   {
     accessorKey: "createdAt",

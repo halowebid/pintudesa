@@ -79,6 +79,11 @@ export default function EkspedisiForm({
   const queryClient = useQueryClient()
   const router = useRouter()
 
+  const ekspedisiByIdKey = trpc.ekspedisi.byId.queryKey(id)
+  const invalidateEkspedisiByIdKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: ekspedisiByIdKey })
+  }
+
   const ekspedisisKey = trpc.ekspedisi.all.queryKey()
   const invalidateEkspedisisKey = async () => {
     await queryClient.invalidateQueries({ queryKey: ekspedisisKey })
@@ -90,9 +95,10 @@ export default function EkspedisiForm({
         toast({
           description: "Berhasil memperbaharui ekspedisi",
         })
+        await invalidateEkspedisisKey()
+        await invalidateEkspedisiByIdKey()
         if (isDialog) {
           router.back()
-          await invalidateEkspedisisKey()
         } else {
           router.push("/buku-a8")
         }

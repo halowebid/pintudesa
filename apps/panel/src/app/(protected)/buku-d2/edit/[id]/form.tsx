@@ -41,6 +41,13 @@ export default function KegiatanPembangunanForm({
   const queryClient = useQueryClient()
   const router = useRouter()
 
+  const kegiatanPembangunanByIdKey = trpc.kegiatanPembangunan.byId.queryKey(id)
+  const invalidateKegiatanPembangunanByIdKey = async () => {
+    await queryClient.invalidateQueries({
+      queryKey: kegiatanPembangunanByIdKey,
+    })
+  }
+
   const kegiatanPembangunansKey = trpc.kegiatanPembangunan.all.queryKey()
   const invalidateKegiatanPembangunansKey = async () => {
     await queryClient.invalidateQueries({ queryKey: kegiatanPembangunansKey })
@@ -52,8 +59,11 @@ export default function KegiatanPembangunanForm({
         toast({
           description: "Berhasil memperbaharui Kegiatan Pembangunan",
         })
+
+        await invalidateKegiatanPembangunanByIdKey()
+        await invalidateKegiatanPembangunansKey()
+
         if (isDialog) {
-          await invalidateKegiatanPembangunansKey()
           router.back()
         } else {
           router.push("/buku-d2")

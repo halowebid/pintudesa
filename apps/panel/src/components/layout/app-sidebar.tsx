@@ -56,9 +56,10 @@ const AppSidebar = (props: AppSidebarProps) => {
         icon: "Archive" as const,
       },
       {
-        name: "A4. Buku Tanah Desa",
+        name: "A4. Buku Aparat Pemerintah Desa",
         url: "/buku-a4",
         icon: "MapPin" as const,
+        disabled: true,
       },
       {
         name: "A5. Buku Tanah Kas Desa",

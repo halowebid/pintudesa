@@ -36,6 +36,11 @@ export default function AgendaForm({
   const queryClient = useQueryClient()
   const router = useRouter()
 
+  const agendaByIdKey = trpc.agenda.byId.queryKey(id)
+  const invalidateAgendaByIdKey = async () => {
+    await queryClient.invalidateQueries({ queryKey: agendaByIdKey })
+  }
+
   const agendasKey = trpc.agenda.all.queryKey()
   const invalidateAgendasKey = async () => {
     await queryClient.invalidateQueries({ queryKey: agendasKey })
@@ -47,9 +52,11 @@ export default function AgendaForm({
         toast({
           description: "Berhasil memperbaharui agenda",
         })
+
+        await invalidateAgendaByIdKey()
+        await invalidateAgendasKey()
         if (isDialog) {
           router.back()
-          await invalidateAgendasKey()
         } else {
           router.push("/buku-a7")
         }
