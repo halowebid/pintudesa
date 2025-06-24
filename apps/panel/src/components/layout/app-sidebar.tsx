@@ -209,6 +209,10 @@ const AppSidebar = (props: AppSidebarProps) => {
             items={data.navBukuAdministrasiKeuangan}
             label="Buku Administrasi Keuangan"
           />
+          <NavCollapsible
+            items={data.navBukuAdministrasiPembangunan}
+            label="Buku Administrasi Pembangunan"
+          />
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
