@@ -57,5 +57,3 @@ export default async function ProtectedLayout({
     </SidebarProvider>
   )
 }
-
-export const dynamic = "force-dynamic"
