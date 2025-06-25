@@ -7,6 +7,7 @@ import { inventarisHasilPembangunanRouter } from "./routes/inventaris-hasil-pemb
 import { kaderPemberdayaanMasyarakatRouter } from "./routes/kader-pemberdayaan-masyarakat"
 import { kartuKeluargaRouter } from "./routes/kartu-keluarga"
 import { kegiatanPembangunanRouter } from "./routes/kegiatan-pembangunan"
+import { keputusanKepalaDesaRouter } from "./routes/keputusan-kepala-desa"
 import { lembaranRouter } from "./routes/lembaran"
 import { pendudukRouter } from "./routes/penduduk"
 import { pendudukSementaraRouter } from "./routes/penduduk-sementara"
@@ -32,6 +33,7 @@ export const appRouter = createTRPCRouter({
   kaderPemberdayaanMasyarakat: kaderPemberdayaanMasyarakatRouter,
   kartuKeluarga: kartuKeluargaRouter,
   kegiatanPembangunan: kegiatanPembangunanRouter,
+  keputusanKepalaDesa: keputusanKepalaDesaRouter,
   lembaran: lembaranRouter,
   penduduk: pendudukRouter,
   pendudukSementara: pendudukSementaraRouter,

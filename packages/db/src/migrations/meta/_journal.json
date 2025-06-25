@@ -169,6 +169,13 @@
       "when": 1750818357908,
       "tag": "0023_bright_boomer",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1750819794242,
+      "tag": "0024_gorgeous_titania",
+      "breakpoints": true
     }
   ]
 }
