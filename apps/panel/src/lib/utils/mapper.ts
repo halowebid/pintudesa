@@ -3,6 +3,7 @@ import {
   ASAL_PENDUDUK,
   JENIS_INVENTARIS,
   JENIS_KELAMIN,
+  JENIS_PEKERJAAN,
   JENIS_PERATURAN,
   JENIS_SURAT_AGENDA,
   PENDIDIKAN_TERAKHIR,
@@ -26,7 +27,7 @@ export const pendidikanTerakhirLabelMap = createLabelMap(PENDIDIKAN_TERAKHIR)
 export const statusDomisiliLabelMap = createLabelMap(STATUS_DOMISILI)
 export const statusPendudukLabelMap = createLabelMap(STATUS_PENDUDUK)
 export const statusPerkawinanLabelMap = createLabelMap(STATUS_PERKAWINAN)
-export const jenisPekerjaanLabelMap = createLabelMap(jenisPekerjaanEnumValues)
+export const jenisPekerjaanLabelMap = createLabelMap(JENIS_PEKERJAAN)
 
 export const jenisSuratAgendaLabelMap = createLabelMap(JENIS_SURAT_AGENDA)
 export const jenisPeraturanLabelMap = createLabelMap(JENIS_PERATURAN)
@@ -82,10 +83,14 @@ export function mapPendudukRow(data: SelectPenduduk[]) {
   return data.map((item) => ({
     ...item,
     agama: agamaLabelMap[item.agama],
-    asalPenduduk: asalPendudukLabelMap[item.asalPenduduk],
+    asalPenduduk:
+      item.asalPenduduk != null ? asalPendudukLabelMap[item.asalPenduduk] : "-",
     pendidikanTerakhir: pendidikanTerakhirLabelMap[item.pendidikanTerakhir],
     statusDomisili: statusDomisiliLabelMap[item.statusDomisili],
-    statusPenduduk: statusPendudukLabelMap[item.statusPenduduk],
+    statusPenduduk:
+      item.statusPenduduk != null
+        ? statusPendudukLabelMap[item.statusPenduduk]
+        : "-",
     statusPerkawinan: statusPerkawinanLabelMap[item.statusPerkawinan],
     jenisKelamin: jenisKelaminLabelMap[item.jenisKelamin],
     pekerjaan: jenisPekerjaanLabelMap[item.pekerjaan],

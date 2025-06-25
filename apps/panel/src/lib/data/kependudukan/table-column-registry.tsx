@@ -2,7 +2,10 @@ import { type SelectPenduduk } from "@pintudesa/db/schema"
 import { formatDate } from "@pintudesa/utils"
 import { type ColumnDef } from "@tanstack/react-table"
 
-import { jenisKelaminLabelMap, pendidikanTerakhirLabelMap } from "@/lib/mappers"
+import {
+  jenisKelaminLabelMap,
+  pendidikanTerakhirLabelMap,
+} from "@/lib/utils/mapper"
 
 export const pendudukColumns: ColumnDef<SelectPenduduk, unknown>[] = [
   {

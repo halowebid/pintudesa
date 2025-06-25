@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import {
-  Combobox as CommandPrimitive,
+  Combobox as ComboboxPrimitive,
   useListCollection,
 } from "@ark-ui/react/combobox"
 import { useFilter } from "@ark-ui/react/locale"
@@ -20,7 +20,7 @@ interface Item {
 
 export interface ComboboxBaseProps
   extends Omit<
-    React.ComponentProps<typeof CommandPrimitive.Root>,
+    React.ComponentProps<typeof ComboboxPrimitive.Root>,
     "children" | "onSelect" | "collection"
   > {
   items: Item[]
@@ -60,37 +60,37 @@ export const ComboboxBase = ({
   }
 
   const Content = (
-    <CommandPrimitive.Content>
+    <ComboboxPrimitive.Content>
       {collection.items.length > 0 ? (
-        <CommandPrimitive.ItemGroup>
-          <CommandPrimitive.ItemGroupLabel className="text-muted-foreground px-3 py-1 text-xs font-medium">
+        <ComboboxPrimitive.ItemGroup>
+          <ComboboxPrimitive.ItemGroupLabel className="text-muted-foreground px-3 py-1 text-xs font-medium">
             {groupLabel}
-          </CommandPrimitive.ItemGroupLabel>
+          </ComboboxPrimitive.ItemGroupLabel>
           {collection.items.map((item) => (
-            <CommandPrimitive.Item
+            <ComboboxPrimitive.Item
               key={item.value}
               item={item}
               className="hover:bg-accent hover:text-accent-foreground flex cursor-pointer items-center justify-between rounded-sm px-3 py-2 text-sm"
             >
-              <CommandPrimitive.ItemText>
+              <ComboboxPrimitive.ItemText>
                 {item.label}
-              </CommandPrimitive.ItemText>
-              <CommandPrimitive.ItemIndicator asChild>
+              </ComboboxPrimitive.ItemText>
+              <ComboboxPrimitive.ItemIndicator asChild>
                 <Icon name="Check" className="size-4" />
-              </CommandPrimitive.ItemIndicator>
-            </CommandPrimitive.Item>
+              </ComboboxPrimitive.ItemIndicator>
+            </ComboboxPrimitive.Item>
           ))}
-        </CommandPrimitive.ItemGroup>
+        </ComboboxPrimitive.ItemGroup>
       ) : (
         <div className="text-muted-foreground px-3 py-4 text-center text-sm">
           No results found.
         </div>
       )}
-    </CommandPrimitive.Content>
+    </ComboboxPrimitive.Content>
   )
 
   return (
-    <CommandPrimitive.Root
+    <ComboboxPrimitive.Root
       {...props}
       onInputValueChange={handleInputChange}
       onSelect={handleSelect}
@@ -99,26 +99,26 @@ export const ComboboxBase = ({
     >
       <div className="flex items-center gap-2 border-b px-3 py-2">
         <Icon name="Search" className="text-muted-foreground size-4" />
-        <CommandPrimitive.Input
+        <ComboboxPrimitive.Input
           placeholder={placeholder}
           className="placeholder:text-muted-foreground w-full bg-transparent text-sm outline-none"
         />
-        <CommandPrimitive.ClearTrigger
+        <ComboboxPrimitive.ClearTrigger
           className="text-muted-foreground hover:text-muted-foreground/80"
           asChild
         >
           <Icon name="X" className="size-4" />
-        </CommandPrimitive.ClearTrigger>
+        </ComboboxPrimitive.ClearTrigger>
       </div>
 
       {mode === "portal" ? (
-        <CommandPrimitive.Positioner>
+        <ComboboxPrimitive.Positioner>
           <Portal>{Content}</Portal>
-        </CommandPrimitive.Positioner>
+        </ComboboxPrimitive.Positioner>
       ) : (
         Content
       )}
-    </CommandPrimitive.Root>
+    </ComboboxPrimitive.Root>
   )
 }
 
