@@ -1,6 +1,7 @@
 import { count, eq } from "drizzle-orm"
 
 import { db } from "../connection"
+import type { JenisKelamin } from "../schema/jenis-kelamin"
 import { pendudukTable, type InsertPenduduk } from "../schema/penduduk"
 
 export const insertPenduduk = async (data: InsertPenduduk) => {
@@ -37,7 +38,16 @@ export const getPenduduks = async (page: number, perPage: number) => {
 
 export const getPendudukById = async (id: string) => {
   return await db.query.pendudukTable.findFirst({
-    where: eq(pendudukTable.id, id),
+    where: (penduduk, { eq }) => eq(penduduk.id, id),
+  })
+}
+
+export const getPenduduksByJenisKelamin = async (
+  jenisKelamin: JenisKelamin,
+) => {
+  return await db.query.pendudukTable.findMany({
+    where: (penduduks, { eq }) => eq(penduduks.jenisKelamin, jenisKelamin),
+    limit: 10,
   })
 }
 
@@ -52,6 +62,22 @@ export const searchPenduduks = async ({
     where: (penduduks, { ilike }) =>
       ilike(penduduks.namaLengkap, `%${searchQuery}%`),
     limit: limit,
+  })
+}
+
+export const searchPenduduksByJenisKelamin = async ({
+  searchQuery,
+  jenisKelamin,
+}: {
+  searchQuery: string
+  jenisKelamin: JenisKelamin
+}) => {
+  return await db.query.pendudukTable.findMany({
+    where: (penduduks, { and, ilike }) =>
+      and(
+        eq(penduduks.jenisKelamin, jenisKelamin),
+        ilike(penduduks.namaLengkap, `%${searchQuery}%`),
+      ),
   })
 }
 

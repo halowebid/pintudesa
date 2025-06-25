@@ -54,7 +54,7 @@
 ### Administrasi > Buku Administrasi > Administrasi Umum
 
 - [x] **A1 Buku Peraturan Desa** = peraturan
-- [ ] A2 Buku Keputusan Kepala Desa = keputusan
+- [ ] **A2 Buku Keputusan Kepala Desa** = keputusan
 - [x] **A3 Buku Inventaris Desa** = inventaris
 - [ ] A4 Buku Aparat Pemerintah Desa = aparat (_butuh data aparat pemerintah
       desa_)
@@ -133,6 +133,9 @@
 - [ ] **Surat Keterangan Kematian** = suratKeteranganKematian (_hanya gunakan 1
       combobox untuk mendapatkan data penduduk, jangan samakan dengan demo
       panel_)
+- [ ] **Surat Keterangan Kelahiran** = suratKeteranganKelahiran (_populate data
+      ibu dan ayah menggunakan pencarian getPenduduksByJenisKelamin dan
+      searchPenduduksByJenisKelamin lalu isikan ke form, lihat demo panel_)
 
 ## Fix
 

@@ -7,12 +7,14 @@ import { inventarisHasilPembangunanRouter } from "./routes/inventaris-hasil-pemb
 import { kaderPemberdayaanMasyarakatRouter } from "./routes/kader-pemberdayaan-masyarakat"
 import { kartuKeluargaRouter } from "./routes/kartu-keluarga"
 import { kegiatanPembangunanRouter } from "./routes/kegiatan-pembangunan"
+import { keputusanKepalaDesaRouter } from "./routes/keputusan-kepala-desa"
 import { lembaranRouter } from "./routes/lembaran"
 import { pendudukRouter } from "./routes/penduduk"
 import { pendudukSementaraRouter } from "./routes/penduduk-sementara"
 import { peraturanRouter } from "./routes/peraturan"
 import { rabRouter } from "./routes/rab"
 import { rencanaKerjaPembangunanRouter } from "./routes/rencana-kerja-pembangunan"
+import { suratKeteranganKelahiranRouter } from "./routes/surat-keterangan-kelahiran"
 import { suratKeteranganKematianRouter } from "./routes/surat-keterangan-kematian"
 import { tanahRouter } from "./routes/tanah"
 import { tanahKasRouter } from "./routes/tanah-kas"
@@ -32,12 +34,14 @@ export const appRouter = createTRPCRouter({
   kaderPemberdayaanMasyarakat: kaderPemberdayaanMasyarakatRouter,
   kartuKeluarga: kartuKeluargaRouter,
   kegiatanPembangunan: kegiatanPembangunanRouter,
+  keputusanKepalaDesa: keputusanKepalaDesaRouter,
   lembaran: lembaranRouter,
   penduduk: pendudukRouter,
   pendudukSementara: pendudukSementaraRouter,
   peraturan: peraturanRouter,
   rab: rabRouter,
   rencanaKerjaPembangunan: rencanaKerjaPembangunanRouter,
+  suratKeteranganKelahiran: suratKeteranganKelahiranRouter,
   suratKeteranganKematian: suratKeteranganKematianRouter,
   tanah: tanahRouter,
   tanahKas: tanahKasRouter,
