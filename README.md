@@ -138,4 +138,4 @@
 
 - [ ] Ubah RAB tanggal pelaksanaan menjadi timestamp
 - [ ] make global env
-- [ ] typecheck error
+- [x] typecheck error
