@@ -128,6 +128,12 @@
 - [ ] Grafik (_tidak ada CRUD_)
 - [ ] Laporan (_tidak ada CRUD_)
 
+### Surat Menyurat
+
+- [ ] **Surat Keterangan Kematian** = suratKeteranganKematian (_hanya gunakan 1
+      combobox untuk mendapatkan data penduduk, jangan samakan dengan demo
+      panel_)
+
 ## Fix
 
 - [ ] Ubah RAB tanggal pelaksanaan menjadi timestamp
