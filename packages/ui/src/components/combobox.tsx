@@ -18,7 +18,7 @@ interface Item {
   value: string
 }
 
-export interface CommandComboboxBaseProps
+export interface ComboboxBaseProps
   extends Omit<
     React.ComponentProps<typeof CommandPrimitive.Root>,
     "children" | "onSelect" | "collection"
@@ -31,7 +31,7 @@ export interface CommandComboboxBaseProps
   mode?: "portal" | "inline"
 }
 
-export const CommandComboboxBase = ({
+export const ComboboxBase = ({
   items,
   placeholder = "Search...",
   groupLabel = "Suggestions",
@@ -39,7 +39,7 @@ export const CommandComboboxBase = ({
   className,
   mode = "portal",
   ...props
-}: CommandComboboxBaseProps) => {
+}: ComboboxBaseProps) => {
   const { contains } = useFilter({ sensitivity: "base" })
 
   const { collection, filter } = useListCollection<Item>({
@@ -122,9 +122,9 @@ export const CommandComboboxBase = ({
   )
 }
 
-export interface CommandComboboxPopoverProps
+export interface ComboboxPopoverProps
   extends Omit<
-    CommandComboboxBaseProps,
+    ComboboxBaseProps,
     "mode" | "value" | "onSelect" | "onValueChange" | "onOpenChange"
   > {
   value?: string
@@ -134,7 +134,7 @@ export interface CommandComboboxPopoverProps
   buttonClassName?: string
 }
 
-export const CommandComboboxPopover = ({
+export const ComboboxPopover = ({
   value,
   onValueChange,
   open,
@@ -142,7 +142,7 @@ export const CommandComboboxPopover = ({
   items,
   buttonClassName,
   ...rest
-}: CommandComboboxPopoverProps) => {
+}: ComboboxPopoverProps) => {
   const selectedLabel =
     items.find((item) => item.value === value)?.label ?? "Select option"
 
@@ -163,7 +163,7 @@ export const CommandComboboxPopover = ({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
-        <CommandComboboxBase
+        <ComboboxBase
           {...rest}
           open={true}
           mode="inline"
