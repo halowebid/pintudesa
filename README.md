@@ -134,8 +134,8 @@
       combobox untuk mendapatkan data penduduk, jangan samakan dengan demo
       panel_)
 - [ ] **Surat Keterangan Kelahiran** = suratKeteranganKelahiran (_populate data
-      ibu dan ayah menggunakan pencarian getPendudukByJenisKelamin lalu isikan
-      ke form, lihat demo panel_)
+      ibu dan ayah menggunakan pencarian getPenduduksByJenisKelamin dan
+      searchPenduduksByJenisKelamin lalu isikan ke form, lihat demo panel_)
 
 ## Fix
 

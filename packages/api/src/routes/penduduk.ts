@@ -3,9 +3,12 @@ import {
   deletePenduduk,
   getPendudukById,
   getPenduduks,
+  getPenduduksByJenisKelamin,
   insertPenduduk,
   insertPendudukSchema,
+  jenisKelamin,
   searchPenduduks,
+  searchPenduduksByJenisKelamin,
   updatePenduduk,
   updatePendudukSchema,
   type SelectPenduduk,
@@ -73,10 +76,40 @@ export const pendudukRouter = createTRPCRouter({
     return data
   }),
 
+  byJenisKelamin: adminProtectedProcedure
+    .input(jenisKelamin)
+    .query(async ({ input }) => {
+      const { data, error } = await tryCatch(getPenduduksByJenisKelamin(input))
+      if (error) {
+        handleTRPCError(error)
+      }
+      return data
+    }),
+
   search: publicProcedure
     .input(z.object({ searchQuery: z.string(), limit: z.number() }))
     .query(async ({ input }) => {
       const { data, error } = await tryCatch(searchPenduduks(input))
+      if (error) {
+        handleTRPCError(error)
+      }
+      return data
+    }),
+
+  searchByJenisKelamin: adminProtectedProcedure
+    .input(
+      z.object({
+        searchQuery: z.string(),
+        jenisKelamin: jenisKelamin,
+      }),
+    )
+    .query(async ({ input }) => {
+      const { data, error } = await tryCatch(
+        searchPenduduksByJenisKelamin({
+          searchQuery: input.searchQuery,
+          jenisKelamin: input.jenisKelamin,
+        }),
+      )
       if (error) {
         handleTRPCError(error)
       }
