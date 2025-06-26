@@ -1,14 +1,15 @@
 import {
   JENIS_PERATURAN,
   JENIS_SURAT_AGENDA,
-  type InsertAgenda,
-  type InsertBerita,
-  type InsertEkspedisi,
-  type InsertInventaris,
-  type InsertLembaran,
-  type InsertPendudukSementara,
-  type InsertPeraturan,
-  type InsertRAB,
+  type SelectAgenda,
+  type SelectBerita,
+  type SelectEkspedisi,
+  type SelectInventaris,
+  type SelectKeputusanKepalaDesa,
+  type SelectLembaran,
+  type SelectPendudukSementara,
+  type SelectPeraturan,
+  type SelectRAB,
   type SelectTanah,
   type SelectTanahKas,
 } from "@pintudesa/db/schema"
@@ -20,7 +21,7 @@ import {
   jenisSuratAgendaLabelMap,
 } from "@/lib/utils/mapper"
 
-export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
+export const agendaColumns: ColumnDef<SelectAgenda, unknown>[] = [
   {
     accessorKey: "jenisSurat",
     header: "Jenis Surat",
@@ -81,7 +82,7 @@ export const agendaColumns: ColumnDef<InsertAgenda, unknown>[] = [
     },
   },
 ]
-export const beritaColumns: ColumnDef<InsertBerita, unknown>[] = [
+export const beritaColumns: ColumnDef<SelectBerita, unknown>[] = [
   {
     accessorKey: "judul",
     header: "Judul",
@@ -142,7 +143,7 @@ export const beritaColumns: ColumnDef<InsertBerita, unknown>[] = [
     },
   },
 ]
-export const rabColumns: ColumnDef<InsertRAB, unknown>[] = [
+export const rabColumns: ColumnDef<SelectRAB, unknown>[] = [
   {
     accessorKey: "bidang",
     header: "Bidang",
@@ -199,7 +200,7 @@ export const rabColumns: ColumnDef<InsertRAB, unknown>[] = [
   },
 ]
 
-export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
+export const peraturanColumns: ColumnDef<SelectPeraturan, unknown>[] = [
   {
     accessorKey: "jenisPeraturan",
     header: "Jenis Peraturan",
@@ -301,7 +302,7 @@ export const peraturanColumns: ColumnDef<InsertPeraturan, unknown>[] = [
   },
 ]
 export const pendudukSementaraColumns: ColumnDef<
-  InsertPendudukSementara,
+  SelectPendudukSementara,
   unknown
 >[] = [
   {
@@ -493,8 +494,78 @@ export const pendudukSementaraColumns: ColumnDef<
     },
   },
 ]
+export const keputusanKepalaDesaColumns: ColumnDef<
+  SelectKeputusanKepalaDesa,
+  unknown
+>[] = [
+  {
+    accessorKey: "nomorSurat",
+    header: "Nomor Surat",
+    cell: ({ getValue }) => (
+      <span className="line-clamp-2 text-ellipsis">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "judul",
+    header: "Judul",
+    cell: ({ getValue }) => (
+      <span className="line-clamp-2 text-ellipsis">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "uraian",
+    header: "Uraian",
+    cell: ({ getValue, row }) => {
+      const uraian = getValue<string>()
+      const surat = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="line-clamp-2 truncate font-medium">{uraian}</span>
+          <span className="text-muted-foreground mt-1 line-clamp-2 truncate text-[10px] lg:hidden">
+            {surat.keteranganTambahan}
+          </span>
+          <span className="text-muted-foreground mt-1 flex flex-col gap-0.5 text-[10px] lg:hidden">
+            {surat.createdAt && (
+              <span>Dibuat: {formatDate(new Date(surat.createdAt), "LL")}</span>
+            )}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "nomorLaporan",
+    header: "Nomor Laporan",
+    cell: ({ getValue }) => (
+      <span className="line-clamp-2 text-ellipsis">{getValue<string>()}</span>
+    ),
+  },
+  {
+    accessorKey: "keteranganTambahan",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Keterangan Tambahan</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
 
-export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
+export const lembaranColumns: ColumnDef<SelectLembaran, unknown>[] = [
   {
     accessorKey: "jenisPeraturan",
     header: "Jenis Peraturan",
@@ -609,7 +680,7 @@ export const lembaranColumns: ColumnDef<InsertLembaran, unknown>[] = [
   },
 ]
 
-export const inventarisColumns: ColumnDef<InsertInventaris, unknown>[] = [
+export const inventarisColumns: ColumnDef<SelectInventaris, unknown>[] = [
   {
     accessorKey: "jenisInventaris",
     header: "Jenis Inventaris",
@@ -663,7 +734,7 @@ export const inventarisColumns: ColumnDef<InsertInventaris, unknown>[] = [
   },
 ]
 
-export const ekspedisiColumns: ColumnDef<InsertEkspedisi, unknown>[] = [
+export const ekspedisiColumns: ColumnDef<SelectEkspedisi, unknown>[] = [
   {
     accessorKey: "nomorSurat",
     header: "Nomor Surat",
@@ -887,6 +958,7 @@ export const tableColumnRegistry = {
   peraturan: peraturanColumns,
 
   pendudukSementara: pendudukSementaraColumns,
+  keputusanKepalaDesa: keputusanKepalaDesaColumns,
 
   lembaran: lembaranColumns,
 
