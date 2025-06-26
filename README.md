@@ -9,6 +9,8 @@
 
 - [ ] Pengaturan (untuk ubah nama desa, alamat desa, nomor telepon desa, email
       desa, dan logo desa, banner desa).
+- [ ] API Alamat Seluruh Indonesia (_untuk mendapatkan data alamat lengkap dari
+      provinsi, kabupaten, kecamatan, desa, dan kelurahan_)
 - [ ] Role based authentication for admin, penduduk, and aparatur desa
       (_different admin panel view_)
 - [ ] TRPC file upload
