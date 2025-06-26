@@ -137,6 +137,8 @@
       ibu dan ayah menggunakan pencarian getPenduduksByJenisKelamin dan
       searchPenduduksByJenisKelamin lalu isikan ke form, lihat demo panel_)
 - [ ] **Surat Kuasa SKGR** = suratKuasaSKGR
+- [ ] **Surat Pernyataan Belum Menikah** = suratPernyataanBelumMenikah (_saksi 2
+      optional, lihat form demo panel_)
 
 ## Fix
 
