@@ -140,6 +140,7 @@
 - [ ] **Surat Pernyataan Belum Menikah** = suratPernyataanBelumMenikah (_saksi 2
       optional, lihat form demo panel_)
 - [ ] **Surat Izin Keramaian** = suratIzinKeramaian
+- [ ] **Surat Pengantar SKCK** = suratPengantarSKCK
 
 ## Fix
 
