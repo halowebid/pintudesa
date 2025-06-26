@@ -136,6 +136,7 @@
 - [ ] **Surat Keterangan Kelahiran** = suratKeteranganKelahiran (_populate data
       ibu dan ayah menggunakan pencarian getPenduduksByJenisKelamin dan
       searchPenduduksByJenisKelamin lalu isikan ke form, lihat demo panel_)
+- [ ] **Surat Kuasa SKGR** = suratKuasaSKGR
 
 ## Fix
 
