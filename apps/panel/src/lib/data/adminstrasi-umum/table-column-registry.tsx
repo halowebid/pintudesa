@@ -502,18 +502,14 @@ export const keputusanKepalaDesaColumns: ColumnDef<
     accessorKey: "nomorSurat",
     header: "Nomor Surat",
     cell: ({ getValue }) => (
-      <span className="max-w-[180px] truncate font-medium">
-        {getValue<string>()}
-      </span>
+      <span className="line-clamp-2 text-ellipsis">{getValue<string>()}</span>
     ),
   },
   {
     accessorKey: "judul",
     header: "Judul",
     cell: ({ getValue }) => (
-      <span className="max-w-[240px] truncate font-medium">
-        {getValue<string>()}
-      </span>
+      <span className="line-clamp-2 text-ellipsis">{getValue<string>()}</span>
     ),
   },
   {
@@ -541,36 +537,8 @@ export const keputusanKepalaDesaColumns: ColumnDef<
     accessorKey: "nomorLaporan",
     header: "Nomor Laporan",
     cell: ({ getValue }) => (
-      <span className="max-w-[180px] truncate font-medium">
-        {getValue<string>()}
-      </span>
+      <span className="line-clamp-2 text-ellipsis">{getValue<string>()}</span>
     ),
-  },
-  {
-    accessorKey: "tanggalSurat",
-    meta: { isHiddenOnMobile: true },
-    header: () => <span className="hidden lg:inline">Tanggal Surat</span>,
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "tanggalLaporan",
-    meta: { isHiddenOnMobile: true },
-    header: () => <span className="hidden lg:inline">Tanggal Laporan</span>,
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
   },
   {
     accessorKey: "keteranganTambahan",
