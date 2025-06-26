@@ -1,13 +1,48 @@
 {
   "name": "pintudesa",
-  "private": true,
-  "type": "module",
+  "author": "Karyana Yandi <karyana@yandi.me>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yopem/pintudesa.git"
   },
-  "author": "Karyana Yandi <karyana@yandi.me>",
+  "devDependencies": {
+    "@yopem/eslint-config": "catalog:tooling",
+    "@yopem/prettier-config": "catalog:tooling",
+    "lefthook": "1.11.10",
+    "prettier": "catalog:tooling",
+    "turbo": "2.5.0",
+    "typescript": "catalog:tooling"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "license": "AGPL-3.0-or-later",
+  "packageManager": "bun@1.2.17",
+  "prettier": "@yopem/prettier-config/base",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "bun run git clean -xdf dist .cache .turbo .next *.log",
+    "clean:all": "bun clean && bun clean:deps",
+    "clean:deps": "bun -r --parallel exec git clean -xdf node_modules",
+    "dev": "turbo dev",
+    "db:check": "turbo db:check",
+    "db:drop": "turbo db:drop",
+    "db:generate": "turbo db:generate",
+    "db:migrate": "turbo db:migrate",
+    "db:pull": "turbo db:pull",
+    "db:push": "turbo db:push",
+    "db:studio": "turbo db:studio",
+    "db:up": "turbo db:up",
+    "format:check": "turbo format:check",
+    "format:write": "turbo format:write",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint:fix",
+    "postinstall": "lefthook install",
+    "prebuild": "bun install",
+    "typecheck": "turbo typecheck"
+  },
+  "type": "module",
   "workspaces": {
     "packages": [
       "apps/*",
@@ -57,43 +92,5 @@
         "@trpc/tanstack-react-query": "^11.3.1"
       }
     }
-  },
-  "scripts": {
-    "build": "turbo run build",
-    "clean": "bun run git clean -xdf dist .cache .turbo .next *.log",
-    "clean:all": "bun clean && bun clean:deps",
-    "clean:deps": "bun -r --parallel exec git clean -xdf node_modules",
-    "dev": "turbo dev",
-    "db:check": "turbo db:check",
-    "db:drop": "turbo db:drop",
-    "db:generate": "turbo db:generate",
-    "db:migrate": "turbo db:migrate",
-    "db:pull": "turbo db:pull",
-    "db:push": "turbo db:push",
-    "db:studio": "turbo db:studio",
-    "db:up": "turbo db:up",
-    "format:check": "turbo format:check",
-    "format:write": "turbo format:write",
-    "lint": "turbo lint",
-    "lint:fix": "turbo lint:fix",
-    "postinstall": "lefthook install",
-    "prebuild": "bun install",
-    "typecheck": "turbo typecheck"
-  },
-  "devDependencies": {
-    "@yopem/eslint-config": "catalog:tooling",
-    "@yopem/prettier-config": "catalog:tooling",
-    "lefthook": "1.11.10",
-    "prettier": "catalog:tooling",
-    "turbo": "2.5.0",
-    "typescript": "catalog:tooling"
-  },
-  "engines": {
-    "node": ">=20"
-  },
-  "packageManager": "bun@1.2.17",
-  "prettier": "@yopem/prettier-config/base",
-  "dependencies": {
-    "@yopem/typescript-config": "0.2.0"
   }
 }
