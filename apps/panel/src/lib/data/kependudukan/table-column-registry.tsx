@@ -14,11 +14,18 @@ export const pendudukColumns: ColumnDef<SelectPenduduk, unknown>[] = [
     cell: ({ getValue, row }) => {
       const nama = getValue<string>()
       const data = row.original
+      const hasNik = Boolean(data.nik)
+
       return (
         <div className="flex max-w-[240px] flex-col">
           <span className="truncate font-medium">{nama}</span>
           <span className="text-muted-foreground mt-1 text-[10px] lg:hidden">
-            NIK: {data.nik}
+            NIK:{" "}
+            {hasNik ? (
+              data.nik
+            ) : (
+              <span className="font-semibold text-red-500">Tidak Ada</span>
+            )}
           </span>
           <span className="text-muted-foreground text-[10px] lg:hidden">
             {jenisKelaminLabelMap[data.jenisKelamin]} |{" "}
@@ -35,9 +42,18 @@ export const pendudukColumns: ColumnDef<SelectPenduduk, unknown>[] = [
     accessorKey: "nik",
     meta: { isHiddenOnMobile: true },
     header: () => <span className="hidden lg:inline">NIK</span>,
-    cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
-    ),
+    cell: ({ getValue }) => {
+      const nik = getValue<string>()
+      return (
+        <span
+          className={`hidden lg:inline ${
+            nik ? "" : "text-destructive/80 font-semibold"
+          }`}
+        >
+          {nik || "Tidak Ada"}
+        </span>
+      )
+    },
   },
   {
     accessorKey: "jenisKelamin",
