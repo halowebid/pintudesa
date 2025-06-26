@@ -38,6 +38,20 @@ const AppSidebar = (props: AppSidebarProps) => {
         icon: "Users" as const,
       },
     ],
+    navKependudukan: [
+      {
+        name: "Kartu Keluarga",
+        url: "/kartu-keluarga",
+        icon: "Gauge" as const,
+        disbaled: true,
+      },
+      {
+        name: "Penduduk",
+        url: "/penduduk",
+        icon: "Users" as const,
+      },
+    ],
+
     navBukuAdministrasiUmum: [
       {
         name: "A1. Buku Peraturan Desa",
@@ -48,7 +62,6 @@ const AppSidebar = (props: AppSidebarProps) => {
         name: "A2. Buku Keputusan Kepala Desa",
         url: "/buku-a2",
         icon: "DollarSign" as const,
-        disabled: true,
       },
       {
         name: "A3. Buku Inventaris Desa",
@@ -195,7 +208,8 @@ const AppSidebar = (props: AppSidebarProps) => {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain label="Items" items={data.navMain} />
+        <NavMain label="Kependudukan" items={data.navKependudukan} />
         <SidebarGroup>
           <SidebarGroupLabel>Buku Administrasi</SidebarGroupLabel>
           <NavCollapsible
