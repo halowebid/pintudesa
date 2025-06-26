@@ -1,22 +1,13 @@
 {
   "name": "pintudesa",
-  "author": "Karyana Yandi <karyana@yandi.me>",
+  "private": true,
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yopem/pintudesa.git"
   },
-  "devDependencies": {
-    "@yopem/eslint-config": "catalog:tooling",
-    "@yopem/prettier-config": "catalog:tooling",
-    "lefthook": "1.11.10",
-    "prettier": "catalog:tooling",
-    "turbo": "2.5.0",
-    "typescript": "catalog:tooling"
-  },
+  "author": "Karyana Yandi <karyana@yandi.me>",
   "license": "AGPL-3.0-or-later",
-  "packageManager": "bun@1.2.17",
-  "private": true,
-  "type": "module",
   "workspaces": {
     "packages": [
       "apps/*",
@@ -89,8 +80,17 @@
     "prebuild": "bun install",
     "typecheck": "turbo typecheck"
   },
+  "devDependencies": {
+    "@yopem/eslint-config": "catalog:tooling",
+    "@yopem/prettier-config": "catalog:tooling",
+    "lefthook": "1.11.10",
+    "prettier": "catalog:tooling",
+    "turbo": "2.5.0",
+    "typescript": "catalog:tooling"
+  },
   "engines": {
     "node": ">=20"
   },
+  "packageManager": "bun@1.2.17",
   "prettier": "@yopem/prettier-config/base"
 }
