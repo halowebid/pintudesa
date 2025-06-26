@@ -1,17 +1,33 @@
 import {
+  AGAMA,
+  ASAL_PENDUDUK,
   JENIS_INVENTARIS,
   JENIS_KELAMIN,
+  JENIS_PEKERJAAN,
   JENIS_PERATURAN,
   JENIS_SURAT_AGENDA,
+  PENDIDIKAN_TERAKHIR,
+  STATUS_DOMISILI,
+  STATUS_PENDUDUK,
+  STATUS_PERKAWINAN,
   type SelectAgenda,
   type SelectInventaris,
   type SelectKaderPemberdayaanMasyarakat,
   type SelectLembaran,
+  type SelectPenduduk,
   type SelectPeraturan,
 } from "@pintudesa/db/schema"
 import { formatDate } from "@pintudesa/utils"
 
 import { createLabelMap } from "./label"
+
+export const agamaLabelMap = createLabelMap(AGAMA)
+export const asalPendudukLabelMap = createLabelMap(ASAL_PENDUDUK)
+export const pendidikanTerakhirLabelMap = createLabelMap(PENDIDIKAN_TERAKHIR)
+export const statusDomisiliLabelMap = createLabelMap(STATUS_DOMISILI)
+export const statusPendudukLabelMap = createLabelMap(STATUS_PENDUDUK)
+export const statusPerkawinanLabelMap = createLabelMap(STATUS_PERKAWINAN)
+export const jenisPekerjaanLabelMap = createLabelMap(JENIS_PEKERJAAN)
 
 export const jenisSuratAgendaLabelMap = createLabelMap(JENIS_SURAT_AGENDA)
 export const jenisPeraturanLabelMap = createLabelMap(JENIS_PERATURAN)
@@ -62,3 +78,24 @@ export const mapKaderPemberdayaanMasyarakatRow = (
     ...item,
     jenisKelamin: jenisKelaminLabelMap[item.jenisKelamin],
   }))
+
+export function mapPendudukRow(data: SelectPenduduk[]) {
+  return data.map((item) => ({
+    ...item,
+    agama: agamaLabelMap[item.agama],
+    asalPenduduk:
+      item.asalPenduduk != null ? asalPendudukLabelMap[item.asalPenduduk] : "-",
+    pendidikanTerakhir: pendidikanTerakhirLabelMap[item.pendidikanTerakhir],
+    statusDomisili: statusDomisiliLabelMap[item.statusDomisili],
+    statusPenduduk:
+      item.statusPenduduk != null
+        ? statusPendudukLabelMap[item.statusPenduduk]
+        : "-",
+    statusPerkawinan: statusPerkawinanLabelMap[item.statusPerkawinan],
+    jenisKelamin: jenisKelaminLabelMap[item.jenisKelamin],
+    pekerjaan: jenisPekerjaanLabelMap[item.pekerjaan],
+    tanggalLahir: formatDate(item.tanggalLahir, "LL"),
+    createdAt: item.createdAt ? formatDate(item.createdAt, "LL") : "-",
+    updatedAt: item.updatedAt ? formatDate(item.updatedAt, "LL") : "-",
+  }))
+}
