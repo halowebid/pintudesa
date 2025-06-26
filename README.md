@@ -2,8 +2,8 @@
 
 ## Komponen Baru
 
-- [ ] Chart
-- [ ] Combo Box
+- [x] Chart
+- [x] Combo Box
 
 ## Fitur
 
