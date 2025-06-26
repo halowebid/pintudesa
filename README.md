@@ -139,6 +139,7 @@
 - [ ] **Surat Kuasa SKGR** = suratKuasaSKGR
 - [ ] **Surat Pernyataan Belum Menikah** = suratPernyataanBelumMenikah (_saksi 2
       optional, lihat form demo panel_)
+- [ ] **Surat Izin Keramaian** = suratIzinKeramaian
 
 ## Fix
 
