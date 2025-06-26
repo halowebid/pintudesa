@@ -1,4 +1,5 @@
 export * from "./agenda"
+export * from "./setting"
 export * from "./anggota-keluarga"
 export * from "./berita"
 export * from "./ekspedisi"

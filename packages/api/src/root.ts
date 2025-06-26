@@ -14,6 +14,7 @@ import { pendudukSementaraRouter } from "./routes/penduduk-sementara"
 import { peraturanRouter } from "./routes/peraturan"
 import { rabRouter } from "./routes/rab"
 import { rencanaKerjaPembangunanRouter } from "./routes/rencana-kerja-pembangunan"
+import { settingRouter } from "./routes/setting"
 import { suratIzinKeramaianRouter } from "./routes/surat-izin-keramaian"
 import { suratKeteranganKelahiranRouter } from "./routes/surat-keterangan-kelahiran"
 import { suratKeteranganKematianRouter } from "./routes/surat-keterangan-kematian"
@@ -45,6 +46,7 @@ export const appRouter = createTRPCRouter({
   peraturan: peraturanRouter,
   rab: rabRouter,
   rencanaKerjaPembangunan: rencanaKerjaPembangunanRouter,
+  setting: settingRouter,
   suratIzinKeramaian: suratIzinKeramaianRouter,
   suratKeteranganKelahiran: suratKeteranganKelahiranRouter,
   suratKeteranganKematian: suratKeteranganKematianRouter,
