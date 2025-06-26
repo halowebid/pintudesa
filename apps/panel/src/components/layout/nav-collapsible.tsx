@@ -34,7 +34,7 @@ const NavCollapsible = (props: NavCollapsibleProps) => {
               tooltip={item.name}
             >
               {item.disabled ? (
-                <span className="text-muted-foreground line-clamp-2 cursor-not-allowed">
+                <span className="text-muted-foreground line-clamp-2 cursor-not-allowed font-semibold">
                   {item.name}
                 </span>
               ) : (

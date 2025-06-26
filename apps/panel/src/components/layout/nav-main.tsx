@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -14,21 +15,29 @@ interface NavMainProps extends React.ComponentProps<typeof SidebarGroup> {
     name: string
     url: string
     icon: IconProps["name"]
+    disabled?: boolean
   }[]
+  label: string
 }
 
 const NavMain = (props: NavMainProps) => {
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Items</SidebarGroupLabel>
+      <SidebarGroupLabel>{props.label}</SidebarGroupLabel>
       <SidebarMenu>
         {props.items.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a href={item.url}>
-                <Icon name={item.icon} />
-                <span>{item.name}</span>
-              </a>
+              {item.disabled ? (
+                <span className="text-muted-foreground line-clamp-2 cursor-not-allowed font-semibold">
+                  {item.name}
+                </span>
+              ) : (
+                <Link href={item.url}>
+                  <Icon name={item.icon} />
+                  <span className="line-clamp-2">{item.name}</span>
+                </Link>
+              )}
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
