@@ -2,6 +2,7 @@ import type {
   SelectAgenda,
   SelectInventaris,
   SelectLembaran,
+  SelectPendudukSementara,
   SelectPeraturan,
 } from "@pintudesa/db/schema"
 
@@ -9,6 +10,7 @@ import {
   mapAgendaRow,
   mapInventarisRow,
   mapLembaranRow,
+  mapPendudukSementaraRow,
   mapPeraturanRow,
 } from "@/lib/utils/mapper"
 
@@ -17,6 +19,7 @@ interface TableKeyMap {
   inventaris: ReturnType<typeof mapInventarisRow>
   lembaran: ReturnType<typeof mapLembaranRow>
   peraturan: ReturnType<typeof mapPeraturanRow>
+  pendudukSementara: ReturnType<typeof mapPendudukSementaraRow>
 }
 
 type TableDataMapperRegistry = {
@@ -28,4 +31,6 @@ export const tableDataMapperRegistry: TableDataMapperRegistry = {
   inventaris: (data: unknown[]) => mapInventarisRow(data as SelectInventaris[]),
   lembaran: (data: unknown[]) => mapLembaranRow(data as SelectLembaran[]),
   peraturan: (data: unknown[]) => mapPeraturanRow(data as SelectPeraturan[]),
+  pendudukSementara: (data: unknown[]) =>
+    mapPendudukSementaraRow(data as SelectPendudukSementara[]),
 }

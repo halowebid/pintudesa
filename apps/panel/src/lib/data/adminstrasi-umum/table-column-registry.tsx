@@ -344,7 +344,7 @@ export const pendudukSementaraColumns: ColumnDef<
   {
     accessorKey: "jenisKelamin",
     header: "Jenis Kelamin",
-    meta: { filterVariant: "select", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
       <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
@@ -377,7 +377,7 @@ export const pendudukSementaraColumns: ColumnDef<
   {
     accessorKey: "pekerjaan",
     header: "Pekerjaan",
-    meta: { filterVariant: "select", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
       <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}
@@ -395,16 +395,6 @@ export const pendudukSementaraColumns: ColumnDef<
     ),
   },
   {
-    accessorKey: "keturunan",
-    header: "Keturunan",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden text-ellipsis lg:line-clamp-2">
-        {getValue<string>()}
-      </span>
-    ),
-  },
-  {
     accessorKey: "datangDari",
     header: "Datang Dari",
     meta: { isHiddenOnMobile: true },
@@ -413,62 +403,6 @@ export const pendudukSementaraColumns: ColumnDef<
         {getValue<string>()}
       </span>
     ),
-  },
-  {
-    accessorKey: "tujuanKedatangan",
-    header: "Tujuan Kedatangan",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden text-ellipsis lg:line-clamp-2">
-        {getValue<string>()}
-      </span>
-    ),
-  },
-  {
-    accessorKey: "namaYangDidatangi",
-    header: "Nama Yang Didatangi",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden text-ellipsis lg:line-clamp-2">
-        {getValue<string>()}
-      </span>
-    ),
-  },
-  {
-    accessorKey: "alamatYangDidatangi",
-    header: "Alamat Yang Didatangi",
-    meta: { isHiddenOnMobile: true },
-    cell: ({ getValue }) => (
-      <span className="hidden text-ellipsis lg:line-clamp-2">
-        {getValue<string>()}
-      </span>
-    ),
-  },
-  {
-    accessorKey: "tanggalDatang",
-    header: "Tanggal Datang",
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "tanggalPergi",
-    header: "Tanggal Pergi",
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {formatDate(new Date(val), "LL")}
-        </span>
-      )
-    },
   },
   {
     accessorKey: "keteranganTambahan",
@@ -483,7 +417,7 @@ export const pendudukSementaraColumns: ColumnDef<
   {
     accessorKey: "createdAt",
     header: () => <span className="hidden lg:inline">Dibuat</span>,
-    meta: { filterVariant: "range", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
