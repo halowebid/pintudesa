@@ -15,6 +15,7 @@ import {
   type SelectKaderPemberdayaanMasyarakat,
   type SelectLembaran,
   type SelectPenduduk,
+  type SelectPendudukSementara,
   type SelectPeraturan,
 } from "@pintudesa/db/schema"
 import { formatDate } from "@pintudesa/utils"
@@ -92,6 +93,17 @@ export function mapPendudukRow(data: SelectPenduduk[]) {
         ? statusPendudukLabelMap[item.statusPenduduk]
         : "-",
     statusPerkawinan: statusPerkawinanLabelMap[item.statusPerkawinan],
+    jenisKelamin: jenisKelaminLabelMap[item.jenisKelamin],
+    pekerjaan: jenisPekerjaanLabelMap[item.pekerjaan],
+    tanggalLahir: formatDate(item.tanggalLahir, "LL"),
+    createdAt: item.createdAt ? formatDate(item.createdAt, "LL") : "-",
+    updatedAt: item.updatedAt ? formatDate(item.updatedAt, "LL") : "-",
+  }))
+}
+
+export function mapPendudukSementaraRow(data: SelectPendudukSementara[]) {
+  return data.map((item) => ({
+    ...item,
     jenisKelamin: jenisKelaminLabelMap[item.jenisKelamin],
     pekerjaan: jenisPekerjaanLabelMap[item.pekerjaan],
     tanggalLahir: formatDate(item.tanggalLahir, "LL"),
