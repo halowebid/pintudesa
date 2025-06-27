@@ -6,6 +6,7 @@ interface SuratItem {
   name: string
   href: string
   disabled?: boolean
+  icon?: React.ReactNode
 }
 
 interface SuratCardGridProps {
@@ -18,31 +19,31 @@ export function SuratCardGrid({ items }: SuratCardGridProps) {
       {items.map((item) => {
         const isDisabled = item.disabled
 
-        const baseStyle =
-          "rounded-lg border p-4 text-center transition-colors font-medium shadow-sm"
-        const textStyle = "text-color-foreground"
-        const hoverStyle = "hover:bg-primary hover:text-primary-foreground"
-        const disabledStyle =
-          "bg-muted text-muted-foreground border-border pointer-events-none shadow-none cursor-default"
-
-        const cardClass = cn(
-          baseStyle,
-          textStyle,
-          !isDisabled && hoverStyle,
-          isDisabled && disabledStyle,
-        )
-
         const content = (
-          <div className={cardClass}>
-            <div className="text-4xl font-extrabold drop-shadow-sm">
-              {item.label}
+          <div
+            className={cn(
+              "border-border to-muted from-card flex items-start justify-between rounded-lg border bg-gradient-to-b p-4 shadow-sm transition-colors",
+              !isDisabled && "hover:text-primary",
+              isDisabled &&
+                "bg-muted text-muted-foreground pointer-events-none",
+            )}
+          >
+            <div className="flex flex-col gap-1 text-start">
+              <span className="text-muted-foreground text-sm">{item.name}</span>
+              <span className="text-3xl leading-none font-bold">
+                {item.label}
+              </span>
             </div>
-            <div className="mt-1 text-sm">{item.name}</div>
+            {item.icon && (
+              <div className="text-muted-foreground">{item.icon}</div>
+            )}
           </div>
         )
 
         return isDisabled ? (
-          <div key={item.label}>{content}</div>
+          <div key={item.label} className="cursor-not-allowed">
+            {content}
+          </div>
         ) : (
           <Link key={item.label} href={item.href}>
             {content}

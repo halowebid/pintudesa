@@ -387,7 +387,7 @@ export const pendudukSementaraColumns: ColumnDef<
   {
     accessorKey: "kebangsaan",
     header: "Kebangsaan",
-    meta: { filterVariant: "select", isHiddenOnMobile: true },
+    meta: { isHiddenOnMobile: true },
     cell: ({ getValue }) => (
       <span className="hidden text-ellipsis lg:line-clamp-2">
         {getValue<string>()}

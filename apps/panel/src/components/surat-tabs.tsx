@@ -72,7 +72,6 @@ const desaSurat = [
     label: "SKD",
     name: "Surat Keterangan Domisili",
     href: "/desa/skd",
-    disabled: true,
   },
 ]
 
