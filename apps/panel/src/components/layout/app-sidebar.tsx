@@ -123,7 +123,6 @@ const AppSidebar = (props: AppSidebarProps) => {
         name: "B4. Buku Penduduk Sementara",
         url: "/buku-b4",
         icon: "MapPin" as const,
-        disabled: true,
       },
       {
         name: "B5. Buku KTP dan Kartu Keluarga",
