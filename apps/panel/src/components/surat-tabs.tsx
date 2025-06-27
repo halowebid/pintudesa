@@ -77,7 +77,7 @@ const desaSurat = [
 
 export function SuratTabs() {
   return (
-    <Tabs defaultValue="desa" className="w-full px-4 py-2">
+    <Tabs defaultValue="desa" className="w-full py-2">
       <TabsList>
         <TabsTrigger value="desa">
           <Icon name="Home" /> Desa

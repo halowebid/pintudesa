@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { cn } from "@pintudesa/ui"
+import { Card, CardDescription, CardHeader, CardTitle, cn } from "@pintudesa/ui"
 
 interface SuratItem {
   label: string
@@ -15,38 +15,36 @@ interface SuratCardGridProps {
 
 export function SuratCardGrid({ items }: SuratCardGridProps) {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 px-4 lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
       {items.map((item) => {
         const isDisabled = item.disabled
 
-        const content = (
-          <div
+        const CardContent = (
+          <Card
             className={cn(
-              "border-border to-muted from-card flex items-start justify-between rounded-lg border bg-gradient-to-b p-4 shadow-sm transition-colors",
-              !isDisabled && "hover:text-primary",
-              isDisabled &&
-                "bg-muted text-muted-foreground pointer-events-none",
+              "from-primary/5 to-card dark:bg-card @container/card bg-gradient-to-t shadow-xs",
+              isDisabled && "pointer-events-none cursor-not-allowed opacity-60",
             )}
           >
-            <div className="flex flex-col gap-1 text-start">
-              <span className="text-muted-foreground text-sm">{item.name}</span>
-              <span className="text-3xl leading-none font-bold">
+            <CardHeader className="relative">
+              <CardDescription>{item.name}</CardDescription>
+              <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
                 {item.label}
-              </span>
-            </div>
-            {item.icon && (
-              <div className="text-muted-foreground">{item.icon}</div>
-            )}
-          </div>
+              </CardTitle>
+              {item.icon && (
+                <div className="text-muted-foreground absolute top-4 right-4">
+                  {item.icon}
+                </div>
+              )}
+            </CardHeader>
+          </Card>
         )
 
         return isDisabled ? (
-          <div key={item.label} className="cursor-not-allowed">
-            {content}
-          </div>
+          <div key={item.label}>{CardContent}</div>
         ) : (
-          <Link key={item.label} href={item.href}>
-            {content}
+          <Link key={item.label} href={item.href} className="@container/card">
+            {CardContent}
           </Link>
         )
       })}
