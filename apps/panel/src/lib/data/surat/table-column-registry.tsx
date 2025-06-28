@@ -5,22 +5,29 @@ import {
   type InsertSuratKuasaSKGR,
   type InsertSuratPengantarSKCK,
   type InsertSuratPernyataanBelumMenikah,
+  type SelectPenduduk,
 } from "@pintudesa/db/schema"
 import { formatDate } from "@pintudesa/utils"
 import { type ColumnDef } from "@tanstack/react-table"
 
+interface SuratIzinKeramaianColumns extends InsertSuratIzinKeramaian {
+  pemohon: SelectPenduduk
+}
+
 export const suratIzinKeramaianColumns: ColumnDef<
-  InsertSuratIzinKeramaian,
+  SuratIzinKeramaianColumns,
   unknown
 >[] = [
   {
-    accessorKey: "pemohonNIK",
-    header: "Pemohon NIK",
-    cell: ({ getValue }) => {
-      const nik = getValue<string>()
+    accessorKey: "pemohon",
+    header: "Nama",
+    cell: ({ row }) => {
+      const data = row.original
       return (
         <div className="flex max-w-[240px] flex-col">
-          <span className="truncate font-medium">{nik}</span>
+          <span className="truncate font-medium">
+            {data.pemohon.namaLengkap}
+          </span>
         </div>
       )
     },
