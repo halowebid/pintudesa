@@ -79,11 +79,14 @@ export const DialogContent = ({
   side = "bottom",
   className,
   children,
+  mode = "portal",
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> &
-  VariantProps<typeof dialogVariants>) => {
-  return (
-    <DialogPortal>
+  VariantProps<typeof dialogVariants> & {
+    mode?: "inline" | "portal"
+  }) => {
+  const content = (
+    <>
       <DialogBackDrop />
       <DialogPrimitive.Content
         data-slot="dialog-content"
@@ -96,8 +99,10 @@ export const DialogContent = ({
           <span className="sr-only">Close</span>
         </DialogPrimitive.CloseTrigger>
       </DialogPrimitive.Content>
-    </DialogPortal>
+    </>
   )
+
+  return mode === "portal" ? <DialogPortal>{content}</DialogPortal> : content
 }
 
 export const DialogHeader = ({

@@ -1,4 +1,7 @@
-import { type SelectPenduduk } from "@pintudesa/db/schema"
+import {
+  type SelectKartuKeluarga,
+  type SelectPenduduk,
+} from "@pintudesa/db/schema"
 import { formatDate } from "@pintudesa/utils"
 import { type ColumnDef } from "@tanstack/react-table"
 
@@ -6,6 +9,56 @@ import {
   jenisKelaminLabelMap,
   pendidikanTerakhirLabelMap,
 } from "@/lib/utils/mapper"
+
+export const kartuKeluargaColumns: ColumnDef<SelectKartuKeluarga, unknown>[] = [
+  {
+    accessorKey: "nomorKartuKeluarga",
+    header: "No. KK",
+    cell: ({ getValue, row }) => {
+      const noKK = getValue<string>()
+      const data = row.original
+
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="truncate font-medium">{noKK}</span>
+          {/* <span className="text-muted-foreground text-[10px] lg:hidden">
+            Kategori: {kategoriPendudukLabelMap[data.kategoriPenduduk] || "-"}
+          </span> */}
+          <span className="text-muted-foreground mt-0.5 text-[10px] lg:hidden">
+            Dibuat: {formatDate(data.createdAt, "LL")}
+          </span>
+        </div>
+      )
+    },
+  },
+
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? formatDate(val, "LL") : "-"}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Diubah</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden lg:inline">
+          {val ? formatDate(val, "LL") : "-"}
+        </span>
+      )
+    },
+  },
+]
 
 export const pendudukColumns: ColumnDef<SelectPenduduk, unknown>[] = [
   {
@@ -130,4 +183,5 @@ export const pendudukColumns: ColumnDef<SelectPenduduk, unknown>[] = [
 
 export const tableColumnRegistry = {
   penduduk: pendudukColumns,
+  kartuKeluarga: kartuKeluargaColumns,
 } as const
