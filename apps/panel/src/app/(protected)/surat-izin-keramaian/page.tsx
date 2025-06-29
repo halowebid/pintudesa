@@ -9,7 +9,7 @@ const SuratIzinKeramaianContent = dynamicFn(async () => {
 })
 
 export const metadata = {
-  title: "Buku SuratIzinKeramaian dan Buku Berita Desa",
+  title: "Surat Izin Keramaian",
 }
 
 export default function SuratIzinKeramaianPage() {
