@@ -1,3 +1,5 @@
+//
+
 import { count, eq } from "drizzle-orm"
 
 import { db } from "../connection"
@@ -46,6 +48,14 @@ export const getAnggotaKeluargas = async (page: number, perPage: number) => {
 export const getAnggotaKeluargaById = async (id: string) => {
   return await db.query.anggotaKeluargaTable.findFirst({
     where: eq(anggotaKeluargaTable.id, id),
+  })
+}
+
+export const getAnggotaKeluargaByKartuKeluargaId = async (
+  kartuKeluargaId: string,
+) => {
+  return await db.query.anggotaKeluargaTable.findMany({
+    where: eq(anggotaKeluargaTable.kartuKeluargaId, kartuKeluargaId),
   })
 }
 
