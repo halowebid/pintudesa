@@ -21,7 +21,12 @@ interface Item {
 export interface ComboboxBaseProps
   extends Omit<
     React.ComponentProps<typeof ComboboxPrimitive.Root>,
-    "children" | "onSelect" | "collection"
+    | "children"
+    | "onSelect"
+    | "collection"
+    | "onInputValueChange"
+    | "value"
+    | "inputValue"
   > {
   items: Item[]
   placeholder?: string
@@ -29,13 +34,15 @@ export interface ComboboxBaseProps
   onSelect?: (item: Item) => void
   className?: string
   mode?: "portal" | "inline"
+  onInputValueChange?: (value: string) => void
+  inputValue?: string
+  value?: string[]
 }
 
 export const ComboboxBase = ({
   items,
   placeholder = "Search...",
   groupLabel = "Suggestions",
-  onSelect,
   className,
   mode = "portal",
   ...props
@@ -46,18 +53,6 @@ export const ComboboxBase = ({
     initialItems: items,
     filter: contains,
   })
-
-  const handleInputChange = (details: { inputValue: string }) => {
-    filter(details.inputValue)
-  }
-
-  const handleSelect = (details: { value: string[] }) => {
-    const selectedValue = details.value[0]
-    const selectedItem = items.find((item) => item.value === selectedValue)
-    if (selectedItem) {
-      onSelect?.(selectedItem)
-    }
-  }
 
   const Content = (
     <ComboboxPrimitive.Content>
@@ -92,8 +87,18 @@ export const ComboboxBase = ({
   return (
     <ComboboxPrimitive.Root
       {...props}
-      onInputValueChange={handleInputChange}
-      onSelect={handleSelect}
+      value={props.value}
+      inputValue={props.inputValue}
+      onInputValueChange={({ inputValue }) => {
+        filter(inputValue)
+        props.onInputValueChange?.(inputValue)
+      }}
+      onSelect={({ value }) => {
+        const selected = items.find((item) => item.value === value[0])
+        if (selected) {
+          props.onSelect?.(selected)
+        }
+      }}
       collection={collection}
       className={cn("overflow-hidden rounded-md border", className)}
     >
@@ -122,57 +127,79 @@ export const ComboboxBase = ({
   )
 }
 
-export interface ComboboxPopoverProps
-  extends Omit<
-    ComboboxBaseProps,
-    "mode" | "value" | "onSelect" | "onValueChange" | "onOpenChange"
-  > {
+export interface ComboboxPopoverProps {
   value?: string
-  onValueChange?: (value: string) => void
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
+  onSelect?: (value: string) => void
+  onInputValueChange?: (value: string) => void
+  items: Item[]
+  placeholder?: string
+  defaultInputValue?: string
+  defaultLabel?: string
+  onClear?: () => void
+  isClearable?: boolean
   buttonClassName?: string
+  popoverClassName?: string
+  groupLabel?: string
+  className?: string
 }
 
 export const ComboboxPopover = ({
   value,
-  onValueChange,
-  open,
-  onOpenChange,
+  onSelect,
   items,
+  placeholder,
+  defaultLabel,
+  defaultInputValue,
   buttonClassName,
-  ...rest
+  popoverClassName,
+  groupLabel,
+  className,
+  onInputValueChange,
 }: ComboboxPopoverProps) => {
+  const [isOpen, setIsOpen] = React.useState(false)
+  const [inputValue, setInputValue] = React.useState(defaultInputValue)
+
+  const selectedItem = items.find((item) => item.value === value)
   const selectedLabel =
-    items.find((item) => item.value === value)?.label ?? "Select option"
+    selectedItem?.label ?? defaultLabel ?? placeholder ?? "Pilih opsi"
 
   return (
-    <Popover
-      open={open}
-      onOpenChange={(details) => onOpenChange?.(details.open)}
-    >
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className={cn("w-[200px] justify-between", buttonClassName)}
-        >
-          {selectedLabel}
-          <Icon name="ChevronsUpDown" className="size-4 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+    <Popover open={isOpen} onOpenChange={({ open }) => setIsOpen(open)}>
+      <div className="flex w-full items-center justify-center">
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={isOpen}
+            className={cn(
+              "w-[calc(100%-60px)] justify-between pr-10",
+              buttonClassName,
+            )}
+          >
+            <span className="truncate">{selectedLabel}</span>
+            <Icon name="ChevronsUpDown" className="ml-auto size-4 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+      </div>
+
+      <PopoverContent className={cn("p-0", popoverClassName)}>
         <ComboboxBase
-          {...rest}
-          open={true}
           mode="inline"
           items={items}
-          defaultValue={value ? [value] : undefined}
-          onSelect={(item) => {
-            onOpenChange?.(false)
-            onValueChange?.(item.value)
+          value={value ? [value] : []}
+          inputValue={inputValue}
+          onInputValueChange={(val) => {
+            setInputValue(val)
+            onInputValueChange?.(val)
           }}
+          onSelect={(item) => {
+            setIsOpen(false)
+            setInputValue(item.label)
+            onSelect?.(item.value)
+          }}
+          placeholder={placeholder}
+          groupLabel={groupLabel}
+          className={className}
         />
       </PopoverContent>
     </Popover>
