@@ -40,12 +40,18 @@ export const getKartuKeluargas = async (page: number, perPage: number) => {
     limit: perPage,
     offset: (page - 1) * perPage,
     orderBy: (users, { desc }) => [desc(users.createdAt)],
+    with: {
+      anggotaKeluarga: true,
+    },
   })
 }
 
 export const getKartuKeluargaById = async (id: string) => {
   return await db.query.kartuKeluargaTable.findFirst({
     where: eq(kartuKeluargaTable.id, id),
+    with: {
+      anggotaKeluarga: true,
+    },
   })
 }
 
@@ -60,6 +66,9 @@ export const searchKartuKeluargas = async ({
     where: (kartuKeluargas, { ilike }) =>
       ilike(kartuKeluargas.nomorKartuKeluarga, `%${searchQuery}%`),
     limit: limit,
+    with: {
+      anggotaKeluarga: true,
+    },
   })
 }
 

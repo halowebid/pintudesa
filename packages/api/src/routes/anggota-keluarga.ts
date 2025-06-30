@@ -2,6 +2,7 @@ import {
   countAnggotaKeluargas,
   deleteAnggotaKeluarga,
   getAnggotaKeluargaById,
+  getAnggotaKeluargaByKartuKeluargaId,
   getAnggotaKeluargas,
   insertAnggotaKeluarga,
   insertAnggotaKeluargaSchema,
@@ -72,6 +73,18 @@ export const anggotaKeluargaRouter = createTRPCRouter({
     }
     return data
   }),
+
+  byKartuKeluargaId: adminProtectedProcedure
+    .input(z.string())
+    .query(async ({ input }) => {
+      const { data, error } = await tryCatch(
+        getAnggotaKeluargaByKartuKeluargaId(input),
+      )
+      if (error) {
+        handleTRPCError(error)
+      }
+      return data
+    }),
 
   search: publicProcedure
     .input(z.object({ searchQuery: z.string(), limit: z.number() }))
