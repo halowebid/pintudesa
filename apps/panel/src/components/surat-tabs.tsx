@@ -47,8 +47,7 @@ const desaSurat = [
   {
     label: "IK",
     name: "Surat Izin Keramaian",
-    href: "/desa/ik",
-    disabled: true,
+    href: "/surat-izin-keramaian",
   },
   {
     label: "SKCK",

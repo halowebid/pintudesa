@@ -29,11 +29,11 @@ const NavMain = (props: NavMainProps) => {
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
               {item.disabled ? (
-                <span className="text-muted-foreground line-clamp-2 cursor-not-allowed font-semibold">
+                <span className="!text-muted-foreground/70 line-clamp-2 !max-h-16 !min-h-8 !cursor-not-allowed">
                   {item.name}
                 </span>
               ) : (
-                <Link href={item.url}>
+                <Link href={item.url} className="!max-h-16 !min-h-8">
                   <Icon name={item.icon} />
                   <span className="line-clamp-2">{item.name}</span>
                 </Link>
