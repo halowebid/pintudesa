@@ -35,7 +35,7 @@ const DigitalServices = () => {
               Pelayanan Administrasi Digital
             </h2>
             <p className="text-accent-foreground mb-6 text-lg leading-relaxed">
-              Desa Sukarokok menggunakan aplikasi pelayanan online yang bernama{" "}
+              Desa Sukatani menggunakan aplikasi pelayanan online yang bernama{" "}
               <strong>Pintudesa</strong>, aplikasi ini bisa diunduh dari
               aplikasi Play Store untuk pengguna Android dan dari App Store
               untuk pengguna iPhone.

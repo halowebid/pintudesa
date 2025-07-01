@@ -23,7 +23,7 @@ const Footer = () => {
                   <Icon name="Shield" className="size-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">Desa Sukarokok</h3>
+                  <h3 className="text-xl font-bold">Desa Sukatani</h3>
                   <p className="text-accent-foreground">Kecamatan Sukakopi</p>
                   <p className="text-accent-foreground">Kabupaten Sukajanda</p>
                 </div>
@@ -38,7 +38,7 @@ const Footer = () => {
                   name="Mail"
                   className="text-accent-foreground mr-3 size-5"
                 />
-                <span>desasukarokok@gmail.com</span>
+                <span>desasukatani@gmail.com</span>
               </div>
             </div>
 
@@ -51,7 +51,7 @@ const Footer = () => {
                   className="text-accent-foreground mt-1 mr-3 size-5"
                 />
                 <div>
-                  <p>Sukarokok, Kabupaten Sukajanda,</p>
+                  <p>Sukatani, Kabupaten Sukajanda,</p>
                   <p>Provinsi Sumatera Tenggara, Indonesia</p>
                 </div>
               </div>

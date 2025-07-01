@@ -25,7 +25,7 @@
     "format:write": "prettier --write \"**/*.{ts,tsx,mts,js,jsx,mjs,json,md}\"",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "start": "bun run with-env next start",
+    "start": "bun run with-env next start -p 3001",
     "typecheck": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --"
   },
