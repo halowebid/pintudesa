@@ -7,7 +7,7 @@ import { Portal } from "@ark-ui/react/portal"
 import { Icon } from "@yopem-ui/react-icons"
 import { cn } from "@yopem-ui/utils"
 
-interface DatePickerProps
+export interface DatePickerProps
   extends React.ComponentProps<typeof DatePickerPrimitive.Root> {
   label?: string
   handleOnValueChange?: (value: DatePickerValueChangeDetails) => void

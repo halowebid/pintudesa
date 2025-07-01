@@ -13,7 +13,7 @@ export default function DialogWrapper({
   return (
     <>
       <Dialog open={true} onOpenChange={() => router.back()}>
-        <DialogContent side="top">{children}</DialogContent>
+        <DialogContent side="center">{children}</DialogContent>
       </Dialog>
     </>
   )

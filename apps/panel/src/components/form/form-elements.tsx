@@ -28,6 +28,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValueText,
+  type DatePickerProps,
 } from "@pintudesa/ui"
 import { formatStringToDate } from "@pintudesa/utils"
 import { Icon } from "@yopem-ui/react-icons"
@@ -61,12 +62,19 @@ export const BaseField = ({
   )
 }
 
-export const CheckboxField = ({ label }: { label: string }) => {
+export const CheckboxField = ({
+  label,
+  ...props
+}: { label: string } & Omit<
+  React.ComponentProps<typeof Checkbox>,
+  "name" | "checked" | "onChange"
+>) => {
   const field = useFieldContext<boolean>()
 
   return (
     <div className="flex items-center space-x-2">
       <Checkbox
+        {...props}
         name={field.name}
         checked={field.state.value}
         onChange={(e) =>
@@ -174,7 +182,11 @@ export const TextareaField = ({
   )
 }
 
-export interface SelectFieldProps {
+export interface SelectFieldProps
+  extends Omit<
+    React.ComponentProps<typeof Select>,
+    "collection" | "onValueChange" | "value" | "placeholder"
+  > {
   label?: string
   placeholder?: string
   options: {
@@ -190,6 +202,7 @@ export const SelectField = ({
   placeholder = "Select...",
   options,
   mode = "portal",
+  ...props
 }: SelectFieldProps) => {
   const field = useFieldContext<string>()
 
@@ -199,6 +212,7 @@ export const SelectField = ({
 
   return (
     <Select
+      {...props}
       value={[field.state.value]}
       collection={collection}
       onValueChange={(e) => {
@@ -332,13 +346,9 @@ export const FileUploadDropzoneField = ({
   )
 }
 
-export const DatePickerField = ({
-  label,
-  mode,
-}: {
-  label?: string
-  mode?: "inline" | "portal"
-}) => {
+export const DatePickerField = (
+  props: Omit<DatePickerProps, "value" | "handleOnValueChange">,
+) => {
   const field = useFieldContext<string | Date | null | undefined>()
   const handleOnValueChange = (e: DatePickerValueChangeDetails) => {
     field.handleChange(e.valueAsString[0])
@@ -360,11 +370,10 @@ export const DatePickerField = ({
 
   return (
     <DatePicker
+      {...props}
       value={
         defaultValue instanceof Date ? [parseDate(defaultValue)] : undefined
       }
-      label={label}
-      mode={mode}
       handleOnValueChange={handleOnValueChange}
     />
   )
