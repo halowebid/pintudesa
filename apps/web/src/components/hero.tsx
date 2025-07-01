@@ -19,7 +19,7 @@ const Hero = () => {
             <h1 className="mb-6 text-3xl leading-tight font-bold sm:text-4xl lg:text-6xl">
               Selamat datang di
               <br className="hidden sm:block" />
-              Website Profil Desa Sukarokok
+              Website Profil Desa Sukatani
             </h1>
             <p className="mb-8 text-base leading-relaxed text-gray-200 sm:text-lg lg:text-xl">
               Pintudesa Profil dengan teknologi terbaru serta memberikan

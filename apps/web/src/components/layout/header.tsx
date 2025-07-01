@@ -28,7 +28,7 @@ const Header = () => {
             </div>
             <div>
               <h1 className="text-foreground text-lg font-bold">
-                Desa Sukarokok
+                Desa Sukatani
               </h1>
               <p className="text-accent-foreground text-sm">
                 Kecamatan Sukakopi
