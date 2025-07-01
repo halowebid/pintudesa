@@ -21,7 +21,7 @@ export default function StatisticsPage() {
     {
       number: "3",
       label: "Jumlah Dusun",
-      sublabel: "Desa Sukarokok",
+      sublabel: "Desa Sukatani",
       icon: "MapPin",
       color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-100 dark:bg-blue-900",
@@ -29,7 +29,7 @@ export default function StatisticsPage() {
     {
       number: "6",
       label: "Jumlah RW",
-      sublabel: "Desa Sukarokok",
+      sublabel: "Desa Sukatani",
       icon: "Users",
       color: "from-green-500 to-green-600",
       bgColor: "bg-green-100 dark:bg-green-900",
@@ -37,7 +37,7 @@ export default function StatisticsPage() {
     {
       number: "12",
       label: "Jumlah RT",
-      sublabel: "Desa Sukarokok",
+      sublabel: "Desa Sukatani",
       icon: "Target",
       color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-100 dark:bg-purple-900",
@@ -162,7 +162,7 @@ export default function StatisticsPage() {
               Statistik Desa
             </h1>
             <p className="mb-8 text-xl leading-relaxed text-orange-100 lg:text-2xl">
-              Data Lengkap Demografi dan Statistik Desa Sukarokok
+              Data Lengkap Demografi dan Statistik Desa Sukatani
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <div className="flex items-center rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm">
@@ -239,7 +239,7 @@ export default function StatisticsPage() {
                   <div className="grid grid-cols-2 gap-4 text-center">
                     <div>
                       <div className="text-sm opacity-90">Nama Desa</div>
-                      <div className="font-bold">Sukarokok</div>
+                      <div className="font-bold">Sukatani</div>
                     </div>
                     <div>
                       <div className="text-sm opacity-90">Kecamatan</div>
@@ -307,9 +307,9 @@ export default function StatisticsPage() {
                   Pekerjaan Warga
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Distribusi pekerjaan mayoritas warga Desa Sukarokok
-                  berdasarkan data terbaru menunjukkan dominasi sektor pertanian
-                  dan perkebunan.
+                  Distribusi pekerjaan mayoritas warga Desa Sukatani berdasarkan
+                  data terbaru menunjukkan dominasi sektor pertanian dan
+                  perkebunan.
                 </p>
               </div>
 
@@ -430,7 +430,7 @@ export default function StatisticsPage() {
                   Pendidikan Warga
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Tingkat pendidikan masyarakat Desa Sukarokok menunjukkan tren
+                  Tingkat pendidikan masyarakat Desa Sukatani menunjukkan tren
                   positif dengan mayoritas warga memiliki pendidikan menengah
                   atas.
                 </p>
@@ -510,7 +510,7 @@ export default function StatisticsPage() {
               Distribusi Usia Warga
             </h2>
             <p className="text-muted-foreground mx-auto max-w-3xl text-lg">
-              Komposisi usia penduduk Desa Sukarokok menunjukkan struktur
+              Komposisi usia penduduk Desa Sukatani menunjukkan struktur
               demografis yang seimbang dengan dominasi usia produktif
             </p>
           </div>

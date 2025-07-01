@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en" className={`${manrope.className}`} suppressHydrationWarning>
       <body>
         <Providers>
-          <div className="min-h-screen">
+          <div className="container min-h-screen">
             <Header />
             <main>{children}</main>
             <Footer />

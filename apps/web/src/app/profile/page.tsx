@@ -11,7 +11,7 @@ import { Icon, type IconProps } from "@yopem-ui/react-icons"
 
 export default function ProfilePage() {
   const visionPoints = [
-    "Mewujudkan Desa Sukarokok yang maju dan mandiri",
+    "Mewujudkan Desa Sukatani yang maju dan mandiri",
     "Memanfaatkan potensi sumber daya alam berkelanjutan",
     "Mengembangkan sumber daya manusia berkualitas",
     "Menerapkan teknologi digital dalam pelayanan",
@@ -42,25 +42,25 @@ export default function ProfilePage() {
       platform: "Facebook",
       icon: "Facebook",
       color: "text-blue-600",
-      handle: "@desasukarokok",
+      handle: "@desasukatani",
     },
     {
       platform: "Instagram",
       icon: "Instagram",
       color: "text-pink-600",
-      handle: "@desa.sukarokok",
+      handle: "@desa.sukatani",
     },
     {
       platform: "YouTube",
       icon: "Youtube",
       color: "text-red-600",
-      handle: "Desa Sukarokok Official",
+      handle: "Desa Sukatani Official",
     },
     {
       platform: "Email",
       icon: "Mail",
       color: "text-green-600",
-      handle: "desasukarokok@gmail.com",
+      handle: "desasukatani@gmail.com",
     },
   ]
 
@@ -77,7 +77,7 @@ export default function ProfilePage() {
               Profil Desa
             </Badge>
             <h1 className="mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-5xl font-bold text-transparent lg:text-7xl">
-              Desa Sukarokok
+              Desa Sukatani
             </h1>
             <p className="mb-8 text-xl leading-relaxed text-blue-100 lg:text-2xl">
               Kecamatan Sukakopi, Kabupaten Sukajanda, Provinsi Sumatera
@@ -108,10 +108,10 @@ export default function ProfilePage() {
                   Desa Digital
                 </Badge>
                 <h2 className="text-foreground mb-6 text-4xl font-bold">
-                  Sukarokok Digital Village
+                  Sukatani Digital Village
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Desa Sukarokok merupakan desa yang telah menerapkan sistem
+                  Desa Sukatani merupakan desa yang telah menerapkan sistem
                   digitalisasi dalam pelayanan administrasi kepada masyarakat.
                   Dengan memanfaatkan teknologi modern, kami berkomitmen
                   memberikan pelayanan terbaik yang mudah, cepat, dan
@@ -184,7 +184,7 @@ export default function ProfilePage() {
               Visi & Misi
             </Badge>
             <h2 className="text-foreground mb-6 text-4xl font-bold">
-              Visi & Misi Desa Sukarokok
+              Visi & Misi Desa Sukatani
             </h2>
             <p className="text-muted-foreground mx-auto max-w-3xl text-lg">
               Komitmen kami dalam membangun desa yang maju, mandiri, dan
@@ -210,7 +210,7 @@ export default function ProfilePage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-foreground leading-relaxed font-medium">
-                  "Mewujudkan Desa Sukarokok yang maju, mandiri, dan sejahtera
+                  "Mewujudkan Desa Sukatani yang maju, mandiri, dan sejahtera
                   dengan memanfaatkan potensi sumber daya alam dan sumber daya
                   manusia yang berkelanjutan serta berbasis teknologi digital."
                 </p>
@@ -296,10 +296,10 @@ export default function ProfilePage() {
                   Lokasi & Batas Wilayah
                 </Badge>
                 <h2 className="text-foreground mb-6 text-4xl font-bold">
-                  Geografis Desa Sukarokok
+                  Geografis Desa Sukatani
                 </h2>
                 <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-                  Desa Sukarokok terletak di posisi strategis di Kecamatan
+                  Desa Sukatani terletak di posisi strategis di Kecamatan
                   Sukakopi, Kabupaten Sukajanda, Provinsi Sumatera Tenggara.
                   Lokasi yang strategis ini memberikan akses yang baik untuk
                   pengembangan ekonomi dan pariwisata.
@@ -342,8 +342,8 @@ export default function ProfilePage() {
               Terhubung Dengan Kami
             </h2>
             <p className="text-muted-foreground mx-auto max-w-3xl text-lg">
-              Ikuti media sosial resmi Desa Sukarokok untuk mendapatkan
-              informasi terbaru tentang kegiatan dan perkembangan desa
+              Ikuti media sosial resmi Desa Sukatani untuk mendapatkan informasi
+              terbaru tentang kegiatan dan perkembangan desa
             </p>
           </div>
 
