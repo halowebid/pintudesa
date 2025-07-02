@@ -100,6 +100,48 @@ const combinedSchema = z.object({
   kepalaKeluarga: pendudukSchema,
 })
 
+const defaultValues: z.input<typeof combinedSchema> = {
+  kartuKeluarga: {
+    kategoriPenduduk: "penduduk_dalam_desa",
+    nomorKartuKeluarga: "",
+    alamat: "",
+    rt: "",
+    rw: "",
+    provisi: "",
+    kabupaten_kota: "",
+    kecamatan: "",
+    desa_kelurahan: "",
+    dusun: "",
+  },
+
+  kepalaKeluarga: {
+    namaLengkap: "",
+    nik: "",
+    tempatLahir: "",
+    tanggalLahir: new Date(),
+    jenisKelamin: "laki-laki",
+    agama: "islam",
+    pendidikanTerakhir: "tidak_atau_belum_sekolah",
+    pekerjaan: "lainnya",
+    statusPerkawinan: "belum_kawin",
+    statusDomisili: "ktp_beralamat_di_desa_berdomisili_di_desa",
+    asalPenduduk: "penduduk_desa",
+    alamat: "",
+    rt: "",
+    rw: "",
+    provinsi: "",
+    kabupaten_kota: "",
+    kecamatan: "",
+    desa_kelurahan: "",
+    dusun: "",
+    namaAyahKandung: "",
+    namaIbuKandung: "",
+    bantuanSosial: false,
+    disabilitas: false,
+    shdk: "kepala_keluarga",
+  },
+}
+
 export default function PendudukForm({
   id,
   isDialog,
@@ -197,8 +239,6 @@ export default function PendudukForm({
       return null
     }
 
-    const anggotaKeluargaRelations = initialKartuKeluargaData.anggotaKeluarga
-
     const stitchedAnggotaData = anggotaKeluargaRelations
       .map((relasi) => {
         const pendudukDetail = combinedPenduduk.data.find(
@@ -252,55 +292,13 @@ export default function PendudukForm({
       },
       initialAnggotaList: initialAnggotaLain,
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     isLoadingKK,
     combinedPenduduk.isPending,
-    initialKartuKeluargaData,
     combinedPenduduk.data,
+    initialKartuKeluargaData,
+    anggotaKeluargaRelations,
   ])
-
-  const defaultValues: z.input<typeof combinedSchema> = {
-    kartuKeluarga: {
-      kategoriPenduduk: "penduduk_dalam_desa",
-      nomorKartuKeluarga: "",
-      alamat: "",
-      rt: "",
-      rw: "",
-      provisi: "",
-      kabupaten_kota: "",
-      kecamatan: "",
-      desa_kelurahan: "",
-      dusun: "",
-    },
-
-    kepalaKeluarga: {
-      namaLengkap: "",
-      nik: "",
-      tempatLahir: "",
-      tanggalLahir: new Date(),
-      jenisKelamin: "laki-laki",
-      agama: "islam",
-      pendidikanTerakhir: "tidak_atau_belum_sekolah",
-      pekerjaan: "lainnya",
-      statusPerkawinan: "belum_kawin",
-      statusDomisili: "ktp_beralamat_di_desa_berdomisili_di_desa",
-      asalPenduduk: "penduduk_desa",
-      alamat: "",
-      rt: "",
-      rw: "",
-      provinsi: "",
-      kabupaten_kota: "",
-      kecamatan: "",
-      desa_kelurahan: "",
-      dusun: "",
-      namaAyahKandung: "",
-      namaIbuKandung: "",
-      bantuanSosial: false,
-      disabilitas: false,
-      shdk: "kepala_keluarga",
-    },
-  }
 
   const form = useAppForm({
     defaultValues: initialFormData ? initialFormData.formData : defaultValues,
@@ -355,347 +353,44 @@ export default function PendudukForm({
   }
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault()
-        void form.handleSubmit()
-      }}
-      className="max-w-md space-y-6"
-    >
-      <section className="space-y-6 rounded-md border p-4">
-        <h2 className="mb-4 text-lg font-semibold">Kartu Keluarga</h2>
+    <div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          void form.handleSubmit()
+        }}
+        className="max-w-md space-y-6"
+      >
+        <section className="space-y-6 p-4">
+          <h2 className="mb-4 text-lg font-semibold">Kartu Keluarga</h2>
 
-        <form.AppField name="kartuKeluarga.kategoriPenduduk">
-          {(field) => (
-            <form.FormItem>
-              <form.FormLabel>Kategori Penduduk</form.FormLabel>
-              <field.SelectField
-                mode={isDialog ? "inline" : "portal"}
-                options={KATEGORI_PENDUDUK.map((item) => ({
-                  label: item
-                    .replace(/_/g, " ")
-                    .replace(/\b\w/g, (l) => l.toUpperCase()),
-                  value: item,
-                }))}
-              />
-              <form.FormMessage />
-            </form.FormItem>
-          )}
-        </form.AppField>
-        <form.AppField name="kartuKeluarga.nomorKartuKeluarga">
-          {(field) => (
-            <form.FormItem>
-              <form.FormLabel>Nomor Kartu Keluarga</form.FormLabel>
-              <field.BaseField placeholder="Masukkan nomor KK" />
-              <form.FormMessage />
-            </form.FormItem>
-          )}
-        </form.AppField>
-        <form.AppField name="kartuKeluarga.alamat">
-          {(field) => (
-            <form.FormItem>
-              <form.FormLabel>Alamat</form.FormLabel>
-              <field.TextareaField
-                placeholder="Masukkan alamat lengkap"
-                disabled={!isEditingKepalaKeluarga}
-              />
-              <form.FormMessage />
-            </form.FormItem>
-          )}
-        </form.AppField>
-        <form.Subscribe
-          selector={(state) => [state.values.kartuKeluarga.kategoriPenduduk]}
-        >
-          {([asalPenduduk]) => {
-            const showAlamatLuar =
-              asalPenduduk === "penduduk_luar_desa" ||
-              asalPenduduk === "penduduk_luar_berdomisili_di_desa"
-
-            const showAlamatDomisili =
-              asalPenduduk === "penduduk_dalam_desa" ||
-              asalPenduduk === "penduduk_luar_berdomisili_di_desa"
-
-            return (
-              <>
-                {showAlamatLuar && (
-                  <div className="grid grid-cols-1 gap-4 pt-4 md:grid-cols-2">
-                    <form.AppField name="kartuKeluarga.provisi">
-                      {(field) => (
-                        <form.FormItem>
-                          <form.FormLabel>Provinsi</form.FormLabel>
-                          <field.BaseField placeholder="Pilih Provinsi" />
-                          <form.FormMessage />
-                        </form.FormItem>
-                      )}
-                    </form.AppField>
-                    <form.AppField name="kartuKeluarga.kabupaten_kota">
-                      {(field) => (
-                        <form.FormItem>
-                          <form.FormLabel>Kabupaten / Kota</form.FormLabel>
-                          <field.BaseField placeholder="Pilih Kabupaten/Kota" />
-                          <form.FormMessage />
-                        </form.FormItem>
-                      )}
-                    </form.AppField>
-                    <form.AppField name="kartuKeluarga.kecamatan">
-                      {(field) => (
-                        <form.FormItem>
-                          <form.FormLabel>Kecamatan</form.FormLabel>
-                          <field.BaseField placeholder="Pilih Kecamatan" />
-                          <form.FormMessage />
-                        </form.FormItem>
-                      )}
-                    </form.AppField>
-                    <form.AppField name="kartuKeluarga.desa_kelurahan">
-                      {(field) => (
-                        <form.FormItem>
-                          <form.FormLabel>Desa / Kelurahan</form.FormLabel>
-                          <field.BaseField placeholder="Pilih Kelurahan / Desa" />
-                          <form.FormMessage />
-                        </form.FormItem>
-                      )}
-                    </form.AppField>
-                  </div>
-                )}
-
-                {showAlamatDomisili && (
-                  <div className="space-y-4 pt-4">
-                    <h3 className="text-md font-semibold text-gray-700">
-                      Data Domisili saat ini
-                    </h3>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                      <form.AppField name="kartuKeluarga.dusun">
-                        {(field) => (
-                          <form.FormItem>
-                            <form.FormLabel>Dusun</form.FormLabel>
-                            <field.BaseField placeholder="Pilih Dusun" />
-                            <form.FormMessage />
-                          </form.FormItem>
-                        )}
-                      </form.AppField>
-                      <form.AppField name="kartuKeluarga.rw">
-                        {(field) => (
-                          <form.FormItem>
-                            <form.FormLabel>RW</form.FormLabel>
-                            <field.BaseField placeholder="Pilih RW" />
-                            <form.FormMessage />
-                          </form.FormItem>
-                        )}
-                      </form.AppField>
-                      <form.AppField name="kartuKeluarga.rt">
-                        {(field) => (
-                          <form.FormItem>
-                            <form.FormLabel>RT</form.FormLabel>
-                            <field.BaseField placeholder="Pilih RT" />
-                            <form.FormMessage />
-                          </form.FormItem>
-                        )}
-                      </form.AppField>
-                    </div>
-                  </div>
-                )}
-              </>
-            )
-          }}
-        </form.Subscribe>
-      </section>
-
-      <section className="mt-8 space-y-6 rounded-md border p-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Kepala Keluarga</h2>
-          {isEditingKepalaKeluarga ? (
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={handleCancelEditKepalaKeluarga}
-            >
-              Batal Edit
-            </Button>
-          ) : (
-            <Button
-              type="button"
-              size="sm"
-              onClick={() => setIsEditingKepalaKeluarga(true)}
-            >
-              Edit Data
-            </Button>
-          )}
-        </div>
-
-        <div className="space-y-6">
-          <form.AppField name="kepalaKeluarga.namaLengkap">
+          <form.AppField name="kartuKeluarga.kategoriPenduduk">
             {(field) => (
               <form.FormItem>
-                <form.FormLabel>Nama Lengkap</form.FormLabel>
-                <field.BaseField
-                  placeholder="Masukkan nama lengkap"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.nik">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>NIK</form.FormLabel>
-                <field.BaseField
-                  placeholder="Masukkan NIK"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.tempatLahir">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Tempat Lahir</form.FormLabel>
-                <field.BaseField
-                  placeholder="Masukkan tempat lahir"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.tanggalLahir">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Tanggal Lahir</form.FormLabel>
-                <field.DatePickerField
-                  mode={isDialog ? "inline" : "portal"}
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.jenisKelamin">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Jenis Kelamin</form.FormLabel>
+                <form.FormLabel>Kategori Penduduk</form.FormLabel>
                 <field.SelectField
                   mode={isDialog ? "inline" : "portal"}
-                  options={[
-                    { label: "Laki-laki", value: "laki-laki" },
-                    { label: "Perempuan", value: "perempuan" },
-                  ]}
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.agama">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Agama</form.FormLabel>
-                <field.SelectField
-                  mode={isDialog ? "inline" : "portal"}
-                  options={AGAMA.map((item) => ({
-                    label: item.replace(/_/g, " ").toUpperCase(),
+                  options={KATEGORI_PENDUDUK.map((item) => ({
+                    label: item
+                      .replace(/_/g, " ")
+                      .replace(/\b\w/g, (l) => l.toUpperCase()),
                     value: item,
                   }))}
-                  disabled={!isEditingKepalaKeluarga}
                 />
                 <form.FormMessage />
               </form.FormItem>
             )}
           </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.pendidikanTerakhir">
+          <form.AppField name="kartuKeluarga.nomorKartuKeluarga">
             {(field) => (
               <form.FormItem>
-                <form.FormLabel>Pendidikan Terakhir</form.FormLabel>
-                <field.SelectField
-                  mode={isDialog ? "inline" : "portal"}
-                  options={PENDIDIKAN_TERAKHIR.map((item) => ({
-                    label: item.replace(/_/g, " ").toUpperCase(),
-                    value: item,
-                  }))}
-                  disabled={!isEditingKepalaKeluarga}
-                />
+                <form.FormLabel>Nomor Kartu Keluarga</form.FormLabel>
+                <field.BaseField placeholder="Masukkan nomor KK" />
                 <form.FormMessage />
               </form.FormItem>
             )}
           </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.pekerjaan">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Pekerjaan</form.FormLabel>
-                <field.SelectField
-                  mode={isDialog ? "inline" : "portal"}
-                  options={JENIS_PEKERJAAN.map((item) => ({
-                    label: item.replace(/_/g, " ").toUpperCase(),
-                    value: item,
-                  }))}
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.statusPerkawinan">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Status Perkawinan</form.FormLabel>
-                <field.SelectField
-                  mode={isDialog ? "inline" : "portal"}
-                  options={STATUS_PERKAWINAN.map((item) => ({
-                    label: item.replace(/_/g, " ").toUpperCase(),
-                    value: item,
-                  }))}
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.statusDomisili">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Status Domisili</form.FormLabel>
-                <field.SelectField
-                  mode={isDialog ? "inline" : "portal"}
-                  options={STATUS_DOMISILI.map((item) => ({
-                    label: item.replace(/_/g, " ").toUpperCase(),
-                    value: item,
-                  }))}
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.asalPenduduk">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Asal Penduduk</form.FormLabel>
-                <field.SelectField
-                  mode={isDialog ? "inline" : "portal"}
-                  options={ASAL_PENDUDUK.map((item) => ({
-                    label: item.replace(/_/g, " ").toUpperCase(),
-                    value: item,
-                  }))}
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.alamat">
+          <form.AppField name="kartuKeluarga.alamat">
             {(field) => (
               <form.FormItem>
                 <form.FormLabel>Alamat</form.FormLabel>
@@ -707,197 +402,519 @@ export default function PendudukForm({
               </form.FormItem>
             )}
           </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.rt">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>RT</form.FormLabel>
-                <field.BaseField
-                  placeholder="Contoh: 01"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.rw">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>RW</form.FormLabel>
-                <field.BaseField
-                  placeholder="Contoh: 02"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.provinsi">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Provinsi</form.FormLabel>
-                <field.BaseField
-                  placeholder="Masukkan provinsi"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.kabupaten_kota">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Kabupaten/Kota</form.FormLabel>
-                <field.BaseField
-                  placeholder="Masukkan kabupaten atau kota"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.kecamatan">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Kecamatan</form.FormLabel>
-                <field.BaseField
-                  placeholder="Masukkan kecamatan"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.desa_kelurahan">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Desa/Kelurahan</form.FormLabel>
-                <field.BaseField
-                  placeholder="Masukkan desa atau kelurahan"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.dusun">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Dusun</form.FormLabel>
-                <field.BaseField
-                  placeholder="Masukkan dusun (opsional)"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.namaAyahKandung">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Nama Ayah Kandung</form.FormLabel>
-                <field.BaseField
-                  placeholder="Masukkan nama ayah"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.namaIbuKandung">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Nama Ibu Kandung</form.FormLabel>
-                <field.BaseField
-                  placeholder="Masukkan nama ibu"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.bantuanSosial">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Bantuan Sosial</form.FormLabel>
-                <field.CheckboxField
-                  label="Menerima bantuan sosial"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-
-          <form.AppField name="kepalaKeluarga.disabilitas">
-            {(field) => (
-              <form.FormItem>
-                <form.FormLabel>Disabilitas</form.FormLabel>
-                <field.CheckboxField
-                  label="Memiliki disabilitas"
-                  disabled={!isEditingKepalaKeluarga}
-                />
-                <form.FormMessage />
-              </form.FormItem>
-            )}
-          </form.AppField>
-        </div>
-      </section>
-
-      <section className="space-y-2">
-        <div className="flex items-center justify-between">
-          <h2 className="mb-4 text-lg font-semibold">Kepala Keluarga</h2>
-          <Button
-            variant="outline"
-            onClick={() => setShowAddAnggotaModal(true)}
-            asChild
+          <form.Subscribe
+            selector={(state) => [state.values.kartuKeluarga.kategoriPenduduk]}
           >
-            <Icon name="UserPlus" />
+            {([asalPenduduk]) => {
+              const showAlamatLuar =
+                asalPenduduk === "penduduk_luar_desa" ||
+                asalPenduduk === "penduduk_luar_berdomisili_di_desa"
+
+              const showAlamatDomisili =
+                asalPenduduk === "penduduk_dalam_desa" ||
+                asalPenduduk === "penduduk_luar_berdomisili_di_desa"
+
+              return (
+                <>
+                  {showAlamatLuar && (
+                    <div className="grid grid-cols-1 gap-4 pt-4 md:grid-cols-2">
+                      <form.AppField name="kartuKeluarga.provisi">
+                        {(field) => (
+                          <form.FormItem>
+                            <form.FormLabel>Provinsi</form.FormLabel>
+                            <field.BaseField placeholder="Pilih Provinsi" />
+                            <form.FormMessage />
+                          </form.FormItem>
+                        )}
+                      </form.AppField>
+                      <form.AppField name="kartuKeluarga.kabupaten_kota">
+                        {(field) => (
+                          <form.FormItem>
+                            <form.FormLabel>Kabupaten / Kota</form.FormLabel>
+                            <field.BaseField placeholder="Pilih Kabupaten/Kota" />
+                            <form.FormMessage />
+                          </form.FormItem>
+                        )}
+                      </form.AppField>
+                      <form.AppField name="kartuKeluarga.kecamatan">
+                        {(field) => (
+                          <form.FormItem>
+                            <form.FormLabel>Kecamatan</form.FormLabel>
+                            <field.BaseField placeholder="Pilih Kecamatan" />
+                            <form.FormMessage />
+                          </form.FormItem>
+                        )}
+                      </form.AppField>
+                      <form.AppField name="kartuKeluarga.desa_kelurahan">
+                        {(field) => (
+                          <form.FormItem>
+                            <form.FormLabel>Desa / Kelurahan</form.FormLabel>
+                            <field.BaseField placeholder="Pilih Kelurahan / Desa" />
+                            <form.FormMessage />
+                          </form.FormItem>
+                        )}
+                      </form.AppField>
+                    </div>
+                  )}
+
+                  {showAlamatDomisili && (
+                    <div className="space-y-4 pt-4">
+                      <h3 className="text-md font-semibold text-gray-700">
+                        Data Domisili saat ini
+                      </h3>
+                      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                        <form.AppField name="kartuKeluarga.dusun">
+                          {(field) => (
+                            <form.FormItem>
+                              <form.FormLabel>Dusun</form.FormLabel>
+                              <field.BaseField placeholder="Pilih Dusun" />
+                              <form.FormMessage />
+                            </form.FormItem>
+                          )}
+                        </form.AppField>
+                        <form.AppField name="kartuKeluarga.rw">
+                          {(field) => (
+                            <form.FormItem>
+                              <form.FormLabel>RW</form.FormLabel>
+                              <field.BaseField
+                                type="number"
+                                min={0}
+                                max={100}
+                                placeholder="Pilih RW"
+                              />
+                              <form.FormMessage />
+                            </form.FormItem>
+                          )}
+                        </form.AppField>
+                        <form.AppField name="kartuKeluarga.rt">
+                          {(field) => (
+                            <form.FormItem>
+                              <form.FormLabel>RT</form.FormLabel>
+                              <field.BaseField
+                                type="number"
+                                min={0}
+                                max={100}
+                                placeholder="Pilih RT"
+                              />
+                              <form.FormMessage />
+                            </form.FormItem>
+                          )}
+                        </form.AppField>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )
+            }}
+          </form.Subscribe>
+        </section>
+
+        <section className="mt-8 space-y-6 rounded-md border p-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold">Kepala Keluarga</h2>
+            {isEditingKepalaKeluarga ? (
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleCancelEditKepalaKeluarga}
+              >
+                Batal Edit
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                size="sm"
+                onClick={() => setIsEditingKepalaKeluarga(true)}
+              >
+                Edit Data
+              </Button>
+            )}
+          </div>
+
+          <div className="space-y-6">
+            <form.AppField name="kepalaKeluarga.namaLengkap">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Nama Lengkap</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Masukkan nama lengkap"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.nik">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>NIK</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Masukkan NIK"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.tempatLahir">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Tempat Lahir</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Masukkan tempat lahir"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.tanggalLahir">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Tanggal Lahir</form.FormLabel>
+                  <field.DatePickerField
+                    mode={isDialog ? "inline" : "portal"}
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.jenisKelamin">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Jenis Kelamin</form.FormLabel>
+                  <field.SelectField
+                    mode={isDialog ? "inline" : "portal"}
+                    options={[
+                      { label: "Laki-laki", value: "laki-laki" },
+                      { label: "Perempuan", value: "perempuan" },
+                    ]}
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.agama">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Agama</form.FormLabel>
+                  <field.SelectField
+                    mode={isDialog ? "inline" : "portal"}
+                    options={AGAMA.map((item) => ({
+                      label: item.replace(/_/g, " ").toUpperCase(),
+                      value: item,
+                    }))}
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.pendidikanTerakhir">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Pendidikan Terakhir</form.FormLabel>
+                  <field.SelectField
+                    mode={isDialog ? "inline" : "portal"}
+                    options={PENDIDIKAN_TERAKHIR.map((item) => ({
+                      label: item.replace(/_/g, " ").toUpperCase(),
+                      value: item,
+                    }))}
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.pekerjaan">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Pekerjaan</form.FormLabel>
+                  <field.SelectField
+                    mode={isDialog ? "inline" : "portal"}
+                    options={JENIS_PEKERJAAN.map((item) => ({
+                      label: item.replace(/_/g, " ").toUpperCase(),
+                      value: item,
+                    }))}
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.statusPerkawinan">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Status Perkawinan</form.FormLabel>
+                  <field.SelectField
+                    mode={isDialog ? "inline" : "portal"}
+                    options={STATUS_PERKAWINAN.map((item) => ({
+                      label: item.replace(/_/g, " ").toUpperCase(),
+                      value: item,
+                    }))}
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.statusDomisili">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Status Domisili</form.FormLabel>
+                  <field.SelectField
+                    mode={isDialog ? "inline" : "portal"}
+                    options={STATUS_DOMISILI.map((item) => ({
+                      label: item.replace(/_/g, " ").toUpperCase(),
+                      value: item,
+                    }))}
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.asalPenduduk">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Asal Penduduk</form.FormLabel>
+                  <field.SelectField
+                    mode={isDialog ? "inline" : "portal"}
+                    options={ASAL_PENDUDUK.map((item) => ({
+                      label: item.replace(/_/g, " ").toUpperCase(),
+                      value: item,
+                    }))}
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.alamat">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Alamat</form.FormLabel>
+                  <field.TextareaField
+                    placeholder="Masukkan alamat lengkap"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.rt">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>RT</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Contoh: 01"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.rw">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>RW</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Contoh: 02"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.provinsi">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Provinsi</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Masukkan provinsi"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.kabupaten_kota">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Kabupaten/Kota</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Masukkan kabupaten atau kota"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.kecamatan">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Kecamatan</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Masukkan kecamatan"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.desa_kelurahan">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Desa/Kelurahan</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Masukkan desa atau kelurahan"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.dusun">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Dusun</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Masukkan dusun (opsional)"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.namaAyahKandung">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Nama Ayah Kandung</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Masukkan nama ayah"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.namaIbuKandung">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Nama Ibu Kandung</form.FormLabel>
+                  <field.BaseField
+                    placeholder="Masukkan nama ibu"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.bantuanSosial">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Bantuan Sosial</form.FormLabel>
+                  <field.CheckboxField
+                    label="Menerima bantuan sosial"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+
+            <form.AppField name="kepalaKeluarga.disabilitas">
+              {(field) => (
+                <form.FormItem>
+                  <form.FormLabel>Disabilitas</form.FormLabel>
+                  <field.CheckboxField
+                    label="Memiliki disabilitas"
+                    disabled={!isEditingKepalaKeluarga}
+                  />
+                  <form.FormMessage />
+                </form.FormItem>
+              )}
+            </form.AppField>
+          </div>
+        </section>
+
+        <section className="space-y-2">
+          <div className="flex items-center justify-between">
+            <h2 className="mb-4 text-lg font-semibold">Anggota Keluarga</h2>
+            <Button
+              variant="outline"
+              className="!bg-primary !text-primary-foreground rounded-full"
+              onClick={() => setShowAddAnggotaModal(true)}
+              asChild
+            >
+              <Icon name="UserPlus" />
+            </Button>
+          </div>
+          {anggotaList.length > 0 && (
+            <ul className="divide-mute divide-y rounded-md border">
+              {anggotaList.map((anggota, index) => {
+                if (anggota.shdk !== "kepala_keluarga") {
+                  return (
+                    <li
+                      key={index}
+                      className="flex items-center justify-between p-3"
+                    >
+                      <div className="text-sm">
+                        <p className="font-medium">{anggota.namaLengkap}</p>
+                        <p className="text-muted-foreground">
+                          {anggota.nik} -{" "}
+                          {anggota.shdk.replace(/_/g, " ").toUpperCase()}
+                        </p>
+                      </div>
+                      <div className="space-x-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleEditClick(index)}
+                        >
+                          Edit
+                        </Button>
+                      </div>
+                    </li>
+                  )
+                }
+                return null
+              })}
+            </ul>
+          )}
+        </section>
+
+        <form.FormItem>
+          <Button type="submit" disabled={isFormSubmitting}>
+            {isFormSubmitting ? "Menyimpan..." : "Simpan Perubahan"}
           </Button>
-        </div>
-        {anggotaList.length > 0 && (
-          <ul className="divide-mute divide-y rounded-md border">
-            {anggotaList.map((anggota, index) => {
-              if (anggota.shdk !== "kepala_keluarga") {
-                return (
-                  <li
-                    key={index}
-                    className="flex items-center justify-between p-3"
-                  >
-                    <div className="text-sm">
-                      <p className="font-medium">{anggota.namaLengkap}</p>
-                      <p className="text-muted-foreground">
-                        {anggota.nik} -{" "}
-                        {anggota.shdk.replace(/_/g, " ").toUpperCase()}
-                      </p>
-                    </div>
-                    <div className="space-x-2">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleEditClick(index)}
-                      >
-                        Edit
-                      </Button>
-                    </div>
-                  </li>
-                )
-              }
-              return null
-            })}
-          </ul>
-        )}
-      </section>
+        </form.FormItem>
+      </form>
       <FormAnggotaKeluargaDialog
         mode="add"
         open={showAddAnggotaModal}
@@ -947,7 +964,6 @@ export default function PendudukForm({
         }}
         defaultValues={defaultValues.kepalaKeluarga}
       />
-
       {editingAnggotaIndex !== null && (
         <FormAnggotaKeluargaDialog
           mode="edit"
@@ -997,12 +1013,6 @@ export default function PendudukForm({
           defaultValues={defaultValues.kepalaKeluarga}
         />
       )}
-
-      <form.FormItem>
-        <Button type="submit" disabled={isFormSubmitting}>
-          {isFormSubmitting ? "Menyimpan..." : "Simpan Perubahan"}
-        </Button>
-      </form.FormItem>
-    </form>
+    </div>
   )
 }
