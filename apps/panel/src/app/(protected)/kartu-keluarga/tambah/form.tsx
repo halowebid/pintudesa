@@ -2,6 +2,7 @@
 
 import React from "react"
 import { useRouter } from "next/navigation"
+import { createListCollection, type ListCollection } from "@ark-ui/react"
 import {
   AGAMA,
   ASAL_PENDUDUK,
@@ -13,8 +14,16 @@ import {
   STATUS_DOMISILI,
   STATUS_PERKAWINAN,
 } from "@pintudesa/db/schema"
-import { Button, ComboboxPopover } from "@pintudesa/ui"
-import { formatStringToDate } from "@pintudesa/utils"
+import {
+  Button,
+  ComboboxPopover,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectItemGroup,
+  SelectTrigger,
+  SelectValueText,
+} from "@pintudesa/ui"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Icon } from "@yopem-ui/react-icons"
 import { z } from "zod"
@@ -77,10 +86,15 @@ const combinedSchema = z.object({
   kepalaKeluarga: pendudukSchema,
 })
 
+interface SelectedPenduduk
+  extends Omit<z.infer<typeof pendudukSchema>, "shdk"> {
+  label: string
+  value: string
+}
+
 interface SelectedKepalaKeluarga extends z.infer<typeof pendudukSchema> {
   label: string
   value: string
-  shdk: SHDK
 }
 type PendudukKey = keyof z.infer<typeof pendudukSchema>
 
@@ -88,11 +102,16 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
   const [anggotaList, setAnggotaList] = React.useState<
     z.infer<typeof pendudukSchema>[]
   >([])
-  const [searchKey, setSearchKey] = React.useState("")
 
+  const [searchKey, setSearchKey] = React.useState("")
   const [selectedKepalaKeluarga, setSelectedKepalaKeluarga] =
     React.useState<SelectedKepalaKeluarga | null>(null)
-  const [showAddAnggotaModal, setShowAddAnggotaModal] = React.useState(false)
+
+  const [anggotaSearchKey, setAnggotaSearchKey] = React.useState("")
+  const [selectedAnggota, setSelectedAnggota] =
+    React.useState<SelectedPenduduk | null>(null)
+  const [selectedShdk, setSelectedShdk] = React.useState<SHDK | "">("")
+
   const [showEditAnggotaModal, setShowEditAnggotaModal] = React.useState(false)
   const [editingAnggotaIndex, setEditingAnggotaIndex] = React.useState<
     number | null
@@ -111,6 +130,13 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
     ),
   )
 
+  const { data: anggotaSearchResults = [] } = useQuery(
+    trpc.penduduk.search.queryOptions(
+      { searchQuery: anggotaSearchKey, limit: 10 },
+      { enabled: !!anggotaSearchKey },
+    ),
+  )
+
   const pendudukOptionsRaw = React.useMemo(() => {
     return searchResults.map((p) => ({
       ...p,
@@ -123,6 +149,25 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
     () => pendudukOptionsRaw.map(({ label, value }) => ({ label, value })),
     [pendudukOptionsRaw],
   )
+
+  const anggotaPendudukOptionsRaw = React.useMemo(() => {
+    return anggotaSearchResults.map((p) => ({
+      ...p,
+      label: `${p.nik} (${p.namaLengkap})`,
+      value: p.id,
+    }))
+  }, [anggotaSearchResults])
+
+  const shdkOptions = SHDK.filter((s) => s !== "kepala_keluarga").map(
+    (item) => ({
+      label: item.replace(/_/g, " ").toUpperCase(),
+      value: item,
+    }),
+  )
+
+  const shdkCollection: ListCollection = createListCollection({
+    items: shdkOptions,
+  })
 
   const { data: settingDatas } = useQuery(
     trpc.setting.byKey.queryOptions("settings"),
@@ -188,12 +233,6 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
   const { mutateAsync: createKartuKeluarga } = useMutation(
     trpc.kartuKeluarga.create.mutationOptions({
       onError: (error) => handleError(error, "Gagal membuat kartu keluarga"),
-    }),
-  )
-
-  const { mutateAsync: createPenduduk } = useMutation(
-    trpc.penduduk.create.mutationOptions({
-      onError: (error) => handleError(error, "Gagal membuat penduduk"),
     }),
   )
 
@@ -268,24 +307,21 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
     async (kartuKeluargaId: string) => {
       await Promise.all(
         anggotaList.map(async (anggota) => {
-          const pendudukAnggota = await createPenduduk({
-            ...anggota,
-            tanggalLahir: formatStringToDate(anggota.tanggalLahir),
-          })
-
-          if (!pendudukAnggota) {
-            throw new Error("Gagal membuat data penduduk untuk anggota.")
+          if (!anggota.id) {
+            throw new Error(
+              `Anggota keluarga ${anggota.namaLengkap} tidak memiliki ID penduduk.`,
+            )
           }
 
           await createAnggotaKeluarga({
             ...anggota,
-            pendudukId: pendudukAnggota.id,
+            pendudukId: anggota.id,
             kartuKeluargaId: kartuKeluargaId,
           })
         }),
       )
     },
-    [anggotaList, createPenduduk, createAnggotaKeluarga],
+    [anggotaList, createAnggotaKeluarga],
   )
 
   const handleSubmit = React.useCallback(
@@ -351,13 +387,54 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
     onSubmit: handleSubmit,
   })
 
+  const handleAddAnggota = () => {
+    if (!selectedAnggota || !selectedShdk) {
+      toast({
+        title: "Gagal Menambah",
+        description: "Silakan cari penduduk dan pilih SHDK terlebih dahulu.",
+      })
+      return
+    }
+
+    if (selectedAnggota.id === selectedKepalaKeluarga?.id) {
+      toast({
+        title: "Gagal Menambah",
+        description: "Penduduk ini sudah dipilih sebagai Kepala Keluarga.",
+      })
+      return
+    }
+
+    const isAlreadyInList = anggotaList.some(
+      (anggota) => anggota.id === selectedAnggota.id,
+    )
+    if (isAlreadyInList) {
+      toast({
+        title: "Gagal Menambah",
+        description: "Penduduk ini sudah ada di dalam daftar anggota.",
+      })
+      return
+    }
+
+    const newAnggota = {
+      ...selectedAnggota,
+      shdk: selectedShdk,
+    }
+    setAnggotaList((prev) => [...prev, newAnggota])
+
+    setSelectedAnggota(null)
+    setSelectedShdk("")
+    setAnggotaSearchKey("")
+  }
+
   const handleEditClick = React.useCallback((index: number) => {
     setEditingAnggotaIndex(index)
     setShowEditAnggotaModal(true)
   }, [])
+
   const handleDeleteClick = React.useCallback((index: number) => {
     setAnggotaList((prev) => prev.filter((_, i) => i !== index))
   }, [])
+
   return (
     <div>
       <form
@@ -540,7 +617,7 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
                     onInputValueChange={(value) => {
                       setSearchKey(value)
                     }}
-                    onSelect={(val) => {
+                    onValueChange={(val) => {
                       const selected = pendudukOptionsRaw.find(
                         (p) => p.value === val,
                       )
@@ -579,7 +656,6 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
                     }}
                     items={pendudukOptions}
                     placeholder="Cari Nama penduduk..."
-                    buttonClassName="w-full"
                   />
                   <form.FormMessage />
                 </form.FormItem>
@@ -901,18 +977,66 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
           )}
         </section>
 
-        <section className="space-y-2">
-          <div className="flex items-center justify-between">
-            <h2 className="mb-4 text-lg font-semibold">Anggota Keluarga</h2>
-            <Button
-              variant="outline"
-              className="!bg-primary !text-primary-foreground rounded-full"
-              onClick={() => setShowAddAnggotaModal(true)}
-              asChild
-            >
-              <Icon name="UserPlus" />
+        <section className="space-y-4">
+          <h2 className="text-lg font-semibold">Anggota Keluarga</h2>
+          <div className="space-y-4 rounded-md border p-4">
+            <h3 className="text-md font-medium">Cari dan Tambah Anggota</h3>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Cari Penduduk</label>
+              <ComboboxPopover
+                selectedLabel={selectedAnggota?.label}
+                onInputValueChange={setAnggotaSearchKey}
+                onValueChange={(val) => {
+                  const selected = anggotaPendudukOptionsRaw.find(
+                    (p) => p.value === val,
+                  )
+                  if (selected)
+                    setSelectedAnggota({
+                      ...selected,
+                      asalPenduduk: selected.asalPenduduk ?? "penduduk_desa",
+                      dusun: selected.dusun ?? "",
+                    })
+                }}
+                isClearable={true}
+                onClear={() => setSelectedAnggota(null)}
+                items={anggotaPendudukOptionsRaw}
+                placeholder="Cari NIK atau Nama penduduk..."
+                value={selectedAnggota?.value}
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">
+                Status Hubungan Dalam Keluarga (SHDK)
+              </label>
+
+              <Select
+                collection={shdkCollection}
+                value={selectedShdk ? [selectedShdk] : []}
+                onValueChange={(e) => {
+                  const newValue = e.value[0] ?? ""
+                  setSelectedShdk(newValue as SHDK | "")
+                }}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValueText placeholder="Pilih SHDK" />
+                </SelectTrigger>
+                <SelectContent mode={isDialog ? "inline" : "portal"}>
+                  <SelectItemGroup>
+                    {shdkCollection.items.map((item) => (
+                      <SelectItem key={item.value} item={item}>
+                        {item.label}
+                      </SelectItem>
+                    ))}
+                  </SelectItemGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button type="button" onClick={handleAddAnggota}>
+              <Icon name="Plus" className="mr-2" />
+              Tambah ke Daftar
             </Button>
           </div>
+
           {anggotaList.length > 0 && (
             <ul className="divide-mute divide-y rounded-md border">
               {anggotaList.map((anggota, index) => {
@@ -960,14 +1084,6 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
           <Button type="submit">Simpan</Button>
         </form.FormItem>
       </form>
-      <FormAnggotaKeluargaDialog
-        key="add-anggota-keluarga"
-        mode="add"
-        open={showAddAnggotaModal}
-        onClose={() => setShowAddAnggotaModal(false)}
-        onSubmit={(anggota) => setAnggotaList((prev) => [...prev, anggota])}
-        defaultValues={defaultValues.kepalaKeluarga}
-      />
 
       {editingAnggotaIndex !== null && (
         <FormAnggotaKeluargaDialog

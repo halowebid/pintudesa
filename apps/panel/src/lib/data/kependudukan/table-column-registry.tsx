@@ -21,9 +21,16 @@ export const kartuKeluargaColumns: ColumnDef<SelectKartuKeluarga, unknown>[] = [
       return (
         <div className="flex max-w-[240px] flex-col">
           <span className="truncate font-medium">{noKK}</span>
-          {/* <span className="text-muted-foreground text-[10px] lg:hidden">
-            Kategori: {kategoriPendudukLabelMap[data.kategoriPenduduk] || "-"}
-          </span> */}
+
+          <span className="text-muted-foreground mt-1 text-[10px] lg:hidden">
+            Alamat: {data.alamat}
+          </span>
+          <span className="text-muted-foreground text-[10px] lg:hidden">
+            {data.desa_kelurahan}, {data.kecamatan}
+          </span>
+          <span className="text-muted-foreground text-[10px] lg:hidden">
+            RT/RW: {data.rt}/{data.rw}
+          </span>
           <span className="text-muted-foreground mt-0.5 text-[10px] lg:hidden">
             Dibuat: {formatDate(data.createdAt, "LL")}
           </span>
@@ -31,24 +38,20 @@ export const kartuKeluargaColumns: ColumnDef<SelectKartuKeluarga, unknown>[] = [
       )
     },
   },
-
+  {
+    accessorKey: "alamat",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Alamat</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
   {
     accessorKey: "createdAt",
     meta: { isHiddenOnMobile: true },
     header: () => <span className="hidden lg:inline">Dibuat</span>,
-    cell: ({ getValue }) => {
-      const val = getValue<string | Date>()
-      return (
-        <span className="hidden lg:inline">
-          {val ? formatDate(val, "LL") : "-"}
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    meta: { isHiddenOnMobile: true },
-    header: () => <span className="hidden lg:inline">Diubah</span>,
     cell: ({ getValue }) => {
       const val = getValue<string | Date>()
       return (
@@ -153,7 +156,9 @@ export const pendudukColumns: ColumnDef<SelectPenduduk, unknown>[] = [
     meta: { isHiddenOnMobile: true },
     header: () => <span className="hidden lg:inline">Alamat</span>,
     cell: ({ getValue }) => (
-      <span className="hidden lg:inline">{getValue<string>()}</span>
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
     ),
   },
   {

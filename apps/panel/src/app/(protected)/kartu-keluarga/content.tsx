@@ -99,6 +99,7 @@ export default function KartuKeluargaContent() {
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
               editUrl={`/kartu-keluarga/edit/${item.id}`}
+              seperateUrl={`/kartu-keluarga/pisah/${item.id}`}
               description={item.nomorKartuKeluarga}
             />
           )}

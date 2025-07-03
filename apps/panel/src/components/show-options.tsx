@@ -21,11 +21,19 @@ interface ShowOptionsProps extends React.ComponentProps<typeof Menu> {
   editUrlNewTab?: string | UrlObject
   translateUrl?: string | UrlObject
   viewUrl?: string | UrlObject
+  seperateUrl?: string | UrlObject
   description: string | null
 }
 
 const ShowOptions = (props: ShowOptionsProps) => {
-  const { onDelete, editUrl, editUrlNewTab, viewUrl, description } = props
+  const {
+    onDelete,
+    editUrl,
+    editUrlNewTab,
+    viewUrl,
+    seperateUrl,
+    description,
+  } = props
 
   const [openDialogDelete, setOpenDialogDelete] = React.useState<boolean>(false)
 
@@ -72,6 +80,14 @@ const ShowOptions = (props: ShowOptionsProps) => {
                 <Link href={viewUrl} target="_blank">
                   <Icon name="Eye" className="mr-2 size-4" />
                   Lihat
+                </Link>
+              </MenuItem>
+            )}
+            {seperateUrl && (
+              <MenuItem value="Pisah" asChild>
+                <Link href={seperateUrl}>
+                  <Icon name="Ungroup" className="mr-2 size-4" />
+                  Pisah
                 </Link>
               </MenuItem>
             )}
