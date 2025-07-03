@@ -64,6 +64,7 @@ const dateFlexible = z
 const pendudukSchema = z.object({
   id: z.string().optional(),
   anggotaKeluargaId: z.string().optional(),
+  kartuKeluargaId: z.string().optional(),
   namaLengkap: z.string().min(1, "Nama lengkap wajib diisi"),
   nik: z.string().min(1, "NIK wajib diisi"),
   tempatLahir: z.string().min(1, "Tempat lahir wajib diisi"),
@@ -357,7 +358,13 @@ export default function PendudukForm({
               `Anggota keluarga ${anggota.namaLengkap} tidak memiliki ID penduduk.`,
             )
           }
-
+          if (anggota.anggotaKeluargaId) {
+            toast({
+              title: "Anggota Sudah Terdaftar",
+              description: `${anggota.namaLengkap} sudah menjadi anggota keluarga atau terdaftar di kartu keluarga lain.`,
+            })
+            return
+          }
           await createAnggotaKeluarga({
             ...anggota,
             pendudukId: anggota.id,
@@ -459,6 +466,11 @@ export default function PendudukForm({
   const handleCancelEditKepalaKeluarga = () => {
     setIsEditingKepalaKeluarga(false)
   }
+  React.useEffect(() => {
+    if (initialFormData?.initialAnggotaList && anggotaList.length === 0) {
+      setAnggotaList(initialFormData.initialAnggotaList)
+    }
+  }, [initialFormData?.initialAnggotaList, anggotaList.length])
   if (!initialFormData) {
     return <div>Mempersiapkan form...</div>
   }

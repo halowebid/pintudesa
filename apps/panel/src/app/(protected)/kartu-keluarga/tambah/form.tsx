@@ -276,6 +276,7 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
       }
 
       const kartuKeluargaData = await createKartuKeluarga(kartuKeluargaInput)
+
       if (!kartuKeluargaData) {
         throw new Error("Gagal membuat data kartu keluarga.")
       }
