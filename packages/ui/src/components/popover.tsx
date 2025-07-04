@@ -7,13 +7,7 @@ import { cn } from "@yopem-ui/utils"
 export const Popover = ({
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Root>) => {
-  return (
-    <PopoverPrimitive.Root
-      positioning={{ sameWidth: true, gutter: 4 }}
-      data-slot="popover"
-      {...props}
-    />
-  )
+  return <PopoverPrimitive.Root data-slot="popover" {...props} />
 }
 
 export const PopoverTrigger = ({

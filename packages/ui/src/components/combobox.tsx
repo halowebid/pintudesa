@@ -179,10 +179,13 @@ export const ComboboxPopover = ({
   const comboboxRef = React.useRef<ComboboxBaseHandle>(null)
 
   const label = React.useMemo(() => {
-    return selectedLabel ?? placeholder ?? "Pilih opsi"
-  }, [selectedLabel])
+    return value
+      ? (selectedLabel ?? placeholder)
+      : (placeholder ?? "Pilih opsi")
+  }, [value, selectedLabel, placeholder])
 
-  const handleClear = () => {
+  const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
     onClear?.()
     setInputValue("")
     comboboxRef.current?.clear()
@@ -191,69 +194,75 @@ export const ComboboxPopover = ({
   React.useEffect(() => {
     if (isOpen) {
       comboboxRef.current?.clear()
+      setInputValue("")
     }
   }, [isOpen])
 
   return (
-    <Popover open={isOpen} onOpenChange={(details) => setIsOpen(details.open)}>
-      <div
-        className={cn(
-          "border-input bg-background ring-offset-background focus-within:ring-ring flex h-10 w-full items-center rounded-md border px-3 text-sm focus-within:ring-2 focus-within:ring-offset-2",
-          className,
-        )}
+    <div data-slot="combobox-popover" className={cn("w-full", className)}>
+      <Popover
+        positioning={{ sameWidth: true, gutter: 8, offset: { mainAxis: 10 } }}
+        open={isOpen}
+        onOpenChange={(details) => setIsOpen(details.open)}
       >
         <PopoverTrigger asChild>
-          <div className="flex flex-grow cursor-pointer items-center justify-between">
-            <span
-              className={cn("truncate pr-2", {
-                "text-muted-foreground": !value,
-              })}
-            >
-              {label}
-            </span>
-            <Icon
-              name="ChevronsUpDown"
-              className="size-4 shrink-0 opacity-50"
-            />
+          <div
+            className={cn(
+              "border-input bg-background ring-offset-background focus-within:ring-ring flex h-10 w-full cursor-pointer items-center rounded-md border px-3 text-sm focus-within:ring-2 focus-within:ring-offset-2",
+            )}
+          >
+            <div className="flex flex-grow items-center justify-between">
+              <span
+                className={cn("truncate pr-2", {
+                  "text-muted-foreground": !value,
+                })}
+              >
+                {label}
+              </span>
+              <Icon
+                name="ChevronsUpDown"
+                className="size-4 shrink-0 opacity-50"
+              />
+            </div>
+            {isClearable && value && (
+              <button
+                type="button"
+                aria-label="Clear selection"
+                onClick={handleClear}
+                className="ring-offset-background z-10 ml-2 flex-shrink-0 cursor-default rounded-sm p-0.5 opacity-50 transition-opacity hover:opacity-100 focus:outline-none"
+              >
+                <Icon name="X" className="size-4" />
+              </button>
+            )}
           </div>
         </PopoverTrigger>
-        {isClearable && value && (
-          <button
-            type="button"
-            aria-label="Clear selection"
-            onClick={handleClear}
-            className="z-10 ml-2 flex-shrink-0 cursor-default rounded-sm p-0.5 opacity-50 transition-opacity hover:opacity-100"
-          >
-            <Icon name="X" className="size-4" />
-          </button>
-        )}
-      </div>
 
-      <PopoverContent
-        className={cn(
-          "w-[var(--radix-popover-trigger-width)] p-0",
-          popoverClassName,
-        )}
-      >
-        <ComboboxBase
-          ref={comboboxRef}
-          mode="inline"
-          items={items}
-          value={value ? [value] : []}
-          inputValue={inputValue}
-          onInputValueChange={(val) => {
-            setInputValue(val)
-            onInputValueChange?.(val)
-          }}
-          onValueChange={(item) => {
-            setIsOpen(false)
-            setInputValue(item.label)
-            onValueChange?.(item.value)
-          }}
-          placeholder={placeholder}
-          groupLabel={groupLabel}
-        />
-      </PopoverContent>
-    </Popover>
+        <PopoverContent
+          className={cn(
+            "w-[var(--popover-trigger-width)] p-0",
+            popoverClassName,
+          )}
+        >
+          <ComboboxBase
+            ref={comboboxRef}
+            mode="inline"
+            items={items}
+            value={value ? [value] : []}
+            inputValue={inputValue}
+            onInputValueChange={(val) => {
+              setInputValue(val)
+              onInputValueChange?.(val)
+            }}
+            onValueChange={(item) => {
+              setIsOpen(false)
+              setInputValue(item.label)
+              onValueChange?.(item.value)
+            }}
+            placeholder={placeholder}
+            groupLabel={groupLabel}
+          />
+        </PopoverContent>
+      </Popover>
+    </div>
   )
 }

@@ -8,7 +8,7 @@ export const Table = ({
   return (
     <div
       data-slot="table-container"
-      className="relative min-h-[50vw] w-full overflow-x-auto"
+      className="relative min-h-max w-full overflow-x-auto border-b after:block after:h-[200px] after:content-['']"
     >
       <table
         data-slot="table"

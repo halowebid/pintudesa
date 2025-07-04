@@ -197,6 +197,25 @@ export default function PecahKKForm({
   )
 
   const handleSelectMember = (member: CombinedMember) => {
+    if (member.shdk === "kepala_keluarga") {
+      toast({
+        description: "Kepala keluarga tidak bisa ganti kartu keluarga.",
+      })
+      return
+    }
+    if (availableMembers.length === 0) {
+      toast({
+        description: "Semua anggota sudah dipilih untuk KK baru.",
+      })
+      return
+    }
+    if (availableMembers.length === 1) {
+      toast({
+        description:
+          "Hanya ada satu anggota yang tersisa, tidak bisa dipindahkan.",
+      })
+      return
+    }
     setNewKkMembers((prev) => [
       ...prev,
       { ...member, newShdk: prev.length === 0 ? "kepala_keluarga" : "anak" },
@@ -218,7 +237,7 @@ export default function PecahKKForm({
   }
 
   return (
-    <div className="max-w-md space-y-8 p-6">
+    <div className="max-w-lg space-y-8">
       <header>
         <h1 className="text-xl font-bold">
           Pecah Kartu Keluarga Untuk Nomor KK {originalKk?.nomorKartuKeluarga}
@@ -255,15 +274,25 @@ export default function PecahKKForm({
                         Pilih
                       </Button>
                     </TableCell>
-                    <TableCell>{member.nik}</TableCell>
+                    <TableCell>
+                      <span className="line-clamp-2 text-ellipsis">
+                        {member.nik}
+                      </span>
+                    </TableCell>
                     <TableCell>{member.namaLengkap}</TableCell>
                     <TableCell>
-                      {member.tempatLahir},{" "}
-                      {new Date(member.tanggalLahir).toLocaleDateString(
-                        "id-ID",
-                      )}
+                      <span className="line-clamp-2 text-ellipsis">
+                        {member.tempatLahir},{" "}
+                        {new Date(member.tanggalLahir).toLocaleDateString(
+                          "id-ID",
+                        )}
+                      </span>
                     </TableCell>
-                    <TableCell>{member.shdk.replace(/_/g, " ")}</TableCell>
+                    <TableCell className="max-w-[10rem] px-1.5 py-2 !whitespace-normal md:px-3">
+                      <span className="line-clamp-2 text-ellipsis">
+                        {member.shdk.replace(/_/g, " ").toUpperCase()}
+                      </span>
+                    </TableCell>
                   </TableRow>
                 ))
               ) : (
@@ -305,8 +334,16 @@ export default function PecahKKForm({
                       </Button>
                     </TableCell>
                     <TableCell>{member.nik}</TableCell>
-                    <TableCell>{member.namaLengkap}</TableCell>
-                    <TableCell>{member.shdk.replace(/_/g, " ")}</TableCell>
+                    <TableCell className="max-w-[10rem] px-1.5 py-2 !whitespace-normal md:px-3">
+                      <span className="line-clamp-2 text-ellipsis">
+                        {member.namaLengkap}
+                      </span>
+                    </TableCell>
+                    <TableCell className="max-w-[10rem] px-1.5 py-2 !whitespace-normal md:px-3">
+                      <span className="line-clamp-2 text-ellipsis">
+                        {member.shdk.replace(/_/g, " ").toUpperCase()}
+                      </span>
+                    </TableCell>
                     <TableCell>
                       <Select
                         collection={shdkCollection}
