@@ -263,38 +263,45 @@ export default function PecahKKForm({
             </TableHeader>
             <TableBody>
               {availableMembers.length > 0 ? (
-                availableMembers.map((member) => (
-                  <TableRow key={member.nik}>
-                    <TableCell>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleSelectMember(member)}
-                      >
-                        Pilih
-                      </Button>
-                    </TableCell>
-                    <TableCell>
-                      <span className="line-clamp-2 text-ellipsis">
-                        {member.nik}
-                      </span>
-                    </TableCell>
-                    <TableCell>{member.namaLengkap}</TableCell>
-                    <TableCell>
-                      <span className="line-clamp-2 text-ellipsis">
-                        {member.tempatLahir},{" "}
-                        {new Date(member.tanggalLahir).toLocaleDateString(
-                          "id-ID",
+                availableMembers.map((member) => {
+                  const isKepalaKeluarga = member.shdk === "kepala_keluarga"
+                  return (
+                    <TableRow key={member.nik}>
+                      <TableCell>
+                        {isKepalaKeluarga ? (
+                          ""
+                        ) : (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => handleSelectMember(member)}
+                          >
+                            Pilih
+                          </Button>
                         )}
-                      </span>
-                    </TableCell>
-                    <TableCell className="max-w-[10rem] px-1.5 py-2 !whitespace-normal md:px-3">
-                      <span className="line-clamp-2 text-ellipsis">
-                        {member.shdk.replace(/_/g, " ").toUpperCase()}
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                ))
+                      </TableCell>
+                      <TableCell>
+                        <span className="line-clamp-2 text-ellipsis">
+                          {member.nik}
+                        </span>
+                      </TableCell>
+                      <TableCell>{member.namaLengkap}</TableCell>
+                      <TableCell>
+                        <span className="line-clamp-2 text-ellipsis">
+                          {member.tempatLahir},{" "}
+                          {new Date(member.tanggalLahir).toLocaleDateString(
+                            "id-ID",
+                          )}
+                        </span>
+                      </TableCell>
+                      <TableCell className="max-w-[10rem] px-1.5 py-2 !whitespace-normal md:px-3">
+                        <span className="line-clamp-2 text-ellipsis">
+                          {member.shdk.replace(/_/g, " ").toUpperCase()}
+                        </span>
+                      </TableCell>
+                    </TableRow>
+                  )
+                })
               ) : (
                 <TableRow>
                   <TableCell colSpan={5} className="text-center">

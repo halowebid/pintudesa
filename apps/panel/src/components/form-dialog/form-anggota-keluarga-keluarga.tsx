@@ -148,10 +148,7 @@ export function FormAnggotaKeluargaDialog({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent
-        side="center"
-        className="z-[60] max-h-[90vh] overflow-y-auto"
-      >
+      <DialogContent className="z-[60] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
             {mode === "add"
