@@ -311,7 +311,12 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
         {(field) => (
           <form.FormItem>
             <form.FormLabel>RT</form.FormLabel>
-            <field.BaseField placeholder="Contoh: 01" />
+            <field.BaseField
+              type="number"
+              min={0}
+              max={100}
+              placeholder="Contoh: 01"
+            />
             <form.FormMessage />
           </form.FormItem>
         )}
@@ -321,7 +326,12 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
         {(field) => (
           <form.FormItem>
             <form.FormLabel>RW</form.FormLabel>
-            <field.BaseField placeholder="Contoh: 02" />
+            <field.BaseField
+              type="number"
+              min={0}
+              max={100}
+              placeholder="Contoh: 02"
+            />
             <form.FormMessage />
           </form.FormItem>
         )}

@@ -188,11 +188,12 @@ export default function SuratIzinKeramaianForm({
           <form.FormItem>
             <form.FormLabel>Informasi Pemohon</form.FormLabel>
             <ComboboxPopover
+              selectedLabel={selectedPenduduk?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKey(value)
               }}
-              onSelect={(val) => {
+              onValueChange={(val) => {
                 const selectedValue = val
 
                 const selected = pendudukOptionsRaw.find(
@@ -211,7 +212,6 @@ export default function SuratIzinKeramaianForm({
               }}
               items={pendudukOptions}
               placeholder="Cari Nama penduduk..."
-              buttonClassName="w-full"
               value={selectedPenduduk?.value}
             />
 

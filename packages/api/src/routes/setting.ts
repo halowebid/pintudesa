@@ -77,6 +77,6 @@ export const settingRouter = createTRPCRouter({
     if (error) {
       handleTRPCError(error)
     }
-    return data
+    return data ?? null
   }),
 })
