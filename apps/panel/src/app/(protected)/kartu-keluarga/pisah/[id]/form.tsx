@@ -257,7 +257,6 @@ export default function PecahKKForm({
                 <TableHead className="w-[80px]">Pilih</TableHead>
                 <TableHead>NIK</TableHead>
                 <TableHead>Nama</TableHead>
-                <TableHead>TTL</TableHead>
                 <TableHead>SHDK</TableHead>
               </TableRow>
             </TableHeader>
@@ -286,14 +285,6 @@ export default function PecahKKForm({
                         </span>
                       </TableCell>
                       <TableCell>{member.namaLengkap}</TableCell>
-                      <TableCell>
-                        <span className="line-clamp-2 text-ellipsis">
-                          {member.tempatLahir},{" "}
-                          {new Date(member.tanggalLahir).toLocaleDateString(
-                            "id-ID",
-                          )}
-                        </span>
-                      </TableCell>
                       <TableCell className="max-w-[10rem] px-1.5 py-2 !whitespace-normal md:px-3">
                         <span className="line-clamp-2 text-ellipsis">
                           {member.shdk.replace(/_/g, " ").toUpperCase()}
