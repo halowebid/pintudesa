@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import * as React from "react"
 import { useRouter } from "next/navigation"
 import { createListCollection, type ListCollection } from "@ark-ui/react"
 import {
@@ -170,14 +170,21 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
   })
 
   const { data: settingDatas } = useQuery(
-    trpc.setting.byKey.queryOptions("settings"),
+    trpc.setting.byKey.queryOptions("setting:address"),
   )
 
   const settingsValue = React.useMemo(() => {
-    if (settingDatas?.value) {
+    if (
+      settingDatas &&
+      typeof settingDatas === "object" &&
+      "value" in settingDatas &&
+      typeof (settingDatas as { value?: unknown }).value === "string" &&
+      (settingDatas as { value: string }).value
+    ) {
       try {
-        return JSON.parse(settingDatas.value)
+        return JSON.parse((settingDatas as { value: string }).value)
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error("Gagal mem-parsing JSON dari data pengaturan:", error)
         return null
       }
@@ -360,8 +367,8 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
           router.push("/kartu-keluarga")
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error("Gagal submit:", error)
-
         toast({
           description: "Terjadi kesalahan saat menyimpan data.",
         })
