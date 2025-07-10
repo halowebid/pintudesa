@@ -61,13 +61,8 @@
     "typescript": "catalog:tooling"
   },
   "dependencies": {
-    "@oslojs/crypto": "^1.0.1",
-    "@oslojs/encoding": "^1.1.0",
     "@pintudesa/db": "workspace:*",
-    "arctic": "^3.7.0",
-    "next": "catalog:",
-    "react": "catalog:react",
-    "zod": "catalog:"
+    "better-auth": "^1.2.12"
   },
   "prettier": "@yopem/prettier-config/react"
 }

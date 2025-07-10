@@ -60,9 +60,6 @@ export default function UserTable(props: UserTableProps) {
           <TableRow>
             <TableHead>Nama</TableHead>
             <TableHead className="hidden whitespace-nowrap lg:table-cell">
-              Nama pengguna
-            </TableHead>
-            <TableHead className="hidden whitespace-nowrap lg:table-cell">
               Email
             </TableHead>
             <TableHead className="hidden whitespace-nowrap lg:table-cell">
@@ -83,18 +80,9 @@ export default function UserTable(props: UserTableProps) {
                       {user.name}
                     </span>
                     <span className="text-muted-foreground table-cell text-[10px] lg:hidden">
-                      <span>{user.username}</span>
-                      <span className="pr-1">,</span>
                       <span className="uppercase">{user.role}</span>
                       <span className="pr-1">,</span>
                       <span>{user.email}</span>
-                    </span>
-                  </div>
-                </TableCell>
-                <TableCell className="hidden align-middle whitespace-nowrap lg:table-cell">
-                  <div className="flex">
-                    <span className="overflow-hidden font-medium text-ellipsis">
-                      {user.username}
                     </span>
                   </div>
                 </TableCell>
@@ -119,7 +107,7 @@ export default function UserTable(props: UserTableProps) {
                       deleteUser(user.id)
                     }}
                     editUrl={`/user/edit/${user.id}`}
-                    viewUrl={`/user/${user.username}`}
+                    viewUrl={`/user/${user.id}`}
                     description={user.name}
                   />
                 </TableCell>

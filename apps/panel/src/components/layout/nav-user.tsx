@@ -1,6 +1,6 @@
 "use client"
 
-import type { SelectUser } from "@pintudesa/db/schema"
+import type { Session } from "@pintudesa/auth"
 import {
   Avatar,
   AvatarFallback,
@@ -18,10 +18,10 @@ import {
 } from "@pintudesa/ui"
 import { Icon } from "@yopem-ui/react-icons"
 
-import LogOutButton from "@/components/auth/logout-button"
+import SignOutButton from "@/components/auth/sign-out-button"
 
 interface NavUserProps extends React.ComponentProps<typeof SidebarMenu> {
-  user: SelectUser
+  user: Session["user"]
 }
 
 const NavUser = (props: NavUserProps) => {
@@ -67,8 +67,8 @@ const NavUser = (props: NavUserProps) => {
               </MenuItemGroupLabel>
             </MenuItemGroup>
             <MenuSeparator />
-            <MenuItem value="Logout">
-              <LogOutButton />
+            <MenuItem value="Sign Out">
+              <SignOutButton />
             </MenuItem>
           </MenuContent>
         </Menu>

@@ -211,6 +211,20 @@
       "when": 1751293986785,
       "tag": "0029_organic_dexter_bennett",
       "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1752138257122,
+      "tag": "0030_green_rockslide",
+      "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1752143403825,
+      "tag": "0031_charming_tomas",
+      "breakpoints": true
     }
   ]
 }

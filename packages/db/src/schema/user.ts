@@ -1,5 +1,5 @@
 import { createCustomId } from "@pintudesa/utils"
-import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core"
+import { boolean, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod"
 import { z } from "zod"
 
@@ -14,8 +14,8 @@ export const userTable = pgTable("users", {
     .primaryKey()
     .$defaultFn(() => createCustomId()),
   email: text("email"),
+  emailVerified: boolean("email_verified").notNull(),
   name: text("name"),
-  username: text("username").notNull().unique(),
   image: text("image"),
   phoneNumber: text("phone_number"),
   about: text("about"),
@@ -25,11 +25,18 @@ export const userTable = pgTable("users", {
 })
 
 export const accountTable = pgTable("accounts", {
-  provider: text("provider").notNull(),
-  providerAccountId: text("provider_account_id")
-    .notNull()
-    .unique()
-    .primaryKey(),
+  id: text()
+    .primaryKey()
+    .$defaultFn(() => createCustomId()),
+  accountId: text("account_id").notNull(),
+  providerId: text("provider_id").notNull(),
+  accessToken: text("access_token"),
+  refreshToken: text("refresh_token"),
+  idToken: text("id_token"),
+  accessTokenExpiresAt: timestamp("access_token_expires_at"),
+  refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
+  scope: text("scope"),
+  password: text("password"),
   userId: text("user_id")
     .notNull()
     .references(() => userTable.id, { onDelete: "cascade" }),
@@ -41,13 +48,29 @@ export const sessionTable = pgTable("sessions", {
   id: text()
     .primaryKey()
     .$defaultFn(() => createCustomId()),
-  userId: text("user_id")
-    .notNull()
-    .references(() => userTable.id),
+  token: text("token").notNull().unique(),
+  ipAddress: text("ip_address"),
+  userAgent: text("user_agent"),
   expiresAt: timestamp("expires_at", {
     withTimezone: true,
     mode: "date",
   }).notNull(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => userTable.id),
+  createdAt: timestamp("created_at").notNull(),
+  updatedAt: timestamp("updated_at").notNull(),
+})
+
+export const verificationTable = pgTable("verifications", {
+  id: text()
+    .primaryKey()
+    .$defaultFn(() => createCustomId()),
+  identifier: text("identifier").notNull(),
+  value: text("value").notNull(),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at"),
+  updatedAt: timestamp("updated_at"),
 })
 
 export const insertUserSchema = createInsertSchema(userTable)

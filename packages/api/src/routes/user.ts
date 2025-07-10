@@ -2,7 +2,6 @@ import {
   countUsers,
   deleteUser,
   getUserById,
-  getUserByUsername,
   getUsers,
   searchUsers,
   updateUser,
@@ -58,14 +57,6 @@ export const userRouter = createTRPCRouter({
 
   byId: publicProcedure.input(z.string()).query(async ({ input }) => {
     const { data, error } = await tryCatch(getUserById(input))
-    if (error) {
-      handleTRPCError(error)
-    }
-    return data
-  }),
-
-  byUsername: publicProcedure.input(z.string()).query(async ({ input }) => {
-    const { data, error } = await tryCatch(getUserByUsername(input))
     if (error) {
       handleTRPCError(error)
     }

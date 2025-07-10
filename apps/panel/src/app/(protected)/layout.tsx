@@ -1,6 +1,5 @@
 import * as React from "react"
 import { redirect } from "next/navigation"
-import { getCurrentSession } from "@pintudesa/auth"
 import {
   Separator,
   SidebarInset,
@@ -8,9 +7,10 @@ import {
   SidebarTrigger,
 } from "@pintudesa/ui"
 
-import LogOutButton from "@/components/auth/logout-button"
+// import LogOutButton from "@/components/auth/logout-button"
 import AppSidebar from "@/components/layout/app-sidebar"
 import ThemeSwitcher from "@/components/theme/theme-switcher"
+import { getSession } from "@/lib/auth/server"
 
 export default async function ProtectedLayout({
   children,
@@ -19,26 +19,26 @@ export default async function ProtectedLayout({
   children: React.ReactNode
   dialog: React.ReactNode
 }) {
-  const { user } = await getCurrentSession()
+  const session = await getSession()
 
-  const isAdmin = user?.role === "admin"
+  // const isAdmin = user?.role === "admin"
 
-  if (!user) {
-    redirect("/auth/login")
+  if (!session) {
+    redirect("/auth/sign-in")
   }
 
-  if (!isAdmin) {
-    return (
-      <div className="flex h-screen flex-col items-center justify-center space-y-4">
-        <h1 className="text-3xl font-bold">Access Denied</h1>
-        <LogOutButton />
-      </div>
-    )
-  }
+  // if (!isAdmin) {
+  //   return (
+  //     <div className="flex h-screen flex-col items-center justify-center space-y-4">
+  //       <h1 className="text-3xl font-bold">Access Denied</h1>
+  //       <LogOutButton />
+  //     </div>
+  //   )
+  // }
 
   return (
     <SidebarProvider>
-      <AppSidebar user={user} />
+      <AppSidebar user={session.user} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2">
           <div className="flex items-center justify-center gap-2 px-4">

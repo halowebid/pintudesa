@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import type { SelectUser } from "@pintudesa/db/schema"
+import type { Session } from "@pintudesa/auth"
 import {
   Sidebar,
   SidebarContent,
@@ -21,7 +21,7 @@ import { siteTitle } from "@/lib/utils/env"
 import NavCollapsible from "./nav-collapsible"
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  user: SelectUser
+  user: Session["user"]
 }
 
 const AppSidebar = (props: AppSidebarProps) => {

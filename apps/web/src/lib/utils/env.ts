@@ -1,9 +1,7 @@
 export const appEnv = process.env["APP_ENV"]
 export const databaseUrl = process.env["DATABASE_URL"]
 
-export const googleClientId = process.env["GOOGLE_CLIENT_ID"]
-export const googleClientSecret = process.env["GOOGLE_CLIENT_SECRET"]
-export const googleRedirectUrl = process.env["GOOGLE_REDIRECT_URL"]
+export const authSecret = process.env["AUTH_SECRET"]
 
 export const cfAccountId = process.env["CF_ACCOUNT_ID"]
 export const r2AccessKey = process.env["R2_ACCESS_KEY"]

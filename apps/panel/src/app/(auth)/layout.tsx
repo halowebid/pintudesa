@@ -1,15 +1,16 @@
 import * as React from "react"
 import { redirect } from "next/navigation"
-import { getCurrentSession } from "@pintudesa/auth"
+
+import { getSession } from "@/lib/auth/server"
 
 export default async function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const { user } = await getCurrentSession()
+  const session = await getSession()
 
-  if (user) {
+  if (session) {
     redirect("/")
   }
 

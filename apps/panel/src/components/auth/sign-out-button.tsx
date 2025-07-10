@@ -1,16 +1,23 @@
 "use client"
 
 import * as React from "react"
+import { redirect } from "next/navigation"
 import { Icon } from "@yopem-ui/react-icons"
 
-import { handleLogOut } from "./action"
+import { authClient } from "@/lib/auth/client"
 
-const LogoutButton = () => {
+const SignOutButton = () => {
   const [isPending, startTransition] = React.useTransition()
 
   const handleSubmit = () => {
     startTransition(async () => {
-      await handleLogOut()
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            redirect("/auth/sign-in")
+          },
+        },
+      })
     })
   }
 
@@ -28,4 +35,4 @@ const LogoutButton = () => {
   )
 }
 
-export default LogoutButton
+export default SignOutButton

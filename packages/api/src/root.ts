@@ -1,5 +1,6 @@
 import { agendaRouter } from "./routes/agenda"
 import { anggotaKeluargaRouter } from "./routes/anggota-keluarga"
+import { authRouter } from "./routes/auth"
 import { beritaRouter } from "./routes/berita"
 import { ekspedisiRouter } from "./routes/ekspedisi"
 import { inventarisRouter } from "./routes/inventaris"
@@ -28,6 +29,7 @@ import { createCallerFactory, createTRPCRouter, publicProcedure } from "./trpc"
 
 export const appRouter = createTRPCRouter({
   heatlhCheck: publicProcedure.query(() => "ok"),
+  auth: authRouter,
 
   // Routers
   agenda: agendaRouter,

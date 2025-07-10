@@ -1,17 +1,22 @@
-import { unCachedGetCurrentSession } from "@pintudesa/auth"
+import { type Auth } from "@pintudesa/auth"
 import { db } from "@pintudesa/db"
 import { initTRPC, TRPCError } from "@trpc/server"
 import superjson from "superjson"
 import { ZodError } from "zod"
 
-export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const { session, user } = await unCachedGetCurrentSession()
+export const createTRPCContext = async (opts: {
+  headers: Headers
+  auth: Auth
+}) => {
+  const authApi = opts.auth.api
+  const session = await authApi.getSession({
+    headers: opts.headers,
+  })
 
   return {
+    authApi,
     session,
-    user,
     db,
-    ...opts,
   }
 }
 
@@ -30,26 +35,12 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
 })
 
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
-  if (!ctx.session || !ctx.user) {
+  if (!ctx.session?.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" })
   }
   return next({
     ctx: {
-      session: { ...ctx.session, user: ctx.user },
-    },
-  })
-})
-
-const enforceUserIsAdmin = t.middleware(({ ctx, next }) => {
-  if (ctx.session && ctx.user?.role !== "admin") {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: "You must be an admin",
-    })
-  }
-  return next({
-    ctx: {
-      session: { ...ctx.session, user: ctx.user },
+      session: { ...ctx.session, user: ctx.session.user },
     },
   })
 })
@@ -59,4 +50,5 @@ export const createTRPCRouter = t.router
 
 export const publicProcedure = t.procedure
 export const protectedProcedure = t.procedure.use(enforceUserIsAuthed)
-export const adminProtectedProcedure = t.procedure.use(enforceUserIsAdmin)
+// TODO: add role-based access control
+export const adminProtectedProcedure = t.procedure.use(enforceUserIsAuthed)
