@@ -22,16 +22,15 @@ const SignOutButton = () => {
   }
 
   return (
-    <form action={handleSubmit}>
-      <button
-        aria-label="Keluar"
-        disabled={isPending}
-        className="inline-flex cursor-pointer flex-row"
-      >
-        <Icon name="LogOut" className="mr-2" />
-        Keluar
-      </button>
-    </form>
+    <button
+      aria-label="Keluar"
+      disabled={isPending}
+      onClick={handleSubmit}
+      className="inline-flex cursor-pointer flex-row"
+    >
+      <Icon name="LogOut" className="mr-2" />
+      Keluar
+    </button>
   )
 }
 

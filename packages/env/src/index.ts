@@ -4,7 +4,7 @@ export const redisUrl = process.env["REDIS_URL"]
 
 export const corsOrigin = process.env["CORS_ORIGIN"] ?? ""
 export const authSecret = process.env["AUTH_SECRET"]
-export const enableSignUp = process.env["ENABLE_SIGNUP"] === "true"
+export const enableSignUp = process.env["ENABLE_SIGN_UP"]
 
 export const cfAccountId = process.env["CF_ACCOUNT_ID"]
 export const r2AccessKey = process.env["R2_ACCESS_KEY"]
