@@ -19,7 +19,7 @@
     "url": "https://github.com/yopem/pintudesa/issues"
   },
   "scripts": {
-    "build": "bun next build",
+    "build": "bun with-env next build",
     "dev": "bun run with-env next dev --turbopack",
     "format:check": "prettier --check \"**/*.{ts,tsx,mts,js,jsx,mjs,json,md}\"",
     "format:write": "prettier --write \"**/*.{ts,tsx,mts,js,jsx,mjs,json,md}\"",
