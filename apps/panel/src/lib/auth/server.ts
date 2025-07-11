@@ -3,8 +3,7 @@ import "server-only"
 import { cache } from "react"
 import { headers } from "next/headers"
 import { initAuth } from "@pintudesa/auth"
-
-import { appEnv, authSecret, siteUrl } from "@/lib/utils/env"
+import { appEnv, authSecret, siteUrl } from "@pintudesa/env"
 
 const baseUrl = appEnv === "production" ? siteUrl! : "http://localhost:3000"
 

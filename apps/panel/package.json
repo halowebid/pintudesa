@@ -19,20 +19,20 @@
     "url": "https://github.com/yopem/pintudesa/issues"
   },
   "scripts": {
-    "build": "bun with-env next build",
-    "dev": "bun run with-env next dev --turbopack",
+    "build": "bun next build",
+    "dev": "bun run next dev --turbopack",
     "format:check": "prettier --check \"**/*.{ts,tsx,mts,js,jsx,mjs,json,md}\"",
     "format:write": "prettier --write \"**/*.{ts,tsx,mts,js,jsx,mjs,json,md}\"",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "start": "bun run with-env next start",
-    "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env --"
+    "start": "bun run next start",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@pintudesa/api": "workspace:*",
     "@pintudesa/auth": "workspace:*",
     "@pintudesa/db": "workspace:*",
+    "@pintudesa/env": "workspace:*",
     "@pintudesa/ui": "workspace:*",
     "@pintudesa/utils": "workspace:*",
     "@tanstack/react-form": "catalog:",
@@ -61,7 +61,6 @@
     "@yopem/eslint-config": "catalog:tooling",
     "@yopem/prettier-config": "catalog:tooling",
     "@yopem/typescript-config": "catalog:tooling",
-    "dotenv-cli": "catalog:",
     "prettier": "catalog:tooling",
     "tailwindcss": "catalog:tailwindcss",
     "typescript": "catalog:tooling"

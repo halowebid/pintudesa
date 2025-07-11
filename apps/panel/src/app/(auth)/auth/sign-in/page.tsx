@@ -1,4 +1,5 @@
-import { siteTitle } from "@/lib/utils/env"
+import { siteTitle } from "@pintudesa/env"
+
 import { SignInForm } from "./form"
 
 export default function Page() {

@@ -19,6 +19,7 @@
         "@pintudesa/api": "workspace:*",
         "@pintudesa/auth": "workspace:*",
         "@pintudesa/db": "workspace:*",
+        "@pintudesa/env": "workspace:*",
         "@pintudesa/ui": "workspace:*",
         "@pintudesa/utils": "workspace:*",
         "@tanstack/react-form": "catalog:",
@@ -47,7 +48,6 @@
         "@yopem/eslint-config": "catalog:tooling",
         "@yopem/prettier-config": "catalog:tooling",
         "@yopem/typescript-config": "catalog:tooling",
-        "dotenv-cli": "catalog:",
         "prettier": "catalog:tooling",
         "tailwindcss": "catalog:tailwindcss",
         "typescript": "catalog:tooling",
@@ -60,6 +60,7 @@
         "@pintudesa/api": "workspace:*",
         "@pintudesa/auth": "workspace:*",
         "@pintudesa/db": "workspace:*",
+        "@pintudesa/env": "workspace:*",
         "@pintudesa/ui": "workspace:*",
         "@pintudesa/utils": "workspace:*",
         "@tanstack/react-form": "catalog:",
@@ -88,7 +89,6 @@
         "@yopem/eslint-config": "catalog:tooling",
         "@yopem/prettier-config": "catalog:tooling",
         "@yopem/typescript-config": "catalog:tooling",
-        "dotenv-cli": "catalog:",
         "prettier": "catalog:tooling",
         "tailwindcss": "catalog:tailwindcss",
         "typescript": "catalog:tooling",
@@ -100,6 +100,7 @@
       "dependencies": {
         "@pintudesa/auth": "workspace:*",
         "@pintudesa/db": "workspace:*",
+        "@pintudesa/env": "workspace:*",
         "@pintudesa/utils": "workspace:*",
         "@trpc/server": "catalog:trpc",
         "@yopem/try-catch": "catalog:",
@@ -112,7 +113,6 @@
         "@yopem/eslint-config": "catalog:tooling",
         "@yopem/prettier-config": "catalog:tooling",
         "@yopem/typescript-config": "catalog:tooling",
-        "dotenv-cli": "catalog:",
         "eslint": "catalog:tooling",
         "prettier": "catalog:tooling",
         "typescript": "catalog:tooling",
@@ -131,7 +131,6 @@
         "@yopem/eslint-config": "catalog:tooling",
         "@yopem/prettier-config": "catalog:tooling",
         "@yopem/typescript-config": "catalog:tooling",
-        "dotenv-cli": "catalog:",
         "eslint": "catalog:tooling",
         "prettier": "catalog:tooling",
         "typescript": "catalog:tooling",
@@ -141,6 +140,7 @@
       "name": "@pintudesa/db",
       "version": "0.0.2",
       "dependencies": {
+        "@pintudesa/env": "workspace:*",
         "@pintudesa/utils": "workspace:*",
         "drizzle-orm": "^0.44.2",
         "drizzle-zod": "^0.8.2",
@@ -153,8 +153,23 @@
         "@yopem/eslint-config": "catalog:tooling",
         "@yopem/prettier-config": "catalog:tooling",
         "@yopem/typescript-config": "catalog:tooling",
-        "dotenv-cli": "catalog:",
         "drizzle-kit": "^0.31.1",
+        "eslint": "catalog:tooling",
+        "prettier": "catalog:tooling",
+        "typescript": "catalog:tooling",
+      },
+    },
+    "packages/env": {
+      "name": "@pintudesa/env",
+      "version": "0.0.2",
+      "dependencies": {
+        "@next/env": "^15.3.4",
+      },
+      "devDependencies": {
+        "@types/node": "^24.0.13",
+        "@yopem/eslint-config": "catalog:tooling",
+        "@yopem/prettier-config": "catalog:tooling",
+        "@yopem/typescript-config": "catalog:tooling",
         "eslint": "catalog:tooling",
         "prettier": "catalog:tooling",
         "typescript": "catalog:tooling",
@@ -208,7 +223,6 @@
     "@yopem-ui/react-icons": "^0.0.9",
     "@yopem-ui/utils": "^0.0.2",
     "@yopem/try-catch": "^0.0.2",
-    "dotenv-cli": "^8.0.0",
     "js.foresight": "^2.2.0",
     "next": "^15.3.4",
     "next-themes": "^0.4.6",
@@ -430,7 +444,7 @@
 
     "@next/bundle-analyzer": ["@next/bundle-analyzer@15.3.4", "", { "dependencies": { "webpack-bundle-analyzer": "4.10.1" } }, "sha512-AN9H9S+4WaIIahyJBGe6arLj5kopvVZPLffAJsDhkbQPGqirYqaHhwO6vheytXtdq3xNjwJLpbmYNa5ZQnitSw=="],
 
-    "@next/env": ["@next/env@15.3.4", "", {}, "sha512-ZkdYzBseS6UjYzz6ylVKPOK+//zLWvD6Ta+vpoye8cW11AjiQjGYVibF0xuvT4L0iJfAPfZLFidaEzAOywyOAQ=="],
+    "@next/env": ["@next/env@15.3.5", "", {}, "sha512-7g06v8BUVtN2njAX/r8gheoVffhiKFVt4nx74Tt6G4Hqw9HCLYQVx/GkH2qHvPtAHZaUNZ0VXAa0pQP6v1wk7g=="],
 
     "@next/eslint-plugin-next": ["@next/eslint-plugin-next@15.3.3", "", { "dependencies": { "fast-glob": "3.3.1" } }, "sha512-VKZJEiEdpKkfBmcokGjHu0vGDG+8CehGs90tBEy/IDoDDKGngeyIStt2MmE5FYNyU9BhgR7tybNWTAJY/30u+Q=="],
 
@@ -475,6 +489,8 @@
     "@pintudesa/auth": ["@pintudesa/auth@workspace:packages/auth"],
 
     "@pintudesa/db": ["@pintudesa/db@workspace:packages/db"],
+
+    "@pintudesa/env": ["@pintudesa/env@workspace:packages/env"],
 
     "@pintudesa/panel": ["@pintudesa/panel@workspace:apps/panel"],
 
@@ -592,7 +608,7 @@
 
     "@types/json5": ["@types/json5@0.0.29", "", {}, "sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ=="],
 
-    "@types/node": ["@types/node@24.0.4", "", { "dependencies": { "undici-types": "~7.8.0" } }, "sha512-ulyqAkrhnuNq9pB76DRBTkcS6YsmDALy6Ua63V8OhrOBgbcYt6IOdzpw5P1+dyRIyMerzLkeYWBeOXPpA9GMAA=="],
+    "@types/node": ["@types/node@24.0.13", "", { "dependencies": { "undici-types": "~7.8.0" } }, "sha512-Qm9OYVOFHFYg3wJoTSrz80hoec5Lia/dPp84do3X7dZvLikQvM1YpmvTBEdIr/e+U8HTkFjLHLnl78K/qjf+jQ=="],
 
     "@types/react": ["@types/react@19.1.8", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-AwAfQ2Wa5bCx9WP8nZL2uMZWod7J7/JSplxbTmBQ5ms6QpqNYm672H0Vu9ZVKVngQ+ii4R/byguVEUZQyeg44g=="],
 
@@ -921,12 +937,6 @@
     "devalue": ["devalue@5.1.1", "", {}, "sha512-maua5KUiapvEwiEAe+XnlZ3Rh0GD+qI1J/nb9vrJc3muPXvcF/8gXYTWF76+5DAqHyDUtOIImEuo0YKE9mshVw=="],
 
     "doctrine": ["doctrine@2.1.0", "", { "dependencies": { "esutils": "^2.0.2" } }, "sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw=="],
-
-    "dotenv": ["dotenv@16.5.0", "", {}, "sha512-m/C+AwOAr9/W1UOIZUo232ejMNnJAJtYQjUbHoNTBNTJSvqzzDh7vnrei3o3r3m9blf6ZoDkvcw0VmozNRFJxg=="],
-
-    "dotenv-cli": ["dotenv-cli@8.0.0", "", { "dependencies": { "cross-spawn": "^7.0.6", "dotenv": "^16.3.0", "dotenv-expand": "^10.0.0", "minimist": "^1.2.6" }, "bin": { "dotenv": "cli.js" } }, "sha512-aLqYbK7xKOiTMIRf1lDPbI+Y+Ip/wo5k3eyp6ePysVaSqbyxjyK3dK35BTxG+rmd7djf5q2UPs4noPNH+cj0Qw=="],
-
-    "dotenv-expand": ["dotenv-expand@10.0.0", "", {}, "sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A=="],
 
     "drizzle-kit": ["drizzle-kit@0.31.2", "", { "dependencies": { "@drizzle-team/brocli": "^0.10.2", "@esbuild-kit/esm-loader": "^2.5.5", "esbuild": "^0.25.4", "esbuild-register": "^3.5.0" }, "bin": { "drizzle-kit": "bin.cjs" } }, "sha512-Z2Uqxvu4HNFzlDkG3NQ2BYpII8SlOMkpjsC5XFh9TsYP2nYhfVamVjQ8spiMFXH3vGOyUt1cQ5FZ1JSgl6+8QQ=="],
 
@@ -1625,6 +1635,8 @@
     "eslint-plugin-import/debug": ["debug@3.2.7", "", { "dependencies": { "ms": "^2.1.1" } }, "sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ=="],
 
     "fast-glob/glob-parent": ["glob-parent@5.1.2", "", { "dependencies": { "is-glob": "^4.0.1" } }, "sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow=="],
+
+    "next/@next/env": ["@next/env@15.3.4", "", {}, "sha512-ZkdYzBseS6UjYzz6ylVKPOK+//zLWvD6Ta+vpoye8cW11AjiQjGYVibF0xuvT4L0iJfAPfZLFidaEzAOywyOAQ=="],
 
     "postcss/nanoid": ["nanoid@3.3.11", "", { "bin": { "nanoid": "bin/nanoid.cjs" } }, "sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w=="],
 

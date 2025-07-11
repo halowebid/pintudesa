@@ -9,11 +9,11 @@ import {
   updateSettingSchema,
   type SelectSetting,
 } from "@pintudesa/db"
+import { redisUrl } from "@pintudesa/env"
 import { tryCatch } from "@yopem/try-catch"
 import Redis from "ioredis"
 import { z } from "zod"
 
-import { redisUrl } from "../../../db/src/utils/env"
 import {
   adminProtectedProcedure,
   createTRPCRouter,

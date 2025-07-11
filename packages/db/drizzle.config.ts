@@ -1,3 +1,4 @@
+import { databaseUrl } from "@pintudesa/env"
 import { defineConfig, type Config } from "drizzle-kit"
 
 export default defineConfig({
@@ -5,7 +6,7 @@ export default defineConfig({
   schema: "./src/schema",
   out: "./src/migrations",
   dbCredentials: {
-    url: process.env.DATABASE_URL!,
+    url: databaseUrl!,
   },
   verbose: true,
   strict: true,

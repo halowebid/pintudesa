@@ -55,7 +55,6 @@
     "@yopem/eslint-config": "catalog:tooling",
     "@yopem/prettier-config": "catalog:tooling",
     "@yopem/typescript-config": "catalog:tooling",
-    "dotenv-cli": "catalog:",
     "eslint": "catalog:tooling",
     "prettier": "catalog:tooling",
     "typescript": "catalog:tooling"

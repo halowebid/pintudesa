@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import type { Session } from "@pintudesa/auth"
+import { siteTitle } from "@pintudesa/env"
 import {
   Sidebar,
   SidebarContent,
@@ -17,7 +18,6 @@ import {
 import NavMain from "@/components/layout/nav-main"
 import NavUser from "@/components/layout/nav-user"
 import Link from "@/components/link"
-import { siteTitle } from "@/lib/utils/env"
 import NavCollapsible from "./nav-collapsible"
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {

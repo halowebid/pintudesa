@@ -2,10 +2,10 @@ import "@/styles/globals.css"
 
 import { type Metadata } from "next"
 import { Manrope } from "next/font/google"
+import { siteDescription, siteTagline, siteTitle } from "@pintudesa/env"
 
 import Providers from "@/components/providers"
 import { ToastProvider } from "@/components/toast-provider"
-import { siteDescription, siteTagline, siteTitle } from "@/lib/utils/env"
 
 export const metadata: Metadata = {
   title: `${siteTitle} - ${siteTagline}`,

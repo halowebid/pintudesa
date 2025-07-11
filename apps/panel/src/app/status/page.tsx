@@ -1,7 +1,7 @@
 import { db } from "@pintudesa/db"
+import { enableSignUp } from "@pintudesa/env"
 
 import { HydrateClient, prefetch, trpc } from "@/lib/trpc/server"
-import { enableSignUp } from "@/lib/utils/env"
 import ServerStatus from "./server-status"
 
 export default async function StatusPage() {

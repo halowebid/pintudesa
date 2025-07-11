@@ -1,4 +1,5 @@
-import { enableSignUp } from "@/lib/utils/env"
+import { enableSignUp } from "@pintudesa/env"
+
 import { SignUpForm } from "./form"
 
 export default function Page() {

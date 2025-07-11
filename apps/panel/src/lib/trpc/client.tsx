@@ -2,13 +2,13 @@
 
 import * as React from "react"
 import type { AppRouter } from "@pintudesa/api"
+import { appEnv } from "@pintudesa/env"
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { createTRPCClient, httpBatchStreamLink, loggerLink } from "@trpc/client"
 import { createTRPCContext } from "@trpc/tanstack-react-query"
 import SuperJSON from "superjson"
 
-import { appEnv } from "@/lib/utils/env"
 import { createQueryClient } from "./query-client"
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined
