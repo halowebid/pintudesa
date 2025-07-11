@@ -6,12 +6,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"],
-      "cache": false
-    },
-    "build:prod": {
-      "dependsOn": ["^build:prod"],
-      "outputs": ["dist/**", ".next/**"],
+      "outputs": ["dist/**", ".cache/tsbuildinfo.json"],
       "cache": false
     },
     "db:check": {},
@@ -25,17 +20,20 @@
     "format:check": {},
     "format:write": {},
     "test": {},
-    "lint": {},
+    "lint": {
+      "dependsOn": ["^build"],
+      "outputs": [".cache/.eslintcache"]
+    },
     "lint:fix": {},
     "start": {},
     "start:prod": {},
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": false
     },
     "typecheck": {
-      "cache": false,
-      "dependsOn": ["^typecheck"]
+      "dependsOn": ["^build"],
+      "outputs": [".cache/tsbuildinfo.json"]
     },
     "clean": {
       "cache": false

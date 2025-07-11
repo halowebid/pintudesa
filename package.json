@@ -60,7 +60,6 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "build:prod": "turbo run build:prod",
     "clean": "bun run git clean -xdf dist .cache .turbo .next *.log",
     "clean:all": "bun clean && bun clean:deps",
     "clean:deps": "bun -r --parallel exec git clean -xdf node_modules",
@@ -80,7 +79,6 @@
     "postinstall": "lefthook install",
     "prebuild": "bun install",
     "start": "turbo run start",
-    "start:prod": "turbo run start:prod",
     "typecheck": "turbo typecheck"
   },
   "devDependencies": {
