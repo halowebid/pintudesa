@@ -60,10 +60,10 @@
   },
   "scripts": {
     "build": "turbo run build",
+    "build:prod": "turbo run build:prod",
     "clean": "bun run git clean -xdf dist .cache .turbo .next *.log",
     "clean:all": "bun clean && bun clean:deps",
     "clean:deps": "bun -r --parallel exec git clean -xdf node_modules",
-    "dev": "turbo dev",
     "db:check": "turbo db:check",
     "db:drop": "turbo db:drop",
     "db:generate": "turbo db:generate",
@@ -72,12 +72,15 @@
     "db:push": "turbo db:push",
     "db:studio": "turbo db:studio",
     "db:up": "turbo db:up",
+    "dev": "turbo dev",
     "format:check": "turbo format:check",
     "format:write": "turbo format:write",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "postinstall": "lefthook install",
     "prebuild": "bun install",
+    "start": "turbo run start",
+    "start:prod": "turbo run start:prod",
     "typecheck": "turbo typecheck"
   },
   "devDependencies": {

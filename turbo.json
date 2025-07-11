@@ -6,14 +6,13 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**", ".next/**"],
       "cache": false
     },
-    "build:fast": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", ".next/**"]
+    "build:prod": {
+      "dependsOn": ["^build:prod"],
+      "outputs": ["dist/**", ".next/**"],
+      "cache": false
     },
     "db:check": {},
     "db:drop": {},
@@ -29,6 +28,7 @@
     "lint": {},
     "lint:fix": {},
     "start": {},
+    "start:prod": {},
     "dev": {
       "cache": false,
       "persistent": true
