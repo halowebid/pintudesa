@@ -15,5 +15,6 @@
     "schedule": "before 6:00am on the first day of the month"
   },
   "prConcurrentLimit": 30,
-  "prHourlyLimit": 0
+  "prHourlyLimit": 0,
+  "prCreation": "immediate"
 }
