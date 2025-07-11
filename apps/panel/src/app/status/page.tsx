@@ -1,11 +1,15 @@
 import { db } from "@pintudesa/db"
 
 import { HydrateClient, prefetch, trpc } from "@/lib/trpc/server"
+import { enableSignUp } from "@/lib/utils/env"
 import ServerStatus from "./server-status"
 
 export default async function StatusPage() {
   prefetch(trpc.healthCheck.queryOptions())
   const users = await db.query.userTable.findMany()
+
+  console.log("Sign up enabled:", enableSignUp)
+
   return (
     <HydrateClient>
       <div className="container mx-auto flex h-screen w-screen flex-col items-center justify-center">
@@ -23,6 +27,7 @@ export default async function StatusPage() {
               </ul>
             </div>
           )}
+          <div className="flex">{enableSignUp}</div>
         </div>
       </div>
     </HydrateClient>
