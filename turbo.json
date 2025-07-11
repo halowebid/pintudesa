@@ -3,6 +3,7 @@
   "ui": "tui",
   "globalDependencies": ["**/.env"],
   "globalEnv": ["NODE_ENV", "APP_ENV"],
+  "envMode": "loose",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
