@@ -28,7 +28,7 @@ import { userRouter } from "./routes/user"
 import { createCallerFactory, createTRPCRouter, publicProcedure } from "./trpc"
 
 export const appRouter = createTRPCRouter({
-  heatlhCheck: publicProcedure.query(() => "ok"),
+  healthCheck: publicProcedure.query(() => "ok"),
   auth: authRouter,
 
   // Routers
