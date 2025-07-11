@@ -20,10 +20,7 @@
     "format:check": {},
     "format:write": {},
     "test": {},
-    "lint": {
-      "dependsOn": ["^build"],
-      "outputs": [".cache/.eslintcache"]
-    },
+    "lint": {},
     "lint:fix": {},
     "start": {},
     "start:prod": {},
@@ -31,10 +28,7 @@
       "cache": false,
       "persistent": false
     },
-    "typecheck": {
-      "dependsOn": ["^build"],
-      "outputs": [".cache/tsbuildinfo.json"]
-    },
+    "typecheck": {},
     "clean": {
       "cache": false
     }
