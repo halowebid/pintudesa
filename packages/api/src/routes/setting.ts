@@ -7,6 +7,7 @@ import {
   insertSettingSchema,
   updateSetting,
   updateSettingSchema,
+  upsertSetting,
   type SelectSetting,
 } from "@pintudesa/db"
 import { redisUrl } from "@pintudesa/env"
@@ -52,6 +53,24 @@ export const settingRouter = createTRPCRouter({
       return data
     }),
 
+  upsert: adminProtectedProcedure
+    .input(insertSettingSchema)
+    .mutation(async ({ input }) => {
+      const { data, error } = await tryCatch(
+        upsertSetting(input as SelectSetting),
+      )
+
+      if (error) {
+        handleTRPCError(error)
+      }
+
+      if (input.key) {
+        await redis.del(`setting:${input.key}`)
+      }
+
+      return data
+    }),
+
   delete: adminProtectedProcedure
     .input(z.string())
     .mutation(async ({ input }) => {
@@ -63,17 +82,13 @@ export const settingRouter = createTRPCRouter({
       return data
     }),
 
-  all: adminProtectedProcedure
-    .input(z.object({ page: z.number(), perPage: z.number() }))
-    .query(async ({ input }) => {
-      const { data, error } = await tryCatch(
-        getSettings(input.page, input.perPage),
-      )
-      if (error) {
-        handleTRPCError(error)
-      }
-      return data
-    }),
+  all: adminProtectedProcedure.query(async () => {
+    const { data, error } = await tryCatch(getSettings())
+    if (error) {
+      handleTRPCError(error)
+    }
+    return data
+  }),
 
   byId: adminProtectedProcedure.input(z.string()).query(async ({ input }) => {
     const { data, error } = await tryCatch(getSettingById(input))
@@ -88,7 +103,8 @@ export const settingRouter = createTRPCRouter({
     const cached = await redis.get(cacheKey)
 
     if (cached) {
-      return typeof cached === "string" ? JSON.parse(cached) : cached
+      const parsedSetting = JSON.parse(cached) as SelectSetting
+      return parsedSetting.value
     }
 
     const { data, error } = await tryCatch(getSettingByKey(input))
@@ -98,14 +114,9 @@ export const settingRouter = createTRPCRouter({
     }
 
     if (data) {
-      if (typeof data === "object" && !Array.isArray(data)) {
-        for (const [key, value] of Object.entries(data)) {
-          await redis.set(`setting:${key}`, JSON.stringify(value), "EX", 60 * 5)
-        }
-      }
       await redis.set(cacheKey, JSON.stringify(data), "EX", 60 * 5)
     }
 
-    return data ?? null
+    return data?.value
   }),
 })

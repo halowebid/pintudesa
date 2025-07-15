@@ -10,7 +10,7 @@ import {
 import { auth } from "@/lib/auth/server"
 import { createQueryClient } from "./query-client"
 
-const createContext = cache(async () => {
+export const createContext = cache(async () => {
   const heads = new Headers(await headers())
   heads.set("x-trpc-source", "rsc")
 
@@ -49,3 +49,6 @@ export function prefetch<T extends ReturnType<TRPCQueryOptions<any>>>(
     void queryClient.prefetchQuery(queryOptions)
   }
 }
+
+export const createApi = async () =>
+  appRouter.createCaller(await createContext())

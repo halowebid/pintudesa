@@ -28,7 +28,6 @@ export const supportEmail = process.env["NEXT_PUBLIC_SUPPORT_EMAIL"]
 export const facebookUsername = process.env["NEXT_PUBLIC_FACEBOOK_USERNAME"]
 export const instagramUsername = process.env["NEXT_PUBLIC_INSTAGRAM_USERNAME"]
 export const tiktokUsername = process.env["NEXT_PUBLIC_TIKTOK_USERNAME"]
-export const whatsappChannelUsername =
-  process.env["NEXT_PUBLIC_WHATSAPP_CHANNEL_USERNAME"]
+export const whatsappNumber = process.env["NEXT_PUBLIC_WHATSAPP_NUMBER"]
 export const xUsername = process.env["NEXT_PUBLIC_X_USERNAME"]
 export const youtubeUsername = process.env["NEXT_PUBLIC_YOUTUBE_USERNAME"]

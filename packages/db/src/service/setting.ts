@@ -19,6 +19,19 @@ export const updateSetting = async (data: InsertSetting & { id: string }) => {
   return setting[0]
 }
 
+export const upsertSetting = async (data: InsertSetting) => {
+  const setting = await db
+    .insert(settingTable)
+    .values(data)
+    .onConflictDoUpdate({
+      target: settingTable.key,
+      set: { value: data.value, updatedAt: new Date() },
+    })
+    .returning()
+
+  return setting[0]
+}
+
 export const deleteSetting = async (id: string) => {
   const setting = await db
     .delete(settingTable)
@@ -27,12 +40,8 @@ export const deleteSetting = async (id: string) => {
   return setting[0]
 }
 
-export const getSettings = async (page: number, perPage: number) => {
-  return await db.query.settingTable.findMany({
-    limit: perPage,
-    offset: (page - 1) * perPage,
-    orderBy: (users, { desc }) => [desc(users.createdAt)],
-  })
+export const getSettings = async () => {
+  return await db.query.settingTable.findMany()
 }
 
 export const getSettingById = async (id: string) => {

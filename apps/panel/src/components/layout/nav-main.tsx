@@ -8,13 +8,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@pintudesa/ui"
-import { Icon, type IconProps } from "@yopem-ui/react-icons"
 
 interface NavMainProps extends React.ComponentProps<typeof SidebarGroup> {
   items: {
     name: string
     url: string
-    icon: IconProps["name"]
     disabled?: boolean
   }[]
   label: string
@@ -34,7 +32,6 @@ const NavMain = (props: NavMainProps) => {
                 </span>
               ) : (
                 <Link href={item.url} className="!max-h-16 !min-h-8">
-                  <Icon name={item.icon} />
                   <span className="line-clamp-2">{item.name}</span>
                 </Link>
               )}
