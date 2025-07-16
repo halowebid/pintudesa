@@ -37,7 +37,7 @@ export default function SettingForm() {
   const { data: settings } = useQuery(trpc.setting.all.queryOptions())
 
   const { mutate: upsertSetting } = useMutation(
-    trpc.setting.create.mutationOptions({
+    trpc.setting.upsert.mutationOptions({
       onSuccess: async () => {
         toast({
           description: "Berhasil memperbaharui pengaturan",
