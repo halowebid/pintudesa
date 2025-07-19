@@ -15,6 +15,10 @@ const formSchema = z.object({
   siteTagline: z.string().trim(),
   siteDescription: z.string().trim(),
   address: z.string().trim(),
+  desa: z.string().trim(),
+  kecamatan: z.string().trim(),
+  kabupaten: z.string().trim(),
+  provinsi: z.string().trim(),
   supportEmail: z.string().email().trim(),
   facebookUsername: z.string().trim(),
   instagramUsername: z.string().trim(),
@@ -57,6 +61,10 @@ export default function SettingForm() {
     siteDescription:
       settings?.find((s) => s.key === "siteDescription")?.value ?? "",
     address: settings?.find((s) => s.key === "siteAddress")?.value ?? "",
+    desa: settings?.find((s) => s.key === "desa")?.value ?? "",
+    kecamatan: settings?.find((s) => s.key === "kecamatan")?.value ?? "",
+    kabupaten: settings?.find((s) => s.key === "kabupaten")?.value ?? "",
+    provinsi: settings?.find((s) => s.key === "provinsi")?.value ?? "",
     supportEmail: settings?.find((s) => s.key === "supportEmail")?.value ?? "",
     facebookUsername:
       settings?.find((s) => s.key === "facebookUsername")?.value ?? "",
@@ -122,6 +130,42 @@ export default function SettingForm() {
             <form.FormItem>
               <form.FormLabel>Alamat</form.FormLabel>
               <field.TextareaField placeholder="Masukan Alamat" />
+              <form.FormMessage />
+            </form.FormItem>
+          )}
+        </form.AppField>
+        <form.AppField name="desa">
+          {(field) => (
+            <form.FormItem>
+              <form.FormLabel>Desa</form.FormLabel>
+              <field.BaseField placeholder="Masukan Desa" />
+              <form.FormMessage />
+            </form.FormItem>
+          )}
+        </form.AppField>
+        <form.AppField name="kecamatan">
+          {(field) => (
+            <form.FormItem>
+              <form.FormLabel>Kecamatan</form.FormLabel>
+              <field.BaseField placeholder="Masukan Kecamatan" />
+              <form.FormMessage />
+            </form.FormItem>
+          )}
+        </form.AppField>
+        <form.AppField name="kabupaten">
+          {(field) => (
+            <form.FormItem>
+              <form.FormLabel>Kabupaten</form.FormLabel>
+              <field.BaseField placeholder="Masukan Kabupaten" />
+              <form.FormMessage />
+            </form.FormItem>
+          )}
+        </form.AppField>
+        <form.AppField name="provinsi">
+          {(field) => (
+            <form.FormItem>
+              <form.FormLabel>Provinsi</form.FormLabel>
+              <field.BaseField placeholder="Masukan Provinsi" />
               <form.FormMessage />
             </form.FormItem>
           )}
