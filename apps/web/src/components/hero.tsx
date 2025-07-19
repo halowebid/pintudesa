@@ -1,7 +1,15 @@
 import Image from "next/image"
 import { Button } from "@pintudesa/ui"
 
-const Hero = () => {
+import Link from "@/components/link"
+import { createApi } from "@/lib/trpc/server"
+
+const Hero = async () => {
+  const api = await createApi()
+
+  const title = await api.setting.byKey("siteTitle")
+  const description = await api.setting.byKey("siteDescription")
+
   return (
     <section className="relative flex min-h-[80vh] items-center py-12 sm:py-20">
       {/* Background Image */}
@@ -19,24 +27,19 @@ const Hero = () => {
             <h1 className="mb-6 text-3xl leading-tight font-bold sm:text-4xl lg:text-6xl">
               Selamat datang di
               <br className="hidden sm:block" />
-              Website Profil Desa Sukatani
+              Website Profil Desa {title}
             </h1>
             <p className="mb-8 text-base leading-relaxed text-gray-200 sm:text-lg lg:text-xl">
-              Pintudesa Profil dengan teknologi terbaru serta memberikan
-              informasi desa kami kepada masyarakat dengan berbagai profil Desa
-              pelayanan Administrasi menjadi lebih mudah, Cepat dan Murah untuk
-              keperluan warga.
+              {description}
             </p>
-            <div className="mb-6">
-              <p className="text-base font-semibold text-pink-400 sm:text-lg">
-                Agistiadi Nugraha
-              </p>
-            </div>
             <Button
+              asChild
               size="lg"
               className="w-full bg-pink-500 px-8 py-3 text-white hover:bg-pink-600 sm:w-auto"
             >
-              HUBUNGI KAMI
+              <Link href="/contact" className="flex items-center">
+                HUBUNGI KAMI
+              </Link>
             </Button>
           </div>
           {/* Official Image */}
@@ -45,7 +48,7 @@ const Hero = () => {
               <Image
                 src="https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=500&h=750&dpr=1"
                 fill
-                alt="Village Official"
+                alt={title!}
                 className="rounded-lg object-cover shadow-2xl"
                 sizes="(max-width: 640px) 256px, (max-width: 1024px) 320px, 500px"
               />

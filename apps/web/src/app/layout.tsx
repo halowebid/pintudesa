@@ -7,11 +7,21 @@ import { siteDescription, siteTagline, siteTitle } from "@pintudesa/env"
 import Footer from "@/components/layout/footer"
 import Header from "@/components/layout/header"
 import Providers from "@/components/providers"
+import { createApi } from "@/lib/trpc/server"
 
-export const metadata: Metadata = {
-  title: `${siteTitle} - ${siteTagline}`,
-  description: siteDescription,
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+export async function generateMetadata(): Promise<Metadata> {
+  const api = await createApi()
+
+  const title = (await api.setting.byKey("siteTitle")) ?? siteTitle!
+  const tagline = (await api.setting.byKey("siteTagline")) ?? siteTagline!
+  const description =
+    (await api.setting.byKey("siteDescription")) ?? siteDescription!
+
+  return {
+    title: { default: title, template: `%s - ${tagline}` },
+    description: description,
+    icons: [{ rel: "icon", url: "/favicon.ico" }],
+  }
 }
 
 const manrope = Manrope({
