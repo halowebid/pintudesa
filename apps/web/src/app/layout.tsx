@@ -33,7 +33,7 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const api = await createApi()
-  const title = await api.setting.byKey("siteTitle")
+  const desa = await api.setting.byKey("desa")
   const kecamatan = await api.setting.byKey("kecamatan")
 
   return (
@@ -41,7 +41,7 @@ export default async function RootLayout({
       <body>
         <Providers>
           <div className="min-h-screen">
-            <Header title={title!} kecamatan={kecamatan!} />
+            <Header desa={desa!} kecamatan={kecamatan!} />
             <main>{children}</main>
             <Footer />
           </div>

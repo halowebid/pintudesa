@@ -7,7 +7,7 @@ import { Icon } from "@yopem-ui/react-icons"
 import Link from "@/components/link"
 import ThemeSwitcher from "@/components/theme/theme-switcher"
 
-const Header = ({ title, kecamatan }: { title: string; kecamatan: string }) => {
+const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
   const navItems = [
@@ -27,9 +27,7 @@ const Header = ({ title, kecamatan }: { title: string; kecamatan: string }) => {
               <Icon name="Shield" className="text-foreground size-8" />
             </div>
             <div>
-              <h1 className="text-foreground text-lg font-bold">
-                Desa {title}
-              </h1>
+              <h1 className="text-foreground text-lg font-bold">Desa {desa}</h1>
               <p className="text-accent-foreground text-sm">
                 Kecamatan {kecamatan}
               </p>

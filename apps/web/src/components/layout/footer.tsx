@@ -7,7 +7,7 @@ import { createApi } from "@/lib/trpc/server"
 const Footer = async () => {
   const api = await createApi()
 
-  const title = await api.setting.byKey("siteTitle")
+  const desa = await api.setting.byKey("desa")
   const address = await api.setting.byKey("address")
   const kecamatan = await api.setting.byKey("kecamatan")
   const kabupaten = await api.setting.byKey("kabupaten")
@@ -41,7 +41,7 @@ const Footer = async () => {
                   <Icon name="Shield" className="size-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">Desa {title}</h3>
+                  <h3 className="text-xl font-bold">Desa {desa}</h3>
                   <p className="text-accent-foreground">
                     Kecamatan {kecamatan}
                   </p>

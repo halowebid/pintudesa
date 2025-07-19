@@ -7,7 +7,7 @@ import { createApi } from "@/lib/trpc/server"
 const DigitalServices = async () => {
   const api = await createApi()
 
-  const title = await api.setting.byKey("siteTitle")
+  const desa = await api.setting.byKey("desa")
 
   return (
     <section className="bg-background py-16">
@@ -41,7 +41,7 @@ const DigitalServices = async () => {
               Pelayanan Administrasi Digital
             </h2>
             <p className="text-accent-foreground mb-6 text-lg leading-relaxed">
-              Desa {title} menggunakan aplikasi pelayanan online yang bernama{" "}
+              Desa {desa} menggunakan aplikasi pelayanan online yang bernama{" "}
               <strong>Pintudesa</strong>, aplikasi ini bisa diunduh dari
               aplikasi Play Store untuk pengguna Android dan dari App Store
               untuk pengguna iPhone.
