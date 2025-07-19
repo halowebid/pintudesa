@@ -9,9 +9,28 @@ import {
 } from "@pintudesa/ui"
 import { Icon, type IconProps } from "@yopem-ui/react-icons"
 
-export default function ProfilePage() {
+import { createApi } from "@/lib/trpc/server"
+
+export default async function ProfilePage() {
+  const api = await createApi()
+
+  const desa = await api.setting.byKey("desa")
+  const kodePos = await api.setting.byKey("kodePos")
+  const kecamatan = await api.setting.byKey("kecamatan")
+  const kabupaten = await api.setting.byKey("kabupaten")
+  const provinsi = await api.setting.byKey("provinsi")
+  const perbatasanUtara = await api.setting.byKey("perbatasanUtara")
+  const perbatasanSelatan = await api.setting.byKey("perbatasanSelatan")
+  const perbatasanTimur = await api.setting.byKey("perbatasanTimur")
+  const perbatasanBarat = await api.setting.byKey("perbatasanBarat")
+  const facebookUsername = await api.setting.byKey("facebookUsername")
+  const instagramUsername = await api.setting.byKey("instagramUsername")
+  const youtubeUsername = await api.setting.byKey("youtubeUsername")
+  const whatsappNumber = await api.setting.byKey("whatsappNumber")
+  const supportEmail = await api.setting.byKey("supportEmail")
+
   const visionPoints = [
-    "Mewujudkan Desa Sukatani yang maju dan mandiri",
+    `Mewujudkan Desa ${desa} yang maju dan mandiri`,
     "Memanfaatkan potensi sumber daya alam berkelanjutan",
     "Mengembangkan sumber daya manusia berkualitas",
     "Menerapkan teknologi digital dalam pelayanan",
@@ -26,10 +45,10 @@ export default function ProfilePage() {
   ]
 
   const boundaries = [
-    { direction: "Utara", area: "Desa Karya Mulya" },
-    { direction: "Selatan", area: "Desa Muara Mulya" },
-    { direction: "Timur", area: "Desa Sukakopi" },
-    { direction: "Barat", area: "Desa Sukakopi Barat" },
+    { direction: "Utara", area: perbatasanUtara },
+    { direction: "Selatan", area: perbatasanSelatan },
+    { direction: "Timur", area: perbatasanTimur },
+    { direction: "Barat", area: perbatasanBarat },
   ]
 
   const socialMedia: {
@@ -42,25 +61,25 @@ export default function ProfilePage() {
       platform: "Facebook",
       icon: "Facebook",
       color: "text-blue-600",
-      handle: "@desasukatani",
+      handle: `@${facebookUsername}`,
     },
     {
       platform: "Instagram",
       icon: "Instagram",
       color: "text-pink-600",
-      handle: "@desa.sukatani",
+      handle: `@${instagramUsername}`,
     },
     {
       platform: "YouTube",
       icon: "Youtube",
       color: "text-red-600",
-      handle: "Desa Sukatani Official",
+      handle: `@${youtubeUsername}`,
     },
     {
       platform: "Email",
       icon: "Mail",
       color: "text-green-600",
-      handle: "desasukatani@gmail.com",
+      handle: supportEmail!,
     },
   ]
 
@@ -77,20 +96,19 @@ export default function ProfilePage() {
               Profil Desa
             </Badge>
             <h1 className="mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-5xl font-bold text-transparent lg:text-7xl">
-              Desa Sukatani
+              Desa {desa}
             </h1>
             <p className="mb-8 text-xl leading-relaxed text-blue-100 lg:text-2xl">
-              Kecamatan Sukakopi, Kabupaten Sukajanda, Provinsi Sumatera
-              Tenggara
+              Kecamatan {kecamatan}, Kabupaten {kabupaten}, Provinsi {provinsi}
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <div className="flex items-center rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm">
                 <Icon name="MapPin" className="mr-2 size-4" />
-                Kode Pos: 28784
+                Kode Pos: {kodePos}
               </div>
               <div className="flex items-center rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm">
                 <Icon name="Phone" className="mr-2 size-4" />
-                +628127653486
+                {whatsappNumber}
               </div>
             </div>
           </div>
@@ -108,10 +126,10 @@ export default function ProfilePage() {
                   Desa Digital
                 </Badge>
                 <h2 className="text-foreground mb-6 text-4xl font-bold">
-                  Sukatani Digital Village
+                  Desa {desa}
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Desa Sukatani merupakan desa yang telah menerapkan sistem
+                  Desa {desa} merupakan desa yang telah menerapkan sistem
                   digitalisasi dalam pelayanan administrasi kepada masyarakat.
                   Dengan memanfaatkan teknologi modern, kami berkomitmen
                   memberikan pelayanan terbaik yang mudah, cepat, dan
@@ -165,7 +183,7 @@ export default function ProfilePage() {
               <div className="dark:bg-card absolute -right-6 -bottom-6 rounded-2xl border bg-white p-6 shadow-xl">
                 <div className="text-center">
                   <div className="text-foreground text-2xl font-bold">
-                    28784
+                    {kodePos}
                   </div>
                   <div className="text-muted-foreground text-sm">Kode Pos</div>
                 </div>
@@ -296,11 +314,11 @@ export default function ProfilePage() {
                   Lokasi & Batas Wilayah
                 </Badge>
                 <h2 className="text-foreground mb-6 text-4xl font-bold">
-                  Geografis Desa Sukatani
+                  Geografis Desa {desa}
                 </h2>
                 <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-                  Desa Sukatani terletak di posisi strategis di Kecamatan
-                  Sukakopi, Kabupaten Sukajanda, Provinsi Sumatera Tenggara.
+                  Desa {desa} terletak di posisi strategis di Kecamatan
+                  {kecamatan}, Kabupaten {kabupaten}, Provinsi {provinsi}.
                   Lokasi yang strategis ini memberikan akses yang baik untuk
                   pengembangan ekonomi dan pariwisata.
                 </p>
@@ -382,7 +400,7 @@ export default function ProfilePage() {
               <p className="mb-4 text-green-100">
                 Untuk informasi lebih lanjut dan pelayanan administrasi
               </p>
-              <div className="text-3xl font-bold">+628127653486</div>
+              <div className="text-3xl font-bold">{whatsappNumber}</div>
             </CardContent>
           </Card>
         </div>
