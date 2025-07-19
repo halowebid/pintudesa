@@ -1,14 +1,32 @@
 import { Button } from "@pintudesa/ui"
 import { Icon } from "@yopem-ui/react-icons"
 
-const Footer = () => {
+import Link from "@/components/link"
+import { createApi } from "@/lib/trpc/server"
+
+const Footer = async () => {
+  const api = await createApi()
+
+  const title = await api.setting.byKey("siteTitle")
+  const address = await api.setting.byKey("address")
+  const kecamatan = await api.setting.byKey("kecamatan")
+  const kabupaten = await api.setting.byKey("kabupaten")
+  const provinsi = await api.setting.byKey("provinsi")
+  const facebookUsername = await api.setting.byKey("facebookUsername")
+  const instagramUsername = await api.setting.byKey("instagramUsername")
+  const youtubeUsername = await api.setting.byKey("youtubeUsername")
+  const whatsappNumber = await api.setting.byKey("whatsappNumber")
+  const supportEmail = await api.setting.byKey("supportEmail")
+
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className="from-background/80 to-background/90 text-foreground bg-gradient-to-r">
       {/* WhatsApp Contact Bar */}
       <div className="bg-green-500 py-3">
         <div className="container mx-auto flex items-center justify-center px-4">
           <Icon name="Phone" className="mr-2 size-5" />
-          <span className="font-semibold">+6281276534865</span>
+          <span className="font-semibold">{whatsappNumber}</span>
         </div>
       </div>
 
@@ -23,9 +41,13 @@ const Footer = () => {
                   <Icon name="Shield" className="size-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">Desa Sukatani</h3>
-                  <p className="text-accent-foreground">Kecamatan Sukakopi</p>
-                  <p className="text-accent-foreground">Kabupaten Sukajanda</p>
+                  <h3 className="text-xl font-bold">Desa {title}</h3>
+                  <p className="text-accent-foreground">
+                    Kecamatan {kecamatan}
+                  </p>
+                  <p className="text-accent-foreground">
+                    Kabupaten {kabupaten}
+                  </p>
                 </div>
               </div>
             </div>
@@ -38,7 +60,7 @@ const Footer = () => {
                   name="Mail"
                   className="text-accent-foreground mr-3 size-5"
                 />
-                <span>desasukatani@gmail.com</span>
+                <span>{supportEmail}</span>
               </div>
             </div>
 
@@ -51,24 +73,46 @@ const Footer = () => {
                   className="text-accent-foreground mt-1 mr-3 size-5"
                 />
                 <div>
-                  <p>Sukatani, Kabupaten Sukajanda,</p>
-                  <p>Provinsi Sumatera Tenggara, Indonesia</p>
+                  <p>
+                    {address}, Kabupaten {kabupaten},
+                  </p>
+                  <p>Provinsi {provinsi}, Indonesia</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Social Media */}
           <div className="mt-8 flex justify-center space-x-6 border-t border-sky-700 pt-8">
-            <Button variant="ghost" size="icon">
-              <Icon name="Facebook" className="size-6" />
-            </Button>
-            <Button variant="ghost" size="icon">
-              <Icon name="Instagram" className="size-6" />
-            </Button>
-            <Button variant="ghost" size="icon">
-              <Icon name="Youtube" className="size-6" />
-            </Button>
+            {facebookUsername && (
+              <Button asChild variant="ghost" size="icon">
+                <Link
+                  href={`https://www.facebook.com/${facebookUsername}`}
+                  target="_blank"
+                >
+                  <Icon name="Facebook" className="size-6" />
+                </Link>
+              </Button>
+            )}
+            {instagramUsername && (
+              <Button asChild variant="ghost" size="icon">
+                <Link
+                  href={`https://instagram.com/${instagramUsername}`}
+                  target="_blank"
+                >
+                  <Icon name="Instagram" className="size-6" />
+                </Link>
+              </Button>
+            )}
+            {youtubeUsername && (
+              <Button asChild variant="ghost" size="icon">
+                <Link
+                  href={`https://youtube.com/channel/${youtubeUsername}`}
+                  target="_blank"
+                >
+                  <Icon name="Youtube" className="size-6" />
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>
@@ -76,9 +120,7 @@ const Footer = () => {
       {/* Copyright */}
       <div className="bg-accent py-4">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-accent-foreground">
-            Digital Daftar Warga Nusantara © 2025
-          </p>
+          <p className="text-accent-foreground">Pintudesa © {currentYear}</p>
         </div>
       </div>
     </footer>
