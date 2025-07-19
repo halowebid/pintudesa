@@ -7,8 +7,13 @@
 
 ## Fitur
 
-- [ ] **Pengaturan** = setting (_untuk ubah nama desa, alamat desa, nomor
+- [x] **Pengaturan** = setting (_untuk ubah nama desa, alamat desa, nomor
       telepon desa, email desa, dan logo desa, banner desa_)
+- [ ] Pengaturan Visi Misi
+- [ ] Pengaturan Profil Desa (_untuk mengubah profil desa, seperti sejarah desa,
+      potensi desa, dan lain-lain_)
+- [ ] Pengaturan atur alamat dari Google Maps atau OpenStreetMap (_untuk
+      mengatur alamat desa, seperti koordinat desa, nama desa, dan lain-lain_)
 - [ ] API Alamat Seluruh Indonesia (_untuk mendapatkan data alamat lengkap dari
       provinsi, kabupaten, kecamatan, desa, dan kelurahan_)
 - [ ] Role based authentication for admin, penduduk, and aparatur desa
