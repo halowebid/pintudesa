@@ -14,6 +14,13 @@
       potensi desa, dan lain-lain_)
 - [ ] Pengaturan atur alamat dari Google Maps atau OpenStreetMap (_untuk
       mengatur alamat desa, seperti koordinat desa, nama desa, dan lain-lain_)
+- [ ] Statistik Penduduk (_untuk menampilkan statistik penduduk desa, seperti
+      jumlah penduduk, jumlah laki-laki, jumlah perempuan, dan lain-lain_)
+- [ ] Statistik Kartu Keluarga (_untuk menampilkan statistik kartu keluarga
+      desa, seperti jumlah kartu keluarga, jumlah kepala keluarga, dan
+      lain-lain_)
+- [ ] Statistik RT, RW, dan Dusun (_untuk menampilkan statistik RT, RW, dan
+      Dusun desa, seperti jumlah RT, jumlah RW, dan jumlah Dusun_)
 - [ ] API Alamat Seluruh Indonesia (_untuk mendapatkan data alamat lengkap dari
       provinsi, kabupaten, kecamatan, desa, dan kelurahan_)
 - [ ] Role based authentication for admin, penduduk, and aparatur desa
