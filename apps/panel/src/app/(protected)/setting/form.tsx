@@ -16,6 +16,7 @@ const formSchema = z.object({
   siteDescription: z.string().trim(),
   address: z.string().trim(),
   desa: z.string().trim(),
+  kodePos: z.string().trim(),
   kecamatan: z.string().trim(),
   kabupaten: z.string().trim(),
   provinsi: z.string().trim(),
@@ -62,6 +63,7 @@ export default function SettingForm() {
       settings?.find((s) => s.key === "siteDescription")?.value ?? "",
     address: settings?.find((s) => s.key === "siteAddress")?.value ?? "",
     desa: settings?.find((s) => s.key === "desa")?.value ?? "",
+    kodePos: settings?.find((s) => s.key === "kodePos")?.value ?? "",
     kecamatan: settings?.find((s) => s.key === "kecamatan")?.value ?? "",
     kabupaten: settings?.find((s) => s.key === "kabupaten")?.value ?? "",
     provinsi: settings?.find((s) => s.key === "provinsi")?.value ?? "",
@@ -139,6 +141,15 @@ export default function SettingForm() {
             <form.FormItem>
               <form.FormLabel>Desa</form.FormLabel>
               <field.BaseField placeholder="Masukan Desa" />
+              <form.FormMessage />
+            </form.FormItem>
+          )}
+        </form.AppField>
+        <form.AppField name="kodePos">
+          {(field) => (
+            <form.FormItem>
+              <form.FormLabel>Kode Pos</form.FormLabel>
+              <field.BaseField type="number" placeholder="Masukan Kode Pos" />
               <form.FormMessage />
             </form.FormItem>
           )}
