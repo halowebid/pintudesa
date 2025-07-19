@@ -29,15 +29,19 @@ const manrope = Manrope({
   display: "swap",
 })
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const api = await createApi()
+  const title = await api.setting.byKey("siteTitle")
+  const kecamatan = await api.setting.byKey("kecamatan")
+
   return (
     <html lang="en" className={`${manrope.className}`} suppressHydrationWarning>
       <body>
         <Providers>
           <div className="min-h-screen">
-            <Header />
+            <Header title={title!} kecamatan={kecamatan!} />
             <main>{children}</main>
             <Footer />
           </div>

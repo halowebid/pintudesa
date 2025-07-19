@@ -7,14 +7,14 @@ import { Icon } from "@yopem-ui/react-icons"
 import Link from "@/components/link"
 import ThemeSwitcher from "@/components/theme/theme-switcher"
 
-const Header = () => {
+const Header = ({ title, kecamatan }: { title: string; kecamatan: string }) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
   const navItems = [
-    { label: "Beranda", href: "#" },
+    { label: "Beranda", href: "/" },
     { label: "Profil", href: "/profile" },
     { label: "Statistik", href: "/statistics" },
-    { label: "Berita", href: "#" },
+    // { label: "Berita", href: "#" },
   ]
 
   return (
@@ -28,10 +28,10 @@ const Header = () => {
             </div>
             <div>
               <h1 className="text-foreground text-lg font-bold">
-                Desa Sukatani
+                Desa {title}
               </h1>
               <p className="text-accent-foreground text-sm">
-                Kecamatan Sukakopi
+                Kecamatan {kecamatan}
               </p>
             </div>
           </div>
