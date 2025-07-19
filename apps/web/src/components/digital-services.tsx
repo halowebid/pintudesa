@@ -2,7 +2,13 @@ import Image from "next/image"
 import { Button } from "@pintudesa/ui"
 import { Icon } from "@yopem-ui/react-icons"
 
-const DigitalServices = () => {
+import { createApi } from "@/lib/trpc/server"
+
+const DigitalServices = async () => {
+  const api = await createApi()
+
+  const title = await api.setting.byKey("siteTitle")
+
   return (
     <section className="bg-background py-16">
       <div className="container mx-auto px-4">
@@ -35,7 +41,7 @@ const DigitalServices = () => {
               Pelayanan Administrasi Digital
             </h2>
             <p className="text-accent-foreground mb-6 text-lg leading-relaxed">
-              Desa Sukatani menggunakan aplikasi pelayanan online yang bernama{" "}
+              Desa {title} menggunakan aplikasi pelayanan online yang bernama{" "}
               <strong>Pintudesa</strong>, aplikasi ini bisa diunduh dari
               aplikasi Play Store untuk pengguna Android dan dari App Store
               untuk pengguna iPhone.
