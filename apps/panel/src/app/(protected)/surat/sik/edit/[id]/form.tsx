@@ -170,7 +170,7 @@ export default function SuratIzinKeramaianForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/surat-izin-keramaian")
+          router.push("/surat/sik")
         }
       },
       onError: (error) => {
