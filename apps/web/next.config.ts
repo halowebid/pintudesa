@@ -10,20 +10,15 @@ const plugins = [bundleAnalyzer]
 
 const config = {
   reactStrictMode: true,
+  serverExternalPackages: ["@node-rs/argon2"],
   productionBrowserSourceMaps: false,
   experimental: {
     cssChunking: true,
-    serverSourceMaps: true,
-    viewTransition: true,
     staleTimes: {
       dynamic: 30,
       static: 180,
     },
     optimizePackageImports: ["@yopem-ui/react-icons"],
-  },
-  onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
   },
   compiler: {
     ...(process.env.NODE_ENV === "production"
@@ -38,7 +33,7 @@ const config = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.pexels.com",
+        hostname: "**.googleusercontent.com",
       },
       {
         protocol: "https",
