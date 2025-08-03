@@ -86,7 +86,7 @@ export default function SuratIzinKeramaianContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">Surat Izin Keramaian</h1>
         <Button asChild>
-          <Link href="/surat-izin-keramaian/tambah">Tambah</Link>
+          <Link href="/surat/sik/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -101,7 +101,7 @@ export default function SuratIzinKeramaianContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/surat-izin-keramaian/edit/${item.id}`}
+              editUrl={`/surat/sik/edit/${item.id}`}
               description={item.pemohonNIK}
             />
           )}
