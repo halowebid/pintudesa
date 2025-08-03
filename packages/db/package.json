@@ -65,7 +65,7 @@
     "@yopem/eslint-config": "catalog:tooling",
     "@yopem/prettier-config": "catalog:tooling",
     "@yopem/typescript-config": "catalog:tooling",
-    "drizzle-kit": "^0.31.1",
+    "drizzle-kit": "^0.31.4",
     "eslint": "catalog:tooling",
     "prettier": "catalog:tooling",
     "typescript": "catalog:tooling"
@@ -73,10 +73,10 @@
   "dependencies": {
     "@pintudesa/env": "workspace:*",
     "@pintudesa/utils": "workspace:*",
-    "drizzle-orm": "^0.44.2",
+    "drizzle-orm": "^0.44.4",
     "drizzle-zod": "^0.8.2",
     "next": "catalog:",
-    "pg": "^8.16.0",
+    "pg": "^8.16.3",
     "zod": "catalog:"
   },
   "prettier": "@yopem/prettier-config/base"

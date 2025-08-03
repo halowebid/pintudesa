@@ -65,7 +65,7 @@
     "@pintudesa/utils": "workspace:*",
     "@trpc/server": "catalog:trpc",
     "@yopem/try-catch": "catalog:",
-    "ioredis": "^5.6.1",
+    "ioredis": "^5.7.0",
     "superjson": "catalog:",
     "zod": "catalog:"
   },

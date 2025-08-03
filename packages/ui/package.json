@@ -58,11 +58,11 @@
     "typescript": "catalog:tooling"
   },
   "dependencies": {
-    "@ark-ui/react": "^5.15.1",
+    "@ark-ui/react": "^5.18.3",
     "@yopem-ui/react-icons": "catalog:",
     "@yopem-ui/utils": "catalog:",
     "react": "catalog:react",
-    "recharts": "^3.0.0"
+    "recharts": "^3.1.0"
   },
   "prettier": "@yopem/prettier-config/react"
 }

@@ -50,7 +50,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "^24.0.13",
+    "@types/node": "^24.1.0",
     "@yopem/eslint-config": "catalog:tooling",
     "@yopem/prettier-config": "catalog:tooling",
     "@yopem/typescript-config": "catalog:tooling",
@@ -60,6 +60,6 @@
   },
   "prettier": "@yopem/prettier-config/base",
   "dependencies": {
-    "@next/env": "^15.3.4"
+    "@next/env": "^15.4.5"
   }
 }
