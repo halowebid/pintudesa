@@ -24,7 +24,7 @@ const desaSurat = [
     label: "SKM",
     name: "Surat Keterangan Kematian",
     href: "/surat/skm",
-    disabled: true,
+    disabled: false,
   },
   {
     label: "SKL",
