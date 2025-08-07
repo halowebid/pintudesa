@@ -147,14 +147,14 @@
 - [x] **Surat Keterangan Kematian** = suratKeteranganKematian (_hanya gunakan 1
       combobox untuk mendapatkan data penduduk, jangan samakan dengan demo
       panel_)
-- [ ] **Surat Keterangan Kelahiran** = suratKeteranganKelahiran (_populate data
+- [x] **Surat Keterangan Kelahiran** = suratKeteranganKelahiran (_populate data
       ibu dan ayah menggunakan pencarian getPenduduksByJenisKelamin dan
       searchPenduduksByJenisKelamin lalu isikan ke form, lihat demo panel_)
-- [ ] **Surat Kuasa SKGR** = suratKuasaSKGR
-- [ ] **Surat Pernyataan Belum Menikah** = suratPernyataanBelumMenikah (_saksi 2
+- [x] **Surat Kuasa SKGR** = suratKuasaSKGR
+- [x] **Surat Pernyataan Belum Menikah** = suratPernyataanBelumMenikah (_saksi 2
       optional, lihat form demo panel_)
+- [x] **Surat Pengantar SKCK** = suratPengantarSKCK
 - [x] **Surat Izin Keramaian** = suratIzinKeramaian
-- [ ] **Surat Pengantar SKCK** = suratPengantarSKCK
 
 ## Fix
 
