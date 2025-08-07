@@ -125,8 +125,8 @@ export default function SuratPernyataanBelumMenikahForm({
     onSubmit: ({ value }) => {
       createSuratPernyataanBelumMenikah({
         ...value,
-        namaSaksi2: value.namaSaksi2 || undefined,
-        hubunganSaksi2: value.hubunganSaksi2 || undefined,
+        namaSaksi2: value.namaSaksi2,
+        hubunganSaksi2: value.hubunganSaksi2,
       })
     },
   })

@@ -109,30 +109,28 @@ export default function SuratPengantarSKCKForm({
   React.useEffect(() => {
     if (data?.pemohonNIK) {
       const pendudukData = data.pemohon
-      if (pendudukData) {
-        const wilayah = [
-          pendudukData.rt && `RT. ${pendudukData.rt}`,
-          pendudukData.rw && `RW. ${pendudukData.rw}`,
-          pendudukData.dusun && `Dusun ${pendudukData.dusun}`,
-          pendudukData.desa_kelurahan && `Desa ${pendudukData.desa_kelurahan}`,
-          pendudukData.kecamatan && `Kec. ${pendudukData.kecamatan}`,
-          pendudukData.kabupaten_kota && `Kab. ${pendudukData.kabupaten_kota}`,
-          pendudukData.provinsi && pendudukData.provinsi,
-        ]
-          .filter(Boolean)
-          .join(", ")
+      const wilayah = [
+        pendudukData.rt && `RT. ${pendudukData.rt}`,
+        pendudukData.rw && `RW. ${pendudukData.rw}`,
+        pendudukData.dusun && `Dusun ${pendudukData.dusun}`,
+        pendudukData.desa_kelurahan && `Desa ${pendudukData.desa_kelurahan}`,
+        pendudukData.kecamatan && `Kec. ${pendudukData.kecamatan}`,
+        pendudukData.kabupaten_kota && `Kab. ${pendudukData.kabupaten_kota}`,
+        pendudukData.provinsi && pendudukData.provinsi,
+      ]
+        .filter(Boolean)
+        .join(", ")
 
-        const pemohonLabel = `${data.pemohonNIK} - ${pendudukData.namaLengkap}`
-        setSelectedPemohon({
-          label: pemohonLabel,
-          value: data.pemohonNIK,
-          nama: pendudukData.namaLengkap,
-          alamat: pendudukData.alamat,
-          tempatLahir: pendudukData.tempatLahir,
-          tanggalLahir: pendudukData.tanggalLahir,
-          wilayah,
-        })
-      }
+      const pemohonLabel = `${data.pemohonNIK} - ${pendudukData.namaLengkap}`
+      setSelectedPemohon({
+        label: pemohonLabel,
+        value: data.pemohonNIK,
+        nama: pendudukData.namaLengkap,
+        alamat: pendudukData.alamat,
+        tempatLahir: pendudukData.tempatLahir,
+        tanggalLahir: pendudukData.tanggalLahir,
+        wilayah,
+      })
     }
   }, [data])
 

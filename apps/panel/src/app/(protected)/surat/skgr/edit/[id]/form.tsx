@@ -141,30 +141,28 @@ export default function SuratKuasaSKGRForm({
   React.useEffect(() => {
     if (data?.kuasaDariId) {
       const pendudukData = data.kuasaDari
-      if (pendudukData) {
-        const wilayah = [
-          pendudukData.rt && `RT. ${pendudukData.rt}`,
-          pendudukData.rw && `RW. ${pendudukData.rw}`,
-          pendudukData.dusun && `Dusun ${pendudukData.dusun}`,
-          pendudukData.desa_kelurahan && `Desa ${pendudukData.desa_kelurahan}`,
-          pendudukData.kecamatan && `Kec. ${pendudukData.kecamatan}`,
-          pendudukData.kabupaten_kota && `Kab. ${pendudukData.kabupaten_kota}`,
-          pendudukData.provinsi && pendudukData.provinsi,
-        ]
-          .filter(Boolean)
-          .join(", ")
+      const wilayah = [
+        pendudukData.rt && `RT. ${pendudukData.rt}`,
+        pendudukData.rw && `RW. ${pendudukData.rw}`,
+        pendudukData.dusun && `Dusun ${pendudukData.dusun}`,
+        pendudukData.desa_kelurahan && `Desa ${pendudukData.desa_kelurahan}`,
+        pendudukData.kecamatan && `Kec. ${pendudukData.kecamatan}`,
+        pendudukData.kabupaten_kota && `Kab. ${pendudukData.kabupaten_kota}`,
+        pendudukData.provinsi && pendudukData.provinsi,
+      ]
+        .filter(Boolean)
+        .join(", ")
 
-        const kuasaDariLabel = `${pendudukData.nik} - ${pendudukData.namaLengkap}`
-        setSelectedKuasaDari({
-          label: kuasaDariLabel,
-          value: data.kuasaDariId,
-          nama: pendudukData.namaLengkap,
-          alamat: pendudukData.alamat,
-          tempatLahir: pendudukData.tempatLahir,
-          tanggalLahir: pendudukData.tanggalLahir,
-          wilayah,
-        })
-      }
+      const kuasaDariLabel = `${pendudukData.nik} - ${pendudukData.namaLengkap}`
+      setSelectedKuasaDari({
+        label: kuasaDariLabel,
+        value: data.kuasaDariId,
+        nama: pendudukData.namaLengkap,
+        alamat: pendudukData.alamat,
+        tempatLahir: pendudukData.tempatLahir,
+        tanggalLahir: pendudukData.tanggalLahir,
+        wilayah,
+      })
     }
   }, [data])
 
