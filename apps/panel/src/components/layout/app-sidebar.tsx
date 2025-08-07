@@ -55,115 +55,115 @@ const AppSidebar = (props: AppSidebarProps) => {
     navBukuAdministrasiUmum: [
       {
         name: "A1. Buku Peraturan Desa",
-        url: "/buku-a1",
+        url: "/buku/peraturan-desa",
       },
       {
         name: "A2. Buku Keputusan Kepala Desa",
-        url: "/buku-a2",
+        url: "/keputusan-kepala-desa",
       },
       {
         name: "A3. Buku Inventaris Desa",
-        url: "/buku-a3",
+        url: "/buku/buku-a3",
       },
       {
         name: "A4. Buku Aparat Pemerintah Desa",
-        url: "/buku-a4",
+        url: "/buku/aparat-pemerintah-desa",
         disabled: true,
       },
       {
         name: "A5. Buku Tanah Kas Desa",
-        url: "/buku-a5",
+        url: "/buku/tanah-kas",
       },
       {
         name: "A6. Buku Tanah Desa",
-        url: "/buku-a6",
+        url: "/buku/tanah",
       },
       {
         name: "A7. Buku Agenda Desa",
-        url: "/buku-a7",
+        url: "/buku/agenda",
       },
       {
         name: "A8. Buku Ekspedisi Desa",
-        url: "/buku-a8",
+        url: "/buku/ekspedisi",
       },
       {
         name: "A9. Buku Lembaran Desa",
-        url: "/buku-a9",
+        url: "/buku/lembaran",
       },
     ],
     navBukuAdministrasiPenduduk: [
       {
         name: "B1. Buku Induk Penduduk Desa",
-        url: "/buku-b1",
+        url: "/buku/induk-penduduk",
         disabled: true,
       },
       {
         name: "B2. Buku Mutasi Penduduk Desa",
-        url: "/buku-b2",
+        url: "/buku/mutasi-penduduk",
         disabled: true,
       },
       {
         name: "B3. Buku Rekapitulasi Jumlah Penduduk Desa",
-        url: "/buku-b3",
+        url: "/buku/rekapitulasi-penduduk",
         disabled: true,
       },
       {
         name: "B4. Buku Penduduk Sementara",
-        url: "/buku-b4",
+        url: "/buku/penduduk-sementara",
       },
       {
         name: "B5. Buku KTP dan Kartu Keluarga",
-        url: "/buku-b5",
+        url: "/buku/ktp-dan-kartu-keluarga",
         disabled: true,
       },
     ],
     navBukuAdministrasiKeuangan: [
       {
         name: "C1. Buku Anggaran Pendapatan dan Belanja Desa",
-        url: "/buku-c1",
+        url: "/buku/anggaran-pendapatan-dan-belanja-desa",
         disabled: true,
       },
       {
         name: "C2. Buku Rencana Anggaran Biaya Desa",
-        url: "/buku-c2",
+        url: "/buku/rencana-anggaran-biaya",
       },
       {
         name: "C3. Buku Kas Pembantu Kegiatan",
-        url: "/buku-c3",
+        url: "/buku/kas-pembantu-kegiatan",
         disabled: true,
       },
       {
         name: "C4. Buku Kas Umum",
-        url: "/buku-c4",
+        url: "/buku/kas-umum",
         disabled: true,
       },
       {
         name: "C5. Buku Kas Pembantu",
-        url: "/buku-c5",
+        url: "/buku/kas-pembantu",
         disabled: true,
       },
       {
         name: "C6. Buku Bank Desa",
-        url: "/buku-c6",
+        url: "/buku/bank-desa",
         disabled: true,
       },
     ],
     navBukuAdministrasiPembangunan: [
       {
         name: "D1. Buku Rencana Kerja Pembangunan Desa",
-        url: "/buku-d1",
+        url: "/buku/rencana-kerja-pembangunan",
       },
       {
         name: "D2. Buku Kegiatan Pembangunan Desa",
-        url: "/buku-d2",
+        url: "/buku/kegiatan-pembangunan",
       },
       {
         name: "D3. Buku Inventaris Hasil-hasil Pembangunan Desa",
-        url: "/buku-d3",
+        url: "/buku/inventaris",
       },
       {
         name: "D4. Buku Kader Pemberdayaan Masyarakat Desa",
-        url: "/buku-d4",
+        url: "/buku/kader-pemberdayaan-masyarakat",
       },
     ],
   }

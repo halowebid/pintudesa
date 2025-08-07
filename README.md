@@ -68,7 +68,7 @@
 ### Administrasi > Buku Administrasi > Administrasi Umum
 
 - [x] **A1 Buku Peraturan Desa** = peraturan
-- [ ] **A2 Buku Keputusan Kepala Desa** = keputusan
+- [x] **A2 Buku Keputusan Kepala Desa** = keputusan
 - [x] **A3 Buku Inventaris Desa** = inventaris
 - [ ] A4 Buku Aparat Pemerintah Desa = aparat (_butuh data aparat pemerintah
       desa_)
@@ -85,7 +85,7 @@
 - [ ] B2 Buku Mutasi Penduduk Desa = mutasi (_butuh data penduduk desa_)
 - [ ] B3 Buku Rekapitulasi Jumlah Penduduk Desa = rekapitulasi (_butuh data
       penduduk desa, tidak ada CRUD_)
-- [ ] **B4 Buku Penduduk Sementara** = pendudukSementara
+- [x] **B4 Buku Penduduk Sementara** = pendudukSementara
 - [ ] B5 Buku KTP dan Kartu Keluarga = ktpKk (_butuh data penduduk desa, tidak
       ada CRUD_)
 
@@ -110,12 +110,12 @@
 
 ### Kependudukan
 
-- [ ] **Kartu Keluarga** = kartuKeluarga (_tiap jenis kategori penduduk punya
+- [x] **Kartu Keluarga** = kartuKeluarga (_tiap jenis kategori penduduk punya
       form yang berbeda, kepala keluarga wajib memiliki shdk atribut kepala
       keluarga dan anggota keluarga bebas shdk yang lain kecuali kepala
       keluarga, harus ada fitur untuk pecah kartu keluarga juga, lihat demo
       panel_)
-- [ ] **Penduduk** = penduduk (_tandai penduduk yang tidak memiliki nomor kartu
+- [x] **Penduduk** = penduduk (_tandai penduduk yang tidak memiliki nomor kartu
       keluarga, berikan indikator di tabel_)
 
 ### Layanan
@@ -144,7 +144,7 @@
 
 ### Surat Menyurat
 
-- [ ] **Surat Keterangan Kematian** = suratKeteranganKematian (_hanya gunakan 1
+- [x] **Surat Keterangan Kematian** = suratKeteranganKematian (_hanya gunakan 1
       combobox untuk mendapatkan data penduduk, jangan samakan dengan demo
       panel_)
 - [ ] **Surat Keterangan Kelahiran** = suratKeteranganKelahiran (_populate data
@@ -153,7 +153,7 @@
 - [ ] **Surat Kuasa SKGR** = suratKuasaSKGR
 - [ ] **Surat Pernyataan Belum Menikah** = suratPernyataanBelumMenikah (_saksi 2
       optional, lihat form demo panel_)
-- [ ] **Surat Izin Keramaian** = suratIzinKeramaian
+- [x] **Surat Izin Keramaian** = suratIzinKeramaian
 - [ ] **Surat Pengantar SKCK** = suratPengantarSKCK
 
 ## Fix
