@@ -65,7 +65,7 @@ const desaSurat = [
     label: "SKAW",
     name: "Surat Keterangan Ahli Waris",
     href: "/surat/surat-keterangan-ahli-waris",
-    disabled: true,
+    disabled: false,
   },
   {
     label: "IMB",
@@ -77,7 +77,7 @@ const desaSurat = [
     label: "SKD",
     name: "Surat Keterangan Domisili",
     href: "/surat/surat-keterangan-domisili",
-    disabled: true,
+    disabled: false,
   },
 ]
 

@@ -155,8 +155,8 @@
       optional, lihat form demo panel_)
 - [x] **Surat Pengantar SKCK** = suratPengantarSKCK
 - [x] **Surat Izin Keramaian** = suratIzinKeramaian
-- [ ] **Surat Kuasa Ahli Waris** = suratKuasaAhliWaris
-- [ ] **Surat Keterangan Domisili** = suratKeteranganDomisili (_harus ada
+- [x] **Surat Kuasa Ahli Waris** = suratKuasaAhliWaris
+- [x] **Surat Keterangan Domisili** = suratKeteranganDomisili (_harus ada
       keluaraga yang ditambahkan (many to many)_)
 
 ## Fix
