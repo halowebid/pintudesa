@@ -2,16 +2,29 @@ import { count, eq } from "drizzle-orm"
 
 import { db } from "../connection"
 import {
+  suratKeteranganDomisiliKeluargaTable,
   suratKeteranganDomisiliTable,
   type InsertSuratKeteranganDomisili,
 } from "../schema/surat-keterangan-domisili"
 
 export const insertSuratKeteranganDomisili = async (
-  data: InsertSuratKeteranganDomisili,
+  data: InsertSuratKeteranganDomisili & {
+    pendudukIds: string[]
+  },
 ) => {
   const suratKeteranganDomisili = await db
     .insert(suratKeteranganDomisiliTable)
     .values(data)
+    .returning()
+
+  await db
+    .insert(suratKeteranganDomisiliKeluargaTable)
+    .values(
+      data.pendudukIds.map((pendudukId) => ({
+        pendudukId,
+        suratKeteranganDomisiliId: suratKeteranganDomisili[0].id,
+      })),
+    )
     .returning()
 
   return suratKeteranganDomisili[0]
