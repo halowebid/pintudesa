@@ -232,6 +232,13 @@
       "when": 1754928204924,
       "tag": "0032_lean_wither",
       "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1755085337883,
+      "tag": "0033_ambitious_vargas",
+      "breakpoints": true
     }
   ]
 }
