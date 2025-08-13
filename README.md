@@ -159,6 +159,7 @@
 - [x] **Surat Keterangan Domisili** = suratKeteranganDomisili (_harus ada
       keluaraga yang ditambahkan (many to many)_)
 - [ ] **Surat Izin Mendirikan Bangunan** = suratIzinMendirikanBangunan
+- [ ] **Surat Keterangan Kepemilikan Rumah** = suratKeteranganKepemilikanRumah
 
 ## Fix
 
