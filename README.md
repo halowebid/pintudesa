@@ -166,3 +166,4 @@
 - [ ] Ubah RAB tanggal pelaksanaan menjadi timestamp
 - [ ] make global env
 - [x] typecheck error
+- [ ] tambah nomor surat untuk semua tipe surat
