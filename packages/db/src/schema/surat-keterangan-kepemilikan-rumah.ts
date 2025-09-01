@@ -6,7 +6,7 @@ import { createInsertSchema, createUpdateSchema } from "drizzle-zod"
 import { pendudukTable } from "./penduduk"
 
 export const suratKeteranganKepemilikanRumahTable = pgTable(
-  "suratKeteranganKepemilikanRumah",
+  "surat_keterangan_kepemilikan_rumah",
   {
     id: text()
       .primaryKey()

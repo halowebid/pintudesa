@@ -5,7 +5,7 @@ import { createInsertSchema, createUpdateSchema } from "drizzle-zod"
 import { shdkEnum } from "./anggota-keluarga"
 import { pendudukTable } from "./penduduk"
 
-export const suratKuasaAhliWarisTable = pgTable("suratKuasaAhliWaris", {
+export const suratKuasaAhliWarisTable = pgTable("surat_kuasa_ahli_waris", {
   id: text()
     .primaryKey()
     .$defaultFn(() => createCustomId()),

@@ -160,6 +160,7 @@
       keluaraga yang ditambahkan (many to many)_)
 - [ ] **Surat Izin Mendirikan Bangunan** = suratIzinMendirikanBangunan
 - [ ] **Surat Keterangan Kepemilikan Rumah** = suratKeteranganKepemilikanRumah
+- [ ] **Surat Keterangan Penghasilan** = suratKeteranganPenghasilan
 
 ## Fix
 

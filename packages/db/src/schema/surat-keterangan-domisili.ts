@@ -5,17 +5,20 @@ import { createInsertSchema, createUpdateSchema } from "drizzle-zod"
 
 import { pendudukTable } from "./penduduk"
 
-export const suratKeteranganDomisiliTable = pgTable("suratKeteranganDomisili", {
-  id: text()
-    .primaryKey()
-    .$defaultFn(() => createCustomId()),
-  pemohonNIK: text("pemohon_nik")
-    .notNull()
-    .references(() => pendudukTable.id, { onDelete: "cascade" }),
-  jumlahTahunDomisili: text("jumlah_tahun_domisili").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-})
+export const suratKeteranganDomisiliTable = pgTable(
+  "surat_keterangan_domisili",
+  {
+    id: text()
+      .primaryKey()
+      .$defaultFn(() => createCustomId()),
+    pemohonNIK: text("pemohon_nik")
+      .notNull()
+      .references(() => pendudukTable.id, { onDelete: "cascade" }),
+    jumlahTahunDomisili: text("jumlah_tahun_domisili").notNull(),
+    createdAt: timestamp("created_at").defaultNow(),
+    updatedAt: timestamp("updated_at").defaultNow(),
+  },
+)
 
 export const suratKeteranganDomisiliRelations = relations(
   suratKeteranganDomisiliTable,
