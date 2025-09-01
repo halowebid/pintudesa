@@ -162,6 +162,7 @@
 - [ ] **Surat Keterangan Kepemilikan Rumah** = suratKeteranganKepemilikanRumah
 - [ ] **Surat Keterangan Penghasilan** = suratKeteranganPenghasilan
 - [ ] **Surat Keteranan Jalan** = suratKeteranganJalan
+- [ ] **Surat Keterangan Gaib** = suratKeteranganGaib
 
 ## Fix
 
