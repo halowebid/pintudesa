@@ -163,6 +163,7 @@
 - [ ] **Surat Keterangan Penghasilan** = suratKeteranganPenghasilan
 - [ ] **Surat Keteranan Jalan** = suratKeteranganJalan
 - [ ] **Surat Keterangan Gaib** = suratKeteranganGaib
+- [ ] **Surat Keterangan Penyaksian Tanah** = suratKeteranganPenyaksianTanah
 
 ## Fix
 

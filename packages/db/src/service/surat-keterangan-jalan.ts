@@ -47,18 +47,12 @@ export const getSuratKeteranganJalans = async (
     limit: perPage,
     offset: (page - 1) * perPage,
     orderBy: (users, { desc }) => [desc(users.createdAt)],
-    with: {
-      keluarga: true,
-    },
   })
 }
 
 export const getSuratKeteranganJalanById = async (id: string) => {
   return await db.query.suratKeteranganJalanTable.findFirst({
     where: eq(suratKeteranganJalanTable.id, id),
-    with: {
-      keluarga: true,
-    },
   })
 }
 
@@ -73,9 +67,6 @@ export const searchSuratKeteranganJalans = async ({
     where: (suratKeteranganJalans, { ilike }) =>
       ilike(suratKeteranganJalans.pemohonNIK, `%${searchQuery}%`),
     limit: limit,
-    with: {
-      keluarga: true,
-    },
   })
 }
 

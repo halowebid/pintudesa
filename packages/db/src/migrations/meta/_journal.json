@@ -260,6 +260,13 @@
       "when": 1756719509630,
       "tag": "0036_bouncy_smasher",
       "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1756719798605,
+      "tag": "0037_aspiring_the_renegades",
+      "breakpoints": true
     }
   ]
 }

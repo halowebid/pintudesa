@@ -1,0 +1,3726 @@
+{
+  "id": "3d70529d-70f7-4ca8-85d4-df6826759440",
+  "prevId": "a29db489-b156-4514-ae54-c4f11b7c2c01",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.agenda": {
+      "name": "agenda",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "jenis_surat": {
+          "name": "jenis_surat",
+          "type": "jenis_surat_agenda",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'surat_masuk'"
+        },
+        "uraian": {
+          "name": "uraian",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.anggota_keluarga": {
+      "name": "anggota_keluarga",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "kartu_keluarga_id": {
+          "name": "kartu_keluarga_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "penduduk_id": {
+          "name": "penduduk_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shdk": {
+          "name": "shdk",
+          "type": "shdk",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "anggota_keluarga_kartu_keluarga_id_kartu_keluarga_id_fk": {
+          "name": "anggota_keluarga_kartu_keluarga_id_kartu_keluarga_id_fk",
+          "tableFrom": "anggota_keluarga",
+          "tableTo": "kartu_keluarga",
+          "columnsFrom": [
+            "kartu_keluarga_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "anggota_keluarga_penduduk_id_penduduk_id_fk": {
+          "name": "anggota_keluarga_penduduk_id_penduduk_id_fk",
+          "tableFrom": "anggota_keluarga",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "penduduk_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.berita": {
+      "name": "berita",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "judul": {
+          "name": "judul",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "uraian": {
+          "name": "uraian",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "berita_slug_unique": {
+          "name": "berita_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "slug"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ekspedisi": {
+      "name": "ekspedisi",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nomor_surat": {
+          "name": "nomor_surat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_surat": {
+          "name": "tanggal_surat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ditujukan": {
+          "name": "ditujukan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_pengiriman": {
+          "name": "tanggal_pengiriman",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "uraian_surat": {
+          "name": "uraian_surat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.inventaris": {
+      "name": "inventaris",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "jenis_inventaris": {
+          "name": "jenis_inventaris",
+          "type": "jenis_inventaris",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'barang'"
+        },
+        "tahun": {
+          "name": "tahun",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dari_pemerintah": {
+          "name": "dari_pemerintah",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dari_provinsi": {
+          "name": "dari_provinsi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dari_kabupaten_atau_kota": {
+          "name": "dari_kabupaten_atau_kota",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dibeli_sendiri": {
+          "name": "dibeli_sendiri",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sumbangan": {
+          "name": "sumbangan",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keadaan_baik": {
+          "name": "keadaan_baik",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keadaan_rusak": {
+          "name": "keadaan_rusak",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "penghapusan_rusak": {
+          "name": "penghapusan_rusak",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "penghapusan_dijual": {
+          "name": "penghapusan_dijual",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "penghapusan_hilang": {
+          "name": "penghapusan_hilang",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "penghapusan_disumbangkan": {
+          "name": "penghapusan_disumbangkan",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanggal_penghapusan": {
+          "name": "tanggal_penghapusan",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keadaan_baik_akhir_tahun": {
+          "name": "keadaan_baik_akhir_tahun",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keadaan_rusak_akhir_tahun": {
+          "name": "keadaan_rusak_akhir_tahun",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.inventaris_hasil_pembangunan": {
+      "name": "inventaris_hasil_pembangunan",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nama_hasil_pembangunan": {
+          "name": "nama_hasil_pembangunan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "volume": {
+          "name": "volume",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "biaya": {
+          "name": "biaya",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lokasi": {
+          "name": "lokasi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.kader_pemberdayaan_masyarakat": {
+      "name": "kader_pemberdayaan_masyarakat",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nama": {
+          "name": "nama",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "umur": {
+          "name": "umur",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jenis_kelamin": {
+          "name": "jenis_kelamin",
+          "type": "jenis_kelamin",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pendidikan": {
+          "name": "pendidikan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bidang": {
+          "name": "bidang",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alamat": {
+          "name": "alamat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.kartu_keluarga": {
+      "name": "kartu_keluarga",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "kategori_penduduk": {
+          "name": "kategori_penduduk",
+          "type": "kategori_penduduk",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'penduduk_dalam_desa'"
+        },
+        "nomor_kartu_keluarga": {
+          "name": "nomor_kartu_keluarga",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alamat": {
+          "name": "alamat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provinsi": {
+          "name": "provinsi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kabupaten_kota": {
+          "name": "kabupaten_kota",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kecamatan": {
+          "name": "kecamatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "desa_kelurahan": {
+          "name": "desa_kelurahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dusun": {
+          "name": "dusun",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rt": {
+          "name": "rt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rw": {
+          "name": "rw",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.kegiatan_pembangunan": {
+      "name": "kegiatan_pembangunan",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nama_kegiatan": {
+          "name": "nama_kegiatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tahun_kegiatan": {
+          "name": "tahun_kegiatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "volume": {
+          "name": "volume",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "jumlah": {
+          "name": "jumlah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "waktu_pengerjaan": {
+          "name": "waktu_pengerjaan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pelaksana": {
+          "name": "pelaksana",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "baru": {
+          "name": "baru",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lanjutan": {
+          "name": "lanjutan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "biaya_dari_pemerintah": {
+          "name": "biaya_dari_pemerintah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "biaya_dari_provinsi": {
+          "name": "biaya_dari_provinsi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "biaya_dari_kabupaten": {
+          "name": "biaya_dari_kabupaten",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "biaya_dari_swadaya": {
+          "name": "biaya_dari_swadaya",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.keputusan_kepala_desa": {
+      "name": "keputusan_kepala_desa",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nomor_surat": {
+          "name": "nomor_surat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_surat": {
+          "name": "tanggal_surat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "judul": {
+          "name": "judul",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "uraian": {
+          "name": "uraian",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nomor_laporan": {
+          "name": "nomor_laporan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_laporan": {
+          "name": "tanggal_laporan",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.lembaran": {
+      "name": "lembaran",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "jenis_peraturan": {
+          "name": "jenis_peraturan",
+          "type": "jenis_peraturan",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'peraturan_desa'"
+        },
+        "nomor_ditetapkan": {
+          "name": "nomor_ditetapkan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_ditetapkan": {
+          "name": "tanggal_ditetapkan",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nomor_diundangkan": {
+          "name": "nomor_diundangkan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_diundangkan": {
+          "name": "tanggal_diundangkan",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tentang": {
+          "name": "tentang",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keterangan": {
+          "name": "keterangan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.penduduk": {
+      "name": "penduduk",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "asal_penduduk": {
+          "name": "asal_penduduk",
+          "type": "asal_penduduk",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'penduduk_desa'"
+        },
+        "provinsi": {
+          "name": "provinsi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kabupaten_kota": {
+          "name": "kabupaten_kota",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kecamatan": {
+          "name": "kecamatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "desa_kelurahan": {
+          "name": "desa_kelurahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dusun": {
+          "name": "dusun",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rt": {
+          "name": "rt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rw": {
+          "name": "rw",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alamat": {
+          "name": "alamat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nik": {
+          "name": "nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nama_lengkap": {
+          "name": "nama_lengkap",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "agama": {
+          "name": "agama",
+          "type": "agama",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pendidikan_terakhir": {
+          "name": "pendidikan_terakhir",
+          "type": "pendidikan_terakhir",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pekerjaan": {
+          "name": "pekerjaan",
+          "type": "jenis_pekerjaan",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jenis_kelamin": {
+          "name": "jenis_kelamin",
+          "type": "jenis_kelamin",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tempat_lahir": {
+          "name": "tempat_lahir",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_lahir": {
+          "name": "tanggal_lahir",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status_perkawinan": {
+          "name": "status_perkawinan",
+          "type": "status_perkawinan",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status_domisili": {
+          "name": "status_domisili",
+          "type": "status_domisili",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nama_ayah_kandung": {
+          "name": "nama_ayah_kandung",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nama_ibu_kandung": {
+          "name": "nama_ibu_kandung",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status_penduduk": {
+          "name": "status_penduduk",
+          "type": "status_penduduk",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'hidup'"
+        },
+        "bantuan_sosial": {
+          "name": "bantuan_sosial",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "disabilitas": {
+          "name": "disabilitas",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.penduduk_sementara": {
+      "name": "penduduk_sementara",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nama": {
+          "name": "nama",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nomor_identitas": {
+          "name": "nomor_identitas",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jenis_kelamin": {
+          "name": "jenis_kelamin",
+          "type": "jenis_kelamin",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tempat_lahir": {
+          "name": "tempat_lahir",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_lahir": {
+          "name": "tanggal_lahir",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pekerjaan": {
+          "name": "pekerjaan",
+          "type": "jenis_pekerjaan",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kebangsaan": {
+          "name": "kebangsaan",
+          "type": "kebangsaan",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keturunan": {
+          "name": "keturunan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "datang_dari": {
+          "name": "datang_dari",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tujuan_kedatangan": {
+          "name": "tujuan_kedatangan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nama_yang_didatangi": {
+          "name": "nama_yang_didatangi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alamat_yang_didatangi": {
+          "name": "alamat_yang_didatangi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_datang": {
+          "name": "tanggal_datang",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_pergi": {
+          "name": "tanggal_pergi",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.peraturan": {
+      "name": "peraturan",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "judul": {
+          "name": "judul",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "uraian": {
+          "name": "uraian",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jenis_peraturan": {
+          "name": "jenis_peraturan",
+          "type": "jenis_peraturan",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'peraturan_desa'"
+        },
+        "nomor_surat_ditetapkan": {
+          "name": "nomor_surat_ditetapkan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_surat_ditetapkan": {
+          "name": "tanggal_surat_ditetapkan",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nomor_surat_dilaporkan": {
+          "name": "nomor_surat_dilaporkan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_surat_dilaporkan": {
+          "name": "tanggal_surat_dilaporkan",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nomor_surat_diundangkan": {
+          "name": "nomor_surat_diundangkan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanggal_surat_diundangkan": {
+          "name": "tanggal_surat_diundangkan",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.rab": {
+      "name": "rab",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "bidang": {
+          "name": "bidang",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "waktu_pelaksanaan": {
+          "name": "waktu_pelaksanaan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kegiatan": {
+          "name": "kegiatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.rencana_kerja_pembangunan": {
+      "name": "rencana_kerja_pembangunan",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nama_kegiatan": {
+          "name": "nama_kegiatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lokasi": {
+          "name": "lokasi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tahun_perencanaan": {
+          "name": "tahun_perencanaan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jumlah": {
+          "name": "jumlah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pelaksana": {
+          "name": "pelaksana",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "manfaat": {
+          "name": "manfaat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keterangan": {
+          "name": "keterangan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "biaya_dari_pemerintah": {
+          "name": "biaya_dari_pemerintah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "biaya_dari_provinsi": {
+          "name": "biaya_dari_provinsi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "biaya_dari_kabupaten": {
+          "name": "biaya_dari_kabupaten",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "biaya_dari_swadaya": {
+          "name": "biaya_dari_swadaya",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.setting": {
+      "name": "setting",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "key": {
+          "name": "key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "setting_key_unique": {
+          "name": "setting_key_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "key"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_izin_keramaian": {
+      "name": "surat_izin_keramaian",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tujuan_pembuatan": {
+          "name": "tujuan_pembuatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "waktu_acara": {
+          "name": "waktu_acara",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "waktu_selesai": {
+          "name": "waktu_selesai",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_izin_keramaian_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_izin_keramaian_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_izin_keramaian",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_izin_mendirikan_bangunan": {
+      "name": "surat_izin_mendirikan_bangunan",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tujuan_pembuatan": {
+          "name": "tujuan_pembuatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "luas_tanah": {
+          "name": "luas_tanah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "batas_utara": {
+          "name": "batas_utara",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "batas_selatan": {
+          "name": "batas_selatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "batas_barat": {
+          "name": "batas_barat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "batas_timur": {
+          "name": "batas_timur",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_izin_mendirikan_bangunan_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_izin_mendirikan_bangunan_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_izin_mendirikan_bangunan",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public._surat_keterangan_domisili_keluarga": {
+      "name": "_surat_keterangan_domisili_keluarga",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "surat_keterangan_domisili_id": {
+          "name": "surat_keterangan_domisili_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "penduduk_id": {
+          "name": "penduduk_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_keterangan_domisili": {
+      "name": "surat_keterangan_domisili",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jumlah_tahun_domisili": {
+          "name": "jumlah_tahun_domisili",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_keterangan_domisili_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_keterangan_domisili_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_keterangan_domisili",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_keterangan_gaib": {
+      "name": "surat_keterangan_gaib",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_ditinggal": {
+          "name": "tanggal_ditinggal",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_keterangan_gaib_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_keterangan_gaib_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_keterangan_gaib",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_keterangan_jalan": {
+      "name": "surat_keterangan_jalan",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "maksud_perjalanan": {
+          "name": "maksud_perjalanan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tujuan_perjalanan": {
+          "name": "tujuan_perjalanan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rencana_berangkat": {
+          "name": "rencana_berangkat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "transportasi": {
+          "name": "transportasi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "no_plat_kendaraan": {
+          "name": "no_plat_kendaraan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nama_sopir": {
+          "name": "nama_sopir",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tempat_lahir_sopir": {
+          "name": "tempat_lahir_sopir",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_lahir_sopir": {
+          "name": "tanggal_lahir_sopir",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pengikut": {
+          "name": "pengikut",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "barang_bawaan": {
+          "name": "barang_bawaan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_keterangan_jalan_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_keterangan_jalan_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_keterangan_jalan",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_keterangan_kelahiran": {
+      "name": "surat_keterangan_kelahiran",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nama_anak": {
+          "name": "nama_anak",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tempat_lahir_anak": {
+          "name": "tempat_lahir_anak",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_lahir_anak": {
+          "name": "tanggal_lahir_anak",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "jenis_kelamin_anak": {
+          "name": "jenis_kelamin_anak",
+          "type": "jenis_kelamin",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nik_ayah": {
+          "name": "nik_ayah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nama_ayah": {
+          "name": "nama_ayah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tempat_lahir_ayah": {
+          "name": "tempat_lahir_ayah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_lahir_ayah": {
+          "name": "tanggal_lahir_ayah",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pekerjaan_ayah": {
+          "name": "pekerjaan_ayah",
+          "type": "jenis_pekerjaan",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alamat_ayah": {
+          "name": "alamat_ayah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alamat_wilayah_ayah": {
+          "name": "alamat_wilayah_ayah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nik_ibu": {
+          "name": "nik_ibu",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nama_ibu": {
+          "name": "nama_ibu",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tempat_lahir_ibu": {
+          "name": "tempat_lahir_ibu",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_lahir_ibu": {
+          "name": "tanggal_lahir_ibu",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pekerjaan_ibu": {
+          "name": "pekerjaan_ibu",
+          "type": "jenis_pekerjaan",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alamat_ibu": {
+          "name": "alamat_ibu",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alamat_wilayah_ibu": {
+          "name": "alamat_wilayah_ibu",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nik_pemohon": {
+          "name": "nik_pemohon",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_keterangan_kelahiran_nik_pemohon_penduduk_id_fk": {
+          "name": "surat_keterangan_kelahiran_nik_pemohon_penduduk_id_fk",
+          "tableFrom": "surat_keterangan_kelahiran",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "nik_pemohon"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_keterangan_kematian": {
+      "name": "surat_keterangan_kematian",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "tanggal_meninggal": {
+          "name": "tanggal_meninggal",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lokasi_meninggal": {
+          "name": "lokasi_meninggal",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sebab_meninggal": {
+          "name": "sebab_meninggal",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lokasi_pemakaman": {
+          "name": "lokasi_pemakaman",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_pemakaman": {
+          "name": "tanggal_pemakaman",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nik": {
+          "name": "nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_keterangan_kematian_nik_penduduk_id_fk": {
+          "name": "surat_keterangan_kematian_nik_penduduk_id_fk",
+          "tableFrom": "surat_keterangan_kematian",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_keterangan_kepemilikan_rumah": {
+      "name": "surat_keterangan_kepemilikan_rumah",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alamat_rumah": {
+          "name": "alamat_rumah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_keterangan_kepemilikan_rumah_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_keterangan_kepemilikan_rumah_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_keterangan_kepemilikan_rumah",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_keteragan_penghasilan": {
+      "name": "surat_keteragan_penghasilan",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "penghasilan": {
+          "name": "penghasilan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_keteragan_penghasilan_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_keteragan_penghasilan_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_keteragan_penghasilan",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_keterangan_penyaksian_tanah": {
+      "name": "surat_keterangan_penyaksian_tanah",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keperluan": {
+          "name": "keperluan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jenis_tanah": {
+          "name": "jenis_tanah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lokasi_tanah": {
+          "name": "lokasi_tanah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "luas_tanah": {
+          "name": "luas_tanah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "batas_utara": {
+          "name": "batas_utara",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "batas_selatan": {
+          "name": "batas_selatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "batas_timur": {
+          "name": "batas_timur",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "batas_barat": {
+          "name": "batas_barat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_keterangan_penyaksian_tanah_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_keterangan_penyaksian_tanah_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_keterangan_penyaksian_tanah",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_kuasa_ahli_waris": {
+      "name": "surat_kuasa_ahli_waris",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "yang_diberi_kuasa_nama": {
+          "name": "yang_diberi_kuasa_nama",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "yang_diberi_kuasa_tempat_lahir": {
+          "name": "yang_diberi_kuasa_tempat_lahir",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "yangDiberiKuasaTanggalLahir": {
+          "name": "yangDiberiKuasaTanggalLahir",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hubungan_keluarga": {
+          "name": "hubungan_keluarga",
+          "type": "shdk",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "yang_diberi_kuasa_alamat": {
+          "name": "yang_diberi_kuasa_alamat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "yang_diberi_kuasa_alamat_wilayah": {
+          "name": "yang_diberi_kuasa_alamat_wilayah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "yang_meninggal_nik": {
+          "name": "yang_meninggal_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggalMeninggal": {
+          "name": "tanggalMeninggal",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lokasi_meninggal": {
+          "name": "lokasi_meninggal",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lokasi_pemakaman": {
+          "name": "lokasi_pemakaman",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggalPemakaman": {
+          "name": "tanggalPemakaman",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nomor_surat_kematian": {
+          "name": "nomor_surat_kematian",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanggalSuratKematian": {
+          "name": "tanggalSuratKematian",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ahli_waris_nik": {
+          "name": "ahli_waris_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_kuasa_ahli_waris_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_kuasa_ahli_waris_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_kuasa_ahli_waris",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "surat_kuasa_ahli_waris_yang_meninggal_nik_penduduk_id_fk": {
+          "name": "surat_kuasa_ahli_waris_yang_meninggal_nik_penduduk_id_fk",
+          "tableFrom": "surat_kuasa_ahli_waris",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "yang_meninggal_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_kuasa_skgr": {
+      "name": "surat_kuasa_skgr",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "yang_diberi_kuasa_nama": {
+          "name": "yang_diberi_kuasa_nama",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "yang_diberi_kuasa_tempat_lahir": {
+          "name": "yang_diberi_kuasa_tempat_lahir",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "yang_diberi_kuasa_tanggal_lahir": {
+          "name": "yang_diberi_kuasa_tanggal_lahir",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "yang_diberi_kuasa_pekerjaan": {
+          "name": "yang_diberi_kuasa_pekerjaan",
+          "type": "jenis_pekerjaan",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "yang_diberi_kuasa_alamat": {
+          "name": "yang_diberi_kuasa_alamat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "yang_diberi_kuasa_alamat_wilayah": {
+          "name": "yang_diberi_kuasa_alamat_wilayah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kuasa_untuk": {
+          "name": "kuasa_untuk",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kuasa_atas": {
+          "name": "kuasa_atas",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tujuan_kuasa": {
+          "name": "tujuan_kuasa",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "atas_nama": {
+          "name": "atas_nama",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "no_reg": {
+          "name": "no_reg",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tanggal_surat": {
+          "name": "tanggal_surat",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lokasi_tanah": {
+          "name": "lokasi_tanah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "luas_tanah": {
+          "name": "luas_tanah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kuasa_dari_id": {
+          "name": "kuasa_dari_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_kuasa_skgr_kuasa_dari_id_penduduk_id_fk": {
+          "name": "surat_kuasa_skgr_kuasa_dari_id_penduduk_id_fk",
+          "tableFrom": "surat_kuasa_skgr",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "kuasa_dari_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_pengantar_skck": {
+      "name": "surat_pengantar_skck",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tujuan_pembuatan": {
+          "name": "tujuan_pembuatan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_pengantar_skck_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_pengantar_skck_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_pengantar_skck",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.surat_pernyataan_belum_menikah": {
+      "name": "surat_pernyataan_belum_menikah",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pemohon_nik": {
+          "name": "pemohon_nik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nama_saksi_1": {
+          "name": "nama_saksi_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hubungan_saksi_1": {
+          "name": "hubungan_saksi_1",
+          "type": "shdk",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nama_saksi_2": {
+          "name": "nama_saksi_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hubungan_saksi_2": {
+          "name": "hubungan_saksi_2",
+          "type": "shdk",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "surat_pernyataan_belum_menikah_pemohon_nik_penduduk_id_fk": {
+          "name": "surat_pernyataan_belum_menikah_pemohon_nik_penduduk_id_fk",
+          "tableFrom": "surat_pernyataan_belum_menikah",
+          "tableTo": "penduduk",
+          "columnsFrom": [
+            "pemohon_nik"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tanah": {
+      "name": "tanah",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nama_pemilik": {
+          "name": "nama_pemilik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "total_luas": {
+          "name": "total_luas",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hak_milik": {
+          "name": "hak_milik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hak_guna_bangunan": {
+          "name": "hak_guna_bangunan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hak_pakai": {
+          "name": "hak_pakai",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hak_guna_usaha": {
+          "name": "hak_guna_usaha",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hak_pengelolaan": {
+          "name": "hak_pengelolaan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hak_milik_adat": {
+          "name": "hak_milik_adat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hak_vi_milik_pribumi": {
+          "name": "hak_vi_milik_pribumi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanah_negara": {
+          "name": "tanah_negara",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "perumahan": {
+          "name": "perumahan",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "perdagangan_dan_jasa": {
+          "name": "perdagangan_dan_jasa",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "perkantoran": {
+          "name": "perkantoran",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "industri": {
+          "name": "industri",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fasilitas_umum": {
+          "name": "fasilitas_umum",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sawah": {
+          "name": "sawah",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tegalan": {
+          "name": "tegalan",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "perkebunan": {
+          "name": "perkebunan",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "peternakan_perikanan": {
+          "name": "peternakan_perikanan",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hutan_belukar": {
+          "name": "hutan_belukar",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hutan_lebat": {
+          "name": "hutan_lebat",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanah_kosong": {
+          "name": "tanah_kosong",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lain_lain": {
+          "name": "lain_lain",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mutasi": {
+          "name": "mutasi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tanah_kas": {
+      "name": "tanah_kas",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "asal": {
+          "name": "asal",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nomor_sertifikat": {
+          "name": "nomor_sertifikat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "luas_tanah": {
+          "name": "luas_tanah",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kelas_tanah": {
+          "name": "kelas_tanah",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "milik_desa": {
+          "name": "milik_desa",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "milik_pemerintah": {
+          "name": "milik_pemerintah",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "milik_provinsi": {
+          "name": "milik_provinsi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "milik_kabupaten_atau_kota": {
+          "name": "milik_kabupaten_atau_kota",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "milik_lainnya": {
+          "name": "milik_lainnya",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanah_sawah": {
+          "name": "tanah_sawah",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanah_tegal": {
+          "name": "tanah_tegal",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanah_kebun": {
+          "name": "tanah_kebun",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanah_tambak": {
+          "name": "tanah_tambak",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanah_kering": {
+          "name": "tanah_kering",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanah_patok": {
+          "name": "tanah_patok",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tanah_tidak_patok": {
+          "name": "tanah_tidak_patok",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lokasi": {
+          "name": "lokasi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mutasi": {
+          "name": "mutasi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "keterangan_tambahan": {
+          "name": "keterangan_tambahan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.accounts": {
+      "name": "accounts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider_id": {
+          "name": "provider_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "access_token": {
+          "name": "access_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_token": {
+          "name": "id_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access_token_expires_at": {
+          "name": "access_token_expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "refresh_token_expires_at": {
+          "name": "refresh_token_expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "name": "scope",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "accounts_user_id_users_id_fk": {
+          "name": "accounts_user_id_users_id_fk",
+          "tableFrom": "accounts",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sessions": {
+      "name": "sessions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ip_address": {
+          "name": "ip_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_agent": {
+          "name": "user_agent",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sessions_user_id_users_id_fk": {
+          "name": "sessions_user_id_users_id_fk",
+          "tableFrom": "sessions",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "sessions_token_unique": {
+          "name": "sessions_token_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "token"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email_verified": {
+          "name": "email_verified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone_number": {
+          "name": "phone_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "about": {
+          "name": "about",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "role": {
+          "name": "role",
+          "type": "user_role",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'user'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.verifications": {
+      "name": "verifications",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "identifier": {
+          "name": "identifier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.jenis_surat_agenda": {
+      "name": "jenis_surat_agenda",
+      "schema": "public",
+      "values": [
+        "surat_masuk",
+        "surat_keluar"
+      ]
+    },
+    "public.shdk": {
+      "name": "shdk",
+      "schema": "public",
+      "values": [
+        "suami",
+        "pembantu",
+        "orangtua",
+        "mertua",
+        "menantu",
+        "kepala_keluarga",
+        "istri",
+        "cucu",
+        "anak",
+        "lainnya"
+      ]
+    },
+    "public.jenis_inventaris": {
+      "name": "jenis_inventaris",
+      "schema": "public",
+      "values": [
+        "barang",
+        "bangunan"
+      ]
+    },
+    "public.jenis_kelamin": {
+      "name": "jenis_kelamin",
+      "schema": "public",
+      "values": [
+        "laki-laki",
+        "perempuan"
+      ]
+    },
+    "public.jenis_pekerjaan": {
+      "name": "jenis_pekerjaan",
+      "schema": "public",
+      "values": [
+        "wakil_wali_kota",
+        "wali_kota",
+        "tentara_nasional_indonesia",
+        "sopir",
+        "psikiater_psikolog",
+        "pilot",
+        "pialang",
+        "perawat",
+        "perangkat_desa",
+        "penyiar_televisi",
+        "penyiar_radio",
+        "pengacara",
+        "peneliti",
+        "pelaut",
+        "pedagang",
+        "paranormal",
+        "notaris",
+        "lainnya",
+        "konsultan",
+        "kepala desa",
+        "guru",
+        "dosen",
+        "dokter",
+        "biarawati",
+        "bidan",
+        "arsitek",
+        "apoteker",
+        "anggota_dprd_provinsi",
+        "anggota_dprd_kabupaten_kota",
+        "akuntan",
+        "wiraswasta",
+        "wakil_bupati",
+        "bupati",
+        "wakil_gubernur",
+        "gubernur",
+        "duta_besar",
+        "anggota_kabinet_kementerian",
+        "anggota_mahkamah konstitusi",
+        "wakil_presiden",
+        "presiden",
+        "anggota_bpk",
+        "anggota_dpd",
+        "anggota_dpr-ri",
+        "promotor_acara",
+        "juru_masak",
+        "ustadz_mubaligh",
+        "wartawan",
+        "pastor",
+        "pendeta",
+        "imam_masjid",
+        "penterjemah",
+        "perancang_busana",
+        "paraji",
+        "tabib",
+        "seniman",
+        "mekanik",
+        "penata_rambut",
+        "penata_busana",
+        "penata_rias",
+        "tukang_gigi",
+        "tukang_jahit",
+        "tukang_las_pandai besi",
+        "tukang_sol_sepatu",
+        "tukang_kayu",
+        "tukang_batu",
+        "tukang_listrik",
+        "tukang_cukur",
+        "pembantu_rumah_tangga",
+        "buruh_peternakan",
+        "buruh_nelayan_perikanan",
+        "buruh_tani_perkebunan",
+        "buruh_harian_lepas",
+        "karyawan_honorer",
+        "karyawan_bumd",
+        "karyawan_bumn",
+        "karyawan_swasta",
+        "transportasi",
+        "konstruksi",
+        "industri",
+        "nelayan_perikanan",
+        "peternak",
+        "petani_pekebun",
+        "perdagangan",
+        "kepolisian_ri",
+        "pegawai_negeri_sipil",
+        "pensiunan",
+        "pelajar_mahasiswa",
+        "mengurus_rumah_tangga",
+        "belum_tidak bekerja"
+      ]
+    },
+    "public.kategori_penduduk": {
+      "name": "kategori_penduduk",
+      "schema": "public",
+      "values": [
+        "penduduk_dalam_desa",
+        "penduduk_luar_desa",
+        "penduduk_luar_berdomisili_di_desa"
+      ]
+    },
+    "public.kebangsaan": {
+      "name": "kebangsaan",
+      "schema": "public",
+      "values": [
+        "wni",
+        "wna"
+      ]
+    },
+    "public.agama": {
+      "name": "agama",
+      "schema": "public",
+      "values": [
+        "islam",
+        "kristen",
+        "katolik",
+        "hindu",
+        "budha",
+        "konghucu",
+        "penghayat_kepercayaan"
+      ]
+    },
+    "public.asal_penduduk": {
+      "name": "asal_penduduk",
+      "schema": "public",
+      "values": [
+        "penduduk_desa",
+        "penduduk_luar_desa"
+      ]
+    },
+    "public.pendidikan_terakhir": {
+      "name": "pendidikan_terakhir",
+      "schema": "public",
+      "values": [
+        "tidak_atau_belum_sekolah",
+        "belum_tamat_sd",
+        "sd",
+        "sltp",
+        "slta",
+        "d1_d2",
+        "akademi_d3_s_muda",
+        "s1_d4",
+        "s2",
+        "s3"
+      ]
+    },
+    "public.status_domisili": {
+      "name": "status_domisili",
+      "schema": "public",
+      "values": [
+        "ktp_beralamat_di_desa_berdomisili_di_desa",
+        "ktp_beralamat_di_luar_desa_berdomisili_di_desa",
+        "ktp_beralamat_di_desa_berdomisili_di_luar_desa",
+        "ktp_beralamat_di_luar_desa_berdomisili_di_luar_desa",
+        "tidak_domisili"
+      ]
+    },
+    "public.status_penduduk": {
+      "name": "status_penduduk",
+      "schema": "public",
+      "values": [
+        "hidup",
+        "meninggal",
+        "tidak_aktif"
+      ]
+    },
+    "public.status_perkawinan": {
+      "name": "status_perkawinan",
+      "schema": "public",
+      "values": [
+        "belum_kawin",
+        "kawin_tercatat",
+        "kawin_belum_tercatat",
+        "cerai_hidup",
+        "cerai_mati"
+      ]
+    },
+    "public.jenis_peraturan": {
+      "name": "jenis_peraturan",
+      "schema": "public",
+      "values": [
+        "peraturan_desa",
+        "peraturan_bersama",
+        "peraturan_kepala_desa"
+      ]
+    },
+    "public.user_role": {
+      "name": "user_role",
+      "schema": "public",
+      "values": [
+        "user",
+        "member",
+        "admin"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
