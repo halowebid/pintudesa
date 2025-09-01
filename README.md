@@ -161,6 +161,7 @@
 - [ ] **Surat Izin Mendirikan Bangunan** = suratIzinMendirikanBangunan
 - [ ] **Surat Keterangan Kepemilikan Rumah** = suratKeteranganKepemilikanRumah
 - [ ] **Surat Keterangan Penghasilan** = suratKeteranganPenghasilan
+- [ ] **Surat Keteranan Jalan** = suratKeteranganJalan
 
 ## Fix
 
