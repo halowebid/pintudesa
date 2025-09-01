@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { SHDK } from "@pintudesa/db/schema"
+import type { SHDK } from "@pintudesa/db/schema"
 import { Button, ComboboxPopover } from "@pintudesa/ui"
 import { formatStringToDate } from "@pintudesa/utils"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
