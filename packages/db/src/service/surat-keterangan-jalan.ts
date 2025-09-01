@@ -7,9 +7,7 @@ import {
 } from "../schema/surat-keterangan-jalan"
 
 export const insertSuratKeteranganJalan = async (
-  data: InsertSuratKeteranganJalan & {
-    pendudukIds: string[]
-  },
+  data: InsertSuratKeteranganJalan,
 ) => {
   const suratKeteranganJalan = await db
     .insert(suratKeteranganJalanTable)

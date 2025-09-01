@@ -25,6 +25,7 @@ import { suratKeteranganKelahiranRouter } from "./routes/surat-keterangan-kelahi
 import { suratKeteranganKematianRouter } from "./routes/surat-keterangan-kematian"
 import { suratKeteranganKepemilikanRumahRouter } from "./routes/surat-keterangan-kepemilikan-rumah"
 import { suratKeteranganPenghasilanRouter } from "./routes/surat-keterangan-penghasilan"
+import { suratKeteranganPenghasilanOrangTuaRouter } from "./routes/surat-keterangan-penghasilan-orang-tua"
 import { suratKeteranganPenyaksianTanahRouter } from "./routes/surat-keterangan-penyaksian-tanah"
 import { suratKuasaAhliWarisRouter } from "./routes/surat-kuasa-ahli-waris"
 import { suratKuasaSKGRRouter } from "./routes/surat-kuasa-skgr"
@@ -67,6 +68,7 @@ export const appRouter = createTRPCRouter({
   suratKeteranganKepemilikanRumah: suratKeteranganKepemilikanRumahRouter,
   suratKeteranganPenghasilan: suratKeteranganPenghasilanRouter,
   suratKeteranganPenyaksianTanah: suratKeteranganPenyaksianTanahRouter,
+  suratKeteranganPnghasilanOrangTua: suratKeteranganPenghasilanOrangTuaRouter,
   suratKuasaAhliWaris: suratKuasaAhliWarisRouter,
   suratKuasaSKGR: suratKuasaSKGRRouter,
   suratPengantarSKCK: suratPengantarSKCKRouter,

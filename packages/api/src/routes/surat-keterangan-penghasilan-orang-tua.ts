@@ -1,14 +1,14 @@
 import {
-  countSuratKeteranganJalans,
-  deleteSuratKeteranganJalan,
-  getSuratKeteranganJalanById,
-  getSuratKeteranganJalans,
-  insertSuratKeteranganJalan,
-  insertSuratKeteranganJalanSchema,
-  searchSuratKeteranganJalans,
-  updateSuratKeteranganJalan,
-  updateSuratKeteranganJalanSchema,
-  type SelectSuratKeteranganJalan,
+  countSuratKeteranganPenghasilanOrangTuas,
+  deleteSuratKeteranganPenghasilanOrangTua,
+  getSuratKeteranganPenghasilanOrangTuaById,
+  getSuratKeteranganPenghasilanOrangTuas,
+  insertSuratKeteranganPenghasilanOrangTua,
+  insertSuratKeteranganPenghasilanOrangTuaSchema,
+  searchSuratKeteranganPenghasilanOrangTuas,
+  updateSuratKeteranganPenghasilanOrangTua,
+  updateSuratKeteranganPenghasilanOrangTuaSchema,
+  type SelectSuratKeteranganPenghasilanOrangTua,
 } from "@pintudesa/db"
 import { tryCatch } from "@yopem/try-catch"
 import { z } from "zod"
@@ -20,11 +20,17 @@ import {
 } from "../trpc"
 import { handleTRPCError } from "../utils/error"
 
-export const suratKeteranganJalanRouter = createTRPCRouter({
+export const suratKeteranganPenghasilanOrangTuaRouter = createTRPCRouter({
   create: adminProtectedProcedure
-    .input(insertSuratKeteranganJalanSchema)
+    .input(
+      insertSuratKeteranganPenghasilanOrangTuaSchema.extend({
+        pendudukIds: z.array(z.string()),
+      }),
+    )
     .mutation(async ({ input }) => {
-      const { data, error } = await tryCatch(insertSuratKeteranganJalan(input))
+      const { data, error } = await tryCatch(
+        insertSuratKeteranganPenghasilanOrangTua(input),
+      )
       if (error) {
         handleTRPCError(error)
       }
@@ -32,10 +38,12 @@ export const suratKeteranganJalanRouter = createTRPCRouter({
     }),
 
   update: adminProtectedProcedure
-    .input(updateSuratKeteranganJalanSchema)
+    .input(updateSuratKeteranganPenghasilanOrangTuaSchema)
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(
-        updateSuratKeteranganJalan(input as SelectSuratKeteranganJalan),
+        updateSuratKeteranganPenghasilanOrangTua(
+          input as SelectSuratKeteranganPenghasilanOrangTua,
+        ),
       )
       if (error) {
         handleTRPCError(error)
@@ -46,7 +54,9 @@ export const suratKeteranganJalanRouter = createTRPCRouter({
   delete: adminProtectedProcedure
     .input(z.string())
     .mutation(async ({ input }) => {
-      const { data, error } = await tryCatch(deleteSuratKeteranganJalan(input))
+      const { data, error } = await tryCatch(
+        deleteSuratKeteranganPenghasilanOrangTua(input),
+      )
       if (error) {
         handleTRPCError(error)
       }
@@ -57,7 +67,7 @@ export const suratKeteranganJalanRouter = createTRPCRouter({
     .input(z.object({ page: z.number(), perPage: z.number() }))
     .query(async ({ input }) => {
       const { data, error } = await tryCatch(
-        getSuratKeteranganJalans(input.page, input.perPage),
+        getSuratKeteranganPenghasilanOrangTuas(input.page, input.perPage),
       )
       if (error) {
         handleTRPCError(error)
@@ -66,7 +76,9 @@ export const suratKeteranganJalanRouter = createTRPCRouter({
     }),
 
   byId: adminProtectedProcedure.input(z.string()).query(async ({ input }) => {
-    const { data, error } = await tryCatch(getSuratKeteranganJalanById(input))
+    const { data, error } = await tryCatch(
+      getSuratKeteranganPenghasilanOrangTuaById(input),
+    )
     if (error) {
       handleTRPCError(error)
     }
@@ -76,7 +88,9 @@ export const suratKeteranganJalanRouter = createTRPCRouter({
   search: publicProcedure
     .input(z.object({ searchQuery: z.string(), limit: z.number() }))
     .query(async ({ input }) => {
-      const { data, error } = await tryCatch(searchSuratKeteranganJalans(input))
+      const { data, error } = await tryCatch(
+        searchSuratKeteranganPenghasilanOrangTuas(input),
+      )
       if (error) {
         handleTRPCError(error)
       }
@@ -84,7 +98,9 @@ export const suratKeteranganJalanRouter = createTRPCRouter({
     }),
 
   count: publicProcedure.query(async () => {
-    const { data, error } = await tryCatch(countSuratKeteranganJalans())
+    const { data, error } = await tryCatch(
+      countSuratKeteranganPenghasilanOrangTuas(),
+    )
     if (error) {
       handleTRPCError(error)
     }

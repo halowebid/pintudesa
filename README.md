@@ -164,6 +164,9 @@
 - [ ] **Surat Keteranan Jalan** = suratKeteranganJalan
 - [ ] **Surat Keterangan Gaib** = suratKeteranganGaib
 - [ ] **Surat Keterangan Penyaksian Tanah** = suratKeteranganPenyaksianTanah
+- [ ] **Surat Keterangan Penghasilan Orang Tua** =
+      suratKeteranganPenghasilanOrangTua (_buat NIK ayah dan Ibu bisa input
+      manual_)
 
 ## Fix
 
