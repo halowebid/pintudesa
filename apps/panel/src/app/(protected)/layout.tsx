@@ -1,15 +1,10 @@
 import * as React from "react"
 import { redirect } from "next/navigation"
-import {
-  Separator,
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@pintudesa/ui"
+import { SidebarInset, SidebarProvider } from "@pintudesa/ui"
 
 // import LogOutButton from "@/components/auth/logout-button"
 import AppSidebar from "@/components/layout/app-sidebar"
-import ThemeSwitcher from "@/components/theme/theme-switcher"
+import Topbar from "@/components/layout/topbar"
 import { getSession } from "@/lib/auth/server"
 
 export default async function ProtectedLayout({
@@ -40,14 +35,8 @@ export default async function ProtectedLayout({
     <SidebarProvider>
       <AppSidebar user={session.user} />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2">
-          <div className="flex items-center justify-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1 cursor-pointer" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <ThemeSwitcher />
-          </div>
-        </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+        <Topbar />
+        <div className="flex flex-1 flex-col gap-4 p-4">
           <div className="@container/main flex flex-1 flex-col gap-2">
             {children}
             {dialog}
