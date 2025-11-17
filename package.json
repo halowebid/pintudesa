@@ -14,7 +14,7 @@
       "packages/*"
     ],
     "catalog": {
-      "@next/bundle-analyzer": "15.4.5",
+      "@next/bundle-analyzer": "16.0.3 ",
       "@tanstack/react-form": "^1.15.2",
       "@tanstack/react-query": "^5.84.1",
       "@tanstack/react-query-devtools": "^5.84.1",
@@ -25,7 +25,7 @@
       "@yopem-ui/utils": "^0.0.2",
       "@yopem/try-catch": "^0.0.2",
       "js.foresight": "^2.2.0",
-      "next": "^15.4.5",
+      "next": "^16.0.3",
       "next-themes": "^0.4.6",
       "superjson": "^2.2.2",
       "zod": "^3.25.53"
@@ -81,16 +81,16 @@
     "typecheck": "turbo typecheck"
   },
   "devDependencies": {
-    "@yopem/eslint-config": "catalog:tooling",
-    "@yopem/prettier-config": "catalog:tooling",
-    "lefthook": "1.11.10",
-    "prettier": "catalog:tooling",
-    "turbo": "^2.5.5",
-    "typescript": "catalog:tooling"
+    "@yopem/eslint-config": "^0.3.1",
+    "@yopem/prettier-config": "^0.1.9",
+    "lefthook": "2.0.4",
+    "prettier": "^3.6.2",
+    "turbo": "^2.6.1",
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "bun@1.2.19",
+  "packageManager": "bun@1.3.2",
   "prettier": "@yopem/prettier-config/base"
 }
