@@ -1,8 +1,15 @@
 import {
   type InsertSuratIzinKeramaian,
+  type InsertSuratIzinMendirikanBangunan,
   type InsertSuratKeteranganDomisili,
+  type InsertSuratKeteranganGaib,
+  type InsertSuratKeteranganJalan,
   type InsertSuratKeteranganKelahiran,
   type InsertSuratKeteranganKematian,
+  type InsertSuratKeteranganKepemilikanRumah,
+  type InsertSuratKeteranganPenghasilan,
+  type InsertSuratKeteranganPenghasilanOrangTua,
+  type InsertSuratKeteranganPenyaksianTanah,
   type InsertSuratKuasaAhliWaris,
   type InsertSuratKuasaSKGR,
   type InsertSuratPengantarSKCK,
@@ -660,6 +667,507 @@ export const suratPernyataanBelumMenikahColumns: ColumnDef<
   },
 ]
 
+interface SuratIzinMendirikanBangunanColumns
+  extends InsertSuratIzinMendirikanBangunan {
+  pemohon: SelectPenduduk
+}
+
+export const suratIzinMendirikanBangunanColumns: ColumnDef<
+  SuratIzinMendirikanBangunanColumns,
+  unknown
+>[] = [
+  {
+    accessorKey: "pemohon",
+    header: "Nama Pemohon",
+    cell: ({ row }) => {
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="truncate font-medium">
+            {data.pemohon.namaLengkap}
+          </span>
+          <span className="text-muted-foreground mt-1 text-[10px] lg:hidden">
+            Luas: {data.luasTanah}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "tujuanPembuatan",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Tujuan Pembuatan</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "luasTanah",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Luas Tanah</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Diubah</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
+interface SuratKeteranganKepemilikanRumahColumns
+  extends InsertSuratKeteranganKepemilikanRumah {
+  pemohon: SelectPenduduk
+}
+
+export const suratKeteranganKepemilikanRumahColumns: ColumnDef<
+  SuratKeteranganKepemilikanRumahColumns,
+  unknown
+>[] = [
+  {
+    accessorKey: "pemohon",
+    header: "Nama Pemohon",
+    cell: ({ row }) => {
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="truncate font-medium">
+            {data.pemohon.namaLengkap}
+          </span>
+          <span className="text-muted-foreground mt-1 text-[10px] lg:hidden">
+            {data.alamatRumah}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "alamatRumah",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Alamat Rumah</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Diubah</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
+interface SuratKeteranganPenghasilanColumns
+  extends InsertSuratKeteranganPenghasilan {
+  pemohon: SelectPenduduk
+}
+
+export const suratKeteranganPenghasilanColumns: ColumnDef<
+  SuratKeteranganPenghasilanColumns,
+  unknown
+>[] = [
+  {
+    accessorKey: "pemohon",
+    header: "Nama Pemohon",
+    cell: ({ row }) => {
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="truncate font-medium">
+            {data.pemohon.namaLengkap}
+          </span>
+          <span className="text-muted-foreground mt-1 text-[10px] lg:hidden">
+            Rp {data.penghasilan}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "penghasilan",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Penghasilan</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Diubah</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
+interface SuratKeteranganJalanColumns extends InsertSuratKeteranganJalan {
+  pemohon: SelectPenduduk
+}
+
+export const suratKeteranganJalanColumns: ColumnDef<
+  SuratKeteranganJalanColumns,
+  unknown
+>[] = [
+  {
+    accessorKey: "pemohon",
+    header: "Nama Pemohon",
+    cell: ({ row }) => {
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="truncate font-medium">
+            {data.pemohon.namaLengkap}
+          </span>
+          <span className="text-muted-foreground mt-1 text-[10px] lg:hidden">
+            {data.tujuanPerjalanan}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "maksudPerjalanan",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Maksud Perjalanan</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "tujuanPerjalanan",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Tujuan Perjalanan</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "rencanaBerangkat",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Rencana Berangkat</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
+interface SuratKeteranganGaibColumns extends InsertSuratKeteranganGaib {
+  pemohon: SelectPenduduk
+  pasanganData: SelectPenduduk
+}
+
+export const suratKeteranganGaibColumns: ColumnDef<
+  SuratKeteranganGaibColumns,
+  unknown
+>[] = [
+  {
+    accessorKey: "pemohon",
+    header: "Nama Pemohon",
+    cell: ({ row }) => {
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="truncate font-medium">
+            {data.pemohon.namaLengkap}
+          </span>
+          <span className="text-muted-foreground mt-1 text-[10px] lg:hidden">
+            Pasangan: {data.pasanganData.namaLengkap}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "pasanganData",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Pasangan (Gaib)</span>,
+    cell: ({ row }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {row.original.pasanganData.namaLengkap}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "tanggalDitinggal",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Tanggal Ditinggal</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Diubah</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
+interface SuratKeteranganPenyaksianTanahColumns
+  extends InsertSuratKeteranganPenyaksianTanah {
+  pemohon: SelectPenduduk
+}
+
+export const suratKeteranganPenyaksianTanahColumns: ColumnDef<
+  SuratKeteranganPenyaksianTanahColumns,
+  unknown
+>[] = [
+  {
+    accessorKey: "pemohon",
+    header: "Nama Pemohon",
+    cell: ({ row }) => {
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="truncate font-medium">
+            {data.pemohon.namaLengkap}
+          </span>
+          <span className="text-muted-foreground mt-1 text-[10px] lg:hidden">
+            {data.jenisTanah} - {data.lokasiTanah}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "keperluan",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Keperluan</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "jenisTanah",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Jenis Tanah</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "lokasiTanah",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Lokasi Tanah</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "luasTanah",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Luas Tanah</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
+export const suratKeteranganPenghasilanOrangTuaColumns: ColumnDef<
+  InsertSuratKeteranganPenghasilanOrangTua,
+  unknown
+>[] = [
+  {
+    accessorKey: "pemohonNIK",
+    header: "NIK Pemohon",
+    cell: ({ getValue, row }) => {
+      const nik = getValue<string>()
+      const data = row.original
+      return (
+        <div className="flex max-w-[240px] flex-col">
+          <span className="truncate font-medium">{nik}</span>
+          <span className="text-muted-foreground mt-1 text-[10px] lg:hidden">
+            {data.namaSekolahAtauUniversitas}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "tujuanPembuatan",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Tujuan Pembuatan</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "namaSekolahAtauUniversitas",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Sekolah/Universitas</span>,
+    cell: ({ getValue }) => (
+      <span className="hidden text-ellipsis lg:line-clamp-2">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Dibuat</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    meta: { isHiddenOnMobile: true },
+    header: () => <span className="hidden lg:inline">Diubah</span>,
+    cell: ({ getValue }) => {
+      const val = getValue<string | Date>()
+      return (
+        <span className="hidden text-ellipsis lg:line-clamp-2">
+          {formatDate(new Date(val), "LL")}
+        </span>
+      )
+    },
+  },
+]
+
 export const tableColumnRegistry = {
   suratIzinKeramaian: suratIzinKeramaianColumns,
   suratKeteranganKelahiran: suratKeteranganKelahiranColumns,
@@ -669,4 +1177,11 @@ export const tableColumnRegistry = {
   suratKuasaSKGR: suratKuasaSKGRColumns,
   suratPengantarSKCK: suratPengantarSKCKColumns,
   suratPernyataanBelumMenikah: suratPernyataanBelumMenikahColumns,
+  suratIzinMendirikanBangunan: suratIzinMendirikanBangunanColumns,
+  suratKeteranganKepemilikanRumah: suratKeteranganKepemilikanRumahColumns,
+  suratKeteranganPenghasilan: suratKeteranganPenghasilanColumns,
+  suratKeteranganJalan: suratKeteranganJalanColumns,
+  suratKeteranganGaib: suratKeteranganGaibColumns,
+  suratKeteranganPenyaksianTanah: suratKeteranganPenyaksianTanahColumns,
+  suratKeteranganPenghasilanOrangTua: suratKeteranganPenghasilanOrangTuaColumns,
 } as const

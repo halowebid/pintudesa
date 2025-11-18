@@ -11,13 +11,13 @@ import { Icon } from "@yopem-ui/react-icons"
  */
 export default function Notifications() {
   // Placeholder state - will be replaced with tRPC query
-  const notifications: Array<{
+  const notifications: {
     id: string
     title: string
     message: string
     createdAt: Date
     read: boolean
-  }> = []
+  }[] = []
 
   const unreadCount = notifications.filter((n) => !n.read).length
 

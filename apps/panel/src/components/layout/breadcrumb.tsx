@@ -18,7 +18,7 @@ export default function Breadcrumb() {
   if (breadcrumbs.length === 1) {
     return (
       <div className="flex items-center gap-2">
-        <span className="text-sm font-medium">{breadcrumbs[0]!.label}</span>
+        <span className="text-sm font-medium">{breadcrumbs[0].label}</span>
       </div>
     )
   }

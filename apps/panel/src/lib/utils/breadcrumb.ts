@@ -72,8 +72,7 @@ export function generateBreadcrumbs(pathname: string): {
   ]
 
   let currentPath = ""
-  for (let i = 0; i < segments.length; i++) {
-    const segment = segments[i]!
+  for (const segment of segments) {
     currentPath += `/${segment}`
 
     // Check if segment is a dynamic ID (UUID or number)

@@ -31,12 +31,15 @@ export default function Search() {
   // Group results by category
   const groupedResults = React.useMemo(() => {
     const groups: Record<string, typeof results> = {}
-    results.forEach((item) => {
-      if (!groups[item.category]) {
-        groups[item.category] = []
+    for (const item of results) {
+      const category = item.category
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      if (groups[category]) {
+        groups[category].push(item)
+      } else {
+        groups[category] = [item]
       }
-      groups[item.category].push(item)
-    })
+    }
     return groups
   }, [results])
 
