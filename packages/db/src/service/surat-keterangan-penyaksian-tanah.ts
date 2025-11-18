@@ -47,12 +47,18 @@ export const getSuratKeteranganPenyaksianTanahs = async (
     limit: perPage,
     offset: (page - 1) * perPage,
     orderBy: (users, { desc }) => [desc(users.createdAt)],
+    with: {
+      pemohon: true,
+    },
   })
 }
 
 export const getSuratKeteranganPenyaksianTanahById = async (id: string) => {
   return await db.query.suratKeteranganPenyaksianTanahTable.findFirst({
     where: eq(suratKeteranganPenyaksianTanahTable.id, id),
+    with: {
+      pemohon: true,
+    },
   })
 }
 
@@ -67,6 +73,9 @@ export const searchSuratKeteranganPenyaksianTanahs = async ({
     where: (suratKeteranganPenyaksianTanahs, { ilike }) =>
       ilike(suratKeteranganPenyaksianTanahs.pemohonNIK, `%${searchQuery}%`),
     limit: limit,
+    with: {
+      pemohon: true,
+    },
   })
 }
 

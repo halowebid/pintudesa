@@ -43,7 +43,7 @@ export function getCommonVariables(setting?: {
     kecamatan: setting?.kecamatan ?? "",
     kabupaten: setting?.kabupatenKota ?? "",
     provinsi: setting?.provinsi ?? "",
-    tanggalSurat: formatDate(now, "PPP"),
+    tanggalSurat: formatDate(now, "LL"),
     tahunSurat: now.getFullYear().toString(),
     namaKepala: setting?.namaKepala ?? "",
     nipKepala: setting?.nipKepala ?? "",
@@ -57,26 +57,28 @@ function mapPendudukVariables(penduduk: any, prefix = "penduduk") {
   if (!penduduk) return {}
 
   return {
-    [`${prefix}.nik`]: penduduk.nik ?? "",
-    [`${prefix}.namaLengkap`]: penduduk.namaLengkap ?? "",
-    [`${prefix}.tempatLahir`]: penduduk.tempatLahir ?? "",
-    [`${prefix}.tanggalLahir`]: penduduk.tanggalLahir
-      ? formatDate(new Date(penduduk.tanggalLahir), "PPP")
-      : "",
-    [`${prefix}.jenisKelamin`]: penduduk.jenisKelamin ?? "",
-    [`${prefix}.agama`]: penduduk.agama ?? "",
-    [`${prefix}.statusPerkawinan`]: penduduk.statusPerkawinan ?? "",
-    [`${prefix}.pekerjaan`]: penduduk.pekerjaan ?? "",
-    [`${prefix}.pendidikanTerakhir`]: penduduk.pendidikanTerakhir ?? "",
-    [`${prefix}.alamat`]: penduduk.alamat ?? "",
-    [`${prefix}.rt`]: penduduk.rt ?? "",
-    [`${prefix}.rw`]: penduduk.rw ?? "",
-    [`${prefix}.dusun`]: penduduk.dusun ?? "",
-    [`${prefix}.desaKelurahan`]: penduduk.desa_kelurahan ?? "",
-    [`${prefix}.kecamatan`]: penduduk.kecamatan ?? "",
-    [`${prefix}.kabupatenKota`]: penduduk.kabupaten_kota ?? "",
-    [`${prefix}.provinsi`]: penduduk.provinsi ?? "",
-    [`${prefix}.kodePos`]: penduduk.kode_pos ?? "",
+    [prefix]: {
+      nik: penduduk.nik ?? "",
+      namaLengkap: penduduk.namaLengkap ?? "",
+      tempatLahir: penduduk.tempatLahir ?? "",
+      tanggalLahir: penduduk.tanggalLahir
+        ? formatDate(new Date(penduduk.tanggalLahir), "LL")
+        : "",
+      jenisKelamin: penduduk.jenisKelamin ?? "",
+      agama: penduduk.agama ?? "",
+      statusPerkawinan: penduduk.statusPerkawinan ?? "",
+      pekerjaan: penduduk.pekerjaan ?? "",
+      pendidikanTerakhir: penduduk.pendidikanTerakhir ?? "",
+      alamat: penduduk.alamat ?? "",
+      rt: penduduk.rt ?? "",
+      rw: penduduk.rw ?? "",
+      dusun: penduduk.dusun ?? "",
+      desaKelurahan: penduduk.desa_kelurahan ?? "",
+      kecamatan: penduduk.kecamatan ?? "",
+      kabupatenKota: penduduk.kabupaten_kota ?? "",
+      provinsi: penduduk.provinsi ?? "",
+      kodePos: penduduk.kode_pos ?? "",
+    },
   }
 }
 
@@ -88,7 +90,10 @@ export function mapSuratVariables(
   suratData: any,
   setting?: any,
 ): Record<string, unknown> {
+  console.log("[mapSuratVariables] input:", { suratType, suratData, setting })
+
   const commonVars = getCommonVariables(setting)
+  console.log("[mapSuratVariables] commonVars:", commonVars)
 
   // Base variables
   const variables: Record<string, unknown> = {
@@ -96,14 +101,15 @@ export function mapSuratVariables(
   }
 
   // Map pemohon (applicant) if available
-  if (suratData.pemohonNIK) {
-    Object.assign(
-      variables,
-      mapPendudukVariables(suratData.pemohonNIK, "pemohon"),
-    )
+  console.log("[mapSuratVariables] suratData.pemohon:", suratData.pemohon)
+  if (suratData.pemohon) {
+    const pemohonVars = mapPendudukVariables(suratData.pemohon, "pemohon")
+    console.log("[mapSuratVariables] pemohonVars:", pemohonVars)
+    Object.assign(variables, pemohonVars)
+  } else {
+    console.warn("[mapSuratVariables] No pemohon data found in suratData")
   }
 
-  // Type-specific mappings
   switch (suratType) {
     case "surat-keterangan-gaib":
       if (suratData.pasangan) {
@@ -115,17 +121,15 @@ export function mapSuratVariables(
       if (suratData["tanggalDitinggal"]) {
         variables["tanggalDitinggal"] = formatDate(
           new Date(suratData["tanggalDitinggal"] as string),
-          "PPP",
+          "LL",
         )
       }
       break
 
     case "surat-keterangan-domisili":
       variables["jumlahTahunDomisili"] = suratData["jumlahTahunDomisili"] ?? ""
-      // Add keluarga members if available
       if (suratData.keluarga && Array.isArray(suratData.keluarga)) {
         variables["jumlahKeluarga"] = suratData.keluarga.length
-        // You can add keluarga list rendering here if needed
       }
       break
 
@@ -165,10 +169,10 @@ export function mapSuratVariables(
       break
 
     case "surat-keterangan-kematian":
-      if (suratData.yangMeninggal) {
+      if (suratData.penduduk) {
         Object.assign(
           variables,
-          mapPendudukVariables(suratData.yangMeninggal, "yangMeninggal"),
+          mapPendudukVariables(suratData.penduduk, "yangMeninggal"),
         )
       }
       if (suratData.pelapor) {
@@ -180,7 +184,7 @@ export function mapSuratVariables(
       if (suratData["tanggalMeninggal"]) {
         variables["tanggalMeninggal"] = formatDate(
           new Date(suratData["tanggalMeninggal"] as string),
-          "PPP",
+          "LL",
         )
       }
       variables["jamMeninggal"] = suratData["jamMeninggal"] ?? ""
@@ -193,13 +197,13 @@ export function mapSuratVariables(
       if (suratData["waktuAcara"]) {
         variables["waktuAcara"] = formatDate(
           new Date(suratData["waktuAcara"] as string),
-          "PPP",
+          "LL",
         )
       }
       if (suratData["waktuSelesai"]) {
         variables["waktuSelesai"] = formatDate(
           new Date(suratData["waktuSelesai"] as string),
-          "PPP",
+          "LL",
         )
       }
       break
@@ -247,6 +251,12 @@ export function mapSuratVariables(
       break
 
     case "surat-kuasa-skgr":
+      if (suratData.kuasaDari) {
+        Object.assign(
+          variables,
+          mapPendudukVariables(suratData.kuasaDari, "kuasaDari"),
+        )
+      }
       variables["keperluan"] = suratData["keperluan"] ?? ""
       variables["lokasiTanah"] = suratData["lokasiTanah"] ?? ""
       break

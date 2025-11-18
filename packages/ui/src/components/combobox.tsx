@@ -3,9 +3,8 @@
 import * as React from "react"
 import {
   Combobox as ComboboxPrimitive,
-  useListCollection,
+  createListCollection,
 } from "@ark-ui/react/combobox"
-import { useFilter } from "@ark-ui/react/locale"
 import { Portal } from "@ark-ui/react/portal"
 import { Icon } from "@yopem-ui/react-icons"
 import { cn } from "@yopem-ui/utils"
@@ -57,19 +56,21 @@ export const ComboboxBase = React.forwardRef<
     },
     ref,
   ) => {
-    const { contains } = useFilter({ sensitivity: "base" })
-
-    const { collection, filter, clear } = useListCollection<Item>({
-      initialItems: items,
-      filter: contains,
-    })
+    // Create collection from items - recreates when items change
+    const collection = React.useMemo(
+      () => createListCollection({ items }),
+      [items],
+    )
 
     React.useImperativeHandle(
       ref,
       () => ({
-        clear,
+        clear: () => {
+          // Component is fully controlled, clearing is handled by parent
+          // through inputValue and value props
+        },
       }),
-      [clear],
+      [],
     )
 
     const Content = (
@@ -108,7 +109,6 @@ export const ComboboxBase = React.forwardRef<
         value={props.value}
         inputValue={props.inputValue}
         onInputValueChange={({ inputValue }) => {
-          filter(inputValue)
           props.onInputValueChange?.(inputValue)
         }}
         onValueChange={({ value }) => {
@@ -159,6 +159,7 @@ export interface ComboboxPopoverProps {
   className?: string
   groupLabel?: string
   selectedLabel?: string
+  mode?: "portal" | "inline"
 }
 
 export const ComboboxPopover = ({
@@ -173,6 +174,7 @@ export const ComboboxPopover = ({
   isClearable,
   onClear,
   selectedLabel,
+  mode = "portal",
 }: ComboboxPopoverProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
   const [inputValue, setInputValue] = React.useState("")
@@ -204,6 +206,7 @@ export const ComboboxPopover = ({
         positioning={{ sameWidth: true, gutter: 8, offset: { mainAxis: 10 } }}
         open={isOpen}
         onOpenChange={(details) => setIsOpen(details.open)}
+        portalled={mode === "portal"}
       >
         <PopoverTrigger asChild>
           <div

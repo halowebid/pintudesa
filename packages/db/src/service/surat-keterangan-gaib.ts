@@ -46,7 +46,7 @@ export const getSuratKeteranganGaibs = async (
     offset: (page - 1) * perPage,
     orderBy: (users, { desc }) => [desc(users.createdAt)],
     with: {
-      pemohonNIK: true,
+      pemohon: true,
       pasangan: true,
     },
   })
@@ -56,7 +56,7 @@ export const getSuratKeteranganGaibById = async (id: string) => {
   return await db.query.suratKeteranganGaibTable.findFirst({
     where: eq(suratKeteranganGaibTable.id, id),
     with: {
-      pemohonNIK: true,
+      pemohon: true,
       pasangan: true,
     },
   })
@@ -74,7 +74,7 @@ export const searchSuratKeteranganGaibs = async ({
       ilike(suratKeteranganGaibs.pemohonNIK, `%${searchQuery}%`),
     limit: limit,
     with: {
-      pemohonNIK: true,
+      pemohon: true,
       pasangan: true,
     },
   })

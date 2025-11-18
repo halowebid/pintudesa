@@ -22,7 +22,11 @@ export const suratKeteranganDomisiliTable = pgTable(
 
 export const suratKeteranganDomisiliRelations = relations(
   suratKeteranganDomisiliTable,
-  ({ many }) => ({
+  ({ one, many }) => ({
+    pemohon: one(pendudukTable, {
+      fields: [suratKeteranganDomisiliTable.pemohonNIK],
+      references: [pendudukTable.id],
+    }),
     keluarga: many(suratKeteranganDomisiliKeluargaTable),
   }),
 )

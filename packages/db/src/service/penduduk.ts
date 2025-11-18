@@ -59,8 +59,11 @@ export const searchPenduduks = async ({
   limit: number
 }) => {
   return await db.query.pendudukTable.findMany({
-    where: (penduduks, { ilike }) =>
-      ilike(penduduks.namaLengkap, `%${searchQuery}%`),
+    where: (penduduks, { ilike, or }) =>
+      or(
+        ilike(penduduks.namaLengkap, `%${searchQuery}%`),
+        ilike(penduduks.nik, `%${searchQuery}%`),
+      ),
     limit: limit,
   })
 }

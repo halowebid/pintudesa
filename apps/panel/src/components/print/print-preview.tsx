@@ -36,6 +36,10 @@ export default function PrintPreview({
     trpc.suratTemplate.bySuratType.queryOptions(suratType),
   )
 
+  // Fetch setting data for village information
+  const { data: settings } = useQuery(trpc.setting.all.queryOptions())
+  const setting = settings?.[0]
+
   // Render template when data is available
   React.useEffect(() => {
     if (!template) {
@@ -45,8 +49,14 @@ export default function PrintPreview({
     }
 
     try {
-      // Map variables - we'll use simple desa info for now
-      const variables = mapSuratVariables(suratType, suratData)
+      // Debug: Log the incoming data
+      console.log("[PrintPreview] suratType:", suratType)
+      console.log("[PrintPreview] suratData:", suratData)
+      console.log("[PrintPreview] setting:", setting)
+
+      // Map variables with setting data
+      const variables = mapSuratVariables(suratType, suratData, setting)
+      console.log("[PrintPreview] mapped variables:", variables)
 
       // Render template
       const html = renderTemplate(template.htmlContent, variables)
@@ -56,7 +66,7 @@ export default function PrintPreview({
       setError("Gagal merender template: " + (err as Error).message)
       setRenderedHtml("")
     }
-  }, [template, suratData, suratType])
+  }, [template, suratData, suratType, setting])
 
   const handlePrint = React.useCallback(() => {
     if (!renderedHtml) return
@@ -111,7 +121,7 @@ export default function PrintPreview({
 
   return (
     <Dialog open={open} onOpenChange={(details) => onOpenChange(details.open)}>
-      <DialogContent className="flex max-h-[90vh] max-w-4xl flex-col overflow-hidden">
+      <DialogContent className="flex max-h-[90vh] !max-w-7xl flex-col overflow-hidden">
         <DialogHeader>
           <DialogTitle>Preview & Cetak</DialogTitle>
         </DialogHeader>

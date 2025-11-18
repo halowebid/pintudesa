@@ -45,12 +45,18 @@ export const getSuratKuasaAhliWariss = async (
     limit: perPage,
     offset: (page - 1) * perPage,
     orderBy: (users, { desc }) => [desc(users.createdAt)],
+    with: {
+      pemohon: true,
+    },
   })
 }
 
 export const getSuratKuasaAhliWarisById = async (id: string) => {
   return await db.query.suratKuasaAhliWarisTable.findFirst({
     where: eq(suratKuasaAhliWarisTable.id, id),
+    with: {
+      pemohon: true,
+    },
   })
 }
 
@@ -65,6 +71,9 @@ export const searchSuratKuasaAhliWariss = async ({
     where: (suratKuasaAhliWariss, { ilike }) =>
       ilike(suratKuasaAhliWariss.ahaliWarisNIK, `%${searchQuery}%`),
     limit: limit,
+    with: {
+      pemohon: true,
+    },
   })
 }
 

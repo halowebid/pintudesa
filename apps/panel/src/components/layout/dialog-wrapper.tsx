@@ -13,7 +13,7 @@ export default function DialogWrapper({
   return (
     <>
       <Dialog open={true} onOpenChange={() => router.back()}>
-        <DialogContent>{children}</DialogContent>
+        <DialogContent className="max-w-4xl">{children}</DialogContent>
       </Dialog>
     </>
   )

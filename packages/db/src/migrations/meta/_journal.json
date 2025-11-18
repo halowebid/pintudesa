@@ -281,6 +281,13 @@
       "when": 1763458528982,
       "tag": "0039_odd_photon",
       "breakpoints": true
+    },
+    {
+      "idx": 40,
+      "version": "7",
+      "when": 1763469475365,
+      "tag": "0040_sleepy_harrier",
+      "breakpoints": true
     }
   ]
 }

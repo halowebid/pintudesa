@@ -1,4 +1,5 @@
 import { createCustomId } from "@pintudesa/utils"
+import { relations } from "drizzle-orm"
 import { pgTable, text, timestamp } from "drizzle-orm/pg-core"
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod"
 
@@ -30,6 +31,16 @@ export const suratKeteranganJalanTable = pgTable("surat_keterangan_jalan", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 })
+
+export const suratKeteranganJalanRelations = relations(
+  suratKeteranganJalanTable,
+  ({ one }) => ({
+    pemohon: one(pendudukTable, {
+      fields: [suratKeteranganJalanTable.pemohonNIK],
+      references: [pendudukTable.id],
+    }),
+  }),
+)
 
 export const insertSuratKeteranganJalanSchema = createInsertSchema(
   suratKeteranganJalanTable,

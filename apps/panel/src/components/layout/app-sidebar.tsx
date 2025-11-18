@@ -36,6 +36,10 @@ const AppSidebar = (props: AppSidebarProps) => {
         url: "/setting",
       },
       {
+        name: "Template Surat",
+        url: "/setting/template-surat",
+      },
+      {
         name: "Pengguna",
         url: "/user",
       },
