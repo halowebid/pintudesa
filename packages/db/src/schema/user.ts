@@ -20,6 +20,18 @@ export const userTable = pgTable("users", {
   phoneNumber: text("phone_number"),
   about: text("about"),
   role: userRoleEnum("role").notNull().default("user"),
+  /**
+   * Indicates whether the user is banned from accessing the system
+   */
+  banned: boolean("banned").notNull().default(false),
+  /**
+   * The reason why the user was banned (optional)
+   */
+  banReason: text("ban_reason"),
+  /**
+   * The timestamp when the ban expires (optional, null means permanent ban)
+   */
+  banExpires: timestamp("ban_expires", { withTimezone: true }),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 })
@@ -58,6 +70,10 @@ export const sessionTable = pgTable("sessions", {
   userId: text("user_id")
     .notNull()
     .references(() => userTable.id),
+  /**
+   * The ID of the admin user who is impersonating this session (optional)
+   */
+  impersonatedBy: text("impersonated_by"),
   createdAt: timestamp("created_at").notNull(),
   updatedAt: timestamp("updated_at").notNull(),
 })

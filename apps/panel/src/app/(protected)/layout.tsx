@@ -2,7 +2,7 @@ import * as React from "react"
 import { redirect } from "next/navigation"
 import { SidebarInset, SidebarProvider } from "@pintudesa/ui"
 
-// import LogOutButton from "@/components/auth/logout-button"
+import SignOutButton from "@/components/auth/sign-out-button"
 import AppSidebar from "@/components/layout/app-sidebar"
 import Topbar from "@/components/layout/topbar"
 import { getSession } from "@/lib/auth/server"
@@ -16,20 +16,20 @@ export default async function ProtectedLayout({
 }) {
   const session = await getSession()
 
-  // const isAdmin = user?.role === "admin"
+  const isAdmin = session?.user.role === "admin"
 
   if (!session) {
     redirect("/auth/sign-in")
   }
 
-  // if (!isAdmin) {
-  //   return (
-  //     <div className="flex h-screen flex-col items-center justify-center space-y-4">
-  //       <h1 className="text-3xl font-bold">Access Denied</h1>
-  //       <LogOutButton />
-  //     </div>
-  //   )
-  // }
+  if (!isAdmin) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center space-y-4">
+        <h1 className="text-3xl font-bold">Access Denied</h1>
+        <SignOutButton />
+      </div>
+    )
+  }
 
   return (
     <SidebarProvider>

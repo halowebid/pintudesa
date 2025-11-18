@@ -22,7 +22,57 @@ import {
 } from "../trpc"
 import { handleTRPCError } from "../utils/error"
 
-const redis = new Redis(redisUrl!)
+// Initialize Redis only if URL is provided and available
+const redis = redisUrl
+  ? new Redis(redisUrl, {
+      maxRetriesPerRequest: 3,
+      lazyConnect: true,
+      retryStrategy: (times) => {
+        if (times > 3) {
+          console.warn("Redis connection failed, caching disabled")
+          return null // Stop retrying
+        }
+        return Math.min(times * 100, 2000)
+      },
+    })
+  : null
+
+// Helper to safely use Redis cache
+async function getCached(key: string): Promise<string | null> {
+  if (!redis) return null
+  try {
+    return await redis.get(key)
+  } catch (error) {
+    console.warn("Redis get failed:", error)
+    return null
+  }
+}
+
+async function setCached(
+  key: string,
+  value: string,
+  ttl?: number,
+): Promise<void> {
+  if (!redis) return
+  try {
+    if (ttl) {
+      await redis.set(key, value, "EX", ttl)
+    } else {
+      await redis.set(key, value)
+    }
+  } catch (error) {
+    console.warn("Redis set failed:", error)
+  }
+}
+
+async function delCached(key: string): Promise<void> {
+  if (!redis) return
+  try {
+    await redis.del(key)
+  } catch (error) {
+    console.warn("Redis del failed:", error)
+  }
+}
 
 export const settingRouter = createTRPCRouter({
   create: adminProtectedProcedure
@@ -33,7 +83,7 @@ export const settingRouter = createTRPCRouter({
         handleTRPCError(error)
       }
       if (input.key) {
-        await redis.del(`setting:${input.key}`)
+        await delCached(`setting:${input.key}`)
       }
       return data
     }),
@@ -48,7 +98,7 @@ export const settingRouter = createTRPCRouter({
         handleTRPCError(error)
       }
       if (input.key) {
-        await redis.del(`setting:${input.key}`)
+        await delCached(`setting:${input.key}`)
       }
       return data
     }),
@@ -65,7 +115,7 @@ export const settingRouter = createTRPCRouter({
       }
 
       if (input.key) {
-        await redis.del(`setting:${input.key}`)
+        await delCached(`setting:${input.key}`)
       }
 
       return data
@@ -78,7 +128,7 @@ export const settingRouter = createTRPCRouter({
       if (error) {
         handleTRPCError(error)
       }
-      await redis.del(`setting:${input}`)
+      await delCached(`setting:${input}`)
       return data
     }),
 
@@ -100,7 +150,7 @@ export const settingRouter = createTRPCRouter({
 
   byKey: publicProcedure.input(z.string()).query(async ({ input }) => {
     const cacheKey = `setting:${input}`
-    const cached = await redis.get(cacheKey)
+    const cached = await getCached(cacheKey)
 
     if (cached) {
       const parsedSetting = JSON.parse(cached) as SelectSetting
@@ -114,7 +164,7 @@ export const settingRouter = createTRPCRouter({
     }
 
     if (data) {
-      await redis.set(cacheKey, JSON.stringify(data), "EX", 60 * 5)
+      await setCached(cacheKey, JSON.stringify(data), 60 * 5)
     }
 
     return data?.value

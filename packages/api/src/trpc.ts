@@ -17,6 +17,7 @@ export const createTRPCContext = async (opts: {
     authApi,
     session,
     db,
+    headers: opts.headers,
   }
 }
 
@@ -45,10 +46,32 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   })
 })
 
+/**
+ * Middleware to enforce admin role requirement
+ * Ensures only users with "admin" role can access protected procedures
+ */
+const enforceUserIsAdmin = t.middleware(({ ctx, next }) => {
+  if (!ctx.session?.user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" })
+  }
+
+  if (ctx.session.user.role !== "admin") {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "You must be an admin to perform this action",
+    })
+  }
+
+  return next({
+    ctx: {
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  })
+})
+
 export const createCallerFactory = t.createCallerFactory
 export const createTRPCRouter = t.router
 
 export const publicProcedure = t.procedure
 export const protectedProcedure = t.procedure.use(enforceUserIsAuthed)
-// TODO: add role-based access control
-export const adminProtectedProcedure = t.procedure.use(enforceUserIsAuthed)
+export const adminProtectedProcedure = t.procedure.use(enforceUserIsAdmin)

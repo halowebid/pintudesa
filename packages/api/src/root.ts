@@ -1,3 +1,4 @@
+import { adminRouter } from "./routes/admin"
 import { agendaRouter } from "./routes/agenda"
 import { anggotaKeluargaRouter } from "./routes/anggota-keluarga"
 import { authRouter } from "./routes/auth"
@@ -39,6 +40,7 @@ import { createCallerFactory, createTRPCRouter, publicProcedure } from "./trpc"
 export const appRouter = createTRPCRouter({
   healthCheck: publicProcedure.query(() => "ok"),
   auth: authRouter,
+  admin: adminRouter,
 
   // Routers
   agenda: agendaRouter,
