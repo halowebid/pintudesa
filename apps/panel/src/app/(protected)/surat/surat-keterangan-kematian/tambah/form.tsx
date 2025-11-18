@@ -223,7 +223,8 @@ export default function SuratKeteranganKematianForm({
           <form.FormItem>
             <form.FormLabel>Informasi Penduduk</form.FormLabel>
             <ComboboxPopover
-              selectedLabel={selectedPenduduk?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedPenduduk?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKey(value)

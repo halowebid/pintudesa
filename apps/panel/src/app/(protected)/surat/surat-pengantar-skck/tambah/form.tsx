@@ -134,7 +134,8 @@ export default function SuratPengantarSKCKForm({
             <form.FormItem>
               <form.FormLabel>Cari Data Pemohon</form.FormLabel>
               <ComboboxPopover
-                selectedLabel={selectedPemohon?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedPemohon?.label}
                 popoverClassName="w-lg max-w-sm lg:max-w-md"
                 onInputValueChange={(value) => {
                   setSearchKeyPemohon(value)

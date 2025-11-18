@@ -209,7 +209,8 @@ export default function SuratKeteranganDomisiliForm({
           <form.FormItem>
             <form.FormLabel>Informasi Pemohon</form.FormLabel>
             <ComboboxPopover
-              selectedLabel={selectedPemohon?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedPemohon?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKeyPemohon(value)
@@ -277,7 +278,8 @@ export default function SuratKeteranganDomisiliForm({
                 </div>
               ))}
               <ComboboxPopover
-                selectedLabel={""}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={""}
                 popoverClassName="w-lg max-w-sm lg:max-w-md"
                 onInputValueChange={(value) => {
                   setSearchKeyKeluarga(value)

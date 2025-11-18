@@ -9,6 +9,7 @@ import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
 import { ControlledTable } from "@/components/controlled-table"
 import ShowOptions from "@/components/show-options"
+import PrintPreview from "@/components/print/print-preview"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/surat/table-column-registry"
 import { useTRPC } from "@/lib/trpc/client"
@@ -19,6 +20,7 @@ export default function SuratKeteranganAhliWarisContent() {
     pageIndex: 0,
     pageSize: 10,
   })
+  const [printItem, setPrintItem] = React.useState<any>(null)
   const columns = React.useMemo(
     () =>
       tableColumnRegistry.suratKuasaAhliWaris as ColumnDef<SelectSuratKuasaAhliWaris>[],
@@ -100,12 +102,22 @@ export default function SuratKeteranganAhliWarisContent() {
           showActions
           renderAction={(item) => (
             <ShowOptions
+              onPrint={() => setPrintItem(item)}
               onDelete={() => deleteItem(item.id)}
               editUrl={`/surat/surat-keterangan-ahli-waris/edit/${item.id}`}
               description={item.pemohonNIK}
             />
           )}
         />
+      
+      {printItem && (
+        <PrintPreview
+          suratType="surat-kuasa-ahli-waris"
+          suratData={printItem}
+          open={!!printItem}
+          onOpenChange={(open) => !open && setPrintItem(null)}
+        />
+      )}
       </div>
     </div>
   )

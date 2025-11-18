@@ -382,7 +382,8 @@ export default function SuratKuasaSKGRForm({
             <form.FormItem>
               <form.FormLabel>Cari Data Kuasa Dari</form.FormLabel>
               <ComboboxPopover
-                selectedLabel={selectedKuasaDari?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedKuasaDari?.label}
                 popoverClassName="w-lg max-w-sm lg:max-w-md"
                 onInputValueChange={(value) => {
                   setSearchKeyKuasaDari(value)

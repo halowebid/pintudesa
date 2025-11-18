@@ -9,6 +9,7 @@ import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
 import { ControlledTable } from "@/components/controlled-table"
 import ShowOptions from "@/components/show-options"
+import PrintPreview from "@/components/print/print-preview"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/surat/table-column-registry"
 import { useTRPC } from "@/lib/trpc/client"
@@ -19,6 +20,7 @@ export default function SuratKeteranganKematianContent() {
     pageIndex: 0,
     pageSize: 10,
   })
+  const [printItem, setPrintItem] = React.useState<any>(null)
   const columns = React.useMemo(
     () =>
       tableColumnRegistry.suratKeteranganKematian as ColumnDef<SelectSuratKeteranganKematian>[],
@@ -100,12 +102,22 @@ export default function SuratKeteranganKematianContent() {
           showActions
           renderAction={(item) => (
             <ShowOptions
+              onPrint={() => setPrintItem(item)}
               onDelete={() => deleteItem(item.id)}
               editUrl={`/surat/surat-keterangan-kematian/edit/${item.id}`}
               description={item.nik}
             />
           )}
         />
+      
+      {printItem && (
+        <PrintPreview
+          suratType="surat-keterangan-kematian"
+          suratData={printItem}
+          open={!!printItem}
+          onOpenChange={(open) => !open && setPrintItem(null)}
+        />
+      )}
       </div>
     </div>
   )

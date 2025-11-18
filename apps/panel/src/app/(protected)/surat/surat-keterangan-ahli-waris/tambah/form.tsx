@@ -331,7 +331,8 @@ export default function SuratKeteranganAhliWarisForm({
           <form.FormItem>
             <form.FormLabel>Informasi Pemohon</form.FormLabel>
             <ComboboxPopover
-              selectedLabel={selectedPemohon?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedPemohon?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKeyPemohon(value)
@@ -440,7 +441,8 @@ export default function SuratKeteranganAhliWarisForm({
           <form.FormItem>
             <form.FormLabel>Informasi yang Meninggal</form.FormLabel>
             <ComboboxPopover
-              selectedLabel={selectedYangMeninggal?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedYangMeninggal?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKeyYangMeninggal(value)
@@ -535,7 +537,8 @@ export default function SuratKeteranganAhliWarisForm({
           <form.FormItem>
             <form.FormLabel>Informasi Ahli Waris</form.FormLabel>
             <ComboboxPopover
-              selectedLabel={selectedAhliWaris?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedAhliWaris?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKeyAhliWaris(value)

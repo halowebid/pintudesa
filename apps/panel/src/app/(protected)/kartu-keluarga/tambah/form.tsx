@@ -169,9 +169,10 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
     items: shdkOptions,
   })
 
-  const { data: settingDatas } = useQuery(
-    trpc.setting.byKey.queryOptions("setting:address"),
-  )
+  const { data: settingDatas } = useQuery({
+    ...trpc.setting.byKey.queryOptions("setting:address"),
+    retry: false,
+  })
 
   const settingsValue = React.useMemo(() => {
     if (
@@ -621,7 +622,8 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
                     Cari dan Pilih Kepala Keluarga
                   </form.FormLabel>
                   <ComboboxPopover
-                    popoverClassName="w-lg max-w-sm lg:max-w-md"
+          mode={isDialog ? "inline" : "portal"}
+          popoverClassName="w-lg max-w-sm lg:max-w-md"
                     onInputValueChange={(value) => {
                       setSearchKey(value)
                     }}
@@ -992,7 +994,8 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
             <div className="space-y-2">
               <label className="text-sm font-medium">Cari Penduduk</label>
               <ComboboxPopover
-                selectedLabel={selectedAnggota?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedAnggota?.label}
                 onInputValueChange={setAnggotaSearchKey}
                 onValueChange={(val) => {
                   const selected = anggotaPendudukOptionsRaw.find(

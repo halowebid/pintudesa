@@ -182,7 +182,8 @@ export default function SuratKeteranganGaibForm({
           <form.FormItem>
             <form.FormLabel>Informasi Pemohon</form.FormLabel>
             <ComboboxPopover
-              selectedLabel={selectedPemohon?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedPemohon?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKeyPemohon(value)
@@ -250,7 +251,8 @@ export default function SuratKeteranganGaibForm({
           <form.FormItem>
             <form.FormLabel>Informasi Pasangan yang Gaib</form.FormLabel>
             <ComboboxPopover
-              selectedLabel={selectedPasangan?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedPasangan?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKeyPasangan(value)

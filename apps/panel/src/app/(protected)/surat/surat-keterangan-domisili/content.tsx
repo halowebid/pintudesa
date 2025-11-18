@@ -8,6 +8,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
 import { ControlledTable } from "@/components/controlled-table"
+import PrintPreview from "@/components/print/print-preview"
 import ShowOptions from "@/components/show-options"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/surat/table-column-registry"
@@ -19,6 +20,9 @@ export default function SuratKeteranganDomisiliContent() {
     pageIndex: 0,
     pageSize: 10,
   })
+  const [printItem, setPrintItem] =
+    React.useState<SelectSuratKeteranganDomisili | null>(null)
+
   const columns = React.useMemo(
     () =>
       tableColumnRegistry.suratKeteranganDomisili as ColumnDef<SelectSuratKeteranganDomisili>[],
@@ -100,6 +104,7 @@ export default function SuratKeteranganDomisiliContent() {
           showActions
           renderAction={(item) => (
             <ShowOptions
+              onPrint={() => setPrintItem(item)}
               onDelete={() => deleteItem(item.id)}
               editUrl={`/surat/surat-keterangan-domisili/edit/${item.id}`}
               description={item.pemohonNIK}
@@ -107,6 +112,15 @@ export default function SuratKeteranganDomisiliContent() {
           )}
         />
       </div>
+
+      {printItem && (
+        <PrintPreview
+          suratType="surat-keterangan-domisili"
+          suratData={printItem}
+          open={!!printItem}
+          onOpenChange={(open) => !open && setPrintItem(null)}
+        />
+      )}
     </div>
   )
 }

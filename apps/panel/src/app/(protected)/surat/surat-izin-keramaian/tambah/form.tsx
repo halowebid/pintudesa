@@ -188,7 +188,8 @@ export default function SuratIzinKeramaianForm({
           <form.FormItem>
             <form.FormLabel>Informasi Pemohon</form.FormLabel>
             <ComboboxPopover
-              selectedLabel={selectedPenduduk?.label}
+          mode={isDialog ? "inline" : "portal"}
+          selectedLabel={selectedPenduduk?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKey(value)

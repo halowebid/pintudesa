@@ -17,6 +17,7 @@ import Link from "@/components/link"
 
 interface ShowOptionsProps extends React.ComponentProps<typeof Menu> {
   onDelete?: () => void
+  onPrint?: () => void
   editUrl?: string | UrlObject
   editUrlNewTab?: string | UrlObject
   translateUrl?: string | UrlObject
@@ -28,6 +29,7 @@ interface ShowOptionsProps extends React.ComponentProps<typeof Menu> {
 const ShowOptions = (props: ShowOptionsProps) => {
   const {
     onDelete,
+    onPrint,
     editUrl,
     editUrlNewTab,
     viewUrl,
@@ -47,6 +49,18 @@ const ShowOptions = (props: ShowOptionsProps) => {
         </MenuTrigger>
         <MenuContent className="w-[150px] p-2">
           <MenuItemGroup>
+            {onPrint && (
+              <MenuItem value="Cetak" asChild>
+                <Button
+                  variant="ghost"
+                  onClick={onPrint}
+                  className="w-full justify-start !px-2 py-1.5 text-sm"
+                >
+                  <Icon name="Printer" className="mr-2 size-4" />
+                  Cetak
+                </Button>
+              </MenuItem>
+            )}
             {onDelete && (
               <MenuItem value="Hapus" asChild>
                 <Button
