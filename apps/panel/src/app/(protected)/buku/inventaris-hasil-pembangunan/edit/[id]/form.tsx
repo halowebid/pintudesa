@@ -64,7 +64,7 @@ export default function InventarisHasilPembangunanForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-d3")
+          router.push("/buku/inventaris-hasil-pembangunan")
         }
       },
       onError: (error) => {

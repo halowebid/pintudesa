@@ -58,7 +58,7 @@ export default function AgendaForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-a7")
+          router.push("/buku/agenda")
         }
       },
       onError: (error) => {

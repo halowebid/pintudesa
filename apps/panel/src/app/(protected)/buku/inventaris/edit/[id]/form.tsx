@@ -70,7 +70,7 @@ export default function InventarisForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-a3")
+          router.push("/buku/inventaris")
         }
       },
       onError: (error) => {

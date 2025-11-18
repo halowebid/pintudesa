@@ -127,7 +127,7 @@ export default function PendudukSementaraForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-b4")
+          router.push("/buku/penduduk-sementara")
         }
       },
       onError: (error) => {

@@ -80,7 +80,7 @@ export default function LembaranForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-a9")
+          router.push("/buku/lembaran")
         }
       },
       onError: (error) => {

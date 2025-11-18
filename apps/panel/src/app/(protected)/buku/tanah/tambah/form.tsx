@@ -60,7 +60,7 @@ export default function TanahForm({ isDialog }: { isDialog: boolean }) {
           router.back()
           await invalidateTanahsKey()
         } else {
-          router.push("/buku-a6")
+          router.push("/buku/tanah")
         }
       },
       onError: (error) => {

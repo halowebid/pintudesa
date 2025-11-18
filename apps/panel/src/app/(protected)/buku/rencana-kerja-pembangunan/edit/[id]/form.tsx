@@ -67,7 +67,7 @@ export default function RencanaKerjaPembangunanForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-d1")
+          router.push("/buku/rencana-kerja-pembangunan")
         }
       },
       onError: (error) => {

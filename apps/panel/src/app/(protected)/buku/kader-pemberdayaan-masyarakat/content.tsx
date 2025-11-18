@@ -92,7 +92,7 @@ export default function KaderPemberdayaanMasyarakatContent() {
           D4. Buku Kader Pemberdayaan Masyarakat
         </h1>
         <Button asChild>
-          <Link href="/buku-d4/tambah">Tambah</Link>
+          <Link href="/buku/kader-pemberdayaan-masyarakat/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -107,7 +107,7 @@ export default function KaderPemberdayaanMasyarakatContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku-d4/edit/${item.id}`}
+              editUrl={`/buku/kader-pemberdayaan-masyarakat/edit/${item.id}`}
               description={item.nama}
             />
           )}

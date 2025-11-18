@@ -64,7 +64,7 @@ export default function LembaranForm({ isDialog }: { isDialog: boolean }) {
           router.back()
           await invalidateLembaransKey()
         } else {
-          router.push("/buku-a9")
+          router.push("/buku/lembaran")
         }
       },
       onError: (error) => {

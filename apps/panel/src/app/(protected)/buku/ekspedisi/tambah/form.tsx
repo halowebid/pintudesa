@@ -86,7 +86,7 @@ export default function EkspedisiForm({ isDialog }: { isDialog: boolean }) {
           router.back()
           await invalidateEkspedisisKey()
         } else {
-          router.push("/buku-a8")
+          router.push("/buku/ekspedisi")
         }
       },
       onError: (error) => {

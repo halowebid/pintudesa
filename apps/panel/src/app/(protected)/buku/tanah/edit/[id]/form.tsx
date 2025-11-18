@@ -72,7 +72,7 @@ export default function TanahForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-a6")
+          router.push("/buku/tanah")
         }
       },
       onError: (error) => {

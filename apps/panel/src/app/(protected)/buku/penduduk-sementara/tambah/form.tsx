@@ -116,7 +116,7 @@ export default function PendudukSementaraForm({
           router.back()
           await invalidatePendudukSementarasKey()
         } else {
-          router.push("/buku-b4")
+          router.push("/buku/penduduk-sementara")
         }
       },
       onError: (error) => {

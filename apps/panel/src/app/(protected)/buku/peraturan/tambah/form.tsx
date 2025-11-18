@@ -111,7 +111,7 @@ export default function PeraturanForm({ isDialog }: { isDialog: boolean }) {
           await invalidatePeraturansKey()
           router.back()
         } else {
-          router.push("/buku-a1")
+          router.push("/buku/peraturan")
         }
       },
       onError: (error) => {

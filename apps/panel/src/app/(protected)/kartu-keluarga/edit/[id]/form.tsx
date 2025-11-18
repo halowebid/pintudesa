@@ -410,7 +410,7 @@ export default function PendudukForm({
         await invalidateKartuKeluargasKey()
         await invalidateKartuKeluargasByIdKey()
         if (isDialog) router.back()
-        else router.push(`/kartu-keluarga/ `)
+        else router.push("/kartu-keluarga")
       } catch (error) {
         console.error("Gagal submit:", error)
       } finally {

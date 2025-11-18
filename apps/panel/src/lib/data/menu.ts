@@ -154,8 +154,8 @@ export const menuItems: MenuItem[] = [
     category: "Surat",
   },
   {
-    name: "Surat Kuasa Ahli Waris",
-    url: "/surat/surat-kuasa-ahli-waris",
+    name: "Surat Keterangan Ahli Waris",
+    url: "/surat/surat-keterangan-ahli-waris",
     category: "Surat",
   },
   {

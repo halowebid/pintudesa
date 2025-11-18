@@ -100,7 +100,7 @@ export default function EkspedisiForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-a8")
+          router.push("/buku/ekspedisi")
         }
       },
       onError: (error) => {

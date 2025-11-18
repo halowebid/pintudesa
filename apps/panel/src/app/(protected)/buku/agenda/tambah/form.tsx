@@ -43,7 +43,7 @@ export default function AgendaForm({ isDialog }: { isDialog: boolean }) {
           router.back()
           await invalidateAgendasKey()
         } else {
-          router.push("/buku-a7")
+          router.push("/buku/agenda")
         }
       },
       onError: (error) => {

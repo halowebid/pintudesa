@@ -70,7 +70,7 @@ export default function KaderPemberdayaanMasyarakatForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-d4")
+          router.push("/buku/kader-pemberdayaan-masyarakat")
         }
       },
       onError: (error) => {

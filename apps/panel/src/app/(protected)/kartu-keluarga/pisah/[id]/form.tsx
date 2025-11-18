@@ -180,7 +180,7 @@ export default function PecahKKForm({
         })
 
         if (isDialog) router.back()
-        else router.push(`/kartu-keluarga/ `)
+        else router.push("/kartu-keluarga")
       } catch (error) {
         console.error("Gagal submit:", error)
       } finally {

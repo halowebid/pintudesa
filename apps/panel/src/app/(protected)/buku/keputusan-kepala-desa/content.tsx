@@ -86,7 +86,7 @@ export default function KeputusanKepalaDesaContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">A2. Buku Keputusan Kepala Desa</h1>
         <Button asChild>
-          <Link href="/buku-a2/tambah">Tambah</Link>
+          <Link href="/buku/keputusan-kepala-desa/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -101,7 +101,7 @@ export default function KeputusanKepalaDesaContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku-a2/edit/${item.id}`}
+              editUrl={`/buku/keputusan-kepala-desa/edit/${item.id}`}
               description={item.judul}
             />
           )}

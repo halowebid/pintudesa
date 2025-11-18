@@ -88,7 +88,7 @@ export default function InventarisHasilPembangunanContent() {
           D3. Buku Inventaris Hasil Pembangunan
         </h1>
         <Button asChild>
-          <Link href="/buku-d3/tambah">Tambah</Link>
+          <Link href="/buku/inventaris-hasil-pembangunan/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -103,7 +103,7 @@ export default function InventarisHasilPembangunanContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku-d3/edit/${item.id}`}
+              editUrl={`/buku/inventaris-hasil-pembangunan/edit/${item.id}`}
               description={item.namaHasilPembangunan}
             />
           )}

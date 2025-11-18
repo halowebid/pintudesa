@@ -50,7 +50,7 @@ export default function InventarisHasilPembangunanForm({
           router.back()
           await invalidateInventarisHasilPembangunansKey()
         } else {
-          router.push("/buku-d3")
+          router.push("/buku/inventaris-hasil-pembangunan")
         }
       },
       onError: (error) => {

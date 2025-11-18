@@ -86,7 +86,7 @@ export default function KegiatanPembangunanContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">D2. Buku Kegiatan Pembangunan</h1>
         <Button asChild>
-          <Link href="/buku-d2/tambah">Tambah</Link>
+          <Link href="/buku/kegiatan-pembangunan/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -101,7 +101,7 @@ export default function KegiatanPembangunanContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku-d2/edit/${item.id}`}
+              editUrl={`/buku/kegiatan-pembangunan/edit/${item.id}`}
               description={item.namaKegiatan}
             />
           )}

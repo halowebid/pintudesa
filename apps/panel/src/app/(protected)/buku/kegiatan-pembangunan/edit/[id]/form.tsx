@@ -66,7 +66,7 @@ export default function KegiatanPembangunanForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-d2")
+          router.push("/buku/kegiatan-pembangunan")
         }
       },
       onError: (error) => {

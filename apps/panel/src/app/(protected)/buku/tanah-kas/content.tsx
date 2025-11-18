@@ -84,7 +84,7 @@ export default function TanahKasContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">A5. Buku Tanah Kas Desa</h1>
         <Button asChild>
-          <Link href="/buku-a5/tambah">Tambah</Link>
+          <Link href="/buku/tanah-kas/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -99,7 +99,7 @@ export default function TanahKasContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku-a5/edit/${item.id}`}
+              editUrl={`/buku/tanah-kas/edit/${item.id}`}
               description={item.asal}
             />
           )}

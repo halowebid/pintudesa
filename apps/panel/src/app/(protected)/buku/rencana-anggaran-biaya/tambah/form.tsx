@@ -38,7 +38,7 @@ export default function RABForm({ isDialog }: { isDialog: boolean }) {
           await invalidateRABsKey()
           router.back()
         } else {
-          router.push("/buku-c2")
+          router.push("/buku/rencana-anggaran-biaya")
         }
       },
       onError: (error) => {

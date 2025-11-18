@@ -52,6 +52,69 @@ const AppSidebar = (props: AppSidebarProps) => {
       },
     ],
 
+    navSurat: [
+      {
+        name: "Surat Izin Keramaian",
+        url: "/surat/surat-izin-keramaian",
+      },
+      {
+        name: "Surat Izin Mendirikan Bangunan",
+        url: "/surat/surat-izin-mendirikan-bangunan",
+      },
+      {
+        name: "Surat Keterangan Domisili",
+        url: "/surat/surat-keterangan-domisili",
+      },
+      {
+        name: "Surat Keterangan Gaib",
+        url: "/surat/surat-keterangan-gaib",
+      },
+      {
+        name: "Surat Keterangan Jalan",
+        url: "/surat/surat-keterangan-jalan",
+      },
+      {
+        name: "Surat Keterangan Kelahiran",
+        url: "/surat/surat-keterangan-kelahiran",
+      },
+      {
+        name: "Surat Keterangan Kematian",
+        url: "/surat/surat-keterangan-kematian",
+      },
+      {
+        name: "Surat Keterangan Kepemilikan Rumah",
+        url: "/surat/surat-keterangan-kepemilikan-rumah",
+      },
+      {
+        name: "Surat Keterangan Penghasilan",
+        url: "/surat/surat-keterangan-penghasilan",
+      },
+      {
+        name: "Surat Keterangan Penghasilan Orang Tua",
+        url: "/surat/surat-keterangan-penghasilan-orang-tua",
+      },
+      {
+        name: "Surat Keterangan Penyaksian Tanah",
+        url: "/surat/surat-keterangan-penyaksian-tanah",
+      },
+      {
+        name: "Surat Keterangan Ahli Waris",
+        url: "/surat/surat-keterangan-ahli-waris",
+      },
+      {
+        name: "Surat Kuasa SKGR",
+        url: "/surat/surat-kuasa-skgr",
+      },
+      {
+        name: "Surat Pengantar SKCK",
+        url: "/surat/surat-pengantar-skck",
+      },
+      {
+        name: "Surat Pernyataan Belum Menikah",
+        url: "/surat/surat-pernyataan-belum-menikah",
+      },
+    ],
+
     navBukuAdministrasiUmum: [
       {
         name: "A1. Buku Peraturan Desa",
@@ -185,6 +248,7 @@ const AppSidebar = (props: AppSidebarProps) => {
       <SidebarContent>
         <NavMain label="Menu" items={data.navMain} />
         <NavMain label="Kependudukan" items={data.navKependudukan} />
+        <NavCollapsible items={data.navSurat} label="Surat Menyurat" />
         <SidebarGroup>
           <SidebarGroupLabel>Buku Administrasi</SidebarGroupLabel>
           <NavCollapsible

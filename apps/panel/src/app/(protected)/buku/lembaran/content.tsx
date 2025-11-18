@@ -90,7 +90,7 @@ export default function LembaranContent() {
           A9. Buku Lembaran dan Buku Berita Desa
         </h1>
         <Button asChild>
-          <Link href="/buku-a9/tambah">Tambah</Link>
+          <Link href="/buku/lembaran/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -105,7 +105,7 @@ export default function LembaranContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku-a9/edit/${item.id}`}
+              editUrl={`/buku/lembaran/edit/${item.id}`}
               description={item.keterangan}
             />
           )}

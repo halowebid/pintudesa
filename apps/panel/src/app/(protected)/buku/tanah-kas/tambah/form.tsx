@@ -59,7 +59,7 @@ export default function TanahKasForm({ isDialog }: { isDialog: boolean }) {
           router.back()
           await invalidateTanahKassKey()
         } else {
-          router.push("/buku-a6")
+          router.push("/buku/tanah-kas")
         }
       },
       onError: (error) => {

@@ -88,7 +88,7 @@ export default function AgendaContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">A7. Buku Agenda</h1>
         <Button asChild>
-          <Link href="/buku-a7/tambah">Tambah</Link>
+          <Link href="/buku/agenda/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -103,7 +103,7 @@ export default function AgendaContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku-a7/edit/${item.id}`}
+              editUrl={`/buku/agenda/edit/${item.id}`}
               description={item.uraian}
             />
           )}

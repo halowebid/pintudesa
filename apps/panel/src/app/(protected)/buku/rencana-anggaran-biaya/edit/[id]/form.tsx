@@ -52,7 +52,7 @@ export default function RABForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-c2")
+          router.push("/buku/rencana-anggaran-biaya")
         }
       },
       onError: (error) => {

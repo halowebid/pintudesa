@@ -84,7 +84,7 @@ export default function RABContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">C2. Buku RAB</h1>
         <Button asChild>
-          <Link href="/buku-c2/tambah">Tambah</Link>
+          <Link href="/buku/rencana-anggaran-biaya/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -99,7 +99,7 @@ export default function RABContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku-c2/edit/${item.id}`}
+              editUrl={`/buku/rencana-anggaran-biaya/edit/${item.id}`}
               description={item.kegiatan}
             />
           )}

@@ -52,7 +52,7 @@ export default function RencanaKerjaPembangunanForm({
           router.back()
           await invalidateRencanaKerjaPembangunansKey()
         } else {
-          router.push("/buku-d1")
+          router.push("/buku/rencana-kerja-pembangunan")
         }
       },
       onError: (error) => {

@@ -54,7 +54,7 @@ export default function KaderPemberdayaanMasyarakatForm({
           router.back()
           await invalidateKaderPemberdayaanMasyarakatsKey()
         } else {
-          router.push("/buku-d4")
+          router.push("/buku/kader-pemberdayaan-masyarakat")
         }
       },
       onError: (error) => {

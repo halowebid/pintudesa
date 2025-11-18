@@ -57,7 +57,7 @@ export default function InventarisForm({ isDialog }: { isDialog: boolean }) {
           router.back()
           await invalidateInventarissKey()
         } else {
-          router.push("/buku-a3")
+          router.push("/buku/inventaris")
         }
       },
       onError: (error) => {

@@ -124,7 +124,7 @@ export default function PeraturanForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-a1")
+          router.push("/buku/peraturan")
         }
       },
       onError: (error) => {

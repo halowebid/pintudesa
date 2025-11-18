@@ -88,7 +88,7 @@ export default function RencanaKerjaPembangunanContent() {
           D1. Buku Rencana Kerja Pembangunan
         </h1>
         <Button asChild>
-          <Link href="/buku-d1/tambah">Tambah</Link>
+          <Link href="/buku/rencana-kerja-pembangunan/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -103,7 +103,7 @@ export default function RencanaKerjaPembangunanContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku-d1/edit/${item.id}`}
+              editUrl={`/buku/rencana-kerja-pembangunan/edit/${item.id}`}
               description={item.namaKegiatan}
             />
           )}

@@ -71,7 +71,7 @@ export default function TanahKasForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-a5")
+          router.push("/buku/tanah-kas")
         }
       },
       onError: (error) => {

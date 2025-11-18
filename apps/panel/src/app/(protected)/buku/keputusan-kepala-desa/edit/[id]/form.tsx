@@ -80,7 +80,7 @@ export default function KeputusanKepalaDesaForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku-a2")
+          router.push("/buku/keputusan-kepala-desa")
         }
       },
       onError: (error) => {
