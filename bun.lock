@@ -5,12 +5,12 @@
     "": {
       "name": "pintudesa",
       "devDependencies": {
-        "@yopem/eslint-config": "latest",
-        "@yopem/prettier-config": "latest",
-        "lefthook": "latest",
-        "prettier": "latest",
-        "turbo": "latest",
-        "typescript": "latest",
+        "@yopem/eslint-config": "^0.3.1",
+        "@yopem/prettier-config": "^0.1.9",
+        "lefthook": "2.0.4",
+        "prettier": "^3.6.2",
+        "turbo": "^2.6.1",
+        "typescript": "^5.9.3",
       },
     },
     "apps/panel": {

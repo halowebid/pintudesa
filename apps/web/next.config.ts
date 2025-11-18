@@ -39,6 +39,10 @@ const config = {
         protocol: "https",
         hostname: "*.pintudesa.com",
       },
+      {
+        protocol: "https",
+        hostname: "*.pexels.com",
+      },
     ],
   },
 }
