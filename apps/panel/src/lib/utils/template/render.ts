@@ -21,6 +21,12 @@ export function renderTemplate(
       return "" // Return empty string for missing values
     }
 
+    // Convert to string, handling objects properly
+    if (typeof value === "object") {
+      return JSON.stringify(value)
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
     return String(value)
   })
 }

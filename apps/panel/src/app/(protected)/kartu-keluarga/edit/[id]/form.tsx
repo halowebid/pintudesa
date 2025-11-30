@@ -295,6 +295,7 @@ export default function PendudukForm({
         )
 
         if (!pendudukDetail) {
+          // eslint-disable-next-line no-console
           console.warn(
             `Data penduduk untuk pendudukId ${relasi.pendudukId} tidak ditemukan.`,
           )
@@ -309,6 +310,7 @@ export default function PendudukForm({
 
         const parseResult = pendudukSchema.safeParse(combinedData)
         if (!parseResult.success) {
+          // eslint-disable-next-line no-console
           console.error(
             `Validasi Zod gagal untuk NIK ${pendudukDetail.nik}:`,
             parseResult.error.flatten().fieldErrors,
@@ -373,6 +375,7 @@ export default function PendudukForm({
         }),
       )
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [anggotaList, createAnggotaKeluarga],
   )
   const form = useAppForm({
@@ -412,6 +415,7 @@ export default function PendudukForm({
         if (isDialog) router.back()
         else router.push("/kartu-keluarga")
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error("Gagal submit:", error)
       } finally {
         setIsFormSubmitting(false)

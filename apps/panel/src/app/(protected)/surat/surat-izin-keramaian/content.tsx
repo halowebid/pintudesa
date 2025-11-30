@@ -20,7 +20,8 @@ export default function SuratIzinKeramaianContent() {
     pageIndex: 0,
     pageSize: 10,
   })
-  const [printItem, setPrintItem] = React.useState<any>(null)
+  const [printItem, setPrintItem] =
+    React.useState<SelectSuratIzinKeramaian | null>(null)
   const columns = React.useMemo(
     () =>
       tableColumnRegistry.suratIzinKeramaian as ColumnDef<SelectSuratIzinKeramaian>[],

@@ -182,6 +182,7 @@ export default function PecahKKForm({
         if (isDialog) router.back()
         else router.push("/kartu-keluarga")
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error("Gagal submit:", error)
       } finally {
         setIsSubmitting(false)

@@ -20,7 +20,8 @@ export default function SuratKeteranganPenghasilanContent() {
     pageIndex: 0,
     pageSize: 10,
   })
-  const [printItem, setPrintItem] = React.useState<any>(null)
+  const [printItem, setPrintItem] =
+    React.useState<SelectSuratKeteranganPenghasilan | null>(null)
   const columns = React.useMemo(
     () =>
       tableColumnRegistry.suratKeteranganPenghasilan as ColumnDef<SelectSuratKeteranganPenghasilan>[],

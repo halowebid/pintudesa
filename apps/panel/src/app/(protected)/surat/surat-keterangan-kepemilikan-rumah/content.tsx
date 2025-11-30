@@ -20,7 +20,8 @@ export default function SuratKeteranganKepemilikanRumahContent() {
     pageIndex: 0,
     pageSize: 10,
   })
-  const [printItem, setPrintItem] = React.useState<any>(null)
+  const [printItem, setPrintItem] =
+    React.useState<SelectSuratKeteranganKepemilikanRumah | null>(null)
   const columns = React.useMemo(
     () =>
       tableColumnRegistry.suratKeteranganKepemilikanRumah as ColumnDef<SelectSuratKeteranganKepemilikanRumah>[],

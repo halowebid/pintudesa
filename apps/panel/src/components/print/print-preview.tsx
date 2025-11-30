@@ -16,7 +16,7 @@ import { mapSuratVariables, renderTemplate } from "@/lib/utils/template"
 
 interface PrintPreviewProps {
   suratType: SuratType
-  suratData: any
+  suratData: Record<string, unknown>
   open: boolean
   onOpenChange: (open: boolean) => void
 }
@@ -50,12 +50,16 @@ export default function PrintPreview({
 
     try {
       // Debug: Log the incoming data
+      // eslint-disable-next-line no-console
       console.log("[PrintPreview] suratType:", suratType)
+      // eslint-disable-next-line no-console
       console.log("[PrintPreview] suratData:", suratData)
+      // eslint-disable-next-line no-console
       console.log("[PrintPreview] setting:", setting)
 
       // Map variables with setting data
       const variables = mapSuratVariables(suratType, suratData, setting)
+      // eslint-disable-next-line no-console
       console.log("[PrintPreview] mapped variables:", variables)
 
       // Render template

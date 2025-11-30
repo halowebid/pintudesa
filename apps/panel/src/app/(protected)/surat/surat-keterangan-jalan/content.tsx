@@ -20,7 +20,8 @@ export default function SuratKeteranganJalanContent() {
     pageIndex: 0,
     pageSize: 10,
   })
-  const [printItem, setPrintItem] = React.useState<any>(null)
+  const [printItem, setPrintItem] =
+    React.useState<SelectSuratKeteranganJalan | null>(null)
   const columns = React.useMemo(
     () =>
       tableColumnRegistry.suratKeteranganJalan as ColumnDef<SelectSuratKeteranganJalan>[],

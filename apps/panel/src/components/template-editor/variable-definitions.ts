@@ -294,7 +294,8 @@ export function getVariablesForSuratType(
   return [
     ...COMMON_VARIABLES,
     ...PEMOHON_VARIABLES,
-    ...(SURAT_TYPE_VARIABLES[suratType] ?? []),
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    ...(SURAT_TYPE_VARIABLES[suratType] || []),
   ]
 }
 

@@ -3,6 +3,8 @@
  * Maps database records to template variables
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/dot-notation, no-console */
+
 import type { SuratType } from "@pintudesa/db/schema"
 import { formatDate } from "@pintudesa/utils"
 

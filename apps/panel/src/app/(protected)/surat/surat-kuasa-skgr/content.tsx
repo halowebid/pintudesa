@@ -20,7 +20,9 @@ export default function SuratKuasaSKGRContent() {
     pageIndex: 0,
     pageSize: 10,
   })
-  const [printItem, setPrintItem] = React.useState<any>(null)
+  const [printItem, setPrintItem] = React.useState<SelectSuratKuasaSKGR | null>(
+    null,
+  )
   const columns = React.useMemo(
     () =>
       tableColumnRegistry.suratKuasaSKGR as ColumnDef<SelectSuratKuasaSKGR>[],
