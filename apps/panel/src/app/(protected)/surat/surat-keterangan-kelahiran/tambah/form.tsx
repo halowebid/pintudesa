@@ -355,8 +355,8 @@ export default function SuratKeteranganKelahiranForm({
             <form.FormItem>
               <form.FormLabel>Cari Data Ayah</form.FormLabel>
               <ComboboxPopover
-          mode={isDialog ? "inline" : "portal"}
-          selectedLabel={selectedAyah?.label}
+                mode={isDialog ? "inline" : "portal"}
+                selectedLabel={selectedAyah?.label}
                 popoverClassName="w-lg max-w-sm lg:max-w-md"
                 onInputValueChange={(value) => {
                   setSearchKeyAyah(value)
@@ -498,8 +498,8 @@ export default function SuratKeteranganKelahiranForm({
             <form.FormItem>
               <form.FormLabel>Cari Data Ibu</form.FormLabel>
               <ComboboxPopover
-          mode={isDialog ? "inline" : "portal"}
-          selectedLabel={selectedIbu?.label}
+                mode={isDialog ? "inline" : "portal"}
+                selectedLabel={selectedIbu?.label}
                 popoverClassName="w-lg max-w-sm lg:max-w-md"
                 onInputValueChange={(value) => {
                   setSearchKeyIbu(value)
@@ -641,8 +641,8 @@ export default function SuratKeteranganKelahiranForm({
             <form.FormItem>
               <form.FormLabel>Cari Data Pemohon</form.FormLabel>
               <ComboboxPopover
-          mode={isDialog ? "inline" : "portal"}
-          selectedLabel={selectedPemohon?.label}
+                mode={isDialog ? "inline" : "portal"}
+                selectedLabel={selectedPemohon?.label}
                 popoverClassName="w-lg max-w-sm lg:max-w-md"
                 onInputValueChange={(value) => {
                   setSearchKeyPemohon(value)

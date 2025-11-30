@@ -1,7 +1,9 @@
 import {
   countSuratTemplates,
   deleteSuratTemplate,
+  generateR2Key,
   getDefaultTemplateForType,
+  getR2PublicUrl,
   getSuratTemplateById,
   getSuratTemplates,
   insertSuratTemplate,
@@ -9,9 +11,11 @@ import {
   SURAT_TYPE_VALUES,
   updateSuratTemplate,
   updateSuratTemplateSchema,
+  uploadFileToR2,
   type SelectSuratTemplate,
 } from "@pintudesa/db"
 import { tryCatch } from "@yopem/try-catch"
+import mammoth from "mammoth"
 import { z } from "zod"
 
 import {
@@ -22,9 +26,6 @@ import {
 import { handleTRPCError } from "../utils/error"
 
 export const suratTemplateRouter = createTRPCRouter({
-  /**
-   * Create a new surat template
-   */
   create: adminProtectedProcedure
     .input(insertSuratTemplateSchema)
     .mutation(async ({ input }) => {
@@ -35,9 +36,6 @@ export const suratTemplateRouter = createTRPCRouter({
       return data
     }),
 
-  /**
-   * Update an existing surat template
-   */
   update: adminProtectedProcedure
     .input(updateSuratTemplateSchema)
     .mutation(async ({ input }) => {
@@ -50,9 +48,6 @@ export const suratTemplateRouter = createTRPCRouter({
       return data
     }),
 
-  /**
-   * Delete a surat template
-   */
   delete: adminProtectedProcedure
     .input(z.string())
     .mutation(async ({ input }) => {
@@ -63,9 +58,6 @@ export const suratTemplateRouter = createTRPCRouter({
       return data
     }),
 
-  /**
-   * Get paginated list of all surat templates
-   */
   all: adminProtectedProcedure
     .input(z.object({ page: z.number(), perPage: z.number() }))
     .query(async ({ input }) => {
@@ -78,9 +70,6 @@ export const suratTemplateRouter = createTRPCRouter({
       return data
     }),
 
-  /**
-   * Get a single surat template by ID
-   */
   byId: adminProtectedProcedure.input(z.string()).query(async ({ input }) => {
     const { data, error } = await tryCatch(getSuratTemplateById(input))
     if (error) {
@@ -89,9 +78,6 @@ export const suratTemplateRouter = createTRPCRouter({
     return data
   }),
 
-  /**
-   * Get the default template for a specific surat type
-   */
   bySuratType: adminProtectedProcedure
     .input(z.enum(SURAT_TYPE_VALUES))
     .query(async ({ input }) => {
@@ -102,9 +88,6 @@ export const suratTemplateRouter = createTRPCRouter({
       return data
     }),
 
-  /**
-   * Get total count of surat templates
-   */
   count: publicProcedure.query(async () => {
     const { data, error } = await tryCatch(countSuratTemplates())
     if (error) {
@@ -112,4 +95,43 @@ export const suratTemplateRouter = createTRPCRouter({
     }
     return data
   }),
+
+  uploadWord: adminProtectedProcedure
+    .input(
+      z.object({
+        fileData: z.string(),
+        fileName: z.string(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const { data: html, error: parseError } = await tryCatch(
+        mammoth.convertToHtml({
+          buffer: Buffer.from(input.fileData, "base64"),
+        }),
+      )
+
+      if (parseError || !html) {
+        throw parseError ?? new Error("Failed to parse Word document")
+      }
+
+      const r2Key = generateR2Key("word-templates", input.fileName)
+
+      const { error: uploadError } = await tryCatch(
+        uploadFileToR2({
+          file: Buffer.from(input.fileData, "base64"),
+          fileName: r2Key,
+          contentType:
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        }),
+      )
+
+      if (uploadError) {
+        throw uploadError
+      }
+
+      return {
+        html: html.value,
+        fileUrl: getR2PublicUrl(r2Key),
+      }
+    }),
 })

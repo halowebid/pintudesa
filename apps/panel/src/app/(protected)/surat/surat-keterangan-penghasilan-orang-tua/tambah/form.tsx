@@ -229,8 +229,8 @@ export default function SuratKeteranganPenghasilanOrangTuaForm({
           <form.FormItem>
             <form.FormLabel>Informasi Pemohon (Anak)</form.FormLabel>
             <ComboboxPopover
-          mode={isDialog ? "inline" : "portal"}
-          selectedLabel={selectedPemohon?.label}
+              mode={isDialog ? "inline" : "portal"}
+              selectedLabel={selectedPemohon?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKeyPemohon(value)
@@ -298,8 +298,8 @@ export default function SuratKeteranganPenghasilanOrangTuaForm({
           <form.FormItem>
             <form.FormLabel>Informasi Ayah</form.FormLabel>
             <ComboboxPopover
-          mode={isDialog ? "inline" : "portal"}
-          selectedLabel={selectedAyah?.label}
+              mode={isDialog ? "inline" : "portal"}
+              selectedLabel={selectedAyah?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKeyAyah(value)
@@ -354,8 +354,8 @@ export default function SuratKeteranganPenghasilanOrangTuaForm({
           <form.FormItem>
             <form.FormLabel>Informasi Ibu</form.FormLabel>
             <ComboboxPopover
-          mode={isDialog ? "inline" : "portal"}
-          selectedLabel={selectedIbu?.label}
+              mode={isDialog ? "inline" : "portal"}
+              selectedLabel={selectedIbu?.label}
               popoverClassName="w-lg max-w-sm lg:max-w-md"
               onInputValueChange={(value) => {
                 setSearchKeyIbu(value)

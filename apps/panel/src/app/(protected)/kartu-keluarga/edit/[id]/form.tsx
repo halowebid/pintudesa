@@ -992,8 +992,8 @@ export default function PendudukForm({
             <div className="space-y-2">
               <label className="text-sm font-medium">Cari Penduduk</label>
               <ComboboxPopover
-          mode={isDialog ? "inline" : "portal"}
-          selectedLabel={selectedAnggota?.label}
+                mode={isDialog ? "inline" : "portal"}
+                selectedLabel={selectedAnggota?.label}
                 onInputValueChange={setAnggotaSearchKey}
                 onValueChange={(val) => {
                   const selected = anggotaPendudukOptionsRaw.find(

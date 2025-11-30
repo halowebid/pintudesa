@@ -8,8 +8,8 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
 import { ControlledTable } from "@/components/controlled-table"
-import ShowOptions from "@/components/show-options"
 import PrintPreview from "@/components/print/print-preview"
+import ShowOptions from "@/components/show-options"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/surat/table-column-registry"
 import { useTRPC } from "@/lib/trpc/client"
@@ -109,15 +109,15 @@ export default function SuratKeteranganAhliWarisContent() {
             />
           )}
         />
-      
-      {printItem && (
-        <PrintPreview
-          suratType="surat-kuasa-ahli-waris"
-          suratData={printItem}
-          open={!!printItem}
-          onOpenChange={(open) => !open && setPrintItem(null)}
-        />
-      )}
+
+        {printItem && (
+          <PrintPreview
+            suratType="surat-kuasa-ahli-waris"
+            suratData={printItem}
+            open={!!printItem}
+            onOpenChange={(open) => !open && setPrintItem(null)}
+          />
+        )}
       </div>
     </div>
   )

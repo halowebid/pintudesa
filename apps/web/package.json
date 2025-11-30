@@ -61,6 +61,7 @@
     "@yopem/eslint-config": "catalog:tooling",
     "@yopem/prettier-config": "catalog:tooling",
     "@yopem/typescript-config": "catalog:tooling",
+    "baseline-browser-mapping": "^2.8.32",
     "prettier": "catalog:tooling",
     "tailwindcss": "catalog:tailwindcss",
     "typescript": "catalog:tooling"

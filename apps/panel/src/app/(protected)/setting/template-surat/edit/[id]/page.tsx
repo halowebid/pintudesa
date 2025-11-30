@@ -10,10 +10,11 @@ export const metadata = {
   title: "Edit Template Surat",
 }
 
-export default function EditTemplateSuratPage({
+export default async function EditTemplateSuratPage({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
-  return <TemplateSuratForm id={params.id} isDialog={false} />
+  const { id } = await params
+  return <TemplateSuratForm id={id} isDialog={false} />
 }

@@ -5,9 +5,16 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { SURAT_TYPE_VALUES, type SuratType } from "@pintudesa/db/schema"
 import { Button } from "@pintudesa/ui"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { Icon } from "@yopem-ui/react-icons"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/form"
+import EditorLayout from "@/components/template-editor/editor-layout"
+import { HtmlCodeEditor } from "@/components/template-editor/html-code-editor"
+import LivePreview from "@/components/template-editor/live-preview"
+import { RichTextEditor } from "@/components/template-editor/rich-text-editor"
+import { VariableInsertMenu } from "@/components/template-editor/variable-insert-menu"
+import { WordImportButton } from "@/components/template-editor/word-import-button"
 import { useToast } from "@/components/toast-provider"
 import { useTRPC } from "@/lib/trpc/client"
 import { useHandleTRPCError } from "@/lib/utils/error"
@@ -53,6 +60,10 @@ export default function TemplateSuratForm({
   const queryClient = useQueryClient()
   const router = useRouter()
   const searchParams = useSearchParams()
+  const [editorMode, setEditorMode] = React.useState<"wysiwyg" | "html">(
+    "wysiwyg",
+  )
+  const [showPreview, setShowPreview] = React.useState(false)
 
   const suratTemplatesKey = trpc.suratTemplate.all.queryKey()
 
@@ -63,9 +74,10 @@ export default function TemplateSuratForm({
   }
 
   // Fetch existing template if editing
-  const { data: existingTemplate } = useQuery(
-    trpc.suratTemplate.byId.queryOptions(id!, { enabled: !!id }),
-  )
+  const { data: existingTemplate } = useQuery({
+    ...trpc.suratTemplate.byId.queryOptions(id!),
+    enabled: !!id,
+  })
 
   const { mutate: createTemplate } = useMutation(
     trpc.suratTemplate.create.mutationOptions({
@@ -134,6 +146,40 @@ export default function TemplateSuratForm({
     },
   })
 
+  const [currentSuratType, setCurrentSuratType] = React.useState<SuratType>(
+    defaultValues.suratType,
+  )
+  const [currentHtmlContent, setCurrentHtmlContent] = React.useState(
+    defaultValues.htmlContent,
+  )
+
+  React.useEffect(() => {
+    if (existingTemplate) {
+      setCurrentSuratType(existingTemplate.suratType)
+      setCurrentHtmlContent(existingTemplate.htmlContent)
+      form.setFieldValue("suratType", existingTemplate.suratType)
+      form.setFieldValue("name", existingTemplate.name)
+      form.setFieldValue("htmlContent", existingTemplate.htmlContent)
+      form.setFieldValue("isDefault", existingTemplate.isDefault)
+    } else if (typeFromUrl) {
+      setCurrentSuratType(typeFromUrl)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [existingTemplate, typeFromUrl])
+
+  const handleEditorChange = (html: string) => {
+    setCurrentHtmlContent(html)
+    form.setFieldValue("htmlContent", html)
+  }
+
+  const handleWordImport = (html: string) => {
+    setCurrentHtmlContent(html)
+    form.setFieldValue("htmlContent", html)
+    toast({
+      description: "Template berhasil diimport dari Word",
+    })
+  }
+
   return (
     <form
       onSubmit={(e) => {
@@ -187,23 +233,131 @@ export default function TemplateSuratForm({
         )}
       </form.AppField>
 
-      <form.AppField name="htmlContent">
-        {(field) => (
-          <form.FormItem>
-            <field.TextareaField
-              label="Konten HTML"
-              placeholder="Masukkan HTML template..."
-              rows={20}
-              className="font-mono text-sm"
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-sm font-medium">Konten Template</h3>
+            <p className="text-muted-foreground mt-1 text-xs">
+              Edit template menggunakan editor WYSIWYG atau HTML
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <WordImportButton onImport={handleWordImport} />
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                setEditorMode(editorMode === "wysiwyg" ? "html" : "wysiwyg")
+              }
+            >
+              <Icon name={editorMode === "wysiwyg" ? "Code" : "Eye"} />
+              {editorMode === "wysiwyg" ? "Mode HTML" : "Mode Visual"}
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setShowPreview(!showPreview)}
+            >
+              <Icon name={showPreview ? "EyeOff" : "Eye"} />
+              {showPreview ? "Sembunyikan Preview" : "Tampilkan Preview"}
+            </Button>
+          </div>
+        </div>
+
+        <div className="overflow-hidden rounded-lg border">
+          {showPreview ? (
+            <EditorLayout
+              editor={
+                editorMode === "wysiwyg" ? (
+                  <div className="flex h-full flex-col">
+                    <div className="bg-muted/30 flex items-center justify-between border-b p-2">
+                      <span className="text-sm font-medium">Editor</span>
+                      <VariableInsertMenu
+                        suratType={currentSuratType}
+                        onInsert={(varName) => {
+                          handleEditorChange(
+                            currentHtmlContent + `{{${varName}}}`,
+                          )
+                        }}
+                      />
+                    </div>
+                    <div className="flex-1 overflow-auto">
+                      <RichTextEditor
+                        content={currentHtmlContent}
+                        onChange={handleEditorChange}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex h-full flex-col">
+                    <div className="bg-muted/30 flex items-center justify-between border-b p-2">
+                      <span className="text-sm font-medium">HTML</span>
+                    </div>
+                    <div className="flex-1 overflow-auto">
+                      <HtmlCodeEditor
+                        content={currentHtmlContent}
+                        onChange={handleEditorChange}
+                      />
+                    </div>
+                  </div>
+                )
+              }
+              preview={
+                <LivePreview
+                  content={currentHtmlContent}
+                  suratType={currentSuratType}
+                />
+              }
             />
-            <form.FormDescription>
-              Gunakan variabel template seperti {`{{namaPenduduk}}`} untuk data
-              dinamis
-            </form.FormDescription>
-            <form.FormMessage />
-          </form.FormItem>
-        )}
-      </form.AppField>
+          ) : (
+            <div>
+              {editorMode === "wysiwyg" ? (
+                <div className="flex h-full flex-col">
+                  <div className="bg-muted/30 flex items-center justify-between border-b p-2">
+                    <span className="text-sm font-medium">Editor</span>
+                    <VariableInsertMenu
+                      suratType={currentSuratType}
+                      onInsert={(varName) => {
+                        handleEditorChange(
+                          currentHtmlContent + `{{${varName}}}`,
+                        )
+                      }}
+                    />
+                  </div>
+                  <div className="overflow-auto">
+                    <RichTextEditor
+                      content={currentHtmlContent}
+                      onChange={handleEditorChange}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="flex h-full flex-col">
+                  <div className="bg-muted/30 flex items-center justify-between border-b p-2">
+                    <span className="text-sm font-medium">HTML</span>
+                  </div>
+                  <div className="overflow-auto">
+                    <HtmlCodeEditor
+                      content={currentHtmlContent}
+                      onChange={handleEditorChange}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        <form.AppField name="htmlContent">
+          {() => (
+            <form.FormItem>
+              <form.FormMessage />
+            </form.FormItem>
+          )}
+        </form.AppField>
+      </div>
 
       <form.AppField name="isDefault">
         {(field) => (
