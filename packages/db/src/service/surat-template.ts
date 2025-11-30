@@ -74,15 +74,17 @@ export async function updateSuratTemplate(data: SelectSuratTemplate) {
  */
 export async function deleteSuratTemplate(id: string) {
   // Check if this is a default template
-  const [template] = await db
+  const results = await db
     .select()
     .from(suratTemplateTable)
     .where(eq(suratTemplateTable.id, id))
     .limit(1)
 
-  if (!template) {
+  if (results.length === 0) {
     throw new Error("Template tidak ditemukan")
   }
+
+  const template = results[0]
 
   if (template.isDefault) {
     throw new Error(
@@ -133,13 +135,13 @@ export async function countSuratTemplates() {
  * @returns Template or null if not found
  */
 export async function getSuratTemplateById(id: string) {
-  const [template] = await db
+  const results = await db
     .select()
     .from(suratTemplateTable)
     .where(eq(suratTemplateTable.id, id))
     .limit(1)
 
-  return template ?? null
+  return results[0] ?? null
 }
 
 /**
@@ -148,7 +150,7 @@ export async function getSuratTemplateById(id: string) {
  * @returns Default template for the type, or null if none exists
  */
 export async function getDefaultTemplateForType(suratType: SuratType) {
-  const [template] = await db
+  const results = await db
     .select()
     .from(suratTemplateTable)
     .where(
@@ -159,5 +161,5 @@ export async function getDefaultTemplateForType(suratType: SuratType) {
     )
     .limit(1)
 
-  return template ?? null
+  return results[0] ?? null
 }

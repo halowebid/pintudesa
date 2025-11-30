@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Seed script for default surat templates
  * Run with: bun run packages/db/src/seed/surat-templates.ts
@@ -1259,7 +1260,7 @@ async function seedTemplates() {
   for (const suratType of SURAT_TYPE_VALUES) {
     const template = templates[suratType]
 
-    if (!template) {
+    if (template === undefined) {
       console.warn(`⚠️  No template defined for ${suratType}, skipping...`)
       continue
     }

@@ -154,13 +154,17 @@ export default function TemplateSuratForm({
   )
 
   React.useEffect(() => {
-    setCurrentSuratType(defaultValues.suratType)
-    setCurrentHtmlContent(defaultValues.htmlContent)
-    if (defaultValues.htmlContent) {
-      form.setFieldValue("htmlContent", defaultValues.htmlContent)
+    if (existingTemplate) {
+      setCurrentSuratType(existingTemplate.suratType)
+      setCurrentHtmlContent(existingTemplate.htmlContent)
+      form.setFieldValue("suratType", existingTemplate.suratType)
+      form.setFieldValue("name", existingTemplate.name)
+      form.setFieldValue("htmlContent", existingTemplate.htmlContent)
+      form.setFieldValue("isDefault", existingTemplate.isDefault)
+    } else if (typeFromUrl) {
+      setCurrentSuratType(typeFromUrl)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [defaultValues.suratType, defaultValues.htmlContent])
+  }, [existingTemplate, typeFromUrl, form])
 
   const handleEditorChange = (html: string) => {
     setCurrentHtmlContent(html)

@@ -164,8 +164,7 @@ export default function TemplateSuratForm({
     } else if (typeFromUrl) {
       setCurrentSuratType(typeFromUrl)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [existingTemplate, typeFromUrl])
+  }, [existingTemplate, typeFromUrl, form])
 
   const handleEditorChange = (html: string) => {
     setCurrentHtmlContent(html)
