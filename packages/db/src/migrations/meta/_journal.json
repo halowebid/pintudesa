@@ -288,6 +288,20 @@
       "when": 1763469475365,
       "tag": "0040_sleepy_harrier",
       "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1764483733243,
+      "tag": "0041_slow_doorman",
+      "breakpoints": true
+    },
+    {
+      "idx": 42,
+      "version": "7",
+      "when": 1764496878451,
+      "tag": "0042_confused_valeria_richards",
+      "breakpoints": true
     }
   ]
 }
