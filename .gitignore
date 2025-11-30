@@ -41,3 +41,4 @@ tsconfig.tsbuildinfo
 opencode.jsonc
 .opencode/
 openspec
+AGENTS.md
