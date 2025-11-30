@@ -1260,11 +1260,6 @@ async function seedTemplates() {
   for (const suratType of SURAT_TYPE_VALUES) {
     const template = templates[suratType]
 
-    if (template === undefined) {
-      console.warn(`⚠️  No template defined for ${suratType}, skipping...`)
-      continue
-    }
-
     try {
       await insertSuratTemplate({
         suratType,
