@@ -25,9 +25,7 @@ function formatHtml(html: string): string {
   // Split by tags
   const tags = cleanHtml.match(/<[^>]+>|[^<]+/g) ?? []
 
-  for (let i = 0; i < tags.length; i++) {
-    const tag = tags[i]
-
+  for (const tag of tags) {
     if (!tag || tag.trim() === "") continue
 
     // Check if it's a closing tag
@@ -38,7 +36,7 @@ function formatHtml(html: string): string {
     // Check if it's a self-closing tag or single tag
     else if (
       tag.startsWith("<") &&
-      (tag.endsWith("/>") || tag.match(/<(br|hr|img|input|meta|link)/i))
+      (tag.endsWith("/>") || /<(br|hr|img|input|meta|link)/i.exec(tag))
     ) {
       formatted += " ".repeat(indent * indentSize) + tag + "\n"
     }
@@ -47,8 +45,8 @@ function formatHtml(html: string): string {
       formatted += " ".repeat(indent * indentSize) + tag + "\n"
       // Don't increase indent for inline/void elements
       if (
-        !tag.match(
-          /<(br|hr|img|input|meta|link|area|base|col|embed|param|source|track|wbr)/i,
+        !/<(br|hr|img|input|meta|link|area|base|col|embed|param|source|track|wbr)/i.exec(
+          tag,
         )
       ) {
         indent++
