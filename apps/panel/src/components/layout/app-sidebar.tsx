@@ -25,25 +25,41 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 }
 
 const AppSidebar = (props: AppSidebarProps) => {
+  const userRole = props.user.role ?? "user"
+
+  // Filter navigation items based on user role
+  const filterByRole = <T extends { allowedRoles?: string[] }>(
+    items: T[],
+  ): T[] => {
+    return items.filter((item) => {
+      if (!item.allowedRoles) return true
+      return item.allowedRoles.includes(userRole)
+    })
+  }
+
   const data = {
-    navMain: [
+    navMain: filterByRole([
       {
         name: "Ringkasan",
         url: "/",
+        allowedRoles: ["admin", "member", "user"],
       },
       {
         name: "Pengaturan",
         url: "/setting",
+        allowedRoles: ["admin"],
       },
       {
         name: "Template Surat",
         url: "/setting/template-surat",
+        allowedRoles: ["admin"],
       },
       {
         name: "Pengguna",
         url: "/user",
+        allowedRoles: ["admin"],
       },
-    ],
+    ]),
     navKependudukan: [
       {
         name: "Kartu Keluarga",

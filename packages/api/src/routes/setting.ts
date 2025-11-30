@@ -29,6 +29,7 @@ const redis = redisUrl
       lazyConnect: true,
       retryStrategy: (times) => {
         if (times > 3) {
+          // eslint-disable-next-line no-console
           console.warn("Redis connection failed, caching disabled")
           return null // Stop retrying
         }
@@ -43,6 +44,7 @@ async function getCached(key: string): Promise<string | null> {
   try {
     return await redis.get(key)
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.warn("Redis get failed:", error)
     return null
   }
@@ -61,6 +63,7 @@ async function setCached(
       await redis.set(key, value)
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.warn("Redis set failed:", error)
   }
 }
@@ -70,6 +73,7 @@ async function delCached(key: string): Promise<void> {
   try {
     await redis.del(key)
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.warn("Redis del failed:", error)
   }
 }

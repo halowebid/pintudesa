@@ -14,14 +14,14 @@ import { tryCatch } from "@yopem/try-catch"
 import { z } from "zod"
 
 import {
-  adminProtectedProcedure,
   createTRPCRouter,
   publicProcedure,
+  staffProtectedProcedure,
 } from "../trpc"
 import { handleTRPCError } from "../utils/error"
 
 export const beritaRouter = createTRPCRouter({
-  create: adminProtectedProcedure
+  create: staffProtectedProcedure
     .input(insertBeritaSchema)
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(insertBerita(input))
@@ -31,7 +31,7 @@ export const beritaRouter = createTRPCRouter({
       return data
     }),
 
-  update: adminProtectedProcedure
+  update: staffProtectedProcedure
     .input(updateBeritaSchema)
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(
@@ -43,7 +43,7 @@ export const beritaRouter = createTRPCRouter({
       return data
     }),
 
-  delete: adminProtectedProcedure
+  delete: staffProtectedProcedure
     .input(z.string())
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(deleteBerita(input))
@@ -53,7 +53,7 @@ export const beritaRouter = createTRPCRouter({
       return data
     }),
 
-  all: adminProtectedProcedure
+  all: staffProtectedProcedure
     .input(z.object({ page: z.number(), perPage: z.number() }))
     .query(async ({ input }) => {
       const { data, error } = await tryCatch(

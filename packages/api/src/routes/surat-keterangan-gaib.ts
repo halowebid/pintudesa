@@ -14,14 +14,14 @@ import { tryCatch } from "@yopem/try-catch"
 import { z } from "zod"
 
 import {
-  adminProtectedProcedure,
   createTRPCRouter,
   publicProcedure,
+  staffProtectedProcedure,
 } from "../trpc"
 import { handleTRPCError } from "../utils/error"
 
 export const suratKeteranganGaibRouter = createTRPCRouter({
-  create: adminProtectedProcedure
+  create: staffProtectedProcedure
     .input(insertSuratKeteranganGaibSchema)
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(insertSuratKeteranganGaib(input))
@@ -31,7 +31,7 @@ export const suratKeteranganGaibRouter = createTRPCRouter({
       return data
     }),
 
-  update: adminProtectedProcedure
+  update: staffProtectedProcedure
     .input(updateSuratKeteranganGaibSchema)
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(
@@ -43,7 +43,7 @@ export const suratKeteranganGaibRouter = createTRPCRouter({
       return data
     }),
 
-  delete: adminProtectedProcedure
+  delete: staffProtectedProcedure
     .input(z.string())
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(deleteSuratKeteranganGaib(input))
@@ -53,7 +53,7 @@ export const suratKeteranganGaibRouter = createTRPCRouter({
       return data
     }),
 
-  all: adminProtectedProcedure
+  all: staffProtectedProcedure
     .input(z.object({ page: z.number(), perPage: z.number() }))
     .query(async ({ input }) => {
       const { data, error } = await tryCatch(
@@ -65,7 +65,7 @@ export const suratKeteranganGaibRouter = createTRPCRouter({
       return data
     }),
 
-  byId: adminProtectedProcedure.input(z.string()).query(async ({ input }) => {
+  byId: staffProtectedProcedure.input(z.string()).query(async ({ input }) => {
     const { data, error } = await tryCatch(getSuratKeteranganGaibById(input))
     if (error) {
       handleTRPCError(error)

@@ -110,8 +110,12 @@ export const suratTemplateRouter = createTRPCRouter({
         }),
       )
 
-      if (parseError || !html) {
-        throw parseError ?? new Error("Failed to parse Word document")
+      if (parseError) {
+        throw parseError
+      }
+
+      if (!html) {
+        throw new Error("Failed to parse Word document")
       }
 
       const r2Key = generateR2Key("word-templates", input.fileName)

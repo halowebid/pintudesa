@@ -15,14 +15,14 @@ import { tryCatch } from "@yopem/try-catch"
 import { z } from "zod"
 
 import {
-  adminProtectedProcedure,
   createTRPCRouter,
   publicProcedure,
+  staffProtectedProcedure,
 } from "../trpc"
 import { handleTRPCError } from "../utils/error"
 
 export const anggotaKeluargaRouter = createTRPCRouter({
-  create: adminProtectedProcedure
+  create: staffProtectedProcedure
     .input(insertAnggotaKeluargaSchema)
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(insertAnggotaKeluarga(input))
@@ -32,7 +32,7 @@ export const anggotaKeluargaRouter = createTRPCRouter({
       return data
     }),
 
-  update: adminProtectedProcedure
+  update: staffProtectedProcedure
     .input(updateAnggotaKeluargaSchema)
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(
@@ -44,7 +44,7 @@ export const anggotaKeluargaRouter = createTRPCRouter({
       return data
     }),
 
-  delete: adminProtectedProcedure
+  delete: staffProtectedProcedure
     .input(z.string())
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(deleteAnggotaKeluarga(input))
@@ -54,7 +54,7 @@ export const anggotaKeluargaRouter = createTRPCRouter({
       return data
     }),
 
-  all: adminProtectedProcedure
+  all: staffProtectedProcedure
     .input(z.object({ page: z.number(), perPage: z.number() }))
     .query(async ({ input }) => {
       const { data, error } = await tryCatch(
@@ -66,7 +66,7 @@ export const anggotaKeluargaRouter = createTRPCRouter({
       return data
     }),
 
-  byId: adminProtectedProcedure.input(z.string()).query(async ({ input }) => {
+  byId: staffProtectedProcedure.input(z.string()).query(async ({ input }) => {
     const { data, error } = await tryCatch(getAnggotaKeluargaById(input))
     if (error) {
       handleTRPCError(error)
@@ -74,7 +74,7 @@ export const anggotaKeluargaRouter = createTRPCRouter({
     return data
   }),
 
-  byKartuKeluargaId: adminProtectedProcedure
+  byKartuKeluargaId: staffProtectedProcedure
     .input(z.string())
     .query(async ({ input }) => {
       const { data, error } = await tryCatch(

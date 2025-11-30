@@ -14,14 +14,14 @@ import { tryCatch } from "@yopem/try-catch"
 import { z } from "zod"
 
 import {
-  adminProtectedProcedure,
   createTRPCRouter,
   publicProcedure,
+  staffProtectedProcedure,
 } from "../trpc"
 import { handleTRPCError } from "../utils/error"
 
 export const pendudukSementaraRouter = createTRPCRouter({
-  create: adminProtectedProcedure
+  create: staffProtectedProcedure
     .input(insertPendudukSementaraSchema)
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(insertPendudukSementara(input))
@@ -31,7 +31,7 @@ export const pendudukSementaraRouter = createTRPCRouter({
       return data
     }),
 
-  update: adminProtectedProcedure
+  update: staffProtectedProcedure
     .input(updatePendudukSementaraSchema)
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(
@@ -43,7 +43,7 @@ export const pendudukSementaraRouter = createTRPCRouter({
       return data
     }),
 
-  delete: adminProtectedProcedure
+  delete: staffProtectedProcedure
     .input(z.string())
     .mutation(async ({ input }) => {
       const { data, error } = await tryCatch(deletePendudukSementara(input))
@@ -53,7 +53,7 @@ export const pendudukSementaraRouter = createTRPCRouter({
       return data
     }),
 
-  all: adminProtectedProcedure
+  all: staffProtectedProcedure
     .input(z.object({ page: z.number(), perPage: z.number() }))
     .query(async ({ input }) => {
       const { data, error } = await tryCatch(
@@ -65,7 +65,7 @@ export const pendudukSementaraRouter = createTRPCRouter({
       return data
     }),
 
-  byId: adminProtectedProcedure.input(z.string()).query(async ({ input }) => {
+  byId: staffProtectedProcedure.input(z.string()).query(async ({ input }) => {
     const { data, error } = await tryCatch(getPendudukSementaraById(input))
     if (error) {
       handleTRPCError(error)
