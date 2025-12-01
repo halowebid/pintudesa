@@ -1041,6 +1041,92 @@ ${baseStyles}
 `,
   },
 
+  "surat-keterangan-usaha": {
+    name: "Template Default - Surat Keterangan Usaha",
+    html: `
+${baseStyles}
+<div class="kop-surat">
+  <h1>PEMERINTAH {{kabupaten}}</h1>
+  <h2>KECAMATAN {{kecamatan}}</h2>
+  <h2>DESA {{namaDesa}}</h2>
+  <p>{{provinsi}}</p>
+</div>
+
+<div class="judul-surat">SURAT KETERANGAN USAHA</div>
+
+<div class="content">
+  <p>Yang bertanda tangan di bawah ini Kepala Desa {{namaDesa}}, Kecamatan {{kecamatan}}, Kabupaten {{kabupaten}}, menerangkan bahwa:</p>
+  
+  <table class="data-table">
+    <tr>
+      <td>Nama Lengkap</td>
+      <td>:</td>
+      <td>{{pemohon.namaLengkap}}</td>
+    </tr>
+    <tr>
+      <td>NIK</td>
+      <td>:</td>
+      <td>{{pemohon.nik}}</td>
+    </tr>
+    <tr>
+      <td>Tempat, Tanggal Lahir</td>
+      <td>:</td>
+      <td>{{pemohon.tempatLahir}}, {{pemohon.tanggalLahir}}</td>
+    </tr>
+    <tr>
+      <td>Alamat</td>
+      <td>:</td>
+      <td>{{pemohon.alamat}}</td>
+    </tr>
+    <tr>
+      <td>Wilayah</td>
+      <td>:</td>
+      <td>{{pemohon.wilayah}}</td>
+    </tr>
+  </table>
+  
+  <p>Adalah benar warga Desa {{namaDesa}} yang memiliki/mengelola usaha dengan data sebagai berikut:</p>
+  
+  <table class="data-table">
+    <tr>
+      <td>Bidang Usaha</td>
+      <td>:</td>
+      <td>{{bidangUsaha}}</td>
+    </tr>
+    <tr>
+      <td>Merk/Nama Usaha</td>
+      <td>:</td>
+      <td>{{merkUsaha}}</td>
+    </tr>
+    <tr>
+      <td>Alamat Usaha</td>
+      <td>:</td>
+      <td>{{alamatUsaha}}</td>
+    </tr>
+    <tr>
+      <td>Berdasarkan</td>
+      <td>:</td>
+      <td>{{berdasarkan}}</td>
+    </tr>
+  </table>
+  
+  <p>Surat keterangan ini dibuat berdasarkan data yang ada untuk keperluan administrasi usaha yang bersangkutan.</p>
+  
+  <p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+</div>
+
+<div class="ttd-section">
+  <div class="ttd-box">
+    <p>{{namaDesa}}, {{tanggalSurat}}</p>
+    <p>Kepala Desa {{namaDesa}}</p>
+    <div class="ttd-space"></div>
+    <p class="ttd-name">{{namaKepala}}</p>
+    <p>NIP. {{nipKepala}}</p>
+  </div>
+</div>
+`,
+  },
+
   "surat-kuasa-ahli-waris": {
     name: "Template Default - Surat Kuasa Ahli Waris",
     html: `

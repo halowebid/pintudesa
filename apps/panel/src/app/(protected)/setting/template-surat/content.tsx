@@ -39,6 +39,7 @@ const SURAT_TYPE_LABELS: Record<SuratType, string> = {
   "surat-keterangan-penghasilan-orang-tua":
     "Surat Keterangan Penghasilan Orang Tua",
   "surat-keterangan-penyaksian-tanah": "Surat Keterangan Penyaksian Tanah",
+  "surat-keterangan-usaha": "Surat Keterangan Usaha",
   "surat-kuasa-ahli-waris": "Surat Kuasa Ahli Waris",
   "surat-kuasa-skgr": "Surat Kuasa SKGR",
   "surat-pengantar-skck": "Surat Pengantar SKCK",

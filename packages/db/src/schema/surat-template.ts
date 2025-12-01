@@ -19,6 +19,7 @@ export const SURAT_TYPE_VALUES = [
   "surat-keterangan-penghasilan",
   "surat-keterangan-penghasilan-orang-tua",
   "surat-keterangan-penyaksian-tanah",
+  "surat-keterangan-usaha",
   "surat-kuasa-ahli-waris",
   "surat-kuasa-skgr",
   "surat-pengantar-skck",

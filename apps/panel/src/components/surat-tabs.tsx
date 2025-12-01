@@ -104,6 +104,12 @@ const desaSurat = [
     disabled: false,
   },
   {
+    label: "SKU",
+    name: "Surat Keterangan Usaha",
+    href: "/surat/surat-keterangan-usaha",
+    disabled: false,
+  },
+  {
     label: "SKAW",
     name: "Surat Keterangan Ahli Waris",
     href: "/surat/surat-keterangan-ahli-waris",

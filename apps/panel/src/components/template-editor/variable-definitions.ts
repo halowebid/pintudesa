@@ -315,6 +315,32 @@ export const SURAT_TYPE_VARIABLES: Record<SuratType, VariableDefinition[]> = {
   "surat-keterangan-penghasilan": [],
   "surat-keterangan-penghasilan-orang-tua": [],
   "surat-keterangan-penyaksian-tanah": [],
+  "surat-keterangan-usaha": [
+    {
+      name: "bidangUsaha",
+      label: "Bidang Usaha",
+      description: "Bidang usaha yang dijalankan",
+      category: "surat",
+    },
+    {
+      name: "merkUsaha",
+      label: "Merk Usaha",
+      description: "Nama merk atau brand usaha",
+      category: "surat",
+    },
+    {
+      name: "alamatUsaha",
+      label: "Alamat Usaha",
+      description: "Alamat lengkap tempat usaha",
+      category: "surat",
+    },
+    {
+      name: "berdasarkan",
+      label: "Berdasarkan",
+      description: "Dasar atau referensi pembuatan surat",
+      category: "surat",
+    },
+  ],
   "surat-kuasa-ahli-waris": [],
   "surat-kuasa-skgr": [],
   "surat-pengantar-skck": [],

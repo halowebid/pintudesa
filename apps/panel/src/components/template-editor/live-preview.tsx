@@ -80,6 +80,12 @@ function generateSampleData(suratType: SuratType): Record<string, string> {
     "surat-keterangan-penghasilan": {},
     "surat-keterangan-penghasilan-orang-tua": {},
     "surat-keterangan-penyaksian-tanah": {},
+    "surat-keterangan-usaha": {
+      bidangUsaha: "Perdagangan",
+      merkUsaha: "Toko Berkah Jaya",
+      alamatUsaha: "Jl. Merdeka No. 123, RT 001/RW 002, Desa Contoh",
+      berdasarkan: "Surat Keterangan Domisili Usaha No. 123/SKDU/2024",
+    },
     "surat-kuasa-ahli-waris": {},
     "surat-kuasa-skgr": {},
     "surat-pengantar-skck": {},
