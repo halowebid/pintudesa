@@ -277,6 +277,14 @@ export function mapSuratVariables(
       }
       break
 
+    case "surat-pindah-desa-bpn":
+      variables["nomorShm"] = suratData["nomorShm"] ?? ""
+      variables["tanggalShm"] = suratData["tanggalShm"]
+        ? formatDate(new Date(suratData["tanggalShm"]), "LL")
+        : ""
+      variables["keteranganSurat"] = suratData["keteranganSurat"] ?? ""
+      break
+
     default:
       Object.entries(suratData).forEach(([key, value]) => {
         if (

@@ -75,6 +75,11 @@ function generateSampleData(suratType: SuratType): Record<string, string> {
     "surat-kuasa-skgr": {},
     "surat-pengantar-skck": {},
     "surat-pernyataan-belum-menikah": {},
+    "surat-pindah-desa-bpn": {
+      nomorShm: "12345/SHM/2025",
+      tanggalShm: "15 Januari 2020",
+      keteranganSurat: "Pindah ke Desa Baru untuk keperluan pekerjaan",
+    },
   }
 
   return {

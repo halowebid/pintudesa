@@ -21,6 +21,7 @@ export const SURAT_TYPE_VALUES = [
   "surat-kuasa-skgr",
   "surat-pengantar-skck",
   "surat-pernyataan-belum-menikah",
+  "surat-pindah-desa-bpn",
 ] as const
 
 export type SuratType = (typeof SURAT_TYPE_VALUES)[number]

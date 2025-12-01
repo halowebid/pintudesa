@@ -166,6 +166,11 @@ export const menuItems: MenuItem[] = [
     url: "/surat/surat-pernyataan-belum-menikah",
     category: "Surat",
   },
+  {
+    name: "Surat Pindah Desa BPN",
+    url: "/surat/surat-pindah-desa-bpn",
+    category: "Surat",
+  },
 ]
 
 /**

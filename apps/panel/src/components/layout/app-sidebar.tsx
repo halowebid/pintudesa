@@ -132,6 +132,10 @@ const AppSidebar = (props: AppSidebarProps) => {
         name: "Surat Pernyataan Belum Menikah",
         url: "/surat/surat-pernyataan-belum-menikah",
       },
+      {
+        name: "Surat Pindah Desa BPN",
+        url: "/surat/surat-pindah-desa-bpn",
+      },
     ],
 
     navBukuAdministrasiUmum: [

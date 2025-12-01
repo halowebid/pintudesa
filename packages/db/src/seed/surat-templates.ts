@@ -1246,6 +1246,94 @@ ${baseStyles}
 </div>
 `,
   },
+
+  "surat-pindah-desa-bpn": {
+    name: "Template Default - Surat Pindah Desa BPN",
+    html: `
+${baseStyles}
+<div class="kop-surat">
+  <h1>PEMERINTAH {{kabupaten}}</h1>
+  <h2>KECAMATAN {{kecamatan}}</h2>
+  <h2>DESA {{namaDesa}}</h2>
+  <p>{{provinsi}}</p>
+</div>
+
+<div class="judul-surat">SURAT PINDAH DESA BPN</div>
+
+<div class="content">
+  <p>Yang bertanda tangan di bawah ini Kepala Desa {{namaDesa}}, Kecamatan {{kecamatan}}, Kabupaten {{kabupaten}}, menerangkan bahwa:</p>
+  
+  <table class="data-table">
+    <tr>
+      <td>Nama Lengkap</td>
+      <td>:</td>
+      <td>{{pemohon.namaLengkap}}</td>
+    </tr>
+    <tr>
+      <td>NIK</td>
+      <td>:</td>
+      <td>{{pemohon.nik}}</td>
+    </tr>
+    <tr>
+      <td>Tempat, Tanggal Lahir</td>
+      <td>:</td>
+      <td>{{pemohon.tempatLahir}}, {{pemohon.tanggalLahir}}</td>
+    </tr>
+    <tr>
+      <td>Jenis Kelamin</td>
+      <td>:</td>
+      <td>{{pemohon.jenisKelamin}}</td>
+    </tr>
+    <tr>
+      <td>Agama</td>
+      <td>:</td>
+      <td>{{pemohon.agama}}</td>
+    </tr>
+    <tr>
+      <td>Pekerjaan</td>
+      <td>:</td>
+      <td>{{pemohon.pekerjaan}}</td>
+    </tr>
+    <tr>
+      <td>Alamat</td>
+      <td>:</td>
+      <td>{{pemohon.alamat}}, RT {{pemohon.rt}}/RW {{pemohon.rw}}</td>
+    </tr>
+    <tr>
+      <td>Nomor SHM</td>
+      <td>:</td>
+      <td>{{nomorShm}}</td>
+    </tr>
+    <tr>
+      <td>Tanggal SHM</td>
+      <td>:</td>
+      <td>{{tanggalShm}}</td>
+    </tr>
+    {{#if keteranganSurat}}
+    <tr>
+      <td>Keterangan</td>
+      <td>:</td>
+      <td>{{keteranganSurat}}</td>
+    </tr>
+    {{/if}}
+  </table>
+  
+  <p>Orang tersebut di atas benar-benar penduduk Desa {{namaDesa}} yang akan melakukan perpindahan ke desa lain dengan keperluan perubahan data Badan Pertanahan Nasional (BPN) atas sertifikat hak milik yang bersangkutan.</p>
+  
+  <p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+</div>
+
+<div class="ttd-section">
+  <div class="ttd-box">
+    <p>{{namaDesa}}, {{tanggalSurat}}</p>
+    <p>Kepala Desa {{namaDesa}}</p>
+    <div class="ttd-space"></div>
+    <p class="ttd-name">{{namaKepala}}</p>
+    <p>NIP. {{nipKepala}}</p>
+  </div>
+</div>
+`,
+  },
 }
 
 /**

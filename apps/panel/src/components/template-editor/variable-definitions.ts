@@ -285,6 +285,26 @@ export const SURAT_TYPE_VARIABLES: Record<SuratType, VariableDefinition[]> = {
   "surat-kuasa-skgr": [],
   "surat-pengantar-skck": [],
   "surat-pernyataan-belum-menikah": [],
+  "surat-pindah-desa-bpn": [
+    {
+      name: "nomorShm",
+      label: "Nomor SHM",
+      description: "Nomor Sertifikat Hak Milik",
+      category: "surat",
+    },
+    {
+      name: "tanggalShm",
+      label: "Tanggal SHM",
+      description: "Tanggal Sertifikat Hak Milik",
+      category: "surat",
+    },
+    {
+      name: "keteranganSurat",
+      label: "Keterangan Surat",
+      description: "Keterangan tambahan (opsional)",
+      category: "surat",
+    },
+  ],
 }
 
 export function getVariablesForSuratType(

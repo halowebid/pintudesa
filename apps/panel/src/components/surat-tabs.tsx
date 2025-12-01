@@ -115,6 +115,12 @@ const desaSurat = [
     href: "/surat/surat-pernyataan-belum-menikah",
     disabled: false,
   },
+  {
+    label: "PBPN",
+    name: "Surat Pindah Desa BPN",
+    href: "/surat/surat-pindah-desa-bpn",
+    disabled: false,
+  },
 ]
 
 export function SuratTabs() {

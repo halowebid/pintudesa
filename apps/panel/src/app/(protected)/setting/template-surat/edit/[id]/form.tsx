@@ -36,6 +36,7 @@ const SURAT_TYPE_LABELS: Record<SuratType, string> = {
   "surat-kuasa-skgr": "Surat Kuasa SKGR",
   "surat-pengantar-skck": "Surat Pengantar SKCK",
   "surat-pernyataan-belum-menikah": "Surat Pernyataan Belum Menikah",
+  "surat-pindah-desa-bpn": "Surat Pindah Desa BPN",
 }
 
 const formSchema = z.object({
