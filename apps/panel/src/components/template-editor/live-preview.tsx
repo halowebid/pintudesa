@@ -35,9 +35,18 @@ function generateSampleData(suratType: SuratType): Record<string, string> {
   }
 
   const typeSpecificData: Record<SuratType, Record<string, string>> = {
+    "surat-keterangan-belum-memiliki-rumah": {
+      tujuanPembuatan: "Pengajuan KPR",
+      tempatTinggalSekarang: "rumah orang tua di Jl. Merdeka No. 45",
+    },
     "surat-keterangan-domisili": {
       jumlahTahunDomisili: "10",
       jumlahKeluarga: "4",
+    },
+    "surat-keterangan-domisili-usaha": {
+      jenisUsaha: "Toko Kelontong",
+      namaTempatUsaha: "Toko Berkah Jaya",
+      lokasiUsaha: "Jl. Merdeka No. 123, RT 001/RW 002, Desa Contoh",
     },
     "surat-keterangan-gaib": {
       "pasangan.namaLengkap": "Siti Aminah",

@@ -215,6 +215,35 @@ export function mapSuratVariables(
       variables["kotaTujuan"] = suratData["kotaTujuan"] ?? ""
       break
 
+    case "surat-keterangan-belum-memiliki-rumah": {
+      variables["nama"] = suratData.pemohon?.namaLengkap ?? ""
+      variables["tempat_lahir"] = suratData.pemohon?.tempatLahir ?? ""
+      variables["tanggal_lahir"] = suratData.pemohon?.tanggalLahir
+        ? formatDate(new Date(suratData.pemohon.tanggalLahir), "LL")
+        : ""
+      variables["alamat"] = suratData.pemohon?.alamat ?? ""
+
+      const wilayahParts = []
+      if (suratData.pemohon?.rt) wilayahParts.push(`RT ${suratData.pemohon.rt}`)
+      if (suratData.pemohon?.rw) wilayahParts.push(`RW ${suratData.pemohon.rw}`)
+      if (suratData.pemohon?.dusun)
+        wilayahParts.push(`Dusun ${suratData.pemohon.dusun}`)
+      if (suratData.pemohon?.desa_kelurahan)
+        wilayahParts.push(`Desa ${suratData.pemohon.desa_kelurahan}`)
+      if (suratData.pemohon?.kecamatan)
+        wilayahParts.push(`Kec. ${suratData.pemohon.kecamatan}`)
+      if (suratData.pemohon?.kabupaten_kota)
+        wilayahParts.push(`Kab. ${suratData.pemohon.kabupaten_kota}`)
+      if (suratData.pemohon?.provinsi)
+        wilayahParts.push(suratData.pemohon.provinsi)
+      variables["wilayah"] = wilayahParts.join(", ")
+
+      variables["tujuan_pembuatan"] = suratData["tujuanPembuatan"] ?? ""
+      variables["tempat_tinggal_sekarang"] =
+        suratData["tempatTinggalSekarang"] ?? ""
+      break
+    }
+
     case "surat-keterangan-kepemilikan-rumah":
       variables["alamatRumah"] = suratData["alamatRumah"] ?? ""
       variables["luasTanah"] = suratData["luasTanah"] ?? ""

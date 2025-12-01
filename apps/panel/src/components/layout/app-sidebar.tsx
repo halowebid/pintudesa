@@ -85,6 +85,10 @@ const AppSidebar = (props: AppSidebarProps) => {
         url: "/surat/surat-keterangan-domisili",
       },
       {
+        name: "Surat Keterangan Domisili Usaha",
+        url: "/surat/surat-keterangan-domisili-usaha",
+      },
+      {
         name: "Surat Keterangan Gaib",
         url: "/surat/surat-keterangan-gaib",
       },

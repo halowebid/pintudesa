@@ -8,7 +8,9 @@ import { createInsertSchema, createUpdateSchema } from "drizzle-zod"
 export const SURAT_TYPE_VALUES = [
   "surat-izin-keramaian",
   "surat-izin-mendirikan-bangunan",
+  "surat-keterangan-belum-memiliki-rumah",
   "surat-keterangan-domisili",
+  "surat-keterangan-domisili-usaha",
   "surat-keterangan-gaib",
   "surat-keterangan-jalan",
   "surat-keterangan-kelahiran",

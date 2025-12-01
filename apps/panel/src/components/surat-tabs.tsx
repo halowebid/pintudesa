@@ -44,6 +44,12 @@ const desaSurat = [
     disabled: false,
   },
   {
+    label: "SKDU",
+    name: "Surat Keterangan Domisili Usaha",
+    href: "/surat/surat-keterangan-domisili-usaha",
+    disabled: false,
+  },
+  {
     label: "SKG",
     name: "Surat Keterangan Gaib",
     href: "/surat/surat-keterangan-gaib",
@@ -65,6 +71,12 @@ const desaSurat = [
     label: "SKM",
     name: "Surat Keterangan Kematian",
     href: "/surat/surat-keterangan-kematian",
+    disabled: false,
+  },
+  {
+    label: "BMR",
+    name: "Surat Keterangan Belum Memiliki Rumah",
+    href: "/surat/surat-keterangan-belum-memiliki-rumah",
     disabled: false,
   },
   {

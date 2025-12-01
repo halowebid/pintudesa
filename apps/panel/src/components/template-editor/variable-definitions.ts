@@ -154,6 +154,26 @@ export const SURAT_TYPE_VARIABLES: Record<SuratType, VariableDefinition[]> = {
       category: "surat",
     },
   ],
+  "surat-keterangan-domisili-usaha": [
+    {
+      name: "jenisUsaha",
+      label: "Jenis Usaha",
+      description: "Jenis usaha yang dijalankan",
+      category: "surat",
+    },
+    {
+      name: "namaTempatUsaha",
+      label: "Nama Tempat Usaha",
+      description: "Nama tempat usaha",
+      category: "surat",
+    },
+    {
+      name: "lokasiUsaha",
+      label: "Lokasi Usaha",
+      description: "Lokasi usaha beroperasi",
+      category: "surat",
+    },
+  ],
   "surat-keterangan-gaib": [
     {
       name: "pasangan.namaLengkap",
@@ -276,6 +296,20 @@ export const SURAT_TYPE_VARIABLES: Record<SuratType, VariableDefinition[]> = {
   ],
   "surat-izin-keramaian": [],
   "surat-izin-mendirikan-bangunan": [],
+  "surat-keterangan-belum-memiliki-rumah": [
+    {
+      name: "tujuan_pembuatan",
+      label: "Tujuan Pembuatan",
+      description: "Tujuan pembuatan surat keterangan",
+      category: "surat",
+    },
+    {
+      name: "tempat_tinggal_sekarang",
+      label: "Tempat Tinggal Sekarang",
+      description: "Alamat tempat tinggal saat ini",
+      category: "surat",
+    },
+  ],
   "surat-keterangan-jalan": [],
   "surat-keterangan-kepemilikan-rumah": [],
   "surat-keterangan-penghasilan": [],

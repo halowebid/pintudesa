@@ -127,6 +127,11 @@ export const menuItems: MenuItem[] = [
     category: "Surat",
   },
   {
+    name: "Surat Keterangan Belum Memiliki Rumah",
+    url: "/surat/surat-keterangan-belum-memiliki-rumah",
+    category: "Surat",
+  },
+  {
     name: "Surat Keterangan Kepemilikan Rumah",
     url: "/surat/surat-keterangan-kepemilikan-rumah",
     category: "Surat",

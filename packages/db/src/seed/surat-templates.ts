@@ -722,6 +722,69 @@ ${baseStyles}
 `,
   },
 
+  "surat-keterangan-belum-memiliki-rumah": {
+    name: "Template Default - Surat Keterangan Belum Memiliki Rumah",
+    html: `
+${baseStyles}
+<div class="kop-surat">
+  <h1>PEMERINTAH {{kabupaten}}</h1>
+  <h2>KECAMATAN {{kecamatan}}</h2>
+  <h2>DESA {{namaDesa}}</h2>
+  <p>{{provinsi}}</p>
+</div>
+
+<div class="judul-surat">SURAT KETERANGAN BELUM MEMILIKI RUMAH</div>
+
+<div class="content">
+  <p>Yang bertanda tangan di bawah ini Kepala Desa {{namaDesa}}, Kecamatan {{kecamatan}}, Kabupaten {{kabupaten}}, menerangkan bahwa:</p>
+  
+  <table class="data-table">
+    <tr>
+      <td>Nama Lengkap</td>
+      <td>:</td>
+      <td>{{nama}}</td>
+    </tr>
+    <tr>
+      <td>NIK</td>
+      <td>:</td>
+      <td>{{pemohon.nik}}</td>
+    </tr>
+    <tr>
+      <td>Tempat, Tanggal Lahir</td>
+      <td>:</td>
+      <td>{{tempat_lahir}}, {{tanggal_lahir}}</td>
+    </tr>
+    <tr>
+      <td>Alamat</td>
+      <td>:</td>
+      <td>{{alamat}}</td>
+    </tr>
+    <tr>
+      <td>Wilayah</td>
+      <td>:</td>
+      <td>{{wilayah}}</td>
+    </tr>
+  </table>
+  
+  <p>Orang tersebut di atas adalah benar penduduk Desa {{namaDesa}} dan sampai saat ini yang bersangkutan belum memiliki rumah dan masih menumpang/tinggal di {{tempat_tinggal_sekarang}}.</p>
+  
+  <p>Surat keterangan ini dibuat untuk keperluan {{tujuan_pembuatan}}.</p>
+  
+  <p>Demikian surat keterangan ini dibuat dengan sebenarnya berdasarkan data yang ada untuk dapat dipergunakan sebagaimana mestinya.</p>
+</div>
+
+<div class="ttd-section">
+  <div class="ttd-box">
+    <p>{{namaDesa}}, {{tanggalSurat}}</p>
+    <p>Kepala Desa {{namaDesa}}</p>
+    <div class="ttd-space"></div>
+    <p class="ttd-name">{{namaKepala}}</p>
+    <p>NIP. {{nipKepala}}</p>
+  </div>
+</div>
+`,
+  },
+
   "surat-keterangan-kepemilikan-rumah": {
     name: "Template Default - Surat Keterangan Kepemilikan Rumah",
     html: `
@@ -1321,6 +1384,102 @@ ${baseStyles}
   <p>Orang tersebut di atas benar-benar penduduk Desa {{namaDesa}} yang akan melakukan perpindahan ke desa lain dengan keperluan perubahan data Badan Pertanahan Nasional (BPN) atas sertifikat hak milik yang bersangkutan.</p>
   
   <p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+</div>
+
+<div class="ttd-section">
+  <div class="ttd-box">
+    <p>{{namaDesa}}, {{tanggalSurat}}</p>
+    <p>Kepala Desa {{namaDesa}}</p>
+    <div class="ttd-space"></div>
+    <p class="ttd-name">{{namaKepala}}</p>
+    <p>NIP. {{nipKepala}}</p>
+  </div>
+</div>
+`,
+  },
+
+  "surat-keterangan-domisili-usaha": {
+    name: "Template Default - Surat Keterangan Domisili Usaha",
+    html: `
+${baseStyles}
+<div class="kop-surat">
+  <h1>PEMERINTAH {{kabupaten}}</h1>
+  <h2>KECAMATAN {{kecamatan}}</h2>
+  <h2>DESA {{namaDesa}}</h2>
+  <p>{{provinsi}}</p>
+</div>
+
+<div class="judul-surat">SURAT KETERANGAN DOMISILI USAHA</div>
+
+<div class="content">
+  <p>Yang bertanda tangan di bawah ini Kepala Desa {{namaDesa}}, Kecamatan {{kecamatan}}, Kabupaten {{kabupaten}}, dengan ini menerangkan bahwa:</p>
+  
+  <table class="data-table">
+    <tr>
+      <td>Nama Lengkap</td>
+      <td>:</td>
+      <td>{{pemohon.namaLengkap}}</td>
+    </tr>
+    <tr>
+      <td>NIK</td>
+      <td>:</td>
+      <td>{{pemohon.nik}}</td>
+    </tr>
+    <tr>
+      <td>Tempat, Tanggal Lahir</td>
+      <td>:</td>
+      <td>{{pemohon.tempatLahir}}, {{pemohon.tanggalLahir}}</td>
+    </tr>
+    <tr>
+      <td>Jenis Kelamin</td>
+      <td>:</td>
+      <td>{{pemohon.jenisKelamin}}</td>
+    </tr>
+    <tr>
+      <td>Agama</td>
+      <td>:</td>
+      <td>{{pemohon.agama}}</td>
+    </tr>
+    <tr>
+      <td>Status Perkawinan</td>
+      <td>:</td>
+      <td>{{pemohon.statusPerkawinan}}</td>
+    </tr>
+    <tr>
+      <td>Pekerjaan</td>
+      <td>:</td>
+      <td>{{pemohon.pekerjaan}}</td>
+    </tr>
+    <tr>
+      <td>Alamat</td>
+      <td>:</td>
+      <td>{{pemohon.alamat}}, RT {{pemohon.rt}}/RW {{pemohon.rw}}, Desa {{pemohon.desaKelurahan}}</td>
+    </tr>
+  </table>
+  
+  <p>Adalah benar pemilik/pengelola usaha dengan data sebagai berikut:</p>
+  
+  <table class="data-table">
+    <tr>
+      <td>Jenis Usaha</td>
+      <td>:</td>
+      <td>{{jenisUsaha}}</td>
+    </tr>
+    <tr>
+      <td>Nama Tempat Usaha</td>
+      <td>:</td>
+      <td>{{namaTempatUsaha}}</td>
+    </tr>
+    <tr>
+      <td>Lokasi Usaha</td>
+      <td>:</td>
+      <td>{{lokasiUsaha}}</td>
+    </tr>
+  </table>
+  
+  <p>Usaha tersebut berdomisili dan beroperasi di wilayah Desa {{namaDesa}}, Kecamatan {{kecamatan}}, Kabupaten {{kabupaten}}.</p>
+  
+  <p>Demikian surat keterangan domisili usaha ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
 </div>
 
 <div class="ttd-section">

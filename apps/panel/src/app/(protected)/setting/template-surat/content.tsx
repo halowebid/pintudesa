@@ -26,7 +26,10 @@ import { useHandleTRPCError } from "@/lib/utils/error"
 const SURAT_TYPE_LABELS: Record<SuratType, string> = {
   "surat-izin-keramaian": "Surat Izin Keramaian",
   "surat-izin-mendirikan-bangunan": "Surat Izin Mendirikan Bangunan",
+  "surat-keterangan-belum-memiliki-rumah":
+    "Surat Keterangan Belum Memiliki Rumah",
   "surat-keterangan-domisili": "Surat Keterangan Domisili",
+  "surat-keterangan-domisili-usaha": "Surat Keterangan Domisili Usaha",
   "surat-keterangan-gaib": "Surat Keterangan Gaib",
   "surat-keterangan-jalan": "Surat Keterangan Jalan",
   "surat-keterangan-kelahiran": "Surat Keterangan Kelahiran",
