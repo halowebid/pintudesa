@@ -6,6 +6,12 @@ import {
   type InsertSuratPengantarSKCK,
 } from "../schema/surat-pengantar-skck"
 
+/**
+ * Create a new SKCK cover letter
+ *
+ * @param data - The SKCK cover letter data to insert
+ * @returns The created SKCK cover letter entry
+ */
 export const insertSuratPengantarSKCK = async (
   data: InsertSuratPengantarSKCK,
 ) => {
@@ -17,6 +23,12 @@ export const insertSuratPengantarSKCK = async (
   return suratPengantarSKCK[0]
 }
 
+/**
+ * Update an existing SKCK cover letter
+ *
+ * @param data - The SKCK cover letter data to update, including the id
+ * @returns The updated SKCK cover letter entry
+ */
 export const updateSuratPengantarSKCK = async (
   data: InsertSuratPengantarSKCK & { id: string },
 ) => {
@@ -29,6 +41,12 @@ export const updateSuratPengantarSKCK = async (
   return suratPengantarSKCK[0]
 }
 
+/**
+ * Delete a SKCK cover letter by ID
+ *
+ * @param id - The ID of the SKCK cover letter to delete
+ * @returns The deleted SKCK cover letter entry
+ */
 export const deleteSuratPengantarSKCK = async (id: string) => {
   const suratPengantarSKCK = await db
     .delete(suratPengantarSKCKTable)
@@ -37,6 +55,13 @@ export const deleteSuratPengantarSKCK = async (id: string) => {
   return suratPengantarSKCK[0]
 }
 
+/**
+ * Get paginated list of SKCK cover letters with applicant data
+ *
+ * @param page - The page number (1-indexed)
+ * @param perPage - Number of SKCK cover letters per page
+ * @returns Array of SKCK cover letter entries with applicant, ordered by creation date
+ */
 export const getSuratPengantarSKCKs = async (page: number, perPage: number) => {
   return await db.query.suratPengantarSKCKTable.findMany({
     limit: perPage,
@@ -48,6 +73,12 @@ export const getSuratPengantarSKCKs = async (page: number, perPage: number) => {
   })
 }
 
+/**
+ * Get a single SKCK cover letter by ID with applicant data
+ *
+ * @param id - The ID of the SKCK cover letter
+ * @returns The SKCK cover letter with applicant if found, undefined otherwise
+ */
 export const getSuratPengantarSKCKById = async (id: string) => {
   return await db.query.suratPengantarSKCKTable.findFirst({
     where: eq(suratPengantarSKCKTable.id, id),
@@ -57,6 +88,13 @@ export const getSuratPengantarSKCKById = async (id: string) => {
   })
 }
 
+/**
+ * Search SKCK cover letters with limit
+ *
+ * @param searchQuery - The search query string
+ * @param limit - Maximum number of results to return
+ * @returns Array of matching SKCK cover letter entries with applicant
+ */
 export const searchSuratPengantarSKCKs = async ({
   searchQuery,
   limit,
@@ -74,6 +112,11 @@ export const searchSuratPengantarSKCKs = async ({
   })
 }
 
+/**
+ * Get total count of all SKCK cover letters
+ *
+ * @returns The total number of SKCK cover letter entries
+ */
 export const countSuratPengantarSKCKs = async () => {
   const suratPengantarSKCK = await db
     .select({ value: count() })

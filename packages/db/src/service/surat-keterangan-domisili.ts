@@ -7,6 +7,12 @@ import {
   type InsertSuratKeteranganDomisili,
 } from "../schema/surat-keterangan-domisili"
 
+/**
+ * Create a new domicile certificate letter
+ *
+ * @param data - The domicile certificate letter data to insert
+ * @returns The created domicile certificate letter entry
+ */
 export const insertSuratKeteranganDomisili = async (
   data: InsertSuratKeteranganDomisili & {
     pendudukIds: string[]
@@ -30,6 +36,12 @@ export const insertSuratKeteranganDomisili = async (
   return suratKeteranganDomisili[0]
 }
 
+/**
+ * Update an existing domicile certificate letter
+ *
+ * @param data - The domicile certificate letter data to update, including the id
+ * @returns The updated domicile certificate letter entry
+ */
 export const updateSuratKeteranganDomisili = async (
   data: InsertSuratKeteranganDomisili & { id: string },
 ) => {
@@ -42,6 +54,12 @@ export const updateSuratKeteranganDomisili = async (
   return suratKeteranganDomisili[0]
 }
 
+/**
+ * Delete a domicile certificate letter by ID
+ *
+ * @param id - The ID of the domicile certificate letter to delete
+ * @returns The deleted domicile certificate letter entry
+ */
 export const deleteSuratKeteranganDomisili = async (id: string) => {
   const suratKeteranganDomisili = await db
     .delete(suratKeteranganDomisiliTable)
@@ -50,6 +68,13 @@ export const deleteSuratKeteranganDomisili = async (id: string) => {
   return suratKeteranganDomisili[0]
 }
 
+/**
+ * Get paginated list of domicile certificate letters with applicant data
+ *
+ * @param page - The page number (1-indexed)
+ * @param perPage - Number of domicile certificate letters per page
+ * @returns Array of domicile certificate letter entries with applicant, ordered by creation date
+ */
 export const getSuratKeteranganDomisilis = async (
   page: number,
   perPage: number,
@@ -65,6 +90,12 @@ export const getSuratKeteranganDomisilis = async (
   })
 }
 
+/**
+ * Get a single domicile certificate letter by ID with applicant data
+ *
+ * @param id - The ID of the domicile certificate letter
+ * @returns The domicile certificate letter with applicant if found, undefined otherwise
+ */
 export const getSuratKeteranganDomisiliById = async (id: string) => {
   return await db.query.suratKeteranganDomisiliTable.findFirst({
     where: eq(suratKeteranganDomisiliTable.id, id),
@@ -75,6 +106,13 @@ export const getSuratKeteranganDomisiliById = async (id: string) => {
   })
 }
 
+/**
+ * Search domicile certificate letters with limit
+ *
+ * @param searchQuery - The search query string
+ * @param limit - Maximum number of results to return
+ * @returns Array of matching domicile certificate letter entries with applicant
+ */
 export const searchSuratKeteranganDomisilis = async ({
   searchQuery,
   limit,
@@ -93,6 +131,11 @@ export const searchSuratKeteranganDomisilis = async ({
   })
 }
 
+/**
+ * Get total count of all domicile certificate letters
+ *
+ * @returns The total number of domicile certificate letter entries
+ */
 export const countSuratKeteranganDomisilis = async () => {
   const suratKeteranganDomisili = await db
     .select({ value: count() })

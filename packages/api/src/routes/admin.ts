@@ -15,6 +15,20 @@ import { handleTRPCError } from "../utils/error"
 export const adminRouter = createTRPCRouter({
   /**
    * List users with optional filtering, sorting, and pagination
+   *
+   * @param input - Query parameters for filtering, sorting, and pagination
+   * @param input.searchValue - Optional search value to filter users
+   * @param input.searchField - Field to search in (email or name)
+   * @param input.searchOperator - Search operator (contains, starts_with, ends_with)
+   * @param input.limit - Maximum number of users to return
+   * @param input.offset - Number of users to skip
+   * @param input.sortBy - Field to sort by
+   * @param input.sortDirection - Sort direction (asc or desc)
+   * @param input.filterField - Field to filter by
+   * @param input.filterValue - Value to filter by
+   * @param input.filterOperator - Filter operator (eq, ne, lt, lte, gt, gte)
+   * @returns Paginated list of users
+   * @throws {TRPCError} If the query fails or user is unauthorized
    */
   listUsers: adminProtectedProcedure
     .input(
@@ -51,6 +65,14 @@ export const adminRouter = createTRPCRouter({
   /**
    * Create a new user with specified role
    * Note: Only "user" and "admin" roles are supported by better-auth admin plugin
+   *
+   * @param input - User creation data
+   * @param input.email - User email address (must be valid email format)
+   * @param input.password - User password (minimum 8 characters)
+   * @param input.name - User full name
+   * @param input.role - User role (optional, defaults to "user")
+   * @returns The created user object (without password field)
+   * @throws {TRPCError} If creation fails, email is invalid, or user is unauthorized
    */
   createUser: adminProtectedProcedure
     .input(
@@ -73,7 +95,6 @@ export const adminRouter = createTRPCRouter({
 
       if (error) handleTRPCError(error)
 
-      // Remove password from response if present
       if (data && typeof data === "object" && "password" in data) {
         const { password: _, ...userWithoutPassword } = data as Record<
           string,
@@ -88,6 +109,12 @@ export const adminRouter = createTRPCRouter({
   /**
    * Set user role
    * Note: Only "user" and "admin" roles are supported by better-auth admin plugin
+   *
+   * @param input - Role assignment data
+   * @param input.userId - The ID of the user to update
+   * @param input.role - The role(s) to assign (single role or array of roles)
+   * @returns The updated user data
+   * @throws {TRPCError} If update fails, user not found, or requester is unauthorized
    */
   setRole: adminProtectedProcedure
     .input(
@@ -114,6 +141,12 @@ export const adminRouter = createTRPCRouter({
 
   /**
    * Update user data
+   *
+   * @param input - User update data
+   * @param input.userId - The ID of the user to update
+   * @param input.data - Object containing fields to update
+   * @returns The updated user data
+   * @throws {TRPCError} If update fails, user not found, or requester is unauthorized
    */
   updateUser: adminProtectedProcedure
     .input(
@@ -137,6 +170,10 @@ export const adminRouter = createTRPCRouter({
 
   /**
    * Remove (delete) a user
+   *
+   * @param input - The user ID to delete
+   * @returns Confirmation of deletion
+   * @throws {TRPCError} If deletion fails, user not found, or requester is unauthorized
    */
   removeUser: adminProtectedProcedure
     .input(z.string().min(1, "User ID is required"))
@@ -155,6 +192,13 @@ export const adminRouter = createTRPCRouter({
 
   /**
    * Ban a user with optional reason and expiration
+   *
+   * @param input - Ban configuration data
+   * @param input.userId - The ID of the user to ban
+   * @param input.banReason - Optional reason for the ban
+   * @param input.banExpiresIn - Optional ban duration in seconds
+   * @returns The updated user data with ban status
+   * @throws {TRPCError} If ban fails, user not found, or requester is unauthorized
    */
   banUser: adminProtectedProcedure
     .input(
@@ -182,6 +226,11 @@ export const adminRouter = createTRPCRouter({
 
   /**
    * Unban a user
+   *
+   * @param input - Unban data
+   * @param input.userId - The ID of the user to unban
+   * @returns The updated user data with ban status removed
+   * @throws {TRPCError} If unban fails, user not found, or requester is unauthorized
    */
   unbanUser: adminProtectedProcedure
     .input(
@@ -204,6 +253,11 @@ export const adminRouter = createTRPCRouter({
 
   /**
    * List all sessions for a specific user
+   *
+   * @param input - Query parameters
+   * @param input.userId - The ID of the user to list sessions for
+   * @returns Array of active sessions for the user
+   * @throws {TRPCError} If query fails, user not found, or requester is unauthorized
    */
   listUserSessions: adminProtectedProcedure
     .input(
@@ -226,6 +280,11 @@ export const adminRouter = createTRPCRouter({
 
   /**
    * Revoke a specific user session
+   *
+   * @param input - Revocation data
+   * @param input.sessionToken - The session token to revoke
+   * @returns Confirmation of session revocation
+   * @throws {TRPCError} If revocation fails, session not found, or requester is unauthorized
    */
   revokeUserSession: adminProtectedProcedure
     .input(
@@ -248,6 +307,11 @@ export const adminRouter = createTRPCRouter({
 
   /**
    * Revoke all sessions for a specific user
+   *
+   * @param input - Revocation data
+   * @param input.userId - The ID of the user whose sessions to revoke
+   * @returns Confirmation of all sessions revocation
+   * @throws {TRPCError} If revocation fails, user not found, or requester is unauthorized
    */
   revokeUserSessions: adminProtectedProcedure
     .input(

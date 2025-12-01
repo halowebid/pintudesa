@@ -74,13 +74,9 @@ export const notifikasiTable = pgTable(
     updatedAt: timestamp("updated_at").defaultNow(),
   },
   (table) => ({
-    // Index for querying user's notifications
     userIdIdx: index("idx_notifikasi_user_id").on(table.userId),
-    // Index for ordering by creation date
     createdAtIdx: index("idx_notifikasi_created_at").on(table.createdAt),
-    // Index for filtering unread notifications
     readIdx: index("idx_notifikasi_read").on(table.read),
-    // Composite index for common query pattern: user's unread notifications ordered by date
     userReadCreatedIdx: index("idx_notifikasi_user_read_created").on(
       table.userId,
       table.read,

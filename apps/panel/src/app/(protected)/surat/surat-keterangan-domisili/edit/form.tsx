@@ -66,7 +66,6 @@ export default function SuratKeteranganDomisiliForm({
     })
   }
 
-  // Search for pemohon
   const { data: searchResultsPemohon = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyPemohon, limit: 10 },
@@ -74,7 +73,6 @@ export default function SuratKeteranganDomisiliForm({
     ),
   )
 
-  // Search for keluarga
   const { data: searchResultsKeluarga = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyKeluarga, limit: 10 },
@@ -185,7 +183,6 @@ export default function SuratKeteranganDomisiliForm({
         id: value.id,
         pemohonNIK: value.pemohonNIK,
         jumlahTahunDomisili: value.jumlahTahunDomisili,
-        // pendudukIds is not needed for update in this implementation
       })
     },
   })
@@ -290,7 +287,6 @@ export default function SuratKeteranganDomisiliForm({
                     (p) => p.value === selectedValue,
                   )
                   if (selected) {
-                    // Check if already selected
                     if (
                       !selectedKeluarga.some(
                         (item) => item.value === selected.value,

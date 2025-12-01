@@ -15,7 +15,6 @@ import {
  * @returns Newly created template
  */
 export async function insertSuratTemplate(data: InsertSuratTemplate) {
-  // If this template is being set as default, unset existing default
   if (data.isDefault) {
     await db
       .update(suratTemplateTable)
@@ -43,7 +42,6 @@ export async function insertSuratTemplate(data: InsertSuratTemplate) {
  * @returns Updated template
  */
 export async function updateSuratTemplate(data: SelectSuratTemplate) {
-  // If setting this as default, unset existing default for this type
   if (data.isDefault) {
     await db
       .update(suratTemplateTable)
@@ -73,7 +71,6 @@ export async function updateSuratTemplate(data: SelectSuratTemplate) {
  * @throws Error if attempting to delete default template
  */
 export async function deleteSuratTemplate(id: string) {
-  // Check if this is a default template
   const results = await db
     .select()
     .from(suratTemplateTable)

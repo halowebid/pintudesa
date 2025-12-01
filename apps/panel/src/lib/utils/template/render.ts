@@ -18,10 +18,9 @@ export function renderTemplate(
     const value = getNestedValue(variables, trimmedKey)
 
     if (value === null || value === undefined) {
-      return "" // Return empty string for missing values
+      return ""
     }
 
-    // Convert to string, handling objects properly
     if (typeof value === "object") {
       return JSON.stringify(value)
     }

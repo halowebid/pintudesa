@@ -6,6 +6,12 @@ import {
   type InsertSuratKeteranganPenghasilan,
 } from "../schema/surat-keterangan-penghasilan"
 
+/**
+ * Create a new income certificate letter
+ *
+ * @param data - The income certificate letter data to insert
+ * @returns The created income certificate letter entry
+ */
 export const insertSuratKeteranganPenghasilan = async (
   data: InsertSuratKeteranganPenghasilan,
 ) => {
@@ -17,6 +23,12 @@ export const insertSuratKeteranganPenghasilan = async (
   return suratKeteranganPenghasilan[0]
 }
 
+/**
+ * Update an existing income certificate letter
+ *
+ * @param data - The income certificate letter data to update, including the id
+ * @returns The updated income certificate letter entry
+ */
 export const updateSuratKeteranganPenghasilan = async (
   data: InsertSuratKeteranganPenghasilan & { id: string },
 ) => {
@@ -29,6 +41,12 @@ export const updateSuratKeteranganPenghasilan = async (
   return suratKeteranganPenghasilan[0]
 }
 
+/**
+ * Delete a income certificate letter by ID
+ *
+ * @param id - The ID of the income certificate letter to delete
+ * @returns The deleted income certificate letter entry
+ */
 export const deleteSuratKeteranganPenghasilan = async (id: string) => {
   const suratKeteranganPenghasilan = await db
     .delete(suratKeteranganPenghasilanTable)
@@ -37,6 +55,13 @@ export const deleteSuratKeteranganPenghasilan = async (id: string) => {
   return suratKeteranganPenghasilan[0]
 }
 
+/**
+ * Get paginated list of income certificate letters with applicant data
+ *
+ * @param page - The page number (1-indexed)
+ * @param perPage - Number of income certificate letters per page
+ * @returns Array of income certificate letter entries with applicant, ordered by creation date
+ */
 export const getSuratKeteranganPenghasilans = async (
   page: number,
   perPage: number,
@@ -51,12 +76,25 @@ export const getSuratKeteranganPenghasilans = async (
   })
 }
 
+/**
+ * Get a single income certificate letter by ID with applicant data
+ *
+ * @param id - The ID of the income certificate letter
+ * @returns The income certificate letter with applicant if found, undefined otherwise
+ */
 export const getSuratKeteranganPenghasilanById = async (id: string) => {
   return await db.query.suratKeteranganPenghasilanTable.findFirst({
     where: eq(suratKeteranganPenghasilanTable.id, id),
   })
 }
 
+/**
+ * Search income certificate letters with limit
+ *
+ * @param searchQuery - The search query string
+ * @param limit - Maximum number of results to return
+ * @returns Array of matching income certificate letter entries with applicant
+ */
 export const searchSuratKeteranganPenghasilans = async ({
   searchQuery,
   limit,
@@ -74,6 +112,11 @@ export const searchSuratKeteranganPenghasilans = async ({
   })
 }
 
+/**
+ * Get total count of all income certificate letters
+ *
+ * @returns The total number of income certificate letter entries
+ */
 export const countSuratKeteranganPenghasilans = async () => {
   const suratKeteranganPenghasilan = await db
     .select({ value: count() })

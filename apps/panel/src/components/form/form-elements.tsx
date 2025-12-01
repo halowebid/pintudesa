@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-// TODO: should imported from UI
 import {
   createListCollection,
   parseDate,
@@ -273,7 +272,6 @@ export const FileUploadDropzoneField = ({
     const validFiles = Array.from(files).filter(
       (file) => file.size <= maxSizeMb * 1024 * 1024,
     )
-    // TODO: Handle upload (Issue #123)
     const newFiles = multiple
       ? [...field.state.value, ...validFiles]
       : validFiles.slice(0, 1)

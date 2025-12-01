@@ -118,7 +118,6 @@ export default function SuratKeteranganKelahiranForm({
     })
   }
 
-  // Search for male gender (ayah)
   const { data: searchResultsAyah = [] } = useQuery(
     trpc.penduduk.searchByJenisKelamin.queryOptions(
       {
@@ -129,7 +128,6 @@ export default function SuratKeteranganKelahiranForm({
     ),
   )
 
-  // Search for female gender (ibu)
   const { data: searchResultsIbu = [] } = useQuery(
     trpc.penduduk.searchByJenisKelamin.queryOptions(
       {
@@ -140,7 +138,6 @@ export default function SuratKeteranganKelahiranForm({
     ),
   )
 
-  // Search for pemohon (any gender)
   const { data: searchResultsPemohon = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyPemohon, limit: 10 },

@@ -4,7 +4,6 @@ import * as React from "react"
 import { cn } from "@yopem-ui/utils"
 import * as RechartsPrimitive from "recharts"
 
-// Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const
 
 export type ChartConfig = Record<
@@ -120,7 +119,6 @@ function ChartTooltipContent({
   labelKey,
 }: Omit<React.ComponentProps<typeof RechartsPrimitive.Tooltip>, "payload"> &
   React.ComponentProps<"div"> & {
-    // Recharts tooltip payload type is not exported; fallback to any[]
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     payload?: any[]
     hideLabel?: boolean
@@ -263,7 +261,6 @@ function ChartLegendContent({
   verticalAlign = "bottom",
   nameKey,
 }: React.ComponentProps<"div"> & {
-  // Recharts tooltip payload type is not exported; fallback to any[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload?: any[]
   verticalAlign?: "top" | "bottom" | "middle"

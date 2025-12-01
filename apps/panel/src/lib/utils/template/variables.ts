@@ -12,17 +12,14 @@ import { formatDate } from "@pintudesa/utils"
  * Common variables available in all surat templates
  */
 interface CommonVariables {
-  // Desa information
   namaDesa: string
   kecamatan: string
   kabupaten: string
   provinsi: string
 
-  // Current date/time
   tanggalSurat: string
   tahunSurat: string
 
-  // Officer information (kepala desa, sekretaris, etc)
   namaKepala: string
   nipKepala: string
 }
@@ -97,12 +94,10 @@ export function mapSuratVariables(
   const commonVars = getCommonVariables(setting)
   console.log("[mapSuratVariables] commonVars:", commonVars)
 
-  // Base variables
   const variables: Record<string, unknown> = {
     ...commonVars,
   }
 
-  // Map pemohon (applicant) if available
   console.log("[mapSuratVariables] suratData.pemohon:", suratData.pemohon)
   if (suratData.pemohon) {
     const pemohonVars = mapPendudukVariables(suratData.pemohon, "pemohon")
@@ -282,9 +277,7 @@ export function mapSuratVariables(
       }
       break
 
-    // Add more cases for other surat types as needed
     default:
-      // For surat types without specific mapping, just spread all data
       Object.entries(suratData).forEach(([key, value]) => {
         if (
           typeof value === "string" ||

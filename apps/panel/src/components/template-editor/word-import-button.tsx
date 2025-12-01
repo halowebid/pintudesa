@@ -49,7 +49,6 @@ export function WordImportButton({
         arrayBuffer,
       })
 
-      // Log conversion warnings if any
       if (result.messages.length > 0) {
         // eslint-disable-next-line no-console
         console.warn("Word conversion warnings:", result.messages)

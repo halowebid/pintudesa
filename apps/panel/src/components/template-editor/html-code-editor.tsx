@@ -19,31 +19,23 @@ function formatHtml(html: string): string {
   let indent = 0
   const indentSize = 2
 
-  // Remove extra whitespace and newlines
   const cleanHtml = html.replace(/>\s+</g, "><").trim()
 
-  // Split by tags
   const tags = cleanHtml.match(/<[^>]+>|[^<]+/g) ?? []
 
   for (const tag of tags) {
     if (!tag || tag.trim() === "") continue
 
-    // Check if it's a closing tag
     if (tag.startsWith("</")) {
       indent = Math.max(0, indent - 1)
       formatted += " ".repeat(indent * indentSize) + tag + "\n"
-    }
-    // Check if it's a self-closing tag or single tag
-    else if (
+    } else if (
       tag.startsWith("<") &&
       (tag.endsWith("/>") || /<(br|hr|img|input|meta|link)/i.exec(tag))
     ) {
       formatted += " ".repeat(indent * indentSize) + tag + "\n"
-    }
-    // Check if it's an opening tag
-    else if (tag.startsWith("<")) {
+    } else if (tag.startsWith("<")) {
       formatted += " ".repeat(indent * indentSize) + tag + "\n"
-      // Don't increase indent for inline/void elements
       if (
         !/<(br|hr|img|input|meta|link|area|base|col|embed|param|source|track|wbr)/i.exec(
           tag,
@@ -51,9 +43,7 @@ function formatHtml(html: string): string {
       ) {
         indent++
       }
-    }
-    // Text content
-    else {
+    } else {
       const trimmed = tag.trim()
       if (trimmed) {
         formatted += " ".repeat(indent * indentSize) + trimmed + "\n"
@@ -68,10 +58,7 @@ function formatHtml(html: string): string {
  * Minify HTML by removing unnecessary whitespace
  */
 function minifyHtml(html: string): string {
-  return html
-    .replace(/\n\s*/g, "") // Remove newlines and indentation
-    .replace(/>\s+</g, "><") // Remove whitespace between tags
-    .trim()
+  return html.replace(/\n\s*/g, "").replace(/>\s+</g, "><").trim()
 }
 
 export function HtmlCodeEditor({
@@ -82,7 +69,6 @@ export function HtmlCodeEditor({
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const preRef = useRef<HTMLPreElement>(null)
 
-  // Format the content for display
   const formattedContent = formatHtml(content)
 
   useEffect(() => {
@@ -97,7 +83,6 @@ export function HtmlCodeEditor({
   }, [formattedContent])
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    // Minify the HTML before saving (remove formatting)
     const minified = minifyHtml(e.target.value)
     onChange(minified)
   }

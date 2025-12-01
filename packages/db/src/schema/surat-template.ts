@@ -44,10 +44,7 @@ export const suratTemplateTable = pgTable(
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow(),
   },
-  (table) => [
-    // Index for fast lookup by surat type
-    index("surat_template_type_idx").on(table.suratType),
-  ],
+  (table) => [index("surat_template_type_idx").on(table.suratType)],
 )
 
 export const insertSuratTemplateSchema = createInsertSchema(suratTemplateTable)

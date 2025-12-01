@@ -73,7 +73,6 @@ export default function TemplateSuratForm({
     })
   }
 
-  // Fetch existing template if editing
   const { data: existingTemplate } = useQuery({
     ...trpc.suratTemplate.byId.queryOptions(id!),
     enabled: !!id,

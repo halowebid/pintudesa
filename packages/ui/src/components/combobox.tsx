@@ -56,7 +56,6 @@ export const ComboboxBase = React.forwardRef<
     },
     ref,
   ) => {
-    // Create collection from items - recreates when items change
     const collection = React.useMemo(
       () => createListCollection({ items }),
       [items],
@@ -65,10 +64,8 @@ export const ComboboxBase = React.forwardRef<
     React.useImperativeHandle(
       ref,
       () => ({
-        clear: () => {
-          // Component is fully controlled, clearing is handled by parent
-          // through inputValue and value props
-        },
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        clear: () => {},
       }),
       [],
     )

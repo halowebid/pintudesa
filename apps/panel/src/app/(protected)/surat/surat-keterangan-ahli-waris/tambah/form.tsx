@@ -125,7 +125,6 @@ export default function SuratKeteranganAhliWarisForm({
     })
   }
 
-  // Search for pemohon
   const { data: searchResultsPemohon = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyPemohon, limit: 10 },
@@ -133,7 +132,6 @@ export default function SuratKeteranganAhliWarisForm({
     ),
   )
 
-  // Search for yang meninggal
   const { data: searchResultsYangMeninggal = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyYangMeninggal, limit: 10 },
@@ -141,7 +139,6 @@ export default function SuratKeteranganAhliWarisForm({
     ),
   )
 
-  // Search for ahli waris
   const { data: searchResultsAhliWaris = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyAhliWaris, limit: 10 },

@@ -6,6 +6,12 @@ import {
   type InsertSuratPernyataanBelumMenikah,
 } from "../schema/surat-pernyataan-belum-menikah"
 
+/**
+ * Create a new unmarried statement letter
+ *
+ * @param data - The unmarried statement letter data to insert
+ * @returns The created unmarried statement letter entry
+ */
 export const insertSuratPernyataanBelumMenikah = async (
   data: InsertSuratPernyataanBelumMenikah,
 ) => {
@@ -17,6 +23,12 @@ export const insertSuratPernyataanBelumMenikah = async (
   return suratPernyataanBelumMenikah[0]
 }
 
+/**
+ * Update an existing unmarried statement letter
+ *
+ * @param data - The unmarried statement letter data to update, including the id
+ * @returns The updated unmarried statement letter entry
+ */
 export const updateSuratPernyataanBelumMenikah = async (
   data: InsertSuratPernyataanBelumMenikah & { id: string },
 ) => {
@@ -29,6 +41,12 @@ export const updateSuratPernyataanBelumMenikah = async (
   return suratPernyataanBelumMenikah[0]
 }
 
+/**
+ * Delete a unmarried statement letter by ID
+ *
+ * @param id - The ID of the unmarried statement letter to delete
+ * @returns The deleted unmarried statement letter entry
+ */
 export const deleteSuratPernyataanBelumMenikah = async (id: string) => {
   const suratPernyataanBelumMenikah = await db
     .delete(suratPernyataanBelumMenikahTable)
@@ -37,6 +55,13 @@ export const deleteSuratPernyataanBelumMenikah = async (id: string) => {
   return suratPernyataanBelumMenikah[0]
 }
 
+/**
+ * Get paginated list of unmarried statement letters with applicant data
+ *
+ * @param page - The page number (1-indexed)
+ * @param perPage - Number of unmarried statement letters per page
+ * @returns Array of unmarried statement letter entries with applicant, ordered by creation date
+ */
 export const getSuratPernyataanBelumMenikahs = async (
   page: number,
   perPage: number,
@@ -51,6 +76,12 @@ export const getSuratPernyataanBelumMenikahs = async (
   })
 }
 
+/**
+ * Get a single unmarried statement letter by ID with applicant data
+ *
+ * @param id - The ID of the unmarried statement letter
+ * @returns The unmarried statement letter with applicant if found, undefined otherwise
+ */
 export const getSuratPernyataanBelumMenikahById = async (id: string) => {
   return await db.query.suratPernyataanBelumMenikahTable.findFirst({
     where: eq(suratPernyataanBelumMenikahTable.id, id),
@@ -60,6 +91,13 @@ export const getSuratPernyataanBelumMenikahById = async (id: string) => {
   })
 }
 
+/**
+ * Search unmarried statement letters with limit
+ *
+ * @param searchQuery - The search query string
+ * @param limit - Maximum number of results to return
+ * @returns Array of matching unmarried statement letter entries with applicant
+ */
 export const searchSuratPernyataanBelumMenikahs = async ({
   searchQuery,
   limit,
@@ -77,6 +115,11 @@ export const searchSuratPernyataanBelumMenikahs = async ({
   })
 }
 
+/**
+ * Get total count of all unmarried statement letters
+ *
+ * @returns The total number of unmarried statement letter entries
+ */
 export const countSuratPernyataanBelumMenikahs = async () => {
   const suratPernyataanBelumMenikah = await db
     .select({ value: count() })

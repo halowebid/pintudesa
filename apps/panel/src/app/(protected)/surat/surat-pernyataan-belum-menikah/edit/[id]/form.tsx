@@ -55,7 +55,6 @@ export default function SuratPernyataanBelumMenikahForm({
     trpc.suratPernyataanBelumMenikah.byId.queryOptions(id),
   )
 
-  // Search for pemohon (any gender)
   const { data: searchResultsPemohon = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyPemohon, limit: 10 },
@@ -113,7 +112,6 @@ export default function SuratPernyataanBelumMenikahForm({
     }),
   )
 
-  // Set selected values from existing data
   React.useEffect(() => {
     if (data?.pemohonNIK) {
       const pendudukData = data.pemohon
@@ -168,7 +166,6 @@ export default function SuratPernyataanBelumMenikahForm({
     },
   })
 
-  // Convert SHDK values to readable labels
   const shdkOptions = SHDK.map((value) => {
     const labels = {
       suami: "Suami",

@@ -22,29 +22,25 @@ import {
 } from "../trpc"
 import { handleTRPCError } from "../utils/error"
 
-// Initialize Redis only if URL is provided and available
 const redis = redisUrl
   ? new Redis(redisUrl, {
       maxRetriesPerRequest: 3,
       lazyConnect: true,
       retryStrategy: (times) => {
         if (times > 3) {
-          // eslint-disable-next-line no-console
           console.warn("Redis connection failed, caching disabled")
-          return null // Stop retrying
+          return null
         }
         return Math.min(times * 100, 2000)
       },
     })
   : null
 
-// Helper to safely use Redis cache
 async function getCached(key: string): Promise<string | null> {
   if (!redis) return null
   try {
     return await redis.get(key)
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.warn("Redis get failed:", error)
     return null
   }
@@ -63,7 +59,6 @@ async function setCached(
       await redis.set(key, value)
     }
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.warn("Redis set failed:", error)
   }
 }
@@ -73,7 +68,6 @@ async function delCached(key: string): Promise<void> {
   try {
     await redis.del(key)
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.warn("Redis del failed:", error)
   }
 }

@@ -31,16 +31,13 @@ export default function PrintPreview({
   const [renderedHtml, setRenderedHtml] = React.useState<string>("")
   const [error, setError] = React.useState<string | null>(null)
 
-  // Fetch the default template for this surat type
   const { data: template } = useQuery(
     trpc.suratTemplate.bySuratType.queryOptions(suratType),
   )
 
-  // Fetch setting data for village information
   const { data: settings } = useQuery(trpc.setting.all.queryOptions())
   const setting = settings?.[0]
 
-  // Render template when data is available
   React.useEffect(() => {
     if (!template) {
       setError("Template tidak ditemukan untuk jenis surat ini")
@@ -49,7 +46,6 @@ export default function PrintPreview({
     }
 
     try {
-      // Debug: Log the incoming data
       // eslint-disable-next-line no-console
       console.log("[PrintPreview] suratType:", suratType)
       // eslint-disable-next-line no-console
@@ -57,12 +53,10 @@ export default function PrintPreview({
       // eslint-disable-next-line no-console
       console.log("[PrintPreview] setting:", setting)
 
-      // Map variables with setting data
       const variables = mapSuratVariables(suratType, suratData, setting)
       // eslint-disable-next-line no-console
       console.log("[PrintPreview] mapped variables:", variables)
 
-      // Render template
       const html = renderTemplate(template.htmlContent, variables)
       setRenderedHtml(html)
       setError(null)
@@ -75,14 +69,12 @@ export default function PrintPreview({
   const handlePrint = React.useCallback(() => {
     if (!renderedHtml) return
 
-    // Create a new window for printing
     const printWindow = window.open("", "_blank")
     if (!printWindow) {
       alert("Popup blocked. Please allow popups for this site.")
       return
     }
 
-    // Write the content
     printWindow.document.write(`
       <!DOCTYPE html>
       <html>
@@ -116,7 +108,6 @@ export default function PrintPreview({
     printWindow.document.close()
     printWindow.focus()
 
-    // Wait for content to load, then print
     setTimeout(() => {
       printWindow.print()
       printWindow.close()

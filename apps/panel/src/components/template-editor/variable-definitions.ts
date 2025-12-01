@@ -8,7 +8,6 @@ export interface VariableDefinition {
 }
 
 export const COMMON_VARIABLES: VariableDefinition[] = [
-  // Desa Information
   {
     name: "namaDesa",
     label: "Nama Desa",

@@ -46,7 +46,6 @@ export default function SuratPengantarSKCKForm({
     await queryClient.invalidateQueries({ queryKey: suratPengantarSKCKsKey })
   }
 
-  // Search for pemohon (any gender)
   const { data: searchResultsPemohon = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyPemohon, limit: 10 },

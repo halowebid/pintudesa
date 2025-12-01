@@ -9,6 +9,10 @@ import {
 
 /**
  * Create a new notification for a specific user
+ *
+ * @param userId - The ID of the user to create the notification for
+ * @param data - The notification data (excluding userId)
+ * @returns The created notification
  */
 export const createNotifikasi = async (
   userId: string,
@@ -28,6 +32,12 @@ export const createNotifikasi = async (
 /**
  * Get notifications for a specific user with pagination
  * Optionally filter by unread status
+ *
+ * @param userId - The ID of the user
+ * @param page - The page number (1-indexed)
+ * @param perPage - Number of notifications per page
+ * @param unreadOnly - Optional flag to filter only unread notifications
+ * @returns Array of notifications for the user
  */
 export const getNotifikasiByUser = async (
   userId: string,
@@ -49,6 +59,9 @@ export const getNotifikasiByUser = async (
 
 /**
  * Get count of unread notifications for a specific user
+ *
+ * @param userId - The ID of the user
+ * @returns The count of unread notifications
  */
 export const getUnreadCount = async (userId: string) => {
   const result = await db
@@ -64,6 +77,10 @@ export const getUnreadCount = async (userId: string) => {
 /**
  * Get a single notification by ID
  * Verifies user ownership
+ *
+ * @param notifikasiId - The ID of the notification
+ * @param userId - The ID of the user
+ * @returns The notification if found and owned by user, undefined otherwise
  */
 export const getNotifikasiById = async (
   notifikasiId: string,
@@ -80,6 +97,11 @@ export const getNotifikasiById = async (
 /**
  * Mark a notification as read
  * Verifies user ownership before updating
+ *
+ * @param notifikasiId - The ID of the notification to mark as read
+ * @param userId - The ID of the user
+ * @returns The updated notification
+ * @throws {Error} If notification not found or unauthorized
  */
 export const markAsRead = async (notifikasiId: string, userId: string) => {
   const notification = await getNotifikasiById(notifikasiId, userId)
@@ -103,6 +125,9 @@ export const markAsRead = async (notifikasiId: string, userId: string) => {
 /**
  * Mark all notifications as read for a specific user
  * Returns count of updated notifications
+ *
+ * @param userId - The ID of the user
+ * @returns Object containing the count of updated notifications
  */
 export const markAllAsRead = async (userId: string) => {
   const updated = await db
@@ -122,6 +147,11 @@ export const markAllAsRead = async (userId: string) => {
 /**
  * Delete a notification
  * Verifies user ownership before deletion
+ *
+ * @param notifikasiId - The ID of the notification to delete
+ * @param userId - The ID of the user
+ * @returns The deleted notification
+ * @throws {Error} If notification not found or unauthorized
  */
 export const deleteNotifikasi = async (
   notifikasiId: string,

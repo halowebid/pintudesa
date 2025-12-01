@@ -10,16 +10,13 @@ export interface MenuItem {
 }
 
 export const menuItems: MenuItem[] = [
-  // Main Menu
   { name: "Ringkasan", url: "/", category: "Menu" },
   { name: "Pengaturan", url: "/setting", category: "Menu" },
   { name: "Pengguna", url: "/user", category: "Menu" },
 
-  // Kependudukan
   { name: "Kartu Keluarga", url: "/kartu-keluarga", category: "Kependudukan" },
   { name: "Penduduk", url: "/penduduk", category: "Kependudukan" },
 
-  // Buku Administrasi Umum
   {
     name: "Buku Peraturan Desa",
     url: "/buku/peraturan",
@@ -61,21 +58,18 @@ export const menuItems: MenuItem[] = [
     category: "Buku Administrasi Umum",
   },
 
-  // Buku Administrasi Penduduk
   {
     name: "Buku Penduduk Sementara",
     url: "/buku/penduduk-sementara",
     category: "Buku Administrasi Penduduk",
   },
 
-  // Buku Administrasi Keuangan
   {
     name: "Buku Rencana Anggaran Biaya Desa",
     url: "/buku/rencana-anggaran-biaya",
     category: "Buku Administrasi Keuangan",
   },
 
-  // Buku Administrasi Pembangunan
   {
     name: "Buku Rencana Kerja Pembangunan Desa",
     url: "/buku/rencana-kerja-pembangunan",
@@ -97,7 +91,6 @@ export const menuItems: MenuItem[] = [
     category: "Buku Administrasi Pembangunan",
   },
 
-  // Surat
   {
     name: "Surat Izin Keramaian",
     url: "/surat/surat-izin-keramaian",

@@ -2,7 +2,6 @@
 
 import type { TRPCClientErrorLike } from "@trpc/client"
 
-// TODO: move to UI Package
 import { useToast } from "@/components/toast-provider"
 
 export const useHandleTRPCError = () => {

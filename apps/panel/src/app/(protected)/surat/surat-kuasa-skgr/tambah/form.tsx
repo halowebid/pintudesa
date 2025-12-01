@@ -82,7 +82,6 @@ export default function SuratKuasaSKGRForm({
     await queryClient.invalidateQueries({ queryKey: suratKuasaSKGRsKey })
   }
 
-  // Search for kuasa dari (any gender)
   const { data: searchResultsKuasaDari = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyKuasaDari, limit: 10 },

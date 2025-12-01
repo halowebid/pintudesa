@@ -83,7 +83,6 @@ export default function SuratKuasaSKGRForm({
 
   const { data } = useQuery(trpc.suratKuasaSKGR.byId.queryOptions(id))
 
-  // Search for kuasa dari (any gender)
   const { data: searchResultsKuasaDari = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyKuasaDari, limit: 10 },
@@ -137,7 +136,6 @@ export default function SuratKuasaSKGRForm({
     }),
   )
 
-  // Set selected values from existing data
   React.useEffect(() => {
     if (data?.kuasaDariId) {
       const pendudukData = data.kuasaDari

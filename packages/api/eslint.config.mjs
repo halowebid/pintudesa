@@ -11,6 +11,7 @@ export default [
       "no-restricted-imports": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/no-empty-object-type": "off",
+      "no-console": ["error", { allow: ["error", "warn", "info"] }],
     },
   },
 ]

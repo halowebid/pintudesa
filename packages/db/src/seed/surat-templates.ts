@@ -1281,11 +1281,9 @@ async function seedTemplates() {
   console.log(`   ❌ Errors: ${errorCount}`)
   console.log(`   📝 Total: ${SURAT_TYPE_VALUES.length}`)
 
-  // Close database connection
   process.exit(0)
 }
 
-// Run the seed function
 seedTemplates().catch((error) => {
   console.error("💥 Seeding failed:", error)
   process.exit(1)

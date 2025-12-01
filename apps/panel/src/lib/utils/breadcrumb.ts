@@ -3,7 +3,6 @@
  * Maps Indonesian route segments to human-readable display names
  */
 export const routeLabels: Record<string, string> = {
-  // Main sections
   buku: "Buku",
   surat: "Surat",
   setting: "Pengaturan",
@@ -11,7 +10,6 @@ export const routeLabels: Record<string, string> = {
   penduduk: "Penduduk",
   "kartu-keluarga": "Kartu Keluarga",
 
-  // Buku Administrasi Umum
   "peraturan-desa": "Peraturan Desa",
   "keputusan-kepala-desa": "Keputusan Kepala Desa",
   "buku-a3": "Inventaris Desa",
@@ -23,14 +21,12 @@ export const routeLabels: Record<string, string> = {
   lembaran: "Lembaran Desa",
   peraturan: "Peraturan",
 
-  // Buku Administrasi Penduduk
   "induk-penduduk": "Induk Penduduk Desa",
   "mutasi-penduduk": "Mutasi Penduduk Desa",
   "rekapitulasi-penduduk": "Rekapitulasi Jumlah Penduduk Desa",
   "penduduk-sementara": "Penduduk Sementara",
   "ktp-dan-kartu-keluarga": "KTP dan Kartu Keluarga",
 
-  // Buku Administrasi Keuangan
   "anggaran-pendapatan-dan-belanja-desa":
     "Anggaran Pendapatan dan Belanja Desa",
   "rencana-anggaran-biaya": "Rencana Anggaran Biaya Desa",
@@ -39,13 +35,11 @@ export const routeLabels: Record<string, string> = {
   "kas-pembantu": "Kas Pembantu",
   "bank-desa": "Bank Desa",
 
-  // Buku Administrasi Pembangunan
   "rencana-kerja-pembangunan": "Rencana Kerja Pembangunan Desa",
   "kegiatan-pembangunan": "Kegiatan Pembangunan Desa",
   inventaris: "Inventaris Hasil-hasil Pembangunan Desa",
   "kader-pemberdayaan-masyarakat": "Kader Pemberdayaan Masyarakat Desa",
 
-  // Actions
   tambah: "Tambah",
   edit: "Edit",
   detail: "Detail",
@@ -60,7 +54,6 @@ export function generateBreadcrumbs(pathname: string): {
   label: string
   href: string
 }[] {
-  // Remove leading slash and split into segments
   const segments = pathname.split("/").filter(Boolean)
 
   if (segments.length === 0) {
@@ -75,18 +68,15 @@ export function generateBreadcrumbs(pathname: string): {
   for (const segment of segments) {
     currentPath += `/${segment}`
 
-    // Check if segment is a dynamic ID (UUID or number)
     const isDynamicId =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
         segment,
       ) || /^\d+$/.test(segment)
 
     if (isDynamicId) {
-      // Skip dynamic IDs in breadcrumbs
       continue
     }
 
-    // Get label from mapping or use segment as-is with capitalization
     const label =
       routeLabels[segment] ||
       segment

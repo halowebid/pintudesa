@@ -15,10 +15,8 @@ let clientQueryClientSingleton: QueryClient | undefined = undefined
 
 const getQueryClient = () => {
   if (typeof window === "undefined") {
-    // Server: always make a new query client
     return createQueryClient()
   } else {
-    // Browser: use singleton pattern to keep the same query client
     return (clientQueryClientSingleton ??= createQueryClient())
   }
 }
@@ -46,20 +44,6 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
             return headers
           },
         }),
-        // httpBatchStreamLink({
-        //   transformer: SuperJSON,
-        //   url: getBaseUrl() + "/api/trpc",
-        //   headers() {
-        //     const h = new Headers()
-        //     h.set("x-trpc-source", "nextjs-react")
-        //
-        //     const headers: Record<string, string> = {}
-        //     h.forEach((value, key) => {
-        //       headers[key] = value
-        //     })
-        //     return headers
-        //   },
-        // }),
       ],
     }),
   )

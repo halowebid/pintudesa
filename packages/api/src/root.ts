@@ -44,7 +44,6 @@ export const appRouter = createTRPCRouter({
   auth: authRouter,
   admin: adminRouter,
 
-  // Routers
   agenda: agendaRouter,
   anggotaKeluarga: anggotaKeluargaRouter,
   berita: beritaRouter,

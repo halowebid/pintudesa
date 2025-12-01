@@ -25,10 +25,8 @@ export default function Search() {
   const [query, setQuery] = React.useState("")
   const router = useRouter()
 
-  // Search menu items locally (no API call needed)
   const results = React.useMemo(() => searchMenuItems(query), [query])
 
-  // Group results by category
   const groupedResults = React.useMemo(() => {
     const groups: Record<string, typeof results> = {}
     for (const item of results) {
@@ -43,7 +41,6 @@ export default function Search() {
     return groups
   }, [results])
 
-  // Keyboard shortcut handler (Ctrl+K / Cmd+K)
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {

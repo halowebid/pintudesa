@@ -14,14 +14,12 @@ const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
     { label: "Beranda", href: "/" },
     { label: "Profil", href: "/profile" },
     { label: "Statistik", href: "/statistics" },
-    // { label: "Berita", href: "#" },
   ]
 
   return (
     <header className="bg-background/95 sticky top-0 z-50 border-b backdrop-blur-sm">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="rounded-lg bg-green-600 p-2">
               <Icon name="Shield" className="text-foreground size-8" />
@@ -34,7 +32,6 @@ const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
           <nav className="hidden items-center space-x-8 md:flex">
             {navItems.map((item) => (
               <Link
@@ -51,7 +48,6 @@ const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
             <ThemeSwitcher />
           </nav>
 
-          {/* Mobile Navigation */}
           <Sheet
             open={isOpen}
             onOpenChange={(details) => setIsOpen(details.open)}

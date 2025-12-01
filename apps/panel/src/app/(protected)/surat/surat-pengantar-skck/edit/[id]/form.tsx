@@ -47,7 +47,6 @@ export default function SuratPengantarSKCKForm({
 
   const { data } = useQuery(trpc.suratPengantarSKCK.byId.queryOptions(id))
 
-  // Search for pemohon (any gender)
   const { data: searchResultsPemohon = [] } = useQuery(
     trpc.penduduk.search.queryOptions(
       { searchQuery: searchKeyPemohon, limit: 10 },
@@ -105,7 +104,6 @@ export default function SuratPengantarSKCKForm({
     }),
   )
 
-  // Set selected values from existing data
   React.useEffect(() => {
     if (data?.pemohonNIK) {
       const pendudukData = data.pemohon

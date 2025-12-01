@@ -6,6 +6,12 @@ import {
   type InsertSuratKeteranganJalan,
 } from "../schema/surat-keterangan-jalan"
 
+/**
+ * Create a new road certificate letter
+ *
+ * @param data - The road certificate letter data to insert
+ * @returns The created road certificate letter entry
+ */
 export const insertSuratKeteranganJalan = async (
   data: InsertSuratKeteranganJalan,
 ) => {
@@ -17,6 +23,12 @@ export const insertSuratKeteranganJalan = async (
   return suratKeteranganJalan[0]
 }
 
+/**
+ * Update an existing road certificate letter
+ *
+ * @param data - The road certificate letter data to update, including the id
+ * @returns The updated road certificate letter entry
+ */
 export const updateSuratKeteranganJalan = async (
   data: InsertSuratKeteranganJalan & { id: string },
 ) => {
@@ -29,6 +41,12 @@ export const updateSuratKeteranganJalan = async (
   return suratKeteranganJalan[0]
 }
 
+/**
+ * Delete a road certificate letter by ID
+ *
+ * @param id - The ID of the road certificate letter to delete
+ * @returns The deleted road certificate letter entry
+ */
 export const deleteSuratKeteranganJalan = async (id: string) => {
   const suratKeteranganJalan = await db
     .delete(suratKeteranganJalanTable)
@@ -37,6 +55,13 @@ export const deleteSuratKeteranganJalan = async (id: string) => {
   return suratKeteranganJalan[0]
 }
 
+/**
+ * Get paginated list of road certificate letters with applicant data
+ *
+ * @param page - The page number (1-indexed)
+ * @param perPage - Number of road certificate letters per page
+ * @returns Array of road certificate letter entries with applicant, ordered by creation date
+ */
 export const getSuratKeteranganJalans = async (
   page: number,
   perPage: number,
@@ -51,6 +76,12 @@ export const getSuratKeteranganJalans = async (
   })
 }
 
+/**
+ * Get a single road certificate letter by ID with applicant data
+ *
+ * @param id - The ID of the road certificate letter
+ * @returns The road certificate letter with applicant if found, undefined otherwise
+ */
 export const getSuratKeteranganJalanById = async (id: string) => {
   return await db.query.suratKeteranganJalanTable.findFirst({
     where: eq(suratKeteranganJalanTable.id, id),
@@ -60,6 +91,13 @@ export const getSuratKeteranganJalanById = async (id: string) => {
   })
 }
 
+/**
+ * Search road certificate letters with limit
+ *
+ * @param searchQuery - The search query string
+ * @param limit - Maximum number of results to return
+ * @returns Array of matching road certificate letter entries with applicant
+ */
 export const searchSuratKeteranganJalans = async ({
   searchQuery,
   limit,
@@ -77,6 +115,11 @@ export const searchSuratKeteranganJalans = async ({
   })
 }
 
+/**
+ * Get total count of all road certificate letters
+ *
+ * @returns The total number of road certificate letter entries
+ */
 export const countSuratKeteranganJalans = async () => {
   const suratKeteranganJalan = await db
     .select({ value: count() })

@@ -27,7 +27,6 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 const AppSidebar = (props: AppSidebarProps) => {
   const userRole = props.user.role ?? "user"
 
-  // Filter navigation items based on user role
   const filterByRole = <T extends { allowedRoles?: string[] }>(
     items: T[],
   ): T[] => {

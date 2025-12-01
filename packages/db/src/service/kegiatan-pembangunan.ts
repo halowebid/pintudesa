@@ -6,6 +6,12 @@ import {
   type InsertKegiatanPembangunan,
 } from "../schema/kegiatan-pembangunan"
 
+/**
+ * Create a new development activity entry
+ *
+ * @param data - The development activity data to insert
+ * @returns The created development activity entry
+ */
 export const insertKegiatanPembangunan = async (
   data: InsertKegiatanPembangunan,
 ) => {
@@ -17,6 +23,12 @@ export const insertKegiatanPembangunan = async (
   return kegiatanPembangunan[0]
 }
 
+/**
+ * Update an existing development activity entry
+ *
+ * @param data - The development activity data to update, including the id
+ * @returns The updated development activity entry
+ */
 export const updateKegiatanPembangunan = async (
   data: InsertKegiatanPembangunan & { id: string },
 ) => {
@@ -29,6 +41,12 @@ export const updateKegiatanPembangunan = async (
   return kegiatanPembangunan[0]
 }
 
+/**
+ * Delete a development activity entry by ID
+ *
+ * @param id - The ID of the development activity to delete
+ * @returns The deleted development activity entry
+ */
 export const deleteKegiatanPembangunan = async (id: string) => {
   const kegiatanPembangunan = await db
     .delete(kegiatanPembangunanTable)
@@ -37,6 +55,13 @@ export const deleteKegiatanPembangunan = async (id: string) => {
   return kegiatanPembangunan[0]
 }
 
+/**
+ * Get paginated list of development activities
+ *
+ * @param page - The page number (1-indexed)
+ * @param perPage - Number of development activities per page
+ * @returns Array of development activity entries ordered by creation date
+ */
 export const getKegiatanPembangunans = async (
   page: number,
   perPage: number,
@@ -48,12 +73,25 @@ export const getKegiatanPembangunans = async (
   })
 }
 
+/**
+ * Get a single development activity by ID
+ *
+ * @param id - The ID of the development activity
+ * @returns The development activity if found, undefined otherwise
+ */
 export const getKegiatanPembangunanById = async (id: string) => {
   return await db.query.kegiatanPembangunanTable.findFirst({
     where: eq(kegiatanPembangunanTable.id, id),
   })
 }
 
+/**
+ * Search development activities by activity name with limit
+ *
+ * @param searchQuery - The search query string to match against activity name
+ * @param limit - Maximum number of results to return
+ * @returns Array of matching development activity entries
+ */
 export const searchKegiatanPembangunans = async ({
   searchQuery,
   limit,
@@ -68,6 +106,11 @@ export const searchKegiatanPembangunans = async ({
   })
 }
 
+/**
+ * Get total count of all development activities
+ *
+ * @returns The total number of development activity entries
+ */
 export const countKegiatanPembangunans = async () => {
   const kegiatanPembangunan = await db
     .select({ value: count() })

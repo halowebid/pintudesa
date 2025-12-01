@@ -1,5 +1,3 @@
-// TODO: move to UI Package
-
 "use client"
 
 import { createContext, useContext } from "react"

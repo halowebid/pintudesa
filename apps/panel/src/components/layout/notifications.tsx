@@ -16,7 +16,6 @@ export default function Notifications() {
   const trpc = useTRPC()
   const queryClient = useQueryClient()
 
-  // Fetch notifications with polling every 30 seconds
   const { data: notifications } = useQuery({
     ...trpc.notifikasi.myNotifications.queryOptions({
       page: 1,
@@ -26,18 +25,15 @@ export default function Notifications() {
     refetchOnWindowFocus: true,
   })
 
-  // Fetch unread count
   const { data: unreadCount } = useQuery({
     ...trpc.notifikasi.unreadCount.queryOptions(),
-    refetchInterval: 30000, // 30 seconds
+    refetchInterval: 30000,
     refetchOnWindowFocus: true,
   })
 
-  // Mark as read mutation
   const { mutate: markAsRead } = useMutation(
     trpc.notifikasi.markAsRead.mutationOptions({
       onSuccess: () => {
-        // Invalidate queries to refresh data
         void queryClient.invalidateQueries({
           queryKey: [["notifikasi", "myNotifications"]],
         })
@@ -48,11 +44,9 @@ export default function Notifications() {
     }),
   )
 
-  // Mark all as read mutation
   const { mutate: markAllAsRead, isPending: isMarkingAllAsRead } = useMutation(
     trpc.notifikasi.markAllAsRead.mutationOptions({
       onSuccess: () => {
-        // Invalidate queries to refresh data
         void queryClient.invalidateQueries({
           queryKey: [["notifikasi", "myNotifications"]],
         })
@@ -64,7 +58,6 @@ export default function Notifications() {
   )
 
   const handleNotificationClick = (notificationId: string, read: boolean) => {
-    // Only mark as read if it's unread
     if (!read) {
       markAsRead({ id: notificationId })
     }
@@ -95,57 +88,46 @@ export default function Notifications() {
         </button>
       </MenuTrigger>
       <MenuContent className="w-80">
-        {!notifications || notifications.length === 0 ? (
-          <div className="text-muted-foreground py-6 text-center text-sm">
-            Tidak ada notifikasi
+        {unreadCount && unreadCount > 0 && (
+          <div className="border-border flex items-center justify-between border-b px-3 py-2">
+            <span className="text-muted-foreground text-xs font-medium">
+              {unreadCount} notifikasi belum dibaca
+            </span>
+            <button
+              onClick={handleMarkAllAsRead}
+              disabled={isMarkingAllAsRead}
+              className="text-primary hover:text-primary/80 text-xs font-medium transition-colors disabled:opacity-50"
+            >
+              {isMarkingAllAsRead ? "Memproses..." : "Tandai semua dibaca"}
+            </button>
           </div>
-        ) : (
-          <>
-            {/* Header with mark all as read button */}
-            {unreadCount && unreadCount > 0 && (
-              <div className="border-border flex items-center justify-between border-b px-3 py-2">
-                <span className="text-muted-foreground text-xs font-medium">
-                  {unreadCount} notifikasi belum dibaca
-                </span>
-                <button
-                  onClick={handleMarkAllAsRead}
-                  disabled={isMarkingAllAsRead}
-                  className="text-primary hover:text-primary/80 text-xs font-medium transition-colors disabled:opacity-50"
-                >
-                  {isMarkingAllAsRead ? "Memproses..." : "Tandai semua dibaca"}
-                </button>
-              </div>
-            )}
-            {/* Notifications list */}
-            {notifications.map((notification) => (
-              <MenuItem
-                key={notification.id}
-                value={notification.id}
-                className="flex cursor-pointer flex-col items-start gap-1 p-3"
-                onClick={() =>
-                  handleNotificationClick(notification.id, notification.read)
-                }
-              >
-                <div className="flex w-full items-start justify-between gap-2">
-                  <div className="font-medium">{notification.title}</div>
-                  {!notification.read && (
-                    <div className="bg-primary h-2 w-2 rounded-full" />
-                  )}
-                </div>
-                <div className="text-muted-foreground text-xs">
-                  {notification.message}
-                </div>
-                <div className="text-muted-foreground text-xs">
-                  {notification.createdAt
-                    ? new Date(notification.createdAt).toLocaleDateString(
-                        "id-ID",
-                      )
-                    : ""}
-                </div>
-              </MenuItem>
-            ))}
-          </>
         )}
+        {/* Notifications list */}
+        {notifications?.map((notification) => (
+          <MenuItem
+            key={notification.id}
+            value={notification.id}
+            className="flex cursor-pointer flex-col items-start gap-1 p-3"
+            onClick={() =>
+              handleNotificationClick(notification.id, notification.read)
+            }
+          >
+            <div className="flex w-full items-start justify-between gap-2">
+              <div className="font-medium">{notification.title}</div>
+              {!notification.read && (
+                <div className="bg-primary h-2 w-2 rounded-full" />
+              )}
+            </div>
+            <div className="text-muted-foreground text-xs">
+              {notification.message}
+            </div>
+            <div className="text-muted-foreground text-xs">
+              {notification.createdAt
+                ? new Date(notification.createdAt).toLocaleDateString("id-ID")
+                : ""}
+            </div>
+          </MenuItem>
+        ))}
       </MenuContent>
     </Menu>
   )

@@ -6,6 +6,12 @@ import {
   type InsertRencanaKerjaPembangunan,
 } from "../schema/rencana-kerja-pembangunan"
 
+/**
+ * Create a new development work plan entry
+ *
+ * @param data - The development work plan data to insert
+ * @returns The created development work plan entry
+ */
 export const insertRencanaKerjaPembangunan = async (
   data: InsertRencanaKerjaPembangunan,
 ) => {
@@ -17,6 +23,12 @@ export const insertRencanaKerjaPembangunan = async (
   return rencanaKerjaPembangunan[0]
 }
 
+/**
+ * Update an existing development work plan entry
+ *
+ * @param data - The development work plan data to update, including the id
+ * @returns The updated development work plan entry
+ */
 export const updateRencanaKerjaPembangunan = async (
   data: InsertRencanaKerjaPembangunan & { id: string },
 ) => {
@@ -29,6 +41,12 @@ export const updateRencanaKerjaPembangunan = async (
   return rencanaKerjaPembangunan[0]
 }
 
+/**
+ * Delete a development work plan entry by ID
+ *
+ * @param id - The ID of the development work plan to delete
+ * @returns The deleted development work plan entry
+ */
 export const deleteRencanaKerjaPembangunan = async (id: string) => {
   const rencanaKerjaPembangunan = await db
     .delete(rencanaKerjaPembangunanTable)
@@ -37,6 +55,13 @@ export const deleteRencanaKerjaPembangunan = async (id: string) => {
   return rencanaKerjaPembangunan[0]
 }
 
+/**
+ * Get paginated list of development work plans
+ *
+ * @param page - The page number (1-indexed)
+ * @param perPage - Number of development work plans per page
+ * @returns Array of development work plan entries ordered by creation date
+ */
 export const getRencanaKerjaPembangunans = async (
   page: number,
   perPage: number,
@@ -48,12 +73,25 @@ export const getRencanaKerjaPembangunans = async (
   })
 }
 
+/**
+ * Get a single development work plan by ID
+ *
+ * @param id - The ID of the development work plan
+ * @returns The development work plan if found, undefined otherwise
+ */
 export const getRencanaKerjaPembangunanById = async (id: string) => {
   return await db.query.rencanaKerjaPembangunanTable.findFirst({
     where: eq(rencanaKerjaPembangunanTable.id, id),
   })
 }
 
+/**
+ * Search development work plans by activity name with limit
+ *
+ * @param searchQuery - The search query string to match against activity name
+ * @param limit - Maximum number of results to return
+ * @returns Array of matching development work plan entries
+ */
 export const searchRencanaKerjaPembangunans = async ({
   searchQuery,
   limit,
@@ -68,6 +106,11 @@ export const searchRencanaKerjaPembangunans = async ({
   })
 }
 
+/**
+ * Get total count of all development work plans
+ *
+ * @returns The total number of development work plan entries
+ */
 export const countRencanaKerjaPembangunans = async () => {
   const rencanaKerjaPembangunan = await db
     .select({ value: count() })

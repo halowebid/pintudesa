@@ -14,7 +14,6 @@ export default function Breadcrumb() {
   const pathname = usePathname()
   const breadcrumbs = generateBreadcrumbs(pathname)
 
-  // Don't render if only home breadcrumb
   if (breadcrumbs.length === 1) {
     return (
       <div className="flex items-center gap-2">

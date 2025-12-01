@@ -6,6 +6,12 @@ import {
   type InsertSuratIzinMendirikanBangunan,
 } from "../schema/surat-izin-mendirikan-bangunan"
 
+/**
+ * Create a new building permit letter
+ *
+ * @param data - The building permit letter data to insert
+ * @returns The created building permit letter entry
+ */
 export const insertSuratIzinMendirikanBangunan = async (
   data: InsertSuratIzinMendirikanBangunan,
 ) => {
@@ -17,6 +23,12 @@ export const insertSuratIzinMendirikanBangunan = async (
   return suratIzinMendirikanBangunan[0]
 }
 
+/**
+ * Update an existing building permit letter
+ *
+ * @param data - The building permit letter data to update, including the id
+ * @returns The updated building permit letter entry
+ */
 export const updateSuratIzinMendirikanBangunan = async (
   data: InsertSuratIzinMendirikanBangunan & { id: string },
 ) => {
@@ -29,6 +41,12 @@ export const updateSuratIzinMendirikanBangunan = async (
   return suratIzinMendirikanBangunan[0]
 }
 
+/**
+ * Delete a building permit letter by ID
+ *
+ * @param id - The ID of the building permit letter to delete
+ * @returns The deleted building permit letter entry
+ */
 export const deleteSuratIzinMendirikanBangunan = async (id: string) => {
   const suratIzinMendirikanBangunan = await db
     .delete(suratIzinMendirikanBangunanTable)
@@ -37,6 +55,13 @@ export const deleteSuratIzinMendirikanBangunan = async (id: string) => {
   return suratIzinMendirikanBangunan[0]
 }
 
+/**
+ * Get paginated list of building permit letters with applicant data
+ *
+ * @param page - The page number (1-indexed)
+ * @param perPage - Number of building permit letters per page
+ * @returns Array of building permit letter entries with applicant, ordered by creation date
+ */
 export const getSuratIzinMendirikanBangunans = async (
   page: number,
   perPage: number,
@@ -51,12 +76,25 @@ export const getSuratIzinMendirikanBangunans = async (
   })
 }
 
+/**
+ * Get a single building permit letter by ID with applicant data
+ *
+ * @param id - The ID of the building permit letter
+ * @returns The building permit letter with applicant if found, undefined otherwise
+ */
 export const getSuratIzinMendirikanBangunanById = async (id: string) => {
   return await db.query.suratIzinMendirikanBangunanTable.findFirst({
     where: eq(suratIzinMendirikanBangunanTable.id, id),
   })
 }
 
+/**
+ * Search building permit letters with limit
+ *
+ * @param searchQuery - The search query string
+ * @param limit - Maximum number of results to return
+ * @returns Array of matching building permit letter entries with applicant
+ */
 export const searchSuratIzinMendirikanBangunans = async ({
   searchQuery,
   limit,
@@ -74,6 +112,11 @@ export const searchSuratIzinMendirikanBangunans = async ({
   })
 }
 
+/**
+ * Get total count of all building permit letters
+ *
+ * @returns The total number of building permit letter entries
+ */
 export const countSuratIzinMendirikanBangunans = async () => {
   const suratIzinMendirikanBangunan = await db
     .select({ value: count() })
