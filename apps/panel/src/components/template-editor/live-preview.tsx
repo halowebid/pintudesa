@@ -86,6 +86,10 @@ function generateSampleData(suratType: SuratType): Record<string, string> {
       alamatUsaha: "Jl. Merdeka No. 123, RT 001/RW 002, Desa Contoh",
       berdasarkan: "Surat Keterangan Domisili Usaha No. 123/SKDU/2024",
     },
+    "surat-keterangan-beda-nama": {
+      namaLain: "Ahmad Sudrajat",
+      tujuanPembuatan: "Pengurusan dokumen administrasi KTP",
+    },
     "surat-kuasa-ahli-waris": {},
     "surat-kuasa-skgr": {},
     "surat-pengantar-skck": {},

@@ -20,6 +20,7 @@ import { rencanaKerjaPembangunanRouter } from "./routes/rencana-kerja-pembanguna
 import { settingRouter } from "./routes/setting"
 import { suratIzinKeramaianRouter } from "./routes/surat-izin-keramaian"
 import { suratIzinMendirikanBangunanRouter } from "./routes/surat-izin-mendirikan-bangunan"
+import { suratKeteranganBedaNamaRouter } from "./routes/surat-keterangan-beda-nama"
 import { suratKeteranganBelumMemilikiRumahRouter } from "./routes/surat-keterangan-belum-memiliki-rumah"
 import { suratKeteranganDomisiliRouter } from "./routes/surat-keterangan-domisili"
 import { suratKeteranganDomisiliUsahaRouter } from "./routes/surat-keterangan-domisili-usaha"
@@ -68,6 +69,7 @@ export const appRouter = createTRPCRouter({
   setting: settingRouter,
   suratIzinKeramaian: suratIzinKeramaianRouter,
   suratIzinMendirikanBangunan: suratIzinMendirikanBangunanRouter,
+  suratKeteranganBedaNama: suratKeteranganBedaNamaRouter,
   suratKeteranganBelumMemilikiRumah: suratKeteranganBelumMemilikiRumahRouter,
   suratKeteranganDomisili: suratKeteranganDomisiliRouter,
   suratKeteranganDomisiliUsaha: suratKeteranganDomisiliUsahaRouter,

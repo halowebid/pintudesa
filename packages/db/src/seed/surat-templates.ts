@@ -1127,6 +1127,79 @@ ${baseStyles}
 `,
   },
 
+  "surat-keterangan-beda-nama": {
+    name: "Template Default - Surat Keterangan Beda Nama",
+    html: `
+${baseStyles}
+<div class="kop-surat">
+  <h1>PEMERINTAH {{kabupaten}}</h1>
+  <h2>KECAMATAN {{kecamatan}}</h2>
+  <h2>DESA {{namaDesa}}</h2>
+  <p>{{provinsi}}</p>
+</div>
+
+<div class="judul-surat">SURAT KETERANGAN BEDA NAMA</div>
+
+<div class="content">
+  <p>Yang bertanda tangan di bawah ini Kepala Desa {{namaDesa}}, Kecamatan {{kecamatan}}, Kabupaten {{kabupaten}}, menerangkan bahwa:</p>
+  
+  <table class="data-table">
+    <tr>
+      <td>Nama Lengkap</td>
+      <td>:</td>
+      <td>{{pemohon.namaLengkap}}</td>
+    </tr>
+    <tr>
+      <td>NIK</td>
+      <td>:</td>
+      <td>{{pemohon.nik}}</td>
+    </tr>
+    <tr>
+      <td>Tempat, Tanggal Lahir</td>
+      <td>:</td>
+      <td>{{pemohon.tempatLahir}}, {{pemohon.tanggalLahir}}</td>
+    </tr>
+    <tr>
+      <td>Alamat</td>
+      <td>:</td>
+      <td>{{pemohon.alamat}}</td>
+    </tr>
+    <tr>
+      <td>Wilayah</td>
+      <td>:</td>
+      <td>{{pemohon.wilayah}}</td>
+    </tr>
+  </table>
+  
+  <p>Adalah benar warga Desa {{namaDesa}} yang memiliki nama lain dalam dokumen tertentu, dengan keterangan sebagai berikut:</p>
+  
+  <table class="data-table">
+    <tr>
+      <td>Nama Lain</td>
+      <td>:</td>
+      <td>{{namaLain}}</td>
+    </tr>
+  </table>
+  
+  <p>Bahwa yang bersangkutan adalah orang yang sama, hanya saja terdapat perbedaan penulisan nama pada dokumen-dokumen yang dimiliki.</p>
+  
+  <p>Surat keterangan ini dibuat untuk keperluan: {{tujuanPembuatan}}</p>
+  
+  <p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+</div>
+
+<div class="ttd-section">
+  <div class="ttd-box">
+    <p>{{namaDesa}}, {{tanggalSurat}}</p>
+    <p>Kepala Desa {{namaDesa}}</p>
+    <div class="ttd-space"></div>
+    <p class="ttd-name">{{namaKepala}}</p>
+    <p>NIP. {{nipKepala}}</p>
+  </div>
+</div>
+`,
+  },
+
   "surat-kuasa-ahli-waris": {
     name: "Template Default - Surat Kuasa Ahli Waris",
     html: `

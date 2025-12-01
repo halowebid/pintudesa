@@ -330,6 +330,13 @@
       "when": 1764577334491,
       "tag": "0046_bouncy_smiling_tiger",
       "breakpoints": true
+    },
+    {
+      "idx": 47,
+      "version": "7",
+      "when": 1764579312929,
+      "tag": "0047_modern_pepper_potts",
+      "breakpoints": true
     }
   ]
 }

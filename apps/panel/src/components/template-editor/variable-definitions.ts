@@ -341,6 +341,20 @@ export const SURAT_TYPE_VARIABLES: Record<SuratType, VariableDefinition[]> = {
       category: "surat",
     },
   ],
+  "surat-keterangan-beda-nama": [
+    {
+      name: "namaLain",
+      label: "Nama Lain",
+      description: "Nama lain yang tertera di dokumen",
+      category: "surat",
+    },
+    {
+      name: "tujuanPembuatan",
+      label: "Tujuan Pembuatan",
+      description: "Tujuan pembuatan surat keterangan",
+      category: "surat",
+    },
+  ],
   "surat-kuasa-ahli-waris": [],
   "surat-kuasa-skgr": [],
   "surat-pengantar-skck": [],
