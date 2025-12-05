@@ -35,7 +35,6 @@
     "format:write": "prettier --write \"**/*.{ts,tsx,mts,js,jsx,mjs,json,md}\"",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "postinstall": "lefthook install",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
