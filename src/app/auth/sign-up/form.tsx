@@ -3,11 +3,12 @@
 import { redirect } from "next/navigation"
 import z from "zod"
 
-import { useAppForm } from "@/components/dashboard/form"
-import Link from "@/components/dashboard/link"
+import { useAppForm } from "@/components/features/forms"
 import { useToast } from "@/components/toast-provider"
+import { Button } from "@/components/ui/button"
+import Link from "@/components/ui/link"
 import { authClient } from "@/lib/auth/client"
-import { Button, cn } from "@/lib/ui"
+import { cn } from "@/lib/style"
 
 export function SignUpForm({
   className,

@@ -3,7 +3,7 @@ import "@/styles/globals.css"
 import { type Metadata } from "next"
 import { Manrope } from "next/font/google"
 
-import Providers from "@/components/dashboard/providers"
+import Providers from "@/components/providers"
 import { ToastProvider } from "@/components/toast-provider"
 import { siteDescription, siteTagline, siteTitle } from "@/lib/env"
 import { createApi } from "@/lib/trpc/server"

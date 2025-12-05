@@ -3,7 +3,7 @@
 import { createContext, useContext } from "react"
 import type { Options } from "@zag-js/toast"
 
-import { toast as showToast, Toaster } from "@/lib/ui"
+import { toast as showToast, Toaster } from "@/components/ui/toast"
 
 const ToastContext = createContext<{
   toast: (options: Options) => string
