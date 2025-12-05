@@ -1,5 +1,12 @@
 {
-  "extends": "@yopem/typescript-config/base",
-  "files": [],
-  "exclude": ["node_modules"]
+  "extends": "@yopem/typescript-config/nextjs",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/lib/*": ["./src/lib/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "apps", "packages"]
 }

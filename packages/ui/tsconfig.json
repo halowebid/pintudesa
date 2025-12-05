@@ -1,5 +1,0 @@
-{
-  "extends": "@yopem/typescript-config/react",
-  "include": ["src"],
-  "exclude": ["node_modules"]
-}
