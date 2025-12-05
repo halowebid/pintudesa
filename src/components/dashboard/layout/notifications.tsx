@@ -77,7 +77,7 @@ export default function Notifications() {
           aria-label="Notifications"
         >
           <Icon name="Bell" className="h-5 w-5" />
-          {unreadCount && unreadCount > 0 && (
+          {unreadCount !== undefined && unreadCount > 0 && (
             <Badge
               className="bg-destructive text-destructive-foreground absolute -top-1 -right-1 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full px-1 text-[10px] font-medium"
               aria-label={`${unreadCount} unread notifications`}
@@ -88,7 +88,7 @@ export default function Notifications() {
         </button>
       </MenuTrigger>
       <MenuContent className="w-80">
-        {unreadCount && unreadCount > 0 && (
+        {unreadCount !== undefined && unreadCount > 0 && (
           <div className="border-border flex items-center justify-between border-b px-3 py-2">
             <span className="text-muted-foreground text-xs font-medium">
               {unreadCount} notifikasi belum dibaca
@@ -103,31 +103,38 @@ export default function Notifications() {
           </div>
         )}
         {/* Notifications list */}
-        {notifications?.map((notification) => (
-          <MenuItem
-            key={notification.id}
-            value={notification.id}
-            className="flex cursor-pointer flex-col items-start gap-1 p-3"
-            onClick={() =>
-              handleNotificationClick(notification.id, notification.read)
-            }
-          >
-            <div className="flex w-full items-start justify-between gap-2">
-              <div className="font-medium">{notification.title}</div>
-              {!notification.read && (
-                <div className="bg-primary h-2 w-2 rounded-full" />
-              )}
-            </div>
-            <div className="text-muted-foreground text-xs">
-              {notification.message}
-            </div>
-            <div className="text-muted-foreground text-xs">
-              {notification.createdAt
-                ? new Date(notification.createdAt).toLocaleDateString("id-ID")
-                : ""}
-            </div>
-          </MenuItem>
-        ))}
+        {notifications && notifications.length > 0 ? (
+          notifications.map((notification) => (
+            <MenuItem
+              key={notification.id}
+              value={notification.id}
+              className="flex cursor-pointer flex-col items-start gap-1 p-3"
+              onClick={() =>
+                handleNotificationClick(notification.id, notification.read)
+              }
+            >
+              <div className="flex w-full items-start justify-between gap-2">
+                <div className="font-medium">{notification.title}</div>
+                {!notification.read && (
+                  <div className="bg-primary h-2 w-2 rounded-full" />
+                )}
+              </div>
+              <div className="text-muted-foreground text-xs">
+                {notification.message}
+              </div>
+              <div className="text-muted-foreground text-xs">
+                {notification.createdAt
+                  ? new Date(notification.createdAt).toLocaleDateString("id-ID")
+                  : ""}
+              </div>
+            </MenuItem>
+          ))
+        ) : (
+          <div className="text-muted-foreground flex flex-col items-center justify-center gap-2 p-8 text-center">
+            <Icon name="Bell" className="h-8 w-8 opacity-50" />
+            <p className="text-sm">Tidak ada notifikasi</p>
+          </div>
+        )}
       </MenuContent>
     </Menu>
   )
