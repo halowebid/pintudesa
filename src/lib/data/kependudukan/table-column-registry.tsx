@@ -1,10 +1,7 @@
-import {
-  type SelectKartuKeluarga,
-  type SelectPenduduk,
-} from "@/lib/db/schema"
-import { formatDate } from "@/lib/utils"
 import { type ColumnDef } from "@tanstack/react-table"
 
+import { type SelectKartuKeluarga, type SelectPenduduk } from "@/lib/db/schema"
+import { formatDate } from "@/lib/utils"
 import {
   jenisKelaminLabelMap,
   pendidikanTerakhirLabelMap,

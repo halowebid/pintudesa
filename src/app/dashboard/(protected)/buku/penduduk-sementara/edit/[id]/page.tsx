@@ -1,5 +1,6 @@
 import * as React from "react"
 import dynamicFn from "next/dynamic"
+
 import { Skeleton } from "@/lib/ui"
 
 const PendudukSementaraForm = dynamicFn(async () => {

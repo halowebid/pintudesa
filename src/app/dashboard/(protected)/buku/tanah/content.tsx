@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectTanah } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
@@ -11,7 +9,9 @@ import { ControlledTable } from "@/components/dashboard/controlled-table"
 import ShowOptions from "@/components/dashboard/show-options"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/adminstrasi-umum/table-column-registry"
+import type { SelectTanah } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function TanahContent() {
@@ -84,7 +84,7 @@ export default function TanahContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">A6. Buku Tanah Desa</h1>
         <Button asChild>
-          <Link href="/buku/tanah/tambah">Tambah</Link>
+          <Link href="/dashboard/buku/tanah/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -99,7 +99,7 @@ export default function TanahContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku/tanah/edit/${item.id}`}
+              editUrl={`/dashboard/buku/tanah/edit/${item.id}`}
               description={item.namaPemilik}
             />
           )}

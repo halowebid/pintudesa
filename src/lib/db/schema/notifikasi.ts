@@ -1,4 +1,3 @@
-import { createCustomId } from "@/lib/utils"
 import {
   boolean,
   index,
@@ -9,6 +8,7 @@ import {
 } from "drizzle-orm/pg-core"
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod"
 
+import { createCustomId } from "@/lib/utils"
 import { userTable } from "./user"
 
 /**

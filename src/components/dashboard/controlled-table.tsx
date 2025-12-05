@@ -3,6 +3,25 @@
 import * as React from "react"
 import type { ListCollection } from "@ark-ui/react"
 import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+  type Column,
+  type ColumnDef,
+  type ColumnFiltersState,
+  type Header,
+  type PaginationState,
+  type RowData,
+  type SortingState,
+} from "@tanstack/react-table"
+import { Icon } from "@yopem-ui/react-icons"
+import { cn } from "@yopem-ui/utils"
+
+import {
   createListCollection,
   Input,
   Pagination,
@@ -23,24 +42,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/lib/ui"
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-  type Column,
-  type ColumnDef,
-  type ColumnFiltersState,
-  type Header,
-  type PaginationState,
-  type RowData,
-  type SortingState,
-} from "@tanstack/react-table"
-import { Icon } from "@yopem-ui/react-icons"
-import { cn } from "@yopem-ui/utils"
 
 declare module "@tanstack/react-table" {
   // @ts-ignore extending ColumnMeta with custom props

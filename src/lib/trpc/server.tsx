@@ -1,12 +1,12 @@
 import { cache } from "react"
 import { headers } from "next/headers"
-import { appRouter, createTRPCContext, type AppRouter } from "@/lib/api"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 import {
   createTRPCOptionsProxy,
   type TRPCQueryOptions,
 } from "@trpc/tanstack-react-query"
 
+import { appRouter, createTRPCContext, type AppRouter } from "@/lib/api"
 import { auth } from "@/lib/auth/server"
 import { createQueryClient } from "./query-client"
 

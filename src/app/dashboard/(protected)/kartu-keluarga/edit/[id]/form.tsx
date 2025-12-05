@@ -4,28 +4,6 @@ import React from "react"
 import { useRouter } from "next/navigation"
 import { createListCollection, type ListCollection } from "@ark-ui/react"
 import {
-  AGAMA,
-  ASAL_PENDUDUK,
-  JENIS_KELAMIN,
-  JENIS_PEKERJAAN,
-  KATEGORI_PENDUDUK,
-  PENDIDIKAN_TERAKHIR,
-  SHDK,
-  STATUS_DOMISILI,
-  STATUS_PERKAWINAN,
-} from "@/lib/db/schema"
-import {
-  Button,
-  ComboboxPopover,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectItemGroup,
-  SelectTrigger,
-  SelectValueText,
-} from "@/lib/ui"
-import { formatStringToDate } from "@/lib/utils"
-import {
   useMutation,
   useQueries,
   useQuery,
@@ -38,7 +16,29 @@ import { z } from "zod"
 import { useAppForm } from "@/components/dashboard/form"
 import { FormAnggotaKeluargaDialog } from "@/components/dashboard/form-dialog/form-anggota-keluarga-keluarga"
 import { useToast } from "@/components/toast-provider"
+import {
+  AGAMA,
+  ASAL_PENDUDUK,
+  JENIS_KELAMIN,
+  JENIS_PEKERJAAN,
+  KATEGORI_PENDUDUK,
+  PENDIDIKAN_TERAKHIR,
+  SHDK,
+  STATUS_DOMISILI,
+  STATUS_PERKAWINAN,
+} from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import {
+  Button,
+  ComboboxPopover,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectItemGroup,
+  SelectTrigger,
+  SelectValueText,
+} from "@/lib/ui"
+import { formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const dateFlexible = z
@@ -413,7 +413,7 @@ export default function PendudukForm({
         await invalidateKartuKeluargasKey()
         await invalidateKartuKeluargasByIdKey()
         if (isDialog) router.back()
-        else router.push("/kartu-keluarga")
+        else router.push("/dashboard/kartu-keluarga")
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error("Gagal submit:", error)

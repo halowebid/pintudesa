@@ -1,13 +1,8 @@
 "use client"
 
 import type React from "react"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-  useMobile,
-} from "@/lib/ui"
+
+import { Tabs, TabsContent, TabsList, TabsTrigger, useMobile } from "@/lib/ui"
 
 interface EditorLayoutProps {
   editor: React.ReactNode

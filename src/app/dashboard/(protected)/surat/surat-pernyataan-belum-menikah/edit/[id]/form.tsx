@@ -2,15 +2,15 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { SHDK } from "@/lib/db/schema"
-import { Button, ComboboxPopover } from "@/lib/ui"
-import { formatDate } from "@/lib/utils"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
+import { SHDK } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button, ComboboxPopover } from "@/lib/ui"
+import { formatDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const formSchema = z.object({
@@ -103,7 +103,7 @@ export default function SuratPernyataanBelumMenikahForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/surat/surat-pernyataan-belum-menikah")
+          router.push("/dashboard/surat/surat-pernyataan-belum-menikah")
         }
       },
       onError: (error) => {

@@ -1,4 +1,7 @@
 import Image from "next/image"
+import { Icon, type IconProps } from "@yopem-ui/react-icons"
+
+import { createApi } from "@/lib/trpc/server"
 import {
   Badge,
   Card,
@@ -7,9 +10,6 @@ import {
   CardTitle,
   Separator,
 } from "@/lib/ui"
-import { Icon, type IconProps } from "@yopem-ui/react-icons"
-
-import { createApi } from "@/lib/trpc/server"
 
 export default async function ProfilePage() {
   const api = await createApi()

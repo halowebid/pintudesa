@@ -2,20 +2,20 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import {
-  JENIS_KELAMIN,
-  JENIS_PEKERJAAN,
-  listJenisPekerjaan,
-} from "@/lib/db/schema"
-import { Button, ComboboxPopover } from "@/lib/ui"
-import { formatDate, formatStringToDate } from "@/lib/utils"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
+import {
+  JENIS_KELAMIN,
+  JENIS_PEKERJAAN,
+  listJenisPekerjaan,
+} from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button, ComboboxPopover } from "@/lib/ui"
+import { formatDate, formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const requiredDateFlexible = z
@@ -240,7 +240,7 @@ export default function SuratKeteranganKelahiranForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/surat/surat-keterangan-kelahiran")
+          router.push("/dashboard/surat/surat-keterangan-kelahiran")
         }
       },
       onError: (error) => {

@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectInventarisHasilPembangunan } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
@@ -11,7 +9,9 @@ import { ControlledTable } from "@/components/dashboard/controlled-table"
 import ShowOptions from "@/components/dashboard/show-options"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/admintrasi-pembangunan/table-column-registry"
+import type { SelectInventarisHasilPembangunan } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function InventarisHasilPembangunanContent() {
@@ -88,7 +88,9 @@ export default function InventarisHasilPembangunanContent() {
           D3. Buku Inventaris Hasil Pembangunan
         </h1>
         <Button asChild>
-          <Link href="/buku/inventaris-hasil-pembangunan/tambah">Tambah</Link>
+          <Link href="/dashboard/buku/inventaris-hasil-pembangunan/tambah">
+            Tambah
+          </Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -103,7 +105,7 @@ export default function InventarisHasilPembangunanContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku/inventaris-hasil-pembangunan/edit/${item.id}`}
+              editUrl={`/dashboard/buku/inventaris-hasil-pembangunan/edit/${item.id}`}
               description={item.namaHasilPembangunan}
             />
           )}

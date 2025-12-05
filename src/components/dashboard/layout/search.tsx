@@ -2,6 +2,9 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { Icon } from "@yopem-ui/react-icons"
+
+import { searchMenuItems } from "@/lib/data/menu"
 import {
   Dialog,
   DialogBackDrop,
@@ -12,9 +15,6 @@ import {
   DialogTrigger,
   Input,
 } from "@/lib/ui"
-import { Icon } from "@yopem-ui/react-icons"
-
-import { searchMenuItems } from "@/lib/data/menu"
 
 /**
  * Global search component with keyboard shortcut support

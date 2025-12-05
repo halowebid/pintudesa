@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectSuratKeteranganPenghasilanOrangTua } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
@@ -12,7 +10,9 @@ import PrintPreview from "@/components/dashboard/print/print-preview"
 import ShowOptions from "@/components/dashboard/show-options"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/surat/table-column-registry"
+import type { SelectSuratKeteranganPenghasilanOrangTua } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function SuratKeteranganPenghasilanOrangTuaContent() {
@@ -97,7 +97,7 @@ export default function SuratKeteranganPenghasilanOrangTuaContent() {
           Surat Keterangan Penghasilan Orang Tua
         </h1>
         <Button asChild>
-          <Link href="/surat/surat-keterangan-penghasilan-orang-tua/tambah">
+          <Link href="/dashboard/surat/surat-keterangan-penghasilan-orang-tua/tambah">
             Tambah
           </Link>
         </Button>
@@ -115,7 +115,7 @@ export default function SuratKeteranganPenghasilanOrangTuaContent() {
             <ShowOptions
               onPrint={() => setPrintItem(item)}
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/surat/surat-keterangan-penghasilan-orang-tua/edit/${item.id}`}
+              editUrl={`/dashboard/surat/surat-keterangan-penghasilan-orang-tua/edit/${item.id}`}
               description={item.pemohonNIK}
             />
           )}

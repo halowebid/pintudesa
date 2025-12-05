@@ -1,5 +1,4 @@
 import type { SelectPenduduk } from "@/lib/db/schema"
-
 import { mapPendudukRow } from "@/lib/utils/mapper"
 
 interface TableKeyMap {

@@ -1,8 +1,8 @@
-import { createCustomId } from "@/lib/utils"
 import { boolean, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod"
 import z from "zod"
 
+import { createCustomId } from "@/lib/utils"
 import { jenisKelaminEnum } from "./jenis-kelamin"
 import { jenisPekerjaanEnum } from "./jenis-pekerjaan"
 

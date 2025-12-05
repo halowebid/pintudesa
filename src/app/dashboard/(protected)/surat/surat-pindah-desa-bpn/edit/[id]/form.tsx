@@ -2,14 +2,14 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Button, ComboboxPopover } from "@/lib/ui"
-import { formatDate, formatStringToDate } from "@/lib/utils"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button, ComboboxPopover } from "@/lib/ui"
+import { formatDate, formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const requiredDateFlexible = z.union([z.string(), z.date()]).refine(
@@ -131,7 +131,7 @@ export default function SuratPindahDesaBpnEditForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/surat/surat-pindah-desa-bpn")
+          router.push("/dashboard/surat/surat-pindah-desa-bpn")
         }
       },
       onError: (error) => {

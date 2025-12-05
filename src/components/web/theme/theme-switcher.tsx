@@ -1,9 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { Button } from "@/lib/ui"
 import { Icon } from "@yopem-ui/react-icons"
 import { useTheme } from "next-themes"
+
+import { Button } from "@/lib/ui"
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme()

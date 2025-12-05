@@ -3,7 +3,18 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 import { createListCollection, type ListCollection } from "@ark-ui/react"
+import {
+  useMutation,
+  useQueries,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query"
+import { z } from "zod"
+
+import { useAppForm } from "@/components/dashboard/form"
+import { useToast } from "@/components/toast-provider"
 import { SHDK, type SelectPenduduk as PendudukType } from "@/lib/db/schema"
+import { useTRPC } from "@/lib/trpc/client"
 import {
   Button,
   Select,
@@ -19,17 +30,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/lib/ui"
-import {
-  useMutation,
-  useQueries,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query"
-import { z } from "zod"
-
-import { useAppForm } from "@/components/dashboard/form"
-import { useToast } from "@/components/toast-provider"
-import { useTRPC } from "@/lib/trpc/client"
 
 const newKartuKeluargaSchema = z.object({
   nomorKartuKeluarga: z.string().min(1, "Nomor KK wajib diisi"),
@@ -180,7 +180,7 @@ export default function PecahKKForm({
         })
 
         if (isDialog) router.back()
-        else router.push("/kartu-keluarga")
+        else router.push("/dashboard/kartu-keluarga")
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error("Gagal submit:", error)

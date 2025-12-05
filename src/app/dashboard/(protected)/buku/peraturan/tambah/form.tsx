@@ -1,16 +1,16 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { JENIS_PERATURAN, jenisPeraturan } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
-import { formatStringToDate } from "@/lib/utils"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
+import { JENIS_PERATURAN, jenisPeraturan } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
+import { formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 import { jenisPeraturanLabelMap } from "@/lib/utils/mapper"
 
@@ -111,7 +111,7 @@ export default function PeraturanForm({ isDialog }: { isDialog: boolean }) {
           await invalidatePeraturansKey()
           router.back()
         } else {
-          router.push("/buku/peraturan")
+          router.push("/dashboard/buku/peraturan")
         }
       },
       onError: (error) => {

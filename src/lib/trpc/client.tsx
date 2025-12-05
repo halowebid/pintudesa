@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
-import type { AppRouter } from "@/lib/api"
-import { appEnv } from "@/lib/env"
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { createTRPCClient, httpBatchStreamLink, loggerLink } from "@trpc/client"
 import { createTRPCContext } from "@trpc/tanstack-react-query"
 import SuperJSON from "superjson"
 
+import type { AppRouter } from "@/lib/api"
+import { appEnv } from "@/lib/env"
 import { createQueryClient } from "./query-client"
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined

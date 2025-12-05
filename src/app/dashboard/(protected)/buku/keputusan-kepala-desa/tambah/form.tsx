@@ -1,8 +1,6 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { Button } from "@/lib/ui"
-import { formatStringToDate } from "@/lib/utils"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { z } from "zod"
@@ -10,6 +8,8 @@ import { z } from "zod"
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
+import { formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const dateFlexible = z
@@ -68,7 +68,7 @@ export default function KeputusanKepalaDesaForm({
           await invalidateKeputusanKepalaDesasKey()
           router.back()
         } else {
-          router.push("/buku/keputusan-kepala-desa")
+          router.push("/dashboard/buku/keputusan-kepala-desa")
         }
       },
       onError: (error) => {

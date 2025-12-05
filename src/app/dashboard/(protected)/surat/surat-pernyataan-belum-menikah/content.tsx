@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectSuratPernyataanBelumMenikah } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
@@ -12,7 +10,9 @@ import PrintPreview from "@/components/dashboard/print/print-preview"
 import ShowOptions from "@/components/dashboard/show-options"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/surat/table-column-registry"
+import type { SelectSuratPernyataanBelumMenikah } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function SuratPernyataanBelumMenikahContent() {
@@ -89,7 +89,7 @@ export default function SuratPernyataanBelumMenikahContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">Surat Pernyataan Belum Menikah</h1>
         <Button asChild>
-          <Link href="/surat/surat-pernyataan-belum-menikah/tambah">
+          <Link href="/dashboard/surat/surat-pernyataan-belum-menikah/tambah">
             Tambah
           </Link>
         </Button>
@@ -107,7 +107,7 @@ export default function SuratPernyataanBelumMenikahContent() {
             <ShowOptions
               onPrint={() => setPrintItem(item)}
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/surat/surat-pernyataan-belum-menikah/edit/${item.id}`}
+              editUrl={`/dashboard/surat/surat-pernyataan-belum-menikah/edit/${item.id}`}
               description={item.pemohonNIK}
             />
           )}

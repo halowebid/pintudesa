@@ -2,14 +2,14 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Button, ComboboxPopover } from "@/lib/ui"
-import { formatDate } from "@/lib/utils"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button, ComboboxPopover } from "@/lib/ui"
+import { formatDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const formSchema = z.object({
@@ -97,7 +97,7 @@ export default function SuratKeteranganBedaNamaForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/surat/surat-keterangan-beda-nama")
+          router.push("/dashboard/surat/surat-keterangan-beda-nama")
         }
       },
       onError: (error) => {

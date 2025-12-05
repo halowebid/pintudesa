@@ -2,9 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectSuratKeteranganBelumMemilikiRumah } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
-import { formatDate } from "@/lib/utils"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
@@ -12,7 +9,10 @@ import { ControlledTable } from "@/components/dashboard/controlled-table"
 import PrintPreview from "@/components/dashboard/print/print-preview"
 import ShowOptions from "@/components/dashboard/show-options"
 import { useToast } from "@/components/toast-provider"
+import type { SelectSuratKeteranganBelumMemilikiRumah } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
+import { formatDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function SuratKeteranganBelumMemilikiRumahContent() {
@@ -126,7 +126,7 @@ export default function SuratKeteranganBelumMemilikiRumahContent() {
           Surat Keterangan Belum Memiliki Rumah
         </h1>
         <Button asChild>
-          <Link href="/surat/surat-keterangan-belum-memiliki-rumah/tambah">
+          <Link href="/dashboard/surat/surat-keterangan-belum-memiliki-rumah/tambah">
             Tambah
           </Link>
         </Button>
@@ -144,7 +144,7 @@ export default function SuratKeteranganBelumMemilikiRumahContent() {
             <ShowOptions
               onPrint={() => setPrintItem(item)}
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/surat/surat-keterangan-belum-memiliki-rumah/edit/${item.id}`}
+              editUrl={`/dashboard/surat/surat-keterangan-belum-memiliki-rumah/edit/${item.id}`}
               description={item.pemohonNIK}
             />
           )}

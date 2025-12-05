@@ -1,8 +1,8 @@
 import Image from "next/image"
-import { Button } from "@/lib/ui"
 import { Icon } from "@yopem-ui/react-icons"
 
 import { createApi } from "@/lib/trpc/server"
+import { Button } from "@/lib/ui"
 
 const DigitalServices = async () => {
   const api = await createApi()

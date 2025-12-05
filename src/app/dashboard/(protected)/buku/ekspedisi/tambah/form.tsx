@@ -1,8 +1,6 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { Button } from "@/lib/ui"
-import { formatStringToDate } from "@/lib/utils"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { z } from "zod"
@@ -10,6 +8,8 @@ import { z } from "zod"
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
+import { formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const dateFlexible = z
@@ -86,7 +86,7 @@ export default function EkspedisiForm({ isDialog }: { isDialog: boolean }) {
           router.back()
           await invalidateEkspedisisKey()
         } else {
-          router.push("/buku/ekspedisi")
+          router.push("/dashboard/buku/ekspedisi")
         }
       },
       onError: (error) => {

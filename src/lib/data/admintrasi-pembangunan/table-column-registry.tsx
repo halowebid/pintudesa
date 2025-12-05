@@ -1,3 +1,5 @@
+import type { ColumnDef } from "@tanstack/react-table"
+
 import type {
   InsertInventarisHasilPembangunan,
   InsertKaderPemberdayaanMasyarakat,
@@ -5,7 +7,6 @@ import type {
   InsertRencanaKerjaPembangunan,
 } from "@/lib/db/schema"
 import { formatDate } from "@/lib/utils"
-import type { ColumnDef } from "@tanstack/react-table"
 
 export const rencanaKerjaPembangunanColumns: ColumnDef<
   InsertRencanaKerjaPembangunan,

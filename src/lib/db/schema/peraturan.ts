@@ -1,7 +1,8 @@
-import { createCustomId } from "@/lib/utils"
 import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod"
 import z from "zod"
+
+import { createCustomId } from "@/lib/utils"
 
 export const JENIS_PERATURAN = [
   "peraturan_desa",

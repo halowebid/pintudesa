@@ -2,9 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectSuratKeteranganDomisiliUsaha } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
-import { formatDate } from "@/lib/utils"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
@@ -12,7 +9,10 @@ import { ControlledTable } from "@/components/dashboard/controlled-table"
 import PrintPreview from "@/components/dashboard/print/print-preview"
 import ShowOptions from "@/components/dashboard/show-options"
 import { useToast } from "@/components/toast-provider"
+import type { SelectSuratKeteranganDomisiliUsaha } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
+import { formatDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function SuratKeteranganDomisiliUsahaContent() {
@@ -122,7 +122,7 @@ export default function SuratKeteranganDomisiliUsahaContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">Surat Keterangan Domisili Usaha</h1>
         <Button asChild>
-          <Link href="/surat/surat-keterangan-domisili-usaha/tambah">
+          <Link href="/dashboard/surat/surat-keterangan-domisili-usaha/tambah">
             Tambah
           </Link>
         </Button>
@@ -140,7 +140,7 @@ export default function SuratKeteranganDomisiliUsahaContent() {
             <ShowOptions
               onPrint={() => setPrintItem(item)}
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/surat/surat-keterangan-domisili-usaha/edit/${item.id}`}
+              editUrl={`/dashboard/surat/surat-keterangan-domisili-usaha/edit/${item.id}`}
               description={item.pemohonNIK}
             />
           )}

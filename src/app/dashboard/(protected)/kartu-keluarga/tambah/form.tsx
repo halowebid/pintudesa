@@ -3,6 +3,13 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 import { createListCollection, type ListCollection } from "@ark-ui/react"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { Icon } from "@yopem-ui/react-icons"
+import { z } from "zod"
+
+import { useAppForm } from "@/components/dashboard/form"
+import { FormAnggotaKeluargaDialog } from "@/components/dashboard/form-dialog/form-anggota-keluarga-keluarga"
+import { useToast } from "@/components/toast-provider"
 import {
   AGAMA,
   ASAL_PENDUDUK,
@@ -14,6 +21,7 @@ import {
   STATUS_DOMISILI,
   STATUS_PERKAWINAN,
 } from "@/lib/db/schema"
+import { useTRPC } from "@/lib/trpc/client"
 import {
   Button,
   ComboboxPopover,
@@ -24,14 +32,6 @@ import {
   SelectTrigger,
   SelectValueText,
 } from "@/lib/ui"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { Icon } from "@yopem-ui/react-icons"
-import { z } from "zod"
-
-import { useAppForm } from "@/components/dashboard/form"
-import { FormAnggotaKeluargaDialog } from "@/components/dashboard/form-dialog/form-anggota-keluarga-keluarga"
-import { useToast } from "@/components/toast-provider"
-import { useTRPC } from "@/lib/trpc/client"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const pendudukSchema = z.object({
@@ -365,7 +365,7 @@ export default function PendudukForm({ isDialog }: { isDialog: boolean }) {
           router.back()
           await invalidateKartuKeluargasKey()
         } else {
-          router.push("/kartu-keluarga")
+          router.push("/dashboard/kartu-keluarga")
         }
       } catch (error) {
         // eslint-disable-next-line no-console

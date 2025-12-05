@@ -1,3 +1,5 @@
+import { type ColumnDef } from "@tanstack/react-table"
+
 import {
   type InsertSuratIzinKeramaian,
   type InsertSuratIzinMendirikanBangunan,
@@ -20,7 +22,6 @@ import {
   type SelectPenduduk,
 } from "@/lib/db/schema"
 import { formatDate } from "@/lib/utils"
-import { type ColumnDef } from "@tanstack/react-table"
 
 interface SuratIzinKeramaianColumns extends InsertSuratIzinKeramaian {
   pemohon: SelectPenduduk

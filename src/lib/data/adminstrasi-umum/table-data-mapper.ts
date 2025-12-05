@@ -5,7 +5,6 @@ import type {
   SelectPendudukSementara,
   SelectPeraturan,
 } from "@/lib/db/schema"
-
 import {
   mapAgendaRow,
   mapInventarisRow,

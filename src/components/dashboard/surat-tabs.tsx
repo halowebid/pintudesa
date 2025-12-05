@@ -1,6 +1,6 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/lib/ui"
 import { Icon } from "@yopem-ui/react-icons"
 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/lib/ui"
 import { SuratCardGrid } from "./surat-card-grid"
 
 const internalSurat = [

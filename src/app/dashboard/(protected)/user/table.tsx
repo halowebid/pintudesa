@@ -1,7 +1,14 @@
 "use client"
 
 import * as React from "react"
+import { useMutation } from "@tanstack/react-query"
+
+import ShowOptions from "@/components/dashboard/show-options"
+import TablePagination from "@/components/dashboard/table-pagination"
+import UserRoleBadge from "@/components/dashboard/user-role-badge"
+import { useToast } from "@/components/toast-provider"
 import type { SelectUser } from "@/lib/db/schema"
+import { useTRPC } from "@/lib/trpc/client"
 import {
   Table,
   TableBody,
@@ -11,13 +18,6 @@ import {
   TableRow,
 } from "@/lib/ui"
 import { formatDate } from "@/lib/utils"
-import { useMutation } from "@tanstack/react-query"
-
-import ShowOptions from "@/components/dashboard/show-options"
-import TablePagination from "@/components/dashboard/table-pagination"
-import { useToast } from "@/components/toast-provider"
-import UserRoleBadge from "@/components/dashboard/user-role-badge"
-import { useTRPC } from "@/lib/trpc/client"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 interface UserTableProps {

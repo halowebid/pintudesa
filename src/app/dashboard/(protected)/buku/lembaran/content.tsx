@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectLembaran } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
@@ -12,7 +10,9 @@ import ShowOptions from "@/components/dashboard/show-options"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/adminstrasi-umum/table-column-registry"
 import { tableDataMapperRegistry } from "@/lib/data/adminstrasi-umum/table-data-mapper"
+import type { SelectLembaran } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function LembaranContent() {
@@ -90,7 +90,7 @@ export default function LembaranContent() {
           A9. Buku Lembaran dan Buku Berita Desa
         </h1>
         <Button asChild>
-          <Link href="/buku/lembaran/tambah">Tambah</Link>
+          <Link href="/dashboard/buku/lembaran/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -105,7 +105,7 @@ export default function LembaranContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku/lembaran/edit/${item.id}`}
+              editUrl={`/dashboard/buku/lembaran/edit/${item.id}`}
               description={item.keterangan}
             />
           )}

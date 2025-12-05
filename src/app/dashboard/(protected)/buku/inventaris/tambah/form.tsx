@@ -1,14 +1,14 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { Button } from "@/lib/ui"
-import { formatStringToDate } from "@/lib/utils"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
+import { formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const formSchema = z.object({
@@ -57,7 +57,7 @@ export default function InventarisForm({ isDialog }: { isDialog: boolean }) {
           router.back()
           await invalidateInventarissKey()
         } else {
-          router.push("/buku/inventaris")
+          router.push("/dashboard/buku/inventaris")
         }
       },
       onError: (error) => {

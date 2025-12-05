@@ -16,7 +16,8 @@ export default async function ProtectedLayout({
 }) {
   const session = await getSession()
 
-  const isStaffOrAdmin = session?.user.role === "member" || session?.user.role === "admin"
+  const isStaffOrAdmin =
+    session?.user.role === "member" || session?.user.role === "admin"
 
   if (!session) {
     redirect("/auth/sign-in")

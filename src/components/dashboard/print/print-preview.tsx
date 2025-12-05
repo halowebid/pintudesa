@@ -1,7 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { useQuery } from "@tanstack/react-query"
+
 import type { SuratType } from "@/lib/db/schema"
+import { useTRPC } from "@/lib/trpc/client"
 import {
   Button,
   Dialog,
@@ -9,9 +12,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/lib/ui"
-import { useQuery } from "@tanstack/react-query"
-
-import { useTRPC } from "@/lib/trpc/client"
 import { mapSuratVariables, renderTemplate } from "@/lib/utils/template"
 
 interface PrintPreviewProps {

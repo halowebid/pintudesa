@@ -19,7 +19,6 @@ import {
   type SelectPeraturan,
 } from "@/lib/db/schema"
 import { formatDate } from "@/lib/utils"
-
 import { createLabelMap } from "./label"
 
 export const agamaLabelMap = createLabelMap(AGAMA)

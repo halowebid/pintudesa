@@ -1,13 +1,13 @@
 "use client"
 
 import { redirect } from "next/navigation"
-import { Button, cn } from "@/lib/ui"
 import z from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import Link from "@/components/dashboard/link"
 import { useToast } from "@/components/toast-provider"
 import { authClient } from "@/lib/auth/client"
+import { Button, cn } from "@/lib/ui"
 
 export function SignUpForm({
   className,

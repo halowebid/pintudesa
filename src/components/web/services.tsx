@@ -1,5 +1,6 @@
-import { Card, CardContent } from "@/lib/ui"
 import { Icon, type IconProps } from "@yopem-ui/react-icons"
+
+import { Card, CardContent } from "@/lib/ui"
 
 export const Services = () => {
   const services: {

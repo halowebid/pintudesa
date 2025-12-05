@@ -2,11 +2,17 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useMutation, useQuery } from "@tanstack/react-query"
+
+import AlertDelete from "@/components/dashboard/alert-delete"
+import ShowOptions from "@/components/dashboard/show-options"
+import { useToast } from "@/components/toast-provider"
 import {
   SURAT_TYPE_VALUES,
   type SelectSuratTemplate,
   type SuratType,
 } from "@/lib/db/schema"
+import { useTRPC } from "@/lib/trpc/client"
 import {
   Badge,
   Button,
@@ -15,12 +21,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/lib/ui"
-import { useMutation, useQuery } from "@tanstack/react-query"
-
-import AlertDelete from "@/components/dashboard/alert-delete"
-import ShowOptions from "@/components/dashboard/show-options"
-import { useToast } from "@/components/toast-provider"
-import { useTRPC } from "@/lib/trpc/client"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const SURAT_TYPE_LABELS: Record<SuratType, string> = {
@@ -170,7 +170,7 @@ export default function TemplateSuratContent() {
                               </div>
                               <ShowOptions
                                 onDelete={() => setDeleteId(template.id)}
-                                editUrl={`/setting/template-surat/edit/${template.id}`}
+                                editUrl={`/dashboard/setting/template-surat/edit/${template.id}`}
                                 description={template.name}
                               />
                             </div>

@@ -3,6 +3,7 @@
  * Maps Indonesian route segments to human-readable display names
  */
 export const routeLabels: Record<string, string> = {
+  dashboard: "Ringkasan",
   buku: "Buku",
   surat: "Surat",
   setting: "Pengaturan",
@@ -57,12 +58,10 @@ export function generateBreadcrumbs(pathname: string): {
   const segments = pathname.split("/").filter(Boolean)
 
   if (segments.length === 0) {
-    return [{ label: "Ringkasan", href: "/" }]
+    return [{ label: "Ringkasan", href: "/dashboard" }]
   }
 
-  const breadcrumbs: { label: string; href: string }[] = [
-    { label: "Ringkasan", href: "/" },
-  ]
+  const breadcrumbs: { label: string; href: string }[] = []
 
   let currentPath = ""
   for (const segment of segments) {

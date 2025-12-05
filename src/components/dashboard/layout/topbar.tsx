@@ -1,6 +1,5 @@
-import { Separator, SidebarTrigger } from "@/lib/ui"
-
 import ThemeSwitcher from "@/components/dashboard/theme/theme-switcher"
+import { Separator, SidebarTrigger } from "@/lib/ui"
 import Breadcrumb from "./breadcrumb"
 import Notifications from "./notifications"
 import Search from "./search"

@@ -1,8 +1,8 @@
-import { Button } from "@/lib/ui"
 import { Icon } from "@yopem-ui/react-icons"
 
 import Link from "@/components/web/link"
 import { createApi } from "@/lib/trpc/server"
+import { Button } from "@/lib/ui"
 
 const Footer = async () => {
   const api = await createApi()

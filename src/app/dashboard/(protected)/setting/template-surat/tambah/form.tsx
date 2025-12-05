@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { SURAT_TYPE_VALUES, type SuratType } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Icon } from "@yopem-ui/react-icons"
 import { z } from "zod"
@@ -16,7 +14,9 @@ import { RichTextEditor } from "@/components/dashboard/template-editor/rich-text
 import { VariableInsertMenu } from "@/components/dashboard/template-editor/variable-insert-menu"
 import { WordImportButton } from "@/components/dashboard/template-editor/word-import-button"
 import { useToast } from "@/components/toast-provider"
+import { SURAT_TYPE_VALUES, type SuratType } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const SURAT_TYPE_LABELS: Record<SuratType, string> = {
@@ -94,7 +94,7 @@ export default function TemplateSuratForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/setting/template-surat")
+          router.push("/dashboard/setting/template-surat")
         }
       },
       onError: (error) => {
@@ -113,7 +113,7 @@ export default function TemplateSuratForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/setting/template-surat")
+          router.push("/dashboard/setting/template-surat")
         }
       },
       onError: (error) => {
@@ -387,7 +387,7 @@ export default function TemplateSuratForm({
             if (isDialog) {
               router.back()
             } else {
-              router.push("/setting/template-surat")
+              router.push("/dashboard/setting/template-surat")
             }
           }}
         >

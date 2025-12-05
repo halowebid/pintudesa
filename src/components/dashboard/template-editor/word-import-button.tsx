@@ -1,11 +1,11 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { Button } from "@/lib/ui"
 import { Icon } from "@yopem-ui/react-icons"
 import mammoth from "mammoth"
 
 import { useToast } from "@/components/toast-provider"
+import { Button } from "@/lib/ui"
 
 interface WordImportButtonProps {
   onImport: (html: string) => void

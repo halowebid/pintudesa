@@ -2,6 +2,12 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import dayjs from "dayjs"
+import { z } from "zod"
+
+import { useAppForm } from "@/components/dashboard/form"
+import { useToast } from "@/components/toast-provider"
 import {
   AGAMA,
   ASAL_PENDUDUK,
@@ -11,15 +17,9 @@ import {
   STATUS_DOMISILI,
   STATUS_PERKAWINAN,
 } from "@/lib/db/schema"
+import { useTRPC } from "@/lib/trpc/client"
 import { Button } from "@/lib/ui"
 import { formatStringToDate } from "@/lib/utils"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import dayjs from "dayjs"
-import { z } from "zod"
-
-import { useAppForm } from "@/components/dashboard/form"
-import { useToast } from "@/components/toast-provider"
-import { useTRPC } from "@/lib/trpc/client"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const dateFlexible = z
@@ -103,7 +103,7 @@ export default function PendudukForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/penduduk")
+          router.push("/dashboard/penduduk")
         }
       },
       onError: (error) => {

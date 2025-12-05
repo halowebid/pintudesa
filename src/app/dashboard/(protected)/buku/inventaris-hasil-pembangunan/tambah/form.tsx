@@ -1,13 +1,13 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { Button } from "@/lib/ui"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const formSchema = z.object({
@@ -50,7 +50,7 @@ export default function InventarisHasilPembangunanForm({
           router.back()
           await invalidateInventarisHasilPembangunansKey()
         } else {
-          router.push("/buku/inventaris-hasil-pembangunan")
+          router.push("/dashboard/buku/inventaris-hasil-pembangunan")
         }
       },
       onError: (error) => {

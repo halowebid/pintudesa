@@ -1,5 +1,4 @@
 import type { SelectKaderPemberdayaanMasyarakat } from "@/lib/db/schema"
-
 import { mapKaderPemberdayaanMasyarakatRow } from "@/lib/utils/mapper"
 
 interface TableKeyMap {

@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectKaderPemberdayaanMasyarakat } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
@@ -12,7 +10,9 @@ import ShowOptions from "@/components/dashboard/show-options"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/admintrasi-pembangunan/table-column-registry"
 import { tableDataMapperRegistry } from "@/lib/data/admintrasi-pembangunan/table-data-mapper"
+import type { SelectKaderPemberdayaanMasyarakat } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function KaderPemberdayaanMasyarakatContent() {
@@ -92,7 +92,9 @@ export default function KaderPemberdayaanMasyarakatContent() {
           D4. Buku Kader Pemberdayaan Masyarakat
         </h1>
         <Button asChild>
-          <Link href="/buku/kader-pemberdayaan-masyarakat/tambah">Tambah</Link>
+          <Link href="/dashboard/buku/kader-pemberdayaan-masyarakat/tambah">
+            Tambah
+          </Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -107,7 +109,7 @@ export default function KaderPemberdayaanMasyarakatContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/buku/kader-pemberdayaan-masyarakat/edit/${item.id}`}
+              editUrl={`/dashboard/buku/kader-pemberdayaan-masyarakat/edit/${item.id}`}
               description={item.nama}
             />
           )}

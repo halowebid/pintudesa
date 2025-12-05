@@ -1,3 +1,7 @@
+import { tryCatch } from "@yopem/try-catch"
+import Redis from "ioredis"
+import { z } from "zod"
+
 import {
   deleteSetting,
   getSettingById,
@@ -11,10 +15,6 @@ import {
   type SelectSetting,
 } from "@/lib/db"
 import { redisUrl } from "@/lib/env"
-import { tryCatch } from "@yopem/try-catch"
-import Redis from "ioredis"
-import { z } from "zod"
-
 import {
   adminProtectedProcedure,
   createTRPCRouter,

@@ -1,3 +1,7 @@
+import { betterAuth, type BetterAuthOptions } from "better-auth"
+import { drizzleAdapter } from "better-auth/adapters/drizzle"
+import { admin } from "better-auth/plugins"
+
 import {
   accountTable,
   db,
@@ -5,9 +9,6 @@ import {
   userTable,
   verificationTable,
 } from "@/lib/db"
-import { betterAuth, type BetterAuthOptions } from "better-auth"
-import { drizzleAdapter } from "better-auth/adapters/drizzle"
-import { admin } from "better-auth/plugins"
 
 /**
  * Initializes Better Auth with database adapter and admin plugin for user management

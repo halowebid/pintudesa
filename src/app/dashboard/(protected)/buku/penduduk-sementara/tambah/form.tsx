@@ -1,20 +1,16 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import {
-  JENIS_KELAMIN,
-  JENIS_PEKERJAAN,
-  KEBANGSAAN,
-} from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
-import { formatStringToDate } from "@/lib/utils"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
+import { JENIS_KELAMIN, JENIS_PEKERJAAN, KEBANGSAAN } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
+import { formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const dateFlexible = z
@@ -116,7 +112,7 @@ export default function PendudukSementaraForm({
           router.back()
           await invalidatePendudukSementarasKey()
         } else {
-          router.push("/buku/penduduk-sementara")
+          router.push("/dashboard/buku/penduduk-sementara")
         }
       },
       onError: (error) => {

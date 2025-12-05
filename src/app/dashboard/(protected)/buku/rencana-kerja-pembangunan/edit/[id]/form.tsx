@@ -2,13 +2,13 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Button } from "@/lib/ui"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const formSchema = z.object({
@@ -67,7 +67,7 @@ export default function RencanaKerjaPembangunanForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku/rencana-kerja-pembangunan")
+          router.push("/dashboard/buku/rencana-kerja-pembangunan")
         }
       },
       onError: (error) => {

@@ -2,16 +2,16 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { JENIS_PERATURAN } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
-import { formatStringToDate } from "@/lib/utils"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
+import { JENIS_PERATURAN } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
+import { formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const optionalDateFlexible = z
@@ -80,7 +80,7 @@ export default function LembaranForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/buku/lembaran")
+          router.push("/dashboard/buku/lembaran")
         }
       },
       onError: (error) => {

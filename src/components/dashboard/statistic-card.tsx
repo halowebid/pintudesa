@@ -1,5 +1,9 @@
 "use client"
 
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { Icon } from "@yopem-ui/react-icons"
+
+import { useTRPC } from "@/lib/trpc/client"
 import {
   Card,
   CardDescription,
@@ -7,10 +11,6 @@ import {
   CardTitle,
   Skeleton,
 } from "@/lib/ui"
-import { useSuspenseQuery } from "@tanstack/react-query"
-import { Icon } from "@yopem-ui/react-icons"
-
-import { useTRPC } from "@/lib/trpc/client"
 
 const StatisticCard = () => {
   const trpc = useTRPC()

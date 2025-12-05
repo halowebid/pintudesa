@@ -1,3 +1,6 @@
+import { tryCatch } from "@yopem/try-catch"
+import { z } from "zod"
+
 import {
   createNotifikasi,
   deleteNotifikasi,
@@ -8,9 +11,6 @@ import {
   markAllAsRead,
   markAsRead,
 } from "@/lib/db"
-import { tryCatch } from "@yopem/try-catch"
-import { z } from "zod"
-
 import { createTRPCRouter, protectedProcedure } from "../trpc"
 import { handleTRPCError } from "../utils/error"
 

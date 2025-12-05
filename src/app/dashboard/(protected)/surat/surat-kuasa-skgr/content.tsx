@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectSuratKuasaSKGR } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
@@ -12,7 +10,9 @@ import PrintPreview from "@/components/dashboard/print/print-preview"
 import ShowOptions from "@/components/dashboard/show-options"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/surat/table-column-registry"
+import type { SelectSuratKuasaSKGR } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function SuratKuasaSKGRContent() {
@@ -88,7 +88,7 @@ export default function SuratKuasaSKGRContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">Surat Kuasa SKGR</h1>
         <Button asChild>
-          <Link href="/surat/surat-kuasa-skgr/tambah">Tambah</Link>
+          <Link href="/dashboard/surat/surat-kuasa-skgr/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -104,7 +104,7 @@ export default function SuratKuasaSKGRContent() {
             <ShowOptions
               onPrint={() => setPrintItem(item)}
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/surat/surat-kuasa-skgr/edit/${item.id}`}
+              editUrl={`/dashboard/surat/surat-kuasa-skgr/edit/${item.id}`}
               description={item.yangDiberiKuasaNama}
             />
           )}

@@ -1,8 +1,8 @@
 import * as React from "react"
 import dynamicFn from "next/dynamic"
-import { Skeleton } from "@/lib/ui"
 
 import { HydrateClient, prefetch, trpc } from "@/lib/trpc/server"
+import { Skeleton } from "@/lib/ui"
 
 const UserContent = dynamicFn(async () => {
   const UserContent = await import("./content")

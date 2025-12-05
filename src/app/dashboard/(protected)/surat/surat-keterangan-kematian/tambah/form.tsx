@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Button, ComboboxPopover } from "@/lib/ui"
-import { formatStringToDate } from "@/lib/utils"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { z } from "zod"
@@ -11,6 +9,8 @@ import { z } from "zod"
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button, ComboboxPopover } from "@/lib/ui"
+import { formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const requiredDateFlexible = z
@@ -145,7 +145,7 @@ export default function SuratKeteranganKematianForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/surat/surat-keterangan-kematian")
+          router.push("/dashboard/surat/surat-keterangan-kematian")
         }
       },
       onError: (error) => {

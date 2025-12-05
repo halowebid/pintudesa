@@ -1,8 +1,8 @@
 import Image from "next/image"
-import { Button } from "@/lib/ui"
 
 import Link from "@/components/web/link"
 import { createApi } from "@/lib/trpc/server"
+import { Button } from "@/lib/ui"
 
 const Hero = async () => {
   const api = await createApi()

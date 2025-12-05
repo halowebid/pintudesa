@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect } from "react"
-import { Button } from "@/lib/ui"
 import { Link } from "@tiptap/extension-link"
 import { Table } from "@tiptap/extension-table"
 import { TableCell } from "@tiptap/extension-table-cell"
@@ -13,6 +12,7 @@ import { EditorContent, useEditor, type Editor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 import { Icon } from "@yopem-ui/react-icons"
 
+import { Button } from "@/lib/ui"
 import { VariableExtension } from "./variable-extension"
 
 interface RichTextEditorProps {

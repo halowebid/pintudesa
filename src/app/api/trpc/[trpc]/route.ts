@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server"
-import { appRouter, createTRPCContext } from "@/lib/api"
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch"
 
+import { appRouter, createTRPCContext } from "@/lib/api"
 import { auth } from "@/lib/auth/server"
 
 const setCorsHeaders = (res: Response) => {

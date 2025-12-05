@@ -1,11 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { Badge, Menu, MenuContent, MenuItem, MenuTrigger } from "@/lib/ui"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Icon } from "@yopem-ui/react-icons"
 
 import { useTRPC } from "@/lib/trpc/client"
+import { Badge, Menu, MenuContent, MenuItem, MenuTrigger } from "@/lib/ui"
 
 /**
  * Notifications component with dropdown panel

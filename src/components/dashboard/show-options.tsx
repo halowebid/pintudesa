@@ -2,6 +2,10 @@
 
 import type { UrlObject } from "url"
 import * as React from "react"
+import { Icon } from "@yopem-ui/react-icons"
+
+import AlertDelete from "@/components/dashboard/alert-delete"
+import Link from "@/components/dashboard/link"
 import {
   Button,
   Menu,
@@ -10,10 +14,6 @@ import {
   MenuItemGroup,
   MenuTrigger,
 } from "@/lib/ui"
-import { Icon } from "@yopem-ui/react-icons"
-
-import AlertDelete from "@/components/dashboard/alert-delete"
-import Link from "@/components/dashboard/link"
 
 interface ShowOptionsProps extends React.ComponentProps<typeof Menu> {
   onDelete?: () => void

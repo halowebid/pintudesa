@@ -1,3 +1,5 @@
+import type { ColumnDef } from "@tanstack/react-table"
+
 import {
   JENIS_PERATURAN,
   JENIS_SURAT_AGENDA,
@@ -14,8 +16,6 @@ import {
   type SelectTanahKas,
 } from "@/lib/db/schema"
 import { formatDate } from "@/lib/utils"
-import type { ColumnDef } from "@tanstack/react-table"
-
 import {
   jenisPeraturanLabelMap,
   jenisSuratAgendaLabelMap,

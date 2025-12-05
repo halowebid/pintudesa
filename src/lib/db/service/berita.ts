@@ -1,6 +1,6 @@
-import { slugify } from "@/lib/utils"
 import { count, eq } from "drizzle-orm"
 
+import { slugify } from "@/lib/utils"
 import { db } from "../connection"
 import { beritaTable, type InsertBerita } from "../schema/berita"
 

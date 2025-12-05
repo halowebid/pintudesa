@@ -1,3 +1,5 @@
+import { Icon, type IconProps } from "@yopem-ui/react-icons"
+
 import {
   Badge,
   Card,
@@ -7,7 +9,6 @@ import {
   ProgressLinear,
   Separator,
 } from "@/lib/ui"
-import { Icon, type IconProps } from "@yopem-ui/react-icons"
 
 export default function StatisticsPage() {
   const basicStats: {

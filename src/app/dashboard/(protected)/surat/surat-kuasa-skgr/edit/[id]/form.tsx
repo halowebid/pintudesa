@@ -2,16 +2,16 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { JENIS_PEKERJAAN, listJenisPekerjaan } from "@/lib/db/schema"
-import { Button, ComboboxPopover } from "@/lib/ui"
-import { formatDate, formatStringToDate } from "@/lib/utils"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { z } from "zod"
 
 import { useAppForm } from "@/components/dashboard/form"
 import { useToast } from "@/components/toast-provider"
+import { JENIS_PEKERJAAN, listJenisPekerjaan } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button, ComboboxPopover } from "@/lib/ui"
+import { formatDate, formatStringToDate } from "@/lib/utils"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 const requiredDateFlexible = z
@@ -127,7 +127,7 @@ export default function SuratKuasaSKGRForm({
         if (isDialog) {
           router.back()
         } else {
-          router.push("/surat/surat-kuasa-skgr")
+          router.push("/dashboard/surat/surat-kuasa-skgr")
         }
       },
       onError: (error) => {

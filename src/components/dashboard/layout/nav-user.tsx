@@ -1,5 +1,8 @@
 "use client"
 
+import { Icon } from "@yopem-ui/react-icons"
+
+import SignOutButton from "@/components/dashboard/auth/sign-out-button"
 import type { Session } from "@/lib/auth"
 import {
   Avatar,
@@ -16,9 +19,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/lib/ui"
-import { Icon } from "@yopem-ui/react-icons"
-
-import SignOutButton from "@/components/dashboard/auth/sign-out-button"
 
 interface NavUserProps extends React.ComponentProps<typeof SidebarMenu> {
   user: Session["user"]

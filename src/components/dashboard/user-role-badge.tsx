@@ -1,7 +1,8 @@
 import * as React from "react"
+import { cn } from "@yopem-ui/utils"
+
 import type { UserRole } from "@/lib/db/schema"
 import { Badge } from "@/lib/ui"
-import { cn } from "@yopem-ui/utils"
 
 interface UserRoleBadgeProps extends React.ComponentProps<typeof Badge> {
   role: UserRole

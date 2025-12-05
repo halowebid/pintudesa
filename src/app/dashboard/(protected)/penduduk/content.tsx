@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import type { SelectPenduduk } from "@/lib/db/schema"
-import { Button } from "@/lib/ui"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import type { ColumnDef, PaginationState } from "@tanstack/react-table"
 
@@ -12,7 +10,9 @@ import ShowOptions from "@/components/dashboard/show-options"
 import { useToast } from "@/components/toast-provider"
 import { tableColumnRegistry } from "@/lib/data/kependudukan/table-column-registry"
 import { tableDataMapperRegistry } from "@/lib/data/kependudukan/table-data-mapper"
+import type { SelectPenduduk } from "@/lib/db/schema"
 import { useTRPC } from "@/lib/trpc/client"
+import { Button } from "@/lib/ui"
 import { useHandleTRPCError } from "@/lib/utils/error"
 
 export default function PendudukContent() {
@@ -88,7 +88,7 @@ export default function PendudukContent() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">Penduduk</h1>
         <Button asChild>
-          <Link href="/penduduk/tambah">Tambah</Link>
+          <Link href="/dashboard/penduduk/tambah">Tambah</Link>
         </Button>
       </div>
       <div className="relative min-h-[100vh] w-full overflow-auto">
@@ -103,7 +103,7 @@ export default function PendudukContent() {
           renderAction={(item) => (
             <ShowOptions
               onDelete={() => deleteItem(item.id)}
-              editUrl={`/penduduk/edit/${item.id}`}
+              editUrl={`/dashboard/penduduk/edit/${item.id}`}
               description={item.namaLengkap}
             />
           )}

@@ -1,6 +1,8 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import { Icon } from "@yopem-ui/react-icons"
+
 import type { SuratType } from "@/lib/db/schema"
 import {
   Button,
@@ -9,8 +11,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/lib/ui"
-import { Icon } from "@yopem-ui/react-icons"
-
 import {
   getVariablesForSuratType,
   searchVariables,
