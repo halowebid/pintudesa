@@ -17,8 +17,8 @@
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "build": "bun next build",
-    "dev": "bun next dev --turbopack",
-    "start": "bun next start",
+    "dev": "bun next dev --turbopack -p 3100",
+    "start": "bun next start -p 3100",
     "clean": "bun run git clean -xdf .cache .next *.log",
     "clean:deps": "bun run git clean -xdf node_modules",
     "clean:all": "bun run clean && bun run clean:deps",

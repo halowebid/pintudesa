@@ -6,7 +6,7 @@ import { headers } from "next/headers"
 import { initAuth } from "@/lib/auth"
 import { appEnv, authSecret, siteUrl } from "@/lib/env"
 
-const baseUrl = appEnv === "production" ? siteUrl! : "http://localhost:3000"
+const baseUrl = appEnv === "production" ? siteUrl! : "http://localhost:3100"
 
 export const auth = initAuth({
   baseUrl,
