@@ -88,7 +88,7 @@ export default function Notifications() {
         </button>
       </MenuTrigger>
       <MenuContent className="w-80">
-        {unreadCount !== undefined && unreadCount > 0 && (
+        {unreadCount !== undefined && unreadCount > 0 ? (
           <div className="border-border flex items-center justify-between border-b px-3 py-2">
             <span className="text-muted-foreground text-xs font-medium">
               {unreadCount} notifikasi belum dibaca
@@ -101,7 +101,7 @@ export default function Notifications() {
               {isMarkingAllAsRead ? "Memproses..." : "Tandai semua dibaca"}
             </button>
           </div>
-        )}
+        ) : null}
         {/* Notifications list */}
         {notifications && notifications.length > 0 ? (
           notifications.map((notification) => (
