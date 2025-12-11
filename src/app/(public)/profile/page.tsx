@@ -81,27 +81,25 @@ export default async function ProfilePage() {
   return (
     <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 dark:from-blue-800 dark:via-blue-900 dark:to-green-800"></div>
-        {/* <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg\?auto=compress\&cs=tinysrgb\&w=1260\&h=750\&dpr=1')] bg-cover bg-center opacity-20"></div> */}
-        <div className="relative container mx-auto px-4 text-center text-white">
+      <section className="relative overflow-hidden border-b py-24">
+        <div className="relative container mx-auto px-4 text-center">
           <div className="mx-auto max-w-4xl">
-            <Badge className="mb-6 border-white/30 bg-white/20 text-white hover:bg-white/30">
+            <Badge variant="outline" className="mb-6">
               <Icon name="Building2" className="mr-2 size-4" />
               Profil Desa
             </Badge>
-            <h1 className="mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-5xl font-bold text-transparent lg:text-7xl">
+            <h1 className="text-foreground mb-6 text-5xl font-bold tracking-tight lg:text-7xl">
               Desa {desa}
             </h1>
-            <p className="mb-8 text-xl leading-relaxed text-blue-100 lg:text-2xl">
+            <p className="text-muted-foreground mb-8 text-xl leading-relaxed lg:text-2xl">
               Kecamatan {kecamatan}, Kabupaten {kabupaten}, Provinsi {provinsi}
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <div className="flex items-center rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm">
+              <div className="bg-muted text-muted-foreground flex items-center rounded-full px-4 py-2">
                 <Icon name="MapPin" className="mr-2 size-4" />
                 Kode Pos: {kodePos}
               </div>
-              <div className="flex items-center rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm">
+              <div className="bg-muted text-muted-foreground flex items-center rounded-full px-4 py-2">
                 <Icon name="Phone" className="mr-2 size-4" />
                 {whatsappNumber}
               </div>
@@ -116,11 +114,11 @@ export default async function ProfilePage() {
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div className="space-y-8">
               <div>
-                <Badge className="mb-4 bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
+                <Badge variant="outline" className="mb-4">
                   <Icon name="Globe" className="mr-2 size-4" />
                   Desa Digital
                 </Badge>
-                <h2 className="text-foreground mb-6 text-4xl font-bold">
+                <h2 className="text-foreground mb-6 text-4xl font-bold tracking-tight">
                   Desa {desa}
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
@@ -133,49 +131,45 @@ export default async function ProfilePage() {
               </div>
 
               <div className="grid grid-cols-2 gap-6">
-                <Card className="border-0 bg-gradient-to-br from-green-50 to-green-100 shadow-lg dark:from-green-900/20 dark:to-green-800/20">
+                <Card className="shadow-sm">
                   <CardContent className="p-6 text-center">
                     <Icon
                       name="Users"
-                      className="mx-auto mb-3 size-8 text-green-600"
+                      className="text-foreground mx-auto mb-3 size-8"
                     />
-                    <div className="text-2xl font-bold text-green-700 dark:text-green-400">
+                    <div className="text-foreground text-2xl font-bold">
                       1,578
                     </div>
-                    <div className="text-sm text-green-600 dark:text-green-500">
+                    <div className="text-muted-foreground text-sm">
                       Total Penduduk
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="border-0 bg-gradient-to-br from-blue-50 to-blue-100 shadow-lg dark:from-blue-900/20 dark:to-blue-800/20">
+                <Card className="shadow-sm">
                   <CardContent className="p-6 text-center">
                     <Icon
                       name="Building2"
-                      className="mx-auto mb-3 size-8 text-blue-600"
+                      className="text-foreground mx-auto mb-3 size-8"
                     />
-                    <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">
-                      3
-                    </div>
-                    <div className="text-sm text-blue-600 dark:text-blue-500">
-                      Dusun
-                    </div>
+                    <div className="text-foreground text-2xl font-bold">3</div>
+                    <div className="text-muted-foreground text-sm">Dusun</div>
                   </CardContent>
                 </Card>
               </div>
             </div>
 
             <div className="relative">
-              <div className="aspect-square overflow-hidden rounded-3xl shadow-2xl">
+              <div className="bg-muted aspect-square overflow-hidden rounded-3xl shadow-xl">
                 <Image
                   src="https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1"
                   width={600}
                   height={600}
                   alt="Village Landscape"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  className="h-full w-full object-cover grayscale transition-transform duration-700"
                 />
               </div>
-              <div className="dark:bg-card absolute -right-6 -bottom-6 rounded-2xl border bg-white p-6 shadow-xl">
+              <div className="bg-card absolute -right-6 -bottom-6 rounded-2xl border p-6 shadow-lg">
                 <div className="text-center">
                   <div className="text-foreground text-2xl font-bold">
                     {kodePos}
@@ -192,11 +186,11 @@ export default async function ProfilePage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mb-16 text-center">
-            <Badge className="mb-4 bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
+            <Badge variant="outline" className="mb-4">
               <Icon name="Target" className="mr-2 size-4" />
               Visi & Misi
             </Badge>
-            <h2 className="text-foreground mb-6 text-4xl font-bold">
+            <h2 className="text-foreground mb-6 text-4xl font-bold tracking-tight">
               Visi & Misi Desa Sukatani
             </h2>
             <p className="text-muted-foreground mx-auto max-w-3xl text-lg">
@@ -207,16 +201,13 @@ export default async function ProfilePage() {
 
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {/* Vision */}
-            <Card className="dark:via-background border-0 bg-gradient-to-br from-blue-50 via-white to-blue-50 shadow-xl dark:from-blue-900/10 dark:to-blue-900/10">
+            <Card className="shadow-sm">
               <CardHeader className="pb-6">
                 <div className="flex items-center space-x-3">
-                  <div className="rounded-xl bg-blue-100 p-3 dark:bg-blue-900">
-                    <Icon
-                      name="Eye"
-                      className="size-6 text-blue-600 dark:text-blue-400"
-                    />
+                  <div className="bg-primary text-primary-foreground rounded-xl p-3">
+                    <Icon name="Eye" className="size-6" />
                   </div>
-                  <CardTitle className="text-2xl text-blue-700 dark:text-blue-400">
+                  <CardTitle className="text-foreground text-2xl">
                     Visi
                   </CardTitle>
                 </div>
@@ -231,7 +222,7 @@ export default async function ProfilePage() {
                 <div className="space-y-3">
                   {visionPoints.map((point, index) => (
                     <div key={index} className="flex items-start space-x-3">
-                      <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500"></div>
+                      <div className="bg-foreground mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
                       <span className="text-muted-foreground text-sm">
                         {point}
                       </span>
@@ -242,16 +233,13 @@ export default async function ProfilePage() {
             </Card>
 
             {/* Mission */}
-            <Card className="dark:via-background border-0 bg-gradient-to-br from-green-50 via-white to-green-50 shadow-xl dark:from-green-900/10 dark:to-green-900/10">
+            <Card className="shadow-sm">
               <CardHeader className="pb-6">
                 <div className="flex items-center space-x-3">
-                  <div className="rounded-xl bg-green-100 p-3 dark:bg-green-900">
-                    <Icon
-                      name="Navigation"
-                      className="size-6 text-green-600 dark:text-green-400"
-                    />
+                  <div className="bg-primary text-primary-foreground rounded-xl p-3">
+                    <Icon name="Navigation" className="size-6" />
                   </div>
-                  <CardTitle className="text-2xl text-green-700 dark:text-green-400">
+                  <CardTitle className="text-foreground text-2xl">
                     Misi
                   </CardTitle>
                 </div>
@@ -261,9 +249,9 @@ export default async function ProfilePage() {
                   {missionPoints.map((point, index) => (
                     <div
                       key={index}
-                      className="flex items-start space-x-3 rounded-lg bg-green-50/50 p-3 dark:bg-green-900/10"
+                      className="bg-muted/50 flex items-start space-x-3 rounded-lg p-3"
                     >
-                      <div className="flex size-6 flex-shrink-0 items-center justify-center rounded-full bg-green-500 text-xs font-bold text-white">
+                      <div className="bg-foreground text-background flex size-6 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold">
                         {index + 1}
                       </div>
                       <span className="text-foreground text-sm leading-relaxed">
@@ -283,18 +271,18 @@ export default async function ProfilePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div className="relative">
-              <div className="aspect-video overflow-hidden rounded-3xl shadow-2xl">
+              <div className="bg-muted aspect-video overflow-hidden rounded-3xl shadow-xl">
                 <Image
                   src="https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
                   width={800}
                   height={600}
                   alt="Village Map"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  className="h-full w-full object-cover grayscale transition-transform duration-700"
                 />
               </div>
-              <div className="dark:bg-card/90 absolute top-6 left-6 rounded-xl bg-white/90 p-4 shadow-lg backdrop-blur-sm">
+              <div className="bg-card/90 absolute top-6 left-6 rounded-xl border p-4 shadow-sm backdrop-blur-sm">
                 <div className="flex items-center space-x-2">
-                  <Icon name="MapPin" className="size-5 text-red-500" />
+                  <Icon name="MapPin" className="text-foreground size-5" />
                   <span className="text-foreground font-semibold">
                     Lokasi Desa
                   </span>
@@ -304,11 +292,11 @@ export default async function ProfilePage() {
 
             <div className="space-y-8">
               <div>
-                <Badge className="mb-4 bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300">
+                <Badge variant="outline" className="mb-4">
                   <Icon name="MapPin" className="mr-2 size-4" />
                   Lokasi & Batas Wilayah
                 </Badge>
-                <h2 className="text-foreground mb-6 text-4xl font-bold">
+                <h2 className="text-foreground mb-6 text-4xl font-bold tracking-tight">
                   Geografis Desa {desa}
                 </h2>
                 <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
@@ -323,7 +311,7 @@ export default async function ProfilePage() {
                 {boundaries.map((boundary, index) => (
                   <Card
                     key={index}
-                    className="border-0 shadow-lg transition-shadow hover:shadow-xl"
+                    className="shadow-sm transition-shadow hover:shadow-md"
                   >
                     <CardContent className="p-6">
                       <div className="text-center">
@@ -347,11 +335,11 @@ export default async function ProfilePage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mb-16 text-center">
-            <Badge className="mb-4 bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300">
+            <Badge variant="outline" className="mb-4">
               <Icon name="Globe" className="mr-2 size-4" />
               Media Sosial
             </Badge>
-            <h2 className="text-foreground mb-6 text-4xl font-bold">
+            <h2 className="text-foreground mb-6 text-4xl font-bold tracking-tight">
               Terhubung Dengan Kami
             </h2>
             <p className="text-muted-foreground mx-auto max-w-3xl text-lg">
@@ -364,14 +352,11 @@ export default async function ProfilePage() {
             {socialMedia.map((social, index) => (
               <Card
                 key={index}
-                className="group cursor-pointer border-0 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                className="group hover:border-foreground/20 cursor-pointer shadow-sm transition-all duration-300 hover:shadow-md"
               >
                 <CardContent className="p-8 text-center">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 transition-transform group-hover:scale-110 dark:bg-gray-800">
-                    <Icon
-                      name={social.icon}
-                      className={`size-8 ${social.color}`}
-                    />
+                  <div className="bg-muted text-foreground group-hover:bg-foreground group-hover:text-background mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl transition-colors">
+                    <Icon name={social.icon} className="size-8" />
                   </div>
                   <h3 className="text-foreground mb-2 font-semibold">
                     {social.platform}
@@ -385,14 +370,14 @@ export default async function ProfilePage() {
           </div>
 
           {/* Contact Information */}
-          <Card className="border-0 bg-gradient-to-r from-green-500 to-blue-600 text-white shadow-xl">
+          <Card className="bg-primary text-primary-foreground shadow-xl">
             <CardContent className="p-8 text-center">
               <Icon
                 name="Phone"
                 className="mx-auto mb-4 h-12 w-12 opacity-90"
               />
               <h3 className="mb-2 text-2xl font-bold">Hubungi Kami</h3>
-              <p className="mb-4 text-green-100">
+              <p className="text-primary-foreground/80 mb-4">
                 Untuk informasi lebih lanjut dan pelayanan administrasi
               </p>
               <div className="text-3xl font-bold">{whatsappNumber}</div>
