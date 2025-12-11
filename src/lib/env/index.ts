@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-properties */
 /** Application environment (development, staging, production) */
 export const appEnv = process.env["APP_ENV"]
 /** PostgreSQL database connection URL */

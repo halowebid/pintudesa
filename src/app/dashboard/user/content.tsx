@@ -11,7 +11,7 @@ import UserTable from "./table"
 export default function UserContent() {
   const searchParams = useSearchParams()
 
-  const page = searchParams?.get("page")
+  const page = searchParams.get("page")
 
   const perPage = 10
 

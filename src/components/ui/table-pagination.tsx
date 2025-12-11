@@ -26,7 +26,7 @@ const TablePagination: React.FunctionComponent<TablePaginationProps> = (
   const searchParams = useSearchParams()
 
   function updatePage(page: number) {
-    const params = new URLSearchParams(searchParams?.toString() ?? "")
+    const params = new URLSearchParams(searchParams.toString())
     params.set(paramsName, page.toString())
     window.history.pushState(null, "", `?${params.toString()}`)
   }

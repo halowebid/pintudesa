@@ -31,7 +31,7 @@ const NavCollapsible = (props: NavCollapsibleProps) => {
           <SidebarMenuItem key={item.url}>
             <SidebarMenuButton
               asChild
-              isActive={pathname?.includes(item.url) ?? false}
+              isActive={pathname.includes(item.url)}
               tooltip={item.name}
             >
               {item.disabled ? (

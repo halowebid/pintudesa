@@ -122,7 +122,7 @@ export default function TemplateSuratForm({
     }),
   )
 
-  const typeFromUrl = searchParams?.get("type") as SuratType | null
+  const typeFromUrl = searchParams.get("type") as SuratType | null
 
   const defaultValues = React.useMemo<z.input<typeof formSchema>>(
     () => ({

@@ -4,8 +4,13 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ProgressLinear } from "@/components/ui/progress-linear"
 import { Separator } from "@/components/ui/separator"
+import { createApi } from "@/lib/trpc/server"
 
-export default function StatisticsPage() {
+export default async function StatisticsPage() {
+  const api = await createApi()
+  const summary = await api.statistics.getSummary()
+  const demographics = await api.statistics.getDemographics()
+
   const basicStats: {
     number: string
     label: string
@@ -13,121 +18,92 @@ export default function StatisticsPage() {
     icon: IconProps["name"]
   }[] = [
     {
-      number: "3",
+      number: summary.totalDusun.toString(),
       label: "Jumlah Dusun",
       sublabel: "Desa Sukatani",
       icon: "MapPin",
     },
     {
-      number: "6",
+      number: summary.totalRW.toString(),
       label: "Jumlah RW",
       sublabel: "Desa Sukatani",
       icon: "Users",
     },
     {
-      number: "12",
+      number: summary.totalRT.toString(),
       label: "Jumlah RT",
       sublabel: "Desa Sukatani",
       icon: "Target",
     },
   ]
 
+  const totalPopulation = summary.totalPenduduk
+
   const populationStats: {
     number: string
     label: string
     percentage: number
     icon: IconProps["name"]
-  }[] = [
-    {
-      number: "797",
-      label: "Laki-laki",
-      percentage: 50.5,
-      icon: "Users",
-    },
-    {
-      number: "781",
-      label: "Perempuan",
-      percentage: 49.5,
-      icon: "Users",
-    },
-    {
-      number: "1,578",
-      label: "Total Penduduk",
-      percentage: 100,
-      icon: "Users",
-    },
-  ]
+  }[] = demographics.gender.map((item) => ({
+    number: item.value.toLocaleString(),
+    label: item.label === "laki-laki" ? "Laki-laki" : "Perempuan",
+    percentage:
+      totalPopulation > 0
+        ? parseFloat(((item.value / totalPopulation) * 100).toFixed(1))
+        : 0,
+    icon: "Users",
+  }))
 
-  const occupationData = [
-    {
-      label: "Buruh Tani/Perkebunan",
-      value: 814,
-      percentage: 52,
-    },
-    { label: "Petani", value: 245, percentage: 15 },
-    { label: "Wiraswasta", value: 189, percentage: 12 },
-    { label: "Pedagang", value: 156, percentage: 10 },
-    { label: "PNS", value: 98, percentage: 6 },
-    { label: "Nelayan", value: 76, percentage: 5 },
-  ]
+  // Add total population entry
+  populationStats.push({
+    number: totalPopulation.toLocaleString(),
+    label: "Total Penduduk",
+    percentage: 100,
+    icon: "Users",
+  })
 
-  const educationData = [
-    { level: "SLTA/Sederajat", count: 1138, percentage: 72 },
-    { level: "Diploma/S1", count: 234, percentage: 15 },
-    { level: "SMP/Sederajat", count: 156, percentage: 10 },
-    { level: "SD/Sederajat", count: 50, percentage: 3 },
-  ]
+  const occupationData = demographics.occupation.map((item) => ({
+    label: item.label,
+    value: item.value,
+    percentage:
+      totalPopulation > 0
+        ? Math.round((item.value / totalPopulation) * 100)
+        : 0,
+  }))
+
+  const educationData = demographics.education.map((item) => ({
+    level: item.label
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (l) => l.toUpperCase()),
+    count: item.value,
+    percentage:
+      totalPopulation > 0
+        ? Math.round((item.value / totalPopulation) * 100)
+        : 0,
+  }))
 
   const ageGroups: {
     label: string
     value: number
     percentage: number
     icon: IconProps["name"]
-  }[] = [
-    { label: "Balita (0-5 Tahun)", value: 89, percentage: 15, icon: "Baby" },
-    {
-      label: "Anak-anak (6-12 Tahun)",
-      value: 156,
-      percentage: 25,
-      icon: "Users",
-    },
-    {
-      label: "Remaja (13-17 Tahun)",
-      value: 134,
-      percentage: 22,
-      icon: "Users",
-    },
-    {
-      label: "Dewasa Muda (18-25 Tahun)",
-      value: 178,
-      percentage: 30,
-      icon: "Users",
-    },
-    {
-      label: "Dewasa (26-35 Tahun)",
-      value: 245,
-      percentage: 40,
-      icon: "Users",
-    },
-    {
-      label: "Dewasa Akhir (36-45 Tahun)",
-      value: 344,
-      percentage: 55,
-      icon: "Users",
-    },
-    {
-      label: "Lansia Awal (46-55 Tahun)",
-      value: 289,
-      percentage: 47,
-      icon: "Users",
-    },
-    {
-      label: "Lansia Akhir (56+ Tahun)",
-      value: 143,
-      percentage: 23,
-      icon: "Users",
-    },
-  ]
+  }[] = demographics.ageGroups.map((item) => ({
+    label: item.label,
+    value: item.value,
+    percentage:
+      totalPopulation > 0
+        ? Math.round((item.value / totalPopulation) * 100)
+        : 0,
+    icon: item.label.includes("Balita") ? "Baby" : "Users",
+  }))
+
+  // Find most common age group
+  const mostCommonAgeGroup = [...ageGroups]
+    .sort((a, b) => b.value - a.value)
+    .at(0)
+
+  const topOccupation = occupationData.at(0)
+  const topEducation = educationData.at(0)
 
   return (
     <div className="bg-background min-h-screen">
@@ -148,7 +124,7 @@ export default function StatisticsPage() {
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <div className="bg-muted text-muted-foreground flex items-center rounded-full px-4 py-2">
                 <Icon name="Activity" className="mr-2 size-4" />
-                Data Terkini 2025
+                Data Terkini {new Date().getFullYear()}
               </div>
               <div className="bg-muted text-muted-foreground flex items-center rounded-full px-4 py-2">
                 <Icon name="TrendingUp" className="mr-2 size-4" />
@@ -345,10 +321,10 @@ export default function StatisticsPage() {
                     />
                   </div>
                   <div className="text-foreground mb-3 text-5xl font-bold">
-                    814
+                    {topOccupation?.value ?? 0}
                   </div>
                   <div className="text-foreground mb-2 text-xl font-semibold">
-                    Buruh Tani/Perkebunan
+                    {topOccupation?.label ?? "Belum ada data"}
                   </div>
                   <div className="text-muted-foreground">
                     Pekerjaan mayoritas warga desa
@@ -356,7 +332,9 @@ export default function StatisticsPage() {
                   <Separator className="my-6" />
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <div className="text-foreground font-semibold">52%</div>
+                      <div className="text-foreground font-semibold">
+                        {topOccupation?.percentage ?? 0}%
+                      </div>
                       <div className="text-muted-foreground">
                         dari total penduduk
                       </div>
@@ -365,7 +343,9 @@ export default function StatisticsPage() {
                       <div className="text-foreground font-semibold">
                         Sektor
                       </div>
-                      <div className="text-muted-foreground">Pertanian</div>
+                      <div className="text-muted-foreground">
+                        {topOccupation?.label ?? "-"}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -457,10 +437,10 @@ export default function StatisticsPage() {
                   />
                 </div>
                 <div className="text-foreground mb-3 text-5xl font-bold">
-                  1,138
+                  {topEducation?.count ?? 0}
                 </div>
                 <div className="text-foreground mb-2 text-xl font-semibold">
-                  SLTA / Sederajat
+                  {topEducation?.level ?? "Belum ada data"}
                 </div>
                 <div className="text-muted-foreground mb-6">
                   Tingkat pendidikan mayoritas
@@ -468,7 +448,9 @@ export default function StatisticsPage() {
                 <Separator className="my-6" />
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <div className="text-foreground font-semibold">72%</div>
+                    <div className="text-foreground font-semibold">
+                      {topEducation?.percentage ?? 0}%
+                    </div>
                     <div className="text-muted-foreground">
                       dari total penduduk
                     </div>
@@ -477,7 +459,9 @@ export default function StatisticsPage() {
                     <div className="text-foreground font-semibold">
                       Kategori
                     </div>
-                    <div className="text-muted-foreground">Menengah Atas</div>
+                    <div className="text-muted-foreground">
+                      {topEducation?.level ?? "-"}
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -545,13 +529,16 @@ export default function StatisticsPage() {
                     <Icon name="Users" className="text-foreground size-10" />
                   </div>
                   <div className="text-foreground mb-3 text-5xl font-bold">
-                    344
+                    {mostCommonAgeGroup?.value ?? 0}
                   </div>
                   <div className="text-foreground mb-2 text-lg font-semibold">
-                    Dewasa Akhir
+                    {mostCommonAgeGroup?.label.split("(")[0].trim() ??
+                      "Belum ada data"}
                   </div>
                   <div className="text-muted-foreground mb-4 text-sm">
-                    (36-45 Tahun)
+                    {mostCommonAgeGroup
+                      ? (/\((.*?)\)/.exec(mostCommonAgeGroup.label)?.[0] ?? "")
+                      : ""}
                   </div>
                   <div className="text-muted-foreground text-xs">
                     Kelompok usia terbanyak
@@ -566,18 +553,19 @@ export default function StatisticsPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="bg-muted/50 flex items-center justify-between rounded-lg p-3">
-                    <span className="text-sm font-medium">Usia Produktif</span>
-                    <span className="text-foreground font-bold">67%</span>
-                  </div>
-                  <div className="bg-muted/50 flex items-center justify-between rounded-lg p-3">
-                    <span className="text-sm font-medium">Anak & Remaja</span>
-                    <span className="text-foreground font-bold">25%</span>
-                  </div>
-                  <div className="bg-muted/50 flex items-center justify-between rounded-lg p-3">
-                    <span className="text-sm font-medium">Lansia</span>
-                    <span className="text-foreground font-bold">8%</span>
-                  </div>
+                  {ageGroups.slice(0, 3).map((group, i) => (
+                    <div
+                      key={i}
+                      className="bg-muted/50 flex items-center justify-between rounded-lg p-3"
+                    >
+                      <span className="text-sm font-medium">
+                        {group.label.split("(")[0].trim()}
+                      </span>
+                      <span className="text-foreground font-bold">
+                        {group.percentage}%
+                      </span>
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
             </div>

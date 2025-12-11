@@ -12,7 +12,7 @@ import { generateBreadcrumbs } from "@/lib/utils/breadcrumb"
  */
 export default function Breadcrumb() {
   const pathname = usePathname()
-  const breadcrumbs = generateBreadcrumbs(pathname ?? "")
+  const breadcrumbs = generateBreadcrumbs(pathname)
 
   if (breadcrumbs.length === 1) {
     return (

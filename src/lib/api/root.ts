@@ -18,6 +18,7 @@ import { peraturanRouter } from "./routes/peraturan"
 import { rabRouter } from "./routes/rab"
 import { rencanaKerjaPembangunanRouter } from "./routes/rencana-kerja-pembangunan"
 import { settingRouter } from "./routes/setting"
+import { statisticsRouter } from "./routes/statistics"
 import { suratIzinKeramaianRouter } from "./routes/surat-izin-keramaian"
 import { suratIzinMendirikanBangunanRouter } from "./routes/surat-izin-mendirikan-bangunan"
 import { suratKeteranganBedaNamaRouter } from "./routes/surat-keterangan-beda-nama"
@@ -48,6 +49,7 @@ export const appRouter = createTRPCRouter({
   healthCheck: publicProcedure.query(() => "ok"),
   auth: authRouter,
   admin: adminRouter,
+  statistics: statisticsRouter,
 
   agenda: agendaRouter,
   anggotaKeluarga: anggotaKeluargaRouter,
