@@ -21,106 +21,98 @@ const Footer = async () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="from-background/80 to-background/90 text-foreground bg-gradient-to-r">
+    <footer className="bg-background text-foreground border-t">
       {/* WhatsApp Contact Bar */}
-      <div className="bg-green-500 py-3">
+      <div className="bg-muted/30 border-b py-2 text-sm">
         <div className="container mx-auto flex items-center justify-center px-4">
-          <Icon name="Phone" className="mr-2 size-5" />
-          <span className="font-semibold">{whatsappNumber}</span>
+          <Icon name="Phone" className="text-muted-foreground mr-2 size-4" />
+          <span className="text-muted-foreground font-medium">{whatsappNumber}</span>
         </div>
       </div>
 
       {/* Main Footer */}
-      <div className="py-12">
+      <div className="py-16">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
             {/* Village Info */}
-            <div>
-              <div className="mb-6 flex items-center space-x-3">
-                <div className="rounded-lg bg-green-600 p-2">
-                  <Icon name="Shield" className="size-8 text-white" />
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="bg-primary text-primary-foreground rounded-lg p-2">
+                  <Icon name="Shield" className="size-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">Desa {desa}</h3>
-                  <p className="text-accent-foreground">
+                  <h3 className="text-lg font-bold">Desa {desa}</h3>
+                  <p className="text-muted-foreground text-sm">
                     Kecamatan {kecamatan}
-                  </p>
-                  <p className="text-accent-foreground">
-                    Kabupaten {kabupaten}
                   </p>
                 </div>
               </div>
+              <p className="text-muted-foreground text-sm">
+                 Kabupaten {kabupaten}, Provinsi {provinsi}
+              </p>
             </div>
 
             {/* Contact Info */}
             <div>
-              <h4 className="mb-4 text-lg font-semibold">Email :</h4>
-              <div className="mb-4 flex items-center">
-                <Icon
-                  name="Mail"
-                  className="text-accent-foreground mr-3 size-5"
-                />
-                <span>{supportEmail}</span>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Kontak</h4>
+              <div className="space-y-3">
+                 <div className="flex items-center text-sm">
+                    <Icon name="Mail" className="text-muted-foreground mr-3 size-4" />
+                    <span>{supportEmail}</span>
+                 </div>
+                 <div className="flex items-start text-sm">
+                    <Icon name="MapPin" className="text-muted-foreground mt-0.5 mr-3 size-4" />
+                    <span className="text-muted-foreground">{address}</span>
+                 </div>
               </div>
             </div>
 
-            {/* Address */}
+            {/* Socials */}
             <div>
-              <h4 className="mb-4 text-lg font-semibold">Alamat :</h4>
-              <div className="flex items-start">
-                <Icon
-                  name="MapPin"
-                  className="text-accent-foreground mt-1 mr-3 size-5"
-                />
-                <div>
-                  <p>
-                    {address}, Kabupaten {kabupaten},
-                  </p>
-                  <p>Provinsi {provinsi}, Indonesia</p>
-                </div>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Sosial Media</h4>
+              <div className="flex space-x-2">
+                {facebookUsername && (
+                  <Button asChild variant="outline" size="icon">
+                    <Link
+                      href={`https://www.facebook.com/${facebookUsername}`}
+                      target="_blank"
+                    >
+                      <Icon name="Facebook" className="size-4" />
+                    </Link>
+                  </Button>
+                )}
+                {instagramUsername && (
+                  <Button asChild variant="outline" size="icon">
+                    <Link
+                      href={`https://instagram.com/${instagramUsername}`}
+                      target="_blank"
+                    >
+                      <Icon name="Instagram" className="size-4" />
+                    </Link>
+                  </Button>
+                )}
+                {youtubeUsername && (
+                  <Button asChild variant="outline" size="icon">
+                    <Link
+                      href={`https://youtube.com/channel/${youtubeUsername}`}
+                      target="_blank"
+                    >
+                      <Icon name="Youtube" className="size-4" />
+                    </Link>
+                  </Button>
+                )}
               </div>
             </div>
-          </div>
-
-          <div className="mt-8 flex justify-center space-x-6 border-t border-sky-700 pt-8">
-            {facebookUsername && (
-              <Button asChild variant="ghost" size="icon">
-                <Link
-                  href={`https://www.facebook.com/${facebookUsername}`}
-                  target="_blank"
-                >
-                  <Icon name="Facebook" className="size-6" />
-                </Link>
-              </Button>
-            )}
-            {instagramUsername && (
-              <Button asChild variant="ghost" size="icon">
-                <Link
-                  href={`https://instagram.com/${instagramUsername}`}
-                  target="_blank"
-                >
-                  <Icon name="Instagram" className="size-6" />
-                </Link>
-              </Button>
-            )}
-            {youtubeUsername && (
-              <Button asChild variant="ghost" size="icon">
-                <Link
-                  href={`https://youtube.com/channel/${youtubeUsername}`}
-                  target="_blank"
-                >
-                  <Icon name="Youtube" className="size-6" />
-                </Link>
-              </Button>
-            )}
           </div>
         </div>
       </div>
 
       {/* Copyright */}
-      <div className="bg-accent py-4">
+      <div className="border-t py-6">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-accent-foreground">Pintudesa © {currentYear}</p>
+          <p className="text-muted-foreground text-sm">
+            &copy; {currentYear} Pintudesa. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

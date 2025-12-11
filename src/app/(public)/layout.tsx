@@ -10,7 +10,7 @@ export default async function PublicLayout({
   const kecamatan = await api.setting.byKey("kecamatan")
 
   return (
-    <div className="min-h-screen">
+    <div className="bg-background min-h-screen">
       <Header desa={desa!} kecamatan={kecamatan!} />
       <main>{children}</main>
       <Footer />

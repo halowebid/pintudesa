@@ -10,55 +10,55 @@ const DigitalServices = async () => {
   const desa = await api.setting.byKey("desa")
 
   return (
-    <section className="bg-background py-16">
+    <section className="bg-background py-20">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
           {/* Mobile App Mockups */}
-          <div className="flex justify-center">
+          <div className="flex justify-center order-2 lg:order-1">
             <div className="relative">
               <Image
                 src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=300&h=600&dpr=1"
                 width={300}
                 height={600}
                 alt="Mobile App"
-                className="h-auto w-64 rounded-3xl shadow-2xl"
+                className="bg-muted h-auto w-64 rounded-3xl grayscale shadow-2xl transition-all duration-500 hover:grayscale-0"
               />
-              <div className="absolute -top-8 -right-8 h-auto w-48">
+              <div className="absolute -top-8 -right-8 -z-10 h-auto w-48">
                 <Image
                   src="https://images.pexels.com/photos/699459/pexels-photo-699459.jpeg?auto=compress&cs=tinysrgb&w=300&h=600&dpr=1"
                   width={300}
                   height={600}
                   alt="Mobile App 2"
-                  className="w-full rounded-3xl opacity-80 shadow-xl"
+                  className="bg-muted w-full rounded-3xl grayscale opacity-60 shadow-xl"
                 />
               </div>
             </div>
           </div>
 
           {/* Content */}
-          <div>
-            <h2 className="text-foreground mb-6 text-3xl font-bold lg:text-4xl">
+          <div className="order-1 lg:order-2">
+            <h2 className="text-foreground mb-6 text-3xl font-bold tracking-tight lg:text-4xl">
               Pelayanan Administrasi Digital
             </h2>
-            <p className="text-accent-foreground mb-6 text-lg leading-relaxed">
+            <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
               Desa {desa} menggunakan aplikasi pelayanan online yang bernama{" "}
-              <strong>Pintudesa</strong>, aplikasi ini bisa diunduh dari
+              <strong className="text-foreground">Pintudesa</strong>, aplikasi ini bisa diunduh dari
               aplikasi Play Store untuk pengguna Android dan dari App Store
               untuk pengguna iPhone.
             </p>
-            <p className="text-accent-foreground mb-8 text-lg leading-relaxed">
+            <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
               Beberapa fitur yang tersedia di aplikasi{" "}
-              <strong>Pintudesa</strong> seperti pembuatan surat, menyurat
+              <strong className="text-foreground">Pintudesa</strong> seperti pembuatan surat, menyurat
               secara online, pengaduan, pengumuman desa, berita desa, galeri
               digital UMKM desa, cek bonitas, dan banyak lagi fitur lainnya.
-              Aplikasi <strong>Pintudesa</strong> dapat diunduh melalui tombol
+              Aplikasi <strong className="text-foreground">Pintudesa</strong> dapat diunduh melalui tombol
               dibawah ini.
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Button variant="outline">
+              <Button size="lg" className="w-full sm:w-auto">
                 <Icon name="Download" className="mr-2 size-5" />
-                Google Play
+                Download App
               </Button>
             </div>
           </div>

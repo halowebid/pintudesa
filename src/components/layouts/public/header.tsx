@@ -18,16 +18,16 @@ const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
   ]
 
   return (
-    <header className="bg-background/95 sticky top-0 z-50 border-b backdrop-blur-sm">
+    <header className="bg-background/80 sticky top-0 z-50 border-b backdrop-blur-md">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="rounded-lg bg-green-600 p-2">
-              <Icon name="Shield" className="text-foreground size-8" />
+            <div className="bg-primary rounded-lg p-2 text-primary-foreground">
+              <Icon name="Shield" className="size-8" />
             </div>
             <div>
               <h1 className="text-foreground text-lg font-bold">Desa {desa}</h1>
-              <p className="text-accent-foreground text-sm">
+              <p className="text-muted-foreground text-sm">
                 Kecamatan {kecamatan}
               </p>
             </div>
@@ -38,20 +38,15 @@ const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-foreground font-medium transition-colors hover:text-green-600"
+                className="text-muted-foreground hover:text-foreground font-medium transition-colors"
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/dashboard"
-              className="text-foreground font-medium transition-colors hover:text-green-600"
-            >
-              Dashboard
-            </Link>
-            <Button className="bg-pink-500 text-white hover:bg-pink-600">
-              Pengaduan
+            <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
+              <Link href="/dashboard">Dashboard</Link>
             </Button>
+            <Button>Pengaduan</Button>
             <ThemeSwitcher />
           </nav>
 
@@ -70,7 +65,7 @@ const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
                   <Link
                     key={item.label}
                     href={item.href}
-                    className="text-foreground px-4 py-2 font-medium transition-colors hover:text-green-600"
+                    className="text-foreground hover:bg-muted rounded-md px-4 py-2 font-medium transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.label}
@@ -78,15 +73,17 @@ const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
                 ))}
                 <Link
                   href="/dashboard"
-                  className="text-foreground px-4 py-2 font-medium transition-colors hover:text-green-600"
+                  className="text-foreground hover:bg-muted rounded-md px-4 py-2 font-medium transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   Dashboard
                 </Link>
-                <Button className="m-4 bg-pink-500 hover:bg-pink-600">
-                  Pengaduan
-                </Button>
-                <ThemeSwitcher />
+                <div className="px-4">
+                  <Button className="w-full">Pengaduan</Button>
+                </div>
+                <div className="px-4">
+                  <ThemeSwitcher />
+                </div>
               </nav>
             </SheetContent>
           </Sheet>

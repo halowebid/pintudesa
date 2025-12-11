@@ -47,7 +47,7 @@ export const Services = () => {
           <h2 className="text-foreground mb-4 text-3xl font-bold lg:text-4xl">
             Lebih Lanjut Tentang Desa
           </h2>
-          <p className="text-accent-foreground mx-auto max-w-3xl text-lg">
+          <p className="text-muted-foreground mx-auto max-w-3xl text-lg">
             Pintudesa berkomitmen untuk memberikan Aplikasi pelayanan terbaik
             untuk desa, kami memiliki fitur-fitur pelayanan administrasi yang
             dapat memudahkan perangkat desa dan penduduk untuk mengakses
@@ -59,16 +59,16 @@ export const Services = () => {
           {services.map((service, index) => (
             <Card
               key={index}
-              className="border-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              className="group border-border/50 bg-background transition-all duration-300 hover:border-foreground/20 hover:shadow-sm"
             >
               <CardContent className="p-8 text-center">
-                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-sky-100">
-                  <Icon name={service.icon} className="size-8 text-sky-600" />
+                <div className="bg-muted text-foreground group-hover:bg-foreground group-hover:text-background mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-xl transition-colors duration-300">
+                  <Icon name={service.icon} className="size-6" />
                 </div>
                 <h3 className="text-foreground mb-3 text-lg font-semibold">
                   {service.title}
                 </h3>
-                <p className="text-accent-foreground text-sm leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {service.description}
                 </p>
               </CardContent>
