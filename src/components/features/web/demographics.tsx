@@ -73,7 +73,7 @@ const Demographics = () => {
                           {group.value}
                         </span>
                       </div>
-                      <div className="bg-muted h-3 w-full rounded-full overflow-hidden">
+                      <div className="bg-muted h-3 w-full overflow-hidden rounded-full">
                         <div
                           className="bg-primary h-3 rounded-full transition-all duration-1000"
                           style={{ width: `${(group.value / 100) * 100}%` }}

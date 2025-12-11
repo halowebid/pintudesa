@@ -21,10 +21,10 @@ const Hero = async () => {
           className="object-cover opacity-5 grayscale"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
+        <div className="to-background/80 absolute inset-0 bg-gradient-to-b from-transparent" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="relative z-10 container mx-auto px-4">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Content */}
           <div className="text-center lg:text-left">
@@ -52,7 +52,7 @@ const Hero = async () => {
                 src="https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=500&h=750&dpr=1"
                 fill
                 alt={title!}
-                className="bg-muted rounded-2xl object-cover shadow-2xl grayscale filter transition-all duration-500 hover:grayscale-0"
+                className="bg-muted rounded-2xl object-cover shadow-2xl grayscale filter transition-all duration-500"
                 sizes="(max-width: 640px) 256px, (max-width: 1024px) 320px, 500px"
               />
             </div>

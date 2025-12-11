@@ -59,7 +59,7 @@ export const Services = () => {
           {services.map((service, index) => (
             <Card
               key={index}
-              className="group border-border/50 bg-background transition-all duration-300 hover:border-foreground/20 hover:shadow-sm"
+              className="group border-border/50 bg-background hover:border-foreground/20 transition-all duration-300 hover:shadow-sm"
             >
               <CardContent className="p-8 text-center">
                 <div className="bg-muted text-foreground group-hover:bg-foreground group-hover:text-background mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-xl transition-colors duration-300">

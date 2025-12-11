@@ -26,7 +26,9 @@ const Footer = async () => {
       <div className="bg-muted/30 border-b py-2 text-sm">
         <div className="container mx-auto flex items-center justify-center px-4">
           <Icon name="Phone" className="text-muted-foreground mr-2 size-4" />
-          <span className="text-muted-foreground font-medium">{whatsappNumber}</span>
+          <span className="text-muted-foreground font-medium">
+            {whatsappNumber}
+          </span>
         </div>
       </div>
 
@@ -48,28 +50,38 @@ const Footer = async () => {
                 </div>
               </div>
               <p className="text-muted-foreground text-sm">
-                 Kabupaten {kabupaten}, Provinsi {provinsi}
+                Kabupaten {kabupaten}, Provinsi {provinsi}
               </p>
             </div>
 
             {/* Contact Info */}
             <div>
-              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Kontak</h4>
+              <h4 className="mb-4 text-sm font-semibold tracking-wider uppercase">
+                Kontak
+              </h4>
               <div className="space-y-3">
-                 <div className="flex items-center text-sm">
-                    <Icon name="Mail" className="text-muted-foreground mr-3 size-4" />
-                    <span>{supportEmail}</span>
-                 </div>
-                 <div className="flex items-start text-sm">
-                    <Icon name="MapPin" className="text-muted-foreground mt-0.5 mr-3 size-4" />
-                    <span className="text-muted-foreground">{address}</span>
-                 </div>
+                <div className="flex items-center text-sm">
+                  <Icon
+                    name="Mail"
+                    className="text-muted-foreground mr-3 size-4"
+                  />
+                  <span>{supportEmail}</span>
+                </div>
+                <div className="flex items-start text-sm">
+                  <Icon
+                    name="MapPin"
+                    className="text-muted-foreground mt-0.5 mr-3 size-4"
+                  />
+                  <span className="text-muted-foreground">{address}</span>
+                </div>
               </div>
             </div>
 
             {/* Socials */}
             <div>
-              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Sosial Media</h4>
+              <h4 className="mb-4 text-sm font-semibold tracking-wider uppercase">
+                Sosial Media
+              </h4>
               <div className="flex space-x-2">
                 {facebookUsername && (
                   <Button asChild variant="outline" size="icon">

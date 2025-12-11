@@ -22,7 +22,7 @@ const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="bg-primary rounded-lg p-2 text-primary-foreground">
+            <div className="bg-primary text-primary-foreground rounded-lg p-2">
               <Icon name="Shield" className="size-8" />
             </div>
             <div>
@@ -43,10 +43,13 @@ const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
                 {item.label}
               </Link>
             ))}
-            <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
+            <Button
+              asChild
+              className="text-primary-foreground hover:bg-primary/90"
+            >
               <Link href="/dashboard">Dashboard</Link>
             </Button>
-            <Button>Pengaduan</Button>
+            <Button variant="outline">Pengaduan</Button>
             <ThemeSwitcher />
           </nav>
 
@@ -71,15 +74,15 @@ const Header = ({ desa, kecamatan }: { desa: string; kecamatan: string }) => {
                     {item.label}
                   </Link>
                 ))}
-                <Link
-                  href="/dashboard"
-                  className="text-foreground hover:bg-muted rounded-md px-4 py-2 font-medium transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Dashboard
-                </Link>
-                <div className="px-4">
-                  <Button className="w-full">Pengaduan</Button>
+                <div className="space-y-2 px-4">
+                  <Button asChild className="w-full">
+                    <Link href="/dashboard" onClick={() => setIsOpen(false)}>
+                      Dashboard
+                    </Link>
+                  </Button>
+                  <Button variant="outline" className="w-full">
+                    Pengaduan
+                  </Button>
                 </div>
                 <div className="px-4">
                   <ThemeSwitcher />
